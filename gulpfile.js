@@ -1,29 +1,13 @@
 /* jshint esversion: 6, undef: true, node: true */
 /* \CONFIG\ */
-const config= {
-    /* \APP depend consts\ */
-    app: {
-        name: "jaaJSU",
-        version: "0.1",
-        build: "0001",
-        src_folder: "src/",
-        bin_folder: "bin/",
-        standalone: ["standalone", "cordova"][0],
-        namespaces_rename: {$optimizier: "$optimiziers"},
-        sequence: ['javascript'] //!... pro preskoceni sequence
-    },
-    /* /APP depend consts/ */
-    /* \Gulp - requires\ */
-    $gulp_folder: "./gulp/",
-    gulp: require('gulp'),
-    error: error()
-};
-(function(c){
-    const $run= require(c.$gulp_folder+'gulp-crossplatform')();
-    const {$g,$o}= require(c.$gulp_folder+'gulp-requires')(config.gulp);
-    c.$g= $g; c.$o= $o; c.$run= $run;
-})(config);
-    /* /Gulp - requires/ */
+let config= (function(){
+        const gulp= require('gulp'),
+              $gulp_folder= "./gulp/",
+              $run= require($gulp_folder+'gulp-crossplatform')(),
+              {$g,$o}= require($gulp_folder+'gulp-requires')(gulp),
+              app= JSON.parse($o.fs.readFileSync('./package.json'));
+        return {gulp, $gulp_folder, $run, $g, $o, app, error: error()};
+})();
 /* /CONFIG/ */
 /* \Tasks\ */
 var c_output= "", if_error= 0;
