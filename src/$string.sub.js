@@ -1,4 +1,4 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
     var $string= {
         //mazani mezer ve stringu
         clearSpaces: function(str) {

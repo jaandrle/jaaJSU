@@ -1,4 +1,4 @@
-/* jshint esversion: 6 */
+/* jshint esversion: 6, undef: true, node: true */
 /* \CONFIG\ */
 const config= {
     /* \APP depend consts\ */

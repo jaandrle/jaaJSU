@@ -1,4 +1,4 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true */
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 (function(module_name, factory) {
     'use strict';
     //gulp.place_OR.jaaJSU_export_standalone.sub.js

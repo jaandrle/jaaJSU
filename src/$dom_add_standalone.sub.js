@@ -1,4 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
+    /* $dom *//* global $dom */
     /* tF
      * FCE pridava elementy do DOMu tak, aby byly rovnou pristupne napr. pro onclick handler
      * ...dokaze i rovnou zavolat parseHTML (v cyklech je vhodne parametr zapnout az pri poslednim elementu)

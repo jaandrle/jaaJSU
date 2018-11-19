@@ -1,4 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
+    /* global $optimiziers *///gulp.remove.line
     var $function= {
         each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
         map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
