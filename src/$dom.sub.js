@@ -1,0 +1,90 @@
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true *///gulp.remove.line
+    var $dom={
+        /* tF_
+        * Zajistuje volani .then, az je DOM dostupny
+        * ...
+        * parametry:
+        *  tNN ~= argumenty jsou do .then predavany jako pole,
+        *      resp. pokud je jen jeden, je predan primo.
+        * .then:
+        *  tNN_= zadane parametry, viz vyse
+        *  */
+        ready_: function(){
+            let param= null;
+            if(arguments){
+                if(arguments.length===1) param= arguments[0];
+                else param= arguments;
+            }
+            return new Promise(function(resolve) {
+                function checkState() {
+                    if(document.readyState!=='loading'){
+                        document.removeEventListener('readystatechange', checkState);
+                        resolve(param);
+                    }
+                }
+                if(document.readyState!=='loading') resolve(param);
+                else document.addEventListener('readystatechange', checkState);
+            });
+        },
+        /* tF_
+        * Zajistuje volani .then, az je element dostupny
+        * ...
+        * parametry:
+        *  tD parent ~document= ES6 selector rodice
+        *  tL el_selector= je list, kde klic je typ ES6 selectoru (querySelector, getElementsByClassName,...)
+        *               tedy: {getElementsByClassName: "trida"} je prevedeno na parent.getElementsByClassName("trida")
+        * .then:
+        *  tD_= predava odkaz na element
+        *  */
+        elementReady_: function(el_selector, parent){
+            parent || (parent= document);
+            const sel_key= Object.keys(el_selector)[0];
+            const sel_val= el_selector[sel_key];
+            return new Promise(function(resolve, reject){
+                function check(){
+                    const el= parent[sel_key](sel_val);
+                    if(el) resolve(el);
+                    else requestAnimationFrame(check); //...zajistuje cyklus
+                }
+                requestAnimationFrame(check);
+            });
+        },
+        /* tP
+        * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
+        * ...jedna se o fix typicky pro iOS
+        * parametry:
+        *  tD element ~active_page_el= ES6 element selector
+        *  tS platform ~"iOS"= pro kterou platformu aplikovat: all, iOS, Android, ... (viz cordova)
+        *  */
+        forceRedraw: function(element,platform){
+            element= element || active_page_el;
+            platform= platform || "iOS";
+            if(device.platform===platform||platform==="all"){
+                let d= element.style.display;
+                element.style.display= 'none';
+                let trick= element.offsetHeight;
+                element.style.display= d;
+            }
+            //v2
+            //document.documentElement.style.paddingRight = '1px';
+            //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
+        },
+        /* tP
+        * FCE promaze elementy na zaklade daneho NodeListu
+        * ...
+        * parametry:
+        *  tD els_to_delete= NodeList elementu k mazani
+        *  tN from_index ~0= index v poli odkud zacit mazat (preskoceni el, ktere nechceme mazat)
+        *  tN to_index ~delka pole= index v poli kam az mazat (preskoceni el, ktere nechceme mazat)
+        *  */
+        removeElements: function(els_to_delete,from_index,to_index){
+            from_index= from_index || 0;
+            to_index= to_index || els_to_delete.length;
+            let els_array= [];
+            let j= 0;
+            for(let i= from_index; i < to_index; i++){els_array[j++]= els_to_delete[i];}
+            for(let i= 0, i_length= els_array.length; i < i_length; i++){els_array[i].remove();}
+        },
+        each: __eachInArrayLike
+    };
+    //gulp.place_OR.$dom_add_standalone.sub.js

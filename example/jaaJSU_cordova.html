@@ -1,0 +1,20 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <title>jaaJSU - demonstration</title>
+    <meta name="description" content="jaaJSU - demonstration">
+    <meta name="author" content="Jan Andrle">
+</head>
+<body>
+    <script>
+    function isMandatory(parameter){
+        throw new Error('Missing parameter: '+parameter);
+    }
+    function parseHTML(...args){
+        console.log(...args);
+    }
+    </script>
+    <script src="../bin/jaaJSU.js"></script>
+</body>
+</html>
