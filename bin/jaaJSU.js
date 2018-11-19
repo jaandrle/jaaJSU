@@ -1,7 +1,8 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true */
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 (function(module_name, factory) {
     'use strict';
     
+    /* global define, factory, module, module_name */
     let window_export;
     if (typeof define === 'function' && define.amd) {
         define([], function(){
@@ -169,6 +170,7 @@
         }
     };
 
+
     var $dom={
         /* tF_
         * Zajistuje volani .then, az je DOM dostupny
@@ -220,26 +222,6 @@
             });
         },
         /* tP
-        * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
-        * ...jedna se o fix typicky pro iOS
-        * parametry:
-        *  tD element ~active_page_el= ES6 element selector
-        *  tS platform ~"iOS"= pro kterou platformu aplikovat: all, iOS, Android, ... (viz cordova)
-        *  */
-        forceRedraw: function(element,platform){
-            element= element || active_page_el;
-            platform= platform || "iOS";
-            if(device.platform===platform||platform==="all"){
-                let d= element.style.display;
-                element.style.display= 'none';
-                let trick= element.offsetHeight;
-                element.style.display= d;
-            }
-            //v2
-            //document.documentElement.style.paddingRight = '1px';
-            //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
-        },
-        /* tP
         * FCE promaze elementy na zaklade daneho NodeListu
         * ...
         * parametry:
@@ -258,6 +240,7 @@
         each: __eachInArrayLike
     };
     
+
     /* tF
      * FCE pridava elementy do DOMu tak, aby byly rovnou pristupne napr. pro onclick handler
      * ...dokaze i rovnou zavolat parseHTML (v cyklech je vhodne parametr zapnout az pri poslednim elementu)
@@ -320,6 +303,24 @@
         }
         parent.appendChild(fragment);
         if(i) return els[0];
+    };
+    
+
+        /* tP
+        * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
+        * ...jedna se o fix typicky pro iOS
+        * parametry:
+        *  tD element ~document.body= ES6 element selector
+        *  */
+    $dom.forceRedraw= function(element){
+        element= element || document.body;
+        let d= element.style.display;
+        element.style.display= 'none';
+        let trick= element.offsetHeight;
+        element.style.display= d;
+        //v2
+        //document.documentElement.style.paddingRight = '1px';
+        //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
 
     var $async={
@@ -490,6 +491,7 @@
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
     };
 
+    /* global console */
     var $time={
         /* 
         * FCE vraci EN priponu k radovym cislovkam
@@ -606,6 +608,8 @@
             else return "00";
         }
     };
+
+
     var $array= {
         /* 
         * FCE ketra vraci spravny index pro cyklicke prochazeni polem
@@ -644,6 +648,7 @@
         }
     };
 
+
     var $object= {
         hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
@@ -678,12 +683,13 @@
         each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
     };
 
+
     var $function= {
         each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
         map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
         /* Je to jen hloupy cyklus "...current" do dalsi funkce! => jednotlive funkce musi vracet pole! */
         sequention: function(...functions){return function(...input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](...current); } return current;};},
-        schedule: function(functions, {context= window, delay= 150}= {}){ $optimiziers.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimiziers.timeoutAnimationFrame(loop, delay); }, delay); },
+        schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
         conditionalCall: function(mixed,fun){
             if(!mixed) return false;
             if(typeof fun === "function") return fun(mixed);

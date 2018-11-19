@@ -1,5 +1,5 @@
     /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* global.sub.js *//* global __eachInArrayLike */
+    /* global.sub.js *//* global __eachInArrayLike *///gulp.remove.line
     var $dom={
         /* tF_
         * Zajistuje volani .then, az je DOM dostupny
