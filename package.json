@@ -1,18 +1,27 @@
 {
-  "name": "jaaJSU",
+  "__SECTION_GULP": "",
+  "fullName": "jaaJSU",
   "version": "0.1.0",
-  "description": "JavaScript Utils",
-  "versio": "0.1",
-  "buil": "0001",
+  "build": "0001",
   "src_folder": "src/",
   "bin_folder": "bin/",
-  "standalonComment": "last is applied",
-  "standalone": "cordova",
+  "__Comment__standalon": "Undoc build switch 'cordova' depends on my company internal functions",
+  "__Posibilities__standalone": [
+    "cordova",
+    "standalone"
+  ],
   "standalone": "standalone",
-  "namespaces_rename": {"$optimizier": "$optimiziers"},
-  "sequenceComment": "!... pro preskoceni sequence",
-  "sequence": ["javascript"],
-
+  "__Comment__namespaces_rename": "This settings allow to rename namespaces",
+  "namespaces_rename": {
+    "$optimizier": "$optimiziers"
+  },
+  "__Comment__sequence": "exclamation mark (!) on the start of task name means to escape it",
+  "sequence": [
+    "javascript"
+  ],
+  "__SECTION_NPM": "",
+  "name": "jaajsu",
+  "description": "JavaScript Utils",
   "main": "gulpfile.js",
   "bin": {
     "jaajsu": "jaaJSU-min.js"
