@@ -1,6 +1,6 @@
 /* jshint esversion: 6, undef: true, node: true */
 /* \CONFIG\ */
-let config= (function(){
+const config= (function(){
         let $o_default= {spawn: require('child_process').spawn, fs: require("fs")};
         const gulp= require('gulp'),
               $gulp_folder= "./gulp/",

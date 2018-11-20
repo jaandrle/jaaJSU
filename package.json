@@ -5,7 +5,7 @@
   "build": "0001",
   "src_folder": "src/",
   "bin_folder": "bin/",
-  "__Comment__standalon": "Undoc build switch 'cordova' depends on my company internal functions",
+  "__Comment__standalone": "Undoc build switch 'cordova' depends on my company internal functions",
   "__Posibilities__standalone": [
     "cordova",
     "standalone"
