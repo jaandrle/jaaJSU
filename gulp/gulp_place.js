@@ -6,17 +6,20 @@
         'gulp-replace'
         'fs'
     @version
-        0.4.0
+        0.4.1
     @examples
         gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" contend
+        gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' contend
         gulp_place("some_var_inside_gulp", "variable"): replaced by value of 'some_var_inside_gulp'
     @info
         Returned function 'gulp_place' must be used in gulp.pipe and replacing 'gulp_place' in source files by another files content or eval inputed data (i.e. variables inside gulpfile).
         In case of file replacing and situation "^    gulp_place("file");" also spaces and new line (and ";" if writted) is replaced (see "gulp_place_regex").
         The varibale (in case gulp_place("***", "variable")) is replaced by '"'+***+'"' (means as string)
     
-    @param <object>init= {gulp_replace= 'gulp-replace' package , fs= 'fs' package}
-        @key
+    @param <object>init= {gulp_replace, fs, variable_eval}
+        @key <function>gulp_replace= require('gulp-replace')
+        @key <object>fs= require('fs')
+        @key <function>variable_eval= function for eval ${...} (in file mode) and/or vars in variable mode
     
     @return <function>gulp_place
         @param <object>init= {folder, string_wrapper}
