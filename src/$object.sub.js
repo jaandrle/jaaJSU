@@ -1,5 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* global isMandatory *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+    /* global isMandatory */
     var $object= {
         hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},

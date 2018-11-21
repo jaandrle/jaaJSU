@@ -1,5 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* global $dom, active_page_el, device *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+    /* global $dom, active_page_el, device */
         /* tP
         * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
         * ...jedna se o fix typicky pro iOS

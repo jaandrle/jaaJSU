@@ -1,5 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* global console */
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+    /* global console *///gulp.keep.line
     var $time={
         /* 
         * FCE vraci EN priponu k radovym cislovkam

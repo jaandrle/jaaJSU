@@ -1,8 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 (function(module_name, factory) {
     'use strict';
-    
-    /* global define, factory, module, module_name */
+    /* global define, factory, module, module_name *///gulp.keep.line
     let window_export;
     if (typeof define === 'function' && define.amd) {
         define([], function(){
@@ -13,13 +12,11 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.1.0";
+        window[module_name+"_version"]= "gulp.variable.version";
     }
 })("jaaJSU", function(window, document){
     'use strict';
-    
     function __eachInArrayLike(iterable, i_function){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function(iterable[i],i,!j); } }
-    
     /* tP
     * Slouzi k oznaceni povinnych parametru funkci
     * ...
@@ -29,7 +26,6 @@
     function isMandatory(parameter){
         throw new Error('Missing parameter: '+parameter);
     }
-    
     var $string= {
         //mazani mezer ve stringu
         clearSpaces: function(str) {
@@ -169,8 +165,6 @@
             });
         }
     };
-
-
     var $dom={
         /* tF_
         * Zajistuje volani .then, az je DOM dostupny
@@ -239,8 +233,6 @@
         },
         each: __eachInArrayLike
     };
-    
-
     /* tF
      * FCE pridava elementy do DOMu tak, aby byly rovnou pristupne napr. pro onclick handler
      * ...dokaze i rovnou zavolat parseHTML (v cyklech je vhodne parametr zapnout az pri poslednim elementu)
@@ -304,8 +296,6 @@
         parent.appendChild(fragment);
         if(i) return els[0];
     };
-    
-
         /* tP
         * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
         * ...jedna se o fix typicky pro iOS
@@ -322,7 +312,6 @@
         //document.documentElement.style.paddingRight = '1px';
         //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
-
     var $async={
         /* stara fce ==> postupne nahradit iterate_
         * 
@@ -388,7 +377,6 @@
             return Promise.all(functions.map(f=>f(...input)));
         };}
     };
-
     var $optimizier= {
         /* tP
         * FCE pro pravidelne volani dane (narocne) funkce se zpozdenim
@@ -490,8 +478,7 @@
         },
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
     };
-
-    /* global console */
+    /* global console *///gulp.keep.line
     var $time={
         /* 
         * FCE vraci EN priponu k radovym cislovkam
@@ -608,8 +595,6 @@
             else return "00";
         }
     };
-
-
     var $array= {
         /* 
         * FCE ketra vraci spravny index pro cyklicke prochazeni polem
@@ -647,8 +632,6 @@
             return Math.random() - 0.5;
         }
     };
-
-
     var $object= {
         hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
@@ -682,8 +665,6 @@
         },
         each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
     };
-
-
     var $function= {
         each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
         map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },

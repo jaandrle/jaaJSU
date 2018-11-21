@@ -1,5 +1,6 @@
 /* jshint esversion: 6,-W097, -W040, node: true, expr: true, undef: true */
 module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
+    /* jshint -W061 */const gulp_place= require("./gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str)});/* jshint +W061 */
     let namespaces= {$string: "$string", $dom: "$dom", $async: "$async", $optimizier: "$optimizier", $time: "$time", $array: "$array", $object: "$object", $function: "$function"};
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
     return function(cb){
@@ -16,12 +17,9 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             if(!code){
                 main_stream= gulp.src([app.src_folder+"*.js", '!'+app.src_folder+'*.sub.js'])
                     .pipe($g.replace("\"gulp.variable.namespaces\"", "{"+Object.keys(namespaces).reduce((acc,key,i)=> acc+(i ? ", " : "")+namespaces[key]+": "+ key, "")+"}"))
-                    .pipe($g.replace("//gulp.import.namespaces", Object.keys(namespaces).reduce((acc,key)=> acc+"//gulp.place."+key+".sub.js\n", "")))
-                    .pipe($g.replace(/\/\/gulp\.place\.(.*)/g,function(s, filename){return $o.fs.readFileSync(app.src_folder+filename, 'utf8').replace(/[^\n]*\/\/gulp\.remove\.line/g, "");}))
-                    .pipe($g.replace(/\/\/gulp\.place\.(.*)/g,function(s, filename){return $o.fs.readFileSync(app.src_folder+filename, 'utf8').replace(/[^\n]*\/\/gulp\.remove\.line/g, "");}))
-                    .pipe($g.replace(/\/\/gulp\.place_OR\.(.*)/g,function(s, filename){return $o.fs.readFileSync(app.src_folder+filename.replace("standalone", app.standalone), 'utf8').replace(/[^\n]*\/\/gulp\.remove\.line/g, "");}))
-                    .pipe($g.replace("gulp.variable.version", app.version))
-                    .pipe($g.replace("gulp.variable.name", app.name));
+                    .pipe($g.replace("//gulp.import.namespaces", Object.keys(namespaces).reduce((acc,key)=> acc+'gulp_place("'+key+'.sub.js");\n', "")))
+                    .pipe(gulp_place({folder: "src/", string_wrapper: '"'}))
+                    .pipe($g.replace(/\/\* gulp \*\/\/\* global gulp_place \*\/\r?\n/g,""));
     
                 main_stream
                     .on('error', error.handler)

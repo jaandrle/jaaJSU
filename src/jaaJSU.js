@@ -1,10 +1,11 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/* gulp *//* global gulp_place */
 (function(module_name, factory) {
     'use strict';
-    //gulp.place_OR.jaaJSU_export_standalone.sub.js
-})("gulp.variable.name", function(window, document){
+    gulp_place("jaaJSU_export_${app.standalone}.sub.js");
+})(gulp_place("app.name", "variable"), function(window, document){
     'use strict';
-    //gulp.place.global.sub.js
+    gulp_place("global.sub.js");
     //gulp.import.namespaces
     var out= "gulp.variable.namespaces";
     return out;

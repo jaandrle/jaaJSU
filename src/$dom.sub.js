@@ -1,5 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* global.sub.js *//* global __eachInArrayLike *///gulp.remove.line
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+    /* global.sub.js *//* global __eachInArrayLike */
     var $dom={
         /* tF_
         * Zajistuje volani .then, az je DOM dostupny
@@ -68,5 +68,6 @@
         },
         each: __eachInArrayLike
     };
-    //gulp.place_OR.$dom_add_standalone.sub.js
-    //gulp.place_OR.$dom_forceRedraw_standalone.sub.js
+    /* global gulp_place */
+    gulp_place("$dom_add_${app.standalone}.sub.js");
+    gulp_place("$dom_forceRedraw_${app.standalone}.sub.js");

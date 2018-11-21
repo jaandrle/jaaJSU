@@ -1,5 +1,5 @@
-    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
-    /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder */
+    /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+    /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
     /* $dom *//* global $dom *///gulp.remove.line
     /* tF
      * FCE pridava elementy do DOMu tak, aby byly rovnou pristupne napr. pro onclick handler
