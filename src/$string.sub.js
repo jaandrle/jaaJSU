@@ -14,6 +14,7 @@
                 char_code= str.charCodeAt(i);
                 counter+= (char_code==94 || char_code>127) ? 2 : 1;
             }
+            return counter;
         },
         generateUnique(){
             return (new Date()).getTime()+"_"+(performance.now().toString(36)+Math.random().toString(36)).replace(/\./g, (""+Math.random()).charAt(0)).substr(0, 10);
