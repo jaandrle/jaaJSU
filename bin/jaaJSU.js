@@ -146,7 +146,12 @@
             }
             return out;
         },
-        isNonEmpty: function(str){
+        isEmail: function(email_candidate){
+            /*_@_*/ let e= email_candidate.split("@"); if(e.length!==2) return false;
+            /*_@_._*/ e= [e[0], ...e[1].split(".")]; if(e.length!==3) return false;
+            const _e= !/(#|\?|!|\\|\/|\||\.\.)/i.test(e[0]); return _e && e.reduce((r,o)=>r&&o.length>1&&!/\s/.test(o), _e);
+        },
+        isFilled: function(str){
             if(typeof str !== "string") return false;
             return str.trim() ? str : false;
         },
@@ -614,15 +619,36 @@
         getLast: function(arr){
             return arr[arr.length-1];
         },
-        removeItem: function(arr, item) {
-            var i = 0;
-            while (i < arr.length) {
-                if (arr[i] === item) {
-                    arr.splice(i, 1);
-                } else {
-                    i++;
+        partition: function(arr){
+            return {
+                head: function(){
+                    const [x, ...xs]= arr;
+                    return [x, xs];
+                },
+                tail: function(){
+                    let local_arr= [...arr];
+                    const last= local_arr.pop();
+                    return [local_arr, last];
+                },
+                onIndex: function(index){
+                    let local_arr= [...arr];
+                    return [local_arr.splice(0,index), local_arr];
+                },
+                byCondition: function(fn){
+                    let out= [[],[]];
+                    $array.each(arr, (curr, i)=>out[+fn(curr, i)].push(curr));
+                    return out;
                 }
+            };
+        },
+        removeItem: function(arr, item) {
+            let p_arr= [...arr];//p_arr==private_arr
+            var i = 0;
+            while (i < p_arr.length) {
+                if (p_arr[i] === item) p_arr.splice(i, 1);
+                else i++;
             }
+            return p_arr;
         },
         /* FCE pro pouziti v .sort zaridi promichani pole
         * ...
@@ -634,8 +660,9 @@
         }
     };
     var $object= {
-        hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
+        each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
+        hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
         immutable_keys: function(obj_input){
             return new Proxy(Object.keys(obj_input).reduce(function(obj,key){obj[key]= obj_input[key]; return obj;},{}),{
                 get(target, command){
@@ -664,7 +691,7 @@
                 };
             }
         },
-        each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
+        pluck: (key, object) => object[key],
     };
     var $function= {
         each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
