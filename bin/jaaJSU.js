@@ -636,7 +636,7 @@
                 },
                 byCondition: function(fn){
                     let out= [[],[]];
-                    $array.each(arr, (curr, i)=>out[+fn(curr, i)].push(curr));
+                    __eachInArrayLike(arr, (curr, i)=>out[+!Boolean(fn(curr, i))].push(curr));
                     return out;
                 }
             };
