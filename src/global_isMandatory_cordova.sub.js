@@ -1,0 +1,1 @@
+/* global isMandatory *///gulp.keep.line

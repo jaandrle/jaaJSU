@@ -12,7 +12,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.1.1";
+        window[module_name+"_version"]= "0.1.2";
     }
 })("jaaJSU", function(window, document){
     'use strict';
