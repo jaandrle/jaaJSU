@@ -360,16 +360,16 @@
             return new Promise(function(resolve, reject){
                 return (function run(result){
                     if(!tasks.length) return resolve(result);
-
+    
                     const task= tasks.shift();
                     const value= typeof task==='function' ? task(result):task;
-
+    
                     // check against nil values
                     if(value!==null){
                         if(value===$async.CANCEL) return;
                         if(value.then) return value.then(run);
                     }
-
+    
                     return Promise.resolve(run(value));
                 })();
             });
@@ -450,7 +450,7 @@
         poll_: function(fn, timeout, interval) {
             var endTime= Number(new Date()) + (timeout || 2000);
             interval= interval || 100;
-
+    
             var checkCondition= function(resolve, reject) {
                 var result = fn();
                 if(result) {
@@ -682,7 +682,7 @@
                 },
                 set(){return false;}
             });
-
+    
             function setItemFCE(target){
                 return function(key, value){
                     if(Object.keys(target).indexOf(key)!==-1) return false;
@@ -705,7 +705,7 @@
             return mixed;
         }
     };
-
+    
     var out= {$string: $string, $dom: $dom, $async: $async, $optimiziers: $optimizier, $time: $time, $array: $array, $object: $object, $function: $function};
     return out;
 });

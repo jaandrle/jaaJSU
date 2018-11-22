@@ -6,7 +6,7 @@
         'gulp-replace'
         'fs'
     @version
-        0.5.0
+        0.6.0
     @examples
         gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" contend
         gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' contend
@@ -30,24 +30,31 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
     if(!gulp_replace) throw Error("Missing 'gulp-replace' function!");
     if(!fs) throw Error("Missing 'fs' object!");
     if(!variable_eval) throw Error("Missing 'variable_eval' function!");
+    const files_added= new Set();
 
     return function gulp_place({folder= "js/", string_wrapper= '"'}= {}){
-        const gulp_place_regex= /( *)gulp_place\(\s*(?:\"|\')([^\"]+)(?:\"|\')(?:\s*,\s*(?:\"|\')([^\"]+)(?:\"|\'))?\s*\)(;?)/g;
+        const gulp_place_regex= /( *)gulp_place\(\s*(?:\"|\')([^\"]+)(?:\"|\')(?:\s*,\s*(?:\"|\')([^\"]+)(?:\"|\'))?\s*\)(;?)(\/\*\sglobal[^\*]*\*\/)?/g;
         const gulp_remove_line= /[^\n]*\/\/gulp\.remove\.line\r?\n/g;
         const gulp_remove_jshint= /[^\n]*(\/\*[^\*]*\*\/)?\/\*\s(jshint|global)[^\*]*\*\/(?!\/\/gulp\.keep\.line)\r?\n/g;
-        return gulp_replace(gulp_place_regex,function(full_match, spaces= "", name= false, type="file", semicol= ""){
-            return parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol});
+        return gulp_replace(gulp_place_regex,function(full_match, spaces= "", name= false, type="file", semicol= "", jshint_global= ""){
+            return parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol, jshint_global});
 
-            function parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol}){
+            function parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol, jshint_global}){
                 if(!name) return full_match;
                 else if(type==="files"||type==="blob") return parseFile(parseBlob(folder, [name.substr(0, name.lastIndexOf("/")+1), name.substr(name.lastIndexOf("/")+1)]).replace(gulp_remove_line, "").replace(gulp_remove_jshint, ""));
-                else if(type==="file") return parseFile(fs.readFileSync(folder+fileNameVarHandler(name), 'utf8').replace(gulp_remove_line, "").replace(gulp_remove_jshint, ""));
+                else if(type==="file") return fileHandler(false, folder, fileNameVarHandler(name), spaces);
+                else if(type==="file_once") return fileHandler(true, folder, fileNameVarHandler(name), spaces);
                 else if(type==="variable") return spaces+string_wrapper+variable_eval(name)+string_wrapper+semicol;
             }
             function parseFile(file_data){
-                return file_data.replace(gulp_place_regex, function(full_match, spaces= "", name= false, type="file", semicol= ""){
-                    return parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol});
+                return file_data.replace(gulp_place_regex, function(full_match, spaces= "", name= false, type="file", semicol= "", jshint_global= ""){
+                    return parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol, jshint_global});
                 });
+            }
+            function fileHandler(once, folder, file_name, spaces){
+                if(once&&files_added.has(file_name)) return "";
+                files_added.add(file_name);
+                return parseFile(fs.readFileSync(folder+file_name, 'utf8').replace(gulp_remove_line, "").replace(gulp_remove_jshint, "").replace(/^/gm, spaces));
             }
         });
     };
