@@ -26,150 +26,128 @@
     function isMandatory(parameter){
         throw new Error('Missing parameter: '+parameter);
     }
-    var $string= {
-        //mazani mezer ve stringu
-        clearSpaces: function(str) {
-            if(typeof str !== "string") return false;
-            return str.replace(/\s+/g, "");
-        },
-        countChars: function(str){
-            if(typeof str !== "string") return false;
-            const str_length= str.length;
-            let counter= 0;
-            let char_code;
-            for(let i=0; i<str_length; i++){
-                char_code= str.charCodeAt(i);
-                counter+= (char_code==94 || char_code>127) ? 2 : 1;
-            }
-            return counter;
-        },
-        generateUnique(){
-            return (new Date()).getTime()+"_"+(performance.now().toString(36)+Math.random().toString(36)).replace(/\./g, (""+Math.random()).charAt(0)).substr(0, 10);
-        },
-        //ziskani podretezce (param. start je volitelny: default. je 0)
-        getSubstring: function(str, len, start) {
-            start || (start=0);
-            if(start < 0) start= 0;
-            if (str.length > len+start) {str = str.substring(start, len);}
-            return str;
-        },
+    var $array= {
         /* 
-        * FCE pro "pricitani" pismen ve stringu
-        * ...vraci nasledujici pismenko, resp. pismenko posunute o inc
-        * parametry:
-        *  tS str= [a-zA-Z] alespon na pozici pos
-        *  tN inc ~1= cislo posunu - i zaporne
-        *  tN pos ~posledni pismenko= index pozice
+        * FCE ketra vraci spravny index pro cyklicke prochazeni polem
+        * ...
+        * paramery:
+        *  i= aktualni index v poli
+        *  s= pozadovany posun v poli
+        *  l= delka pole
         * vraci:
-        *  tS string bud puvodni, nebo "posunuty"
+        *  number - cislo indexu v poli
         *  */
-        letterInc: function(str, inc, pos){
-            if(typeof pos === "undefined") pos= str.length-1;
-            let ch= str.charCodeAt(pos);
-            inc || (inc= 1);
-            let ch_out, output;
-            
-            if(!ch) ch=0;
-            else if(ch<65) ch=65;
-            else if(ch>90&&ch<97) ch=97;
-            else if(ch>122) ch=122;
-            ch_out= ch+inc;
-            if(ch===0||ch_out<65) output=false;
-            else if(ch_out>90&&ch_out<97) output=false;
-            else if(ch_out>122) output=false;
-            else output= String.fromCharCode(ch_out);
-            if(output) str= str.substr(0,pos) + output + str.substr(pos+1);
-            return str;
+        arrayIndex: function(i,s,l){
+            return (l+i+(s%l))%l;
         },
-        //osetreni html textu
-        escapeHTML: function(str){
-            var replacements= {"<": "&lt;", ">": "&gt;","&": "&amp;", "\"": "&quot;"};
-            return str.replace(/[<>&"]/g,(character)=>replacements[character]);
+        each: __eachInArrayLike,
+        getLast: function(arr){
+            return arr[arr.length-1];
         },
-        //vycisteni html textu od tagu/js/apod.
-        clearHTML: function(str){
-            var div= document.createElement('div');
-            div.innerHTML= str;
-            return div.textContent;
-        },
-        /* 
-        * FCE vraci bool. dle toho, zda string obsahuje opakujici znaky
-        * ...
-        * parametry:
-        *  tS str= string ke kontrole
-        *  tN quantity ~2= pocet znaku, ktery je jeste povolen
-        *  */
-        containsRepeatingChars: function(str, quantity){
-            if(typeof str !== "string") return false;
-            quantity= quantity || 2;
-            let re= new RegExp("(\\S)(\\1{"+quantity+",})","g");
-            str= str.replace(/\s+/g,"_");
-            return re.test(str);
-        },
-        /* 
-        * FCE vraci bool. dle toho, zda string obsahuje sekvenci znaku (abc..., ABC..., 123... apod.)
-        * ...
-        * vyzaduje:
-        *  $string.letterInc
-        * parametry:
-        *  tS str= string ke kontrole
-        *  tN quantity ~2= pocet znaku, ktery je jeste povolen
-        *  */
-        containsSequential: function(str, quantity){
-            if(typeof str !== "string") return false;
-            quantity= quantity || 2;
-            let out= false;
-            let seq= +str[0], repeat_count=1;
-            for(let i= 1, i_length= str.length; i < i_length; i++){
-                if(+str[i]-repeat_count===seq&&!out){
-                    if(++repeat_count>quantity){
-                        out= true;
-                    }
-                } else if(!out) {
-                    seq= +str[i];
-                    repeat_count= 1;
-                }
-            }
-            if(!out){
-                seq= String.fromCharCode(str.charCodeAt(0));
-                repeat_count=1;
-                for(let i= 1, i_length= str.length; i < i_length; i++){
-                    if(this.letterInc(String.fromCharCode(str.charCodeAt(i)),-repeat_count)===seq&&!out){
-                        if(++repeat_count>quantity){
-                            out= true;
-                        }
-                    } else if(!out) {
-                        seq= String.fromCharCode(str.charCodeAt(i));
-                        repeat_count= 1;
-                    }
-                }
-            }
-            return out;
-        },
-        isEmail: function(email_candidate){
-            /*_@_*/ let e= email_candidate.split("@"); if(e.length!==2) return false;
-            /*_@_._*/ e= [e[0], ...e[1].split(".")]; if(e.length!==3) return false;
-            const _e= !/(#|\?|!|\\|\/|\||\.\.)/i.test(e[0]); return _e && e.reduce((r,o)=>r&&o.length>1&&!/\s/.test(o), _e);
-        },
-        isFilled: function(str){
-            if(typeof str !== "string") return false;
-            return str.trim() ? str : false;
-        },
-        template: function(str){
-            if(typeof str !== "string") throw Error("Type of 'str' is not string!");
-            const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
-            return Object.freeze({
-                execute: function(params_obj={}){
-                    const params_obj_keys= Object.keys(params_obj);
-                    if(!params_obj_keys.length) return str;
-                    str= str.replace(reg, replaceHandler); return str;
-                    function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : match;}
+        partition: function(arr){
+            return {
+                head: function(){
+                    const [x, ...xs]= arr;
+                    return [x, xs];
                 },
-                isSubstituted: function(){
-                    return !reg.test(str);
+                tail: function(){
+                    let local_arr= [...arr];
+                    const last= local_arr.pop();
+                    return [local_arr, last];
+                },
+                onIndex: function(index){
+                    let local_arr= [...arr];
+                    return [local_arr.splice(0,index), local_arr];
+                },
+                byCondition: function(fn){
+                    let out= [[],[]];
+                    __eachInArrayLike(arr, (curr, i)=>out[+!Boolean(fn(curr, i))].push(curr));
+                    return out;
                 }
-            });
+            };
+        },
+        removeItem: function(arr, item) {
+            let p_arr= [...arr];//p_arr==private_arr
+            var i = 0;
+            while (i < p_arr.length) {
+                if (p_arr[i] === item) p_arr.splice(i, 1);
+                else i++;
+            }
+            return p_arr;
+        },
+        /* FCE pro pouziti v .sort zaridi promichani pole
+        * ...
+        * vraci:
+        *  number - nahodne cislo indexu v poli
+        *  */
+        sortRandom: function(){
+            return Math.random() - 0.5;
         }
+    };
+    var $async={
+        /* stara fce ==> postupne nahradit iterate_
+        * 
+        * Zesekvencneni Promise instanci (v core.js fce koncici '_')
+        * ...jedna se o scope vracici funkci, tedy "$async.serialize= function(funcs){...}"
+        * parametry:
+        *  funcs= pole async funkci (instance Promise)
+        * vraci:
+        *  then= prikaz, ktery se ma provest na konci
+        *  */
+        serialize: (function(){
+            const concat = list => Array.prototype.concat.bind(list);
+            const promiseConcat = f => x => f().then(concat(x));
+            const promiseReduce = (acc, f) => acc.then(promiseConcat(f));
+            return funcs => funcs.reduce(promiseReduce, Promise.resolve([]));
+        })(),
+        /* tF_
+        * Iterace pres Promise instance (v core.js fce koncici '_')
+        * ...jedna se o nahradu $async.serialize (obecnejsi + rychlejsi)
+        * parametry:
+        *  tF_ iterablePromises= pole funkci, ktere se budou volat vc. .then(...).catch(...)
+        *                    (typicky pole: [()=>{...zde Promise()...}, ...])
+        * vraci:
+        *  tF_ then= prikaz, ktery se ma provest na konci
+        *  tF_ catch= by nemel vracet asi nic
+        * 
+        * TODO: zjistit, zda dava smysl catch
+        *  */
+        iterate_: function(iterablePromises){
+            return new Promise(function(resolve, reject){
+                let p= Promise.resolve();
+                for(let i= 0, i_length= iterablePromises.length; i < i_length; i++){
+                    p= p.then(iterablePromises[i]);
+                }
+                p.then(resolve).catch(reject);
+            });
+        },
+        CANCEL: Symbol("$async.CANCEL"),
+        iterateMixed_: function(...tasks){
+            return new Promise(function(resolve, reject){
+                return (function run(result){
+                    if(!tasks.length) return resolve(result);
+    
+                    const task= tasks.shift();
+                    const value= typeof task==='function' ? task(result):task;
+    
+                    // check against nil values
+                    if(value!==null){
+                        if(value===$async.CANCEL) return;
+                        if(value.then) return value.then(run);
+                    }
+    
+                    return Promise.resolve(run(value));
+                })();
+            });
+        },
+        sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
+            let p= Promise.resolve(...input);
+            for(let i= 0, i_length= functions.length; i < i_length; i++){ p= p.then(functions[i]); }
+            p.then(resolve).catch(reject);
+        });};},
+        each_: function(...functions){return function(...input){
+            return Promise.all(functions.map(f=>f(...input)));
+        };}
     };
     var $dom={
         /* tF_
@@ -318,70 +296,51 @@
         //document.documentElement.style.paddingRight = '1px';
         //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
-    var $async={
-        /* stara fce ==> postupne nahradit iterate_
-        * 
-        * Zesekvencneni Promise instanci (v core.js fce koncici '_')
-        * ...jedna se o scope vracici funkci, tedy "$async.serialize= function(funcs){...}"
-        * parametry:
-        *  funcs= pole async funkci (instance Promise)
-        * vraci:
-        *  then= prikaz, ktery se ma provest na konci
-        *  */
-        serialize: (function(){
-            const concat = list => Array.prototype.concat.bind(list);
-            const promiseConcat = f => x => f().then(concat(x));
-            const promiseReduce = (acc, f) => acc.then(promiseConcat(f));
-            return funcs => funcs.reduce(promiseReduce, Promise.resolve([]));
-        })(),
-        /* tF_
-        * Iterace pres Promise instance (v core.js fce koncici '_')
-        * ...jedna se o nahradu $async.serialize (obecnejsi + rychlejsi)
-        * parametry:
-        *  tF_ iterablePromises= pole funkci, ktere se budou volat vc. .then(...).catch(...)
-        *                    (typicky pole: [()=>{...zde Promise()...}, ...])
-        * vraci:
-        *  tF_ then= prikaz, ktery se ma provest na konci
-        *  tF_ catch= by nemel vracet asi nic
-        * 
-        * TODO: zjistit, zda dava smysl catch
-        *  */
-        iterate_: function(iterablePromises){
-            return new Promise(function(resolve, reject){
-                let p= Promise.resolve();
-                for(let i= 0, i_length= iterablePromises.length; i < i_length; i++){
-                    p= p.then(iterablePromises[i]);
-                }
-                p.then(resolve).catch(reject);
-            });
-        },
-        CANCEL: Symbol("$async.CANCEL"),
-        iterateMixed_: function(...tasks){
-            return new Promise(function(resolve, reject){
-                return (function run(result){
-                    if(!tasks.length) return resolve(result);
-    
-                    const task= tasks.shift();
-                    const value= typeof task==='function' ? task(result):task;
-    
-                    // check against nil values
-                    if(value!==null){
-                        if(value===$async.CANCEL) return;
-                        if(value.then) return value.then(run);
+    var $function= {
+        each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
+        map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
+        /* Je to jen hloupy cyklus "...current" do dalsi funkce! => jednotlive funkce musi vracet pole! */
+        sequention: function(...functions){return function(...input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](...current); } return current;};},
+        schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
+        conditionalCall: function(mixed,fun){
+            if(!mixed) return false;
+            if(typeof fun === "function") return fun(mixed);
+            return mixed;
+        }
+    };
+    var $object= {
+        each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
+        fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
+        hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
+        immutable_keys: function(obj_input){
+            return new Proxy(Object.keys(obj_input).reduce(function(obj,key){obj[key]= obj_input[key]; return obj;},{}),{
+                get(target, command){
+                    if(Object.keys(target).indexOf(command)!==-1){
+                        return target[command];
+                    } else {
+                        switch(command){
+                            case "set":
+                                return setItemFCE(target);
+                            case "keys":
+                                return function(){return Object.keys(target);};
+                            default:
+                                return;
+                        }
+                        
                     }
-    
-                    return Promise.resolve(run(value));
-                })();
+                },
+                set(){return false;}
             });
+    
+            function setItemFCE(target){
+                return function(key, value){
+                    if(Object.keys(target).indexOf(key)!==-1) return false;
+                    target[key]= value;
+                    return true;
+                };
+            }
         },
-        sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
-            let p= Promise.resolve(...input);
-            for(let i= 0, i_length= functions.length; i < i_length; i++){ p= p.then(functions[i]); }
-            p.then(resolve).catch(reject);
-        });};},
-        each_: function(...functions){return function(...input){
-            return Promise.all(functions.map(f=>f(...input)));
-        };}
+        pluck: (key, object) => object[key],
     };
     var $optimizier= {
         /* tP
@@ -483,6 +442,151 @@
             };
         },
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+    };
+    var $string= {
+        //mazani mezer ve stringu
+        clearSpaces: function(str) {
+            if(typeof str !== "string") return false;
+            return str.replace(/\s+/g, "");
+        },
+        countChars: function(str){
+            if(typeof str !== "string") return false;
+            const str_length= str.length;
+            let counter= 0;
+            let char_code;
+            for(let i=0; i<str_length; i++){
+                char_code= str.charCodeAt(i);
+                counter+= (char_code==94 || char_code>127) ? 2 : 1;
+            }
+            return counter;
+        },
+        generateUnique(){
+            return (new Date()).getTime()+"_"+(performance.now().toString(36)+Math.random().toString(36)).replace(/\./g, (""+Math.random()).charAt(0)).substr(0, 10);
+        },
+        //ziskani podretezce (param. start je volitelny: default. je 0)
+        getSubstring: function(str, len, start) {
+            start || (start=0);
+            if(start < 0) start= 0;
+            if (str.length > len+start) {str = str.substring(start, len);}
+            return str;
+        },
+        /* 
+        * FCE pro "pricitani" pismen ve stringu
+        * ...vraci nasledujici pismenko, resp. pismenko posunute o inc
+        * parametry:
+        *  tS str= [a-zA-Z] alespon na pozici pos
+        *  tN inc ~1= cislo posunu - i zaporne
+        *  tN pos ~posledni pismenko= index pozice
+        * vraci:
+        *  tS string bud puvodni, nebo "posunuty"
+        *  */
+        letterInc: function(str, inc, pos){
+            if(typeof pos === "undefined") pos= str.length-1;
+            let ch= str.charCodeAt(pos);
+            inc || (inc= 1);
+            let ch_out, output;
+            
+            if(!ch) ch=0;
+            else if(ch<65) ch=65;
+            else if(ch>90&&ch<97) ch=97;
+            else if(ch>122) ch=122;
+            ch_out= ch+inc;
+            if(ch===0||ch_out<65) output=false;
+            else if(ch_out>90&&ch_out<97) output=false;
+            else if(ch_out>122) output=false;
+            else output= String.fromCharCode(ch_out);
+            if(output) str= str.substr(0,pos) + output + str.substr(pos+1);
+            return str;
+        },
+        //osetreni html textu
+        escapeHTML: function(str){
+            var replacements= {"<": "&lt;", ">": "&gt;","&": "&amp;", "\"": "&quot;"};
+            return str.replace(/[<>&"]/g,(character)=>replacements[character]);
+        },
+        //vycisteni html textu od tagu/js/apod.
+        clearHTML: function(str){
+            var div= document.createElement('div');
+            div.innerHTML= str;
+            return div.textContent;
+        },
+        /* 
+        * FCE vraci bool. dle toho, zda string obsahuje opakujici znaky
+        * ...
+        * parametry:
+        *  tS str= string ke kontrole
+        *  tN quantity ~2= pocet znaku, ktery je jeste povolen
+        *  */
+        containsRepeatingChars: function(str, quantity){
+            if(typeof str !== "string") return false;
+            quantity= quantity || 2;
+            let re= new RegExp("(\\S)(\\1{"+quantity+",})","g");
+            str= str.replace(/\s+/g,"_");
+            return re.test(str);
+        },
+        /* 
+        * FCE vraci bool. dle toho, zda string obsahuje sekvenci znaku (abc..., ABC..., 123... apod.)
+        * ...
+        * vyzaduje:
+        *  $string.letterInc
+        * parametry:
+        *  tS str= string ke kontrole
+        *  tN quantity ~2= pocet znaku, ktery je jeste povolen
+        *  */
+        containsSequential: function(str, quantity){
+            if(typeof str !== "string") return false;
+            quantity= quantity || 2;
+            let out= false;
+            let seq= +str[0], repeat_count=1;
+            for(let i= 1, i_length= str.length; i < i_length; i++){
+                if(+str[i]-repeat_count===seq&&!out){
+                    if(++repeat_count>quantity){
+                        out= true;
+                    }
+                } else if(!out) {
+                    seq= +str[i];
+                    repeat_count= 1;
+                }
+            }
+            if(!out){
+                seq= String.fromCharCode(str.charCodeAt(0));
+                repeat_count=1;
+                for(let i= 1, i_length= str.length; i < i_length; i++){
+                    if(this.letterInc(String.fromCharCode(str.charCodeAt(i)),-repeat_count)===seq&&!out){
+                        if(++repeat_count>quantity){
+                            out= true;
+                        }
+                    } else if(!out) {
+                        seq= String.fromCharCode(str.charCodeAt(i));
+                        repeat_count= 1;
+                    }
+                }
+            }
+            return out;
+        },
+        isEmail: function(email_candidate){
+            /*_@_*/ let e= email_candidate.split("@"); if(e.length!==2) return false;
+            /*_@_._*/ e= [e[0], ...e[1].split(".")]; if(e.length!==3) return false;
+            const _e= !/(#|\?|!|\\|\/|\||\.\.)/i.test(e[0]); return _e && e.reduce((r,o)=>r&&o.length>1&&!/\s/.test(o), _e);
+        },
+        isFilled: function(str){
+            if(typeof str !== "string") return false;
+            return str.trim() ? str : false;
+        },
+        template: function(str){
+            if(typeof str !== "string") throw Error("Type of 'str' is not string!");
+            const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
+            return Object.freeze({
+                execute: function(params_obj={}){
+                    const params_obj_keys= Object.keys(params_obj);
+                    if(!params_obj_keys.length) return str;
+                    str= str.replace(reg, replaceHandler); return str;
+                    function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : match;}
+                },
+                isSubstituted: function(){
+                    return !reg.test(str);
+                }
+            });
+        }
     };
     /* global console *///gulp.keep.line
     var $time={
@@ -601,111 +705,6 @@
             else return "00";
         }
     };
-    var $array= {
-        /* 
-        * FCE ketra vraci spravny index pro cyklicke prochazeni polem
-        * ...
-        * paramery:
-        *  i= aktualni index v poli
-        *  s= pozadovany posun v poli
-        *  l= delka pole
-        * vraci:
-        *  number - cislo indexu v poli
-        *  */
-        arrayIndex: function(i,s,l){
-            return (l+i+(s%l))%l;
-        },
-        each: __eachInArrayLike,
-        getLast: function(arr){
-            return arr[arr.length-1];
-        },
-        partition: function(arr){
-            return {
-                head: function(){
-                    const [x, ...xs]= arr;
-                    return [x, xs];
-                },
-                tail: function(){
-                    let local_arr= [...arr];
-                    const last= local_arr.pop();
-                    return [local_arr, last];
-                },
-                onIndex: function(index){
-                    let local_arr= [...arr];
-                    return [local_arr.splice(0,index), local_arr];
-                },
-                byCondition: function(fn){
-                    let out= [[],[]];
-                    __eachInArrayLike(arr, (curr, i)=>out[+!Boolean(fn(curr, i))].push(curr));
-                    return out;
-                }
-            };
-        },
-        removeItem: function(arr, item) {
-            let p_arr= [...arr];//p_arr==private_arr
-            var i = 0;
-            while (i < p_arr.length) {
-                if (p_arr[i] === item) p_arr.splice(i, 1);
-                else i++;
-            }
-            return p_arr;
-        },
-        /* FCE pro pouziti v .sort zaridi promichani pole
-        * ...
-        * vraci:
-        *  number - nahodne cislo indexu v poli
-        *  */
-        sortRandom: function(){
-            return Math.random() - 0.5;
-        }
-    };
-    var $object= {
-        each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
-        fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
-        hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
-        immutable_keys: function(obj_input){
-            return new Proxy(Object.keys(obj_input).reduce(function(obj,key){obj[key]= obj_input[key]; return obj;},{}),{
-                get(target, command){
-                    if(Object.keys(target).indexOf(command)!==-1){
-                        return target[command];
-                    } else {
-                        switch(command){
-                            case "set":
-                                return setItemFCE(target);
-                            case "keys":
-                                return function(){return Object.keys(target);};
-                            default:
-                                return;
-                        }
-                        
-                    }
-                },
-                set(){return false;}
-            });
-    
-            function setItemFCE(target){
-                return function(key, value){
-                    if(Object.keys(target).indexOf(key)!==-1) return false;
-                    target[key]= value;
-                    return true;
-                };
-            }
-        },
-        pluck: (key, object) => object[key],
-    };
-    var $function= {
-        each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
-        map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
-        /* Je to jen hloupy cyklus "...current" do dalsi funkce! => jednotlive funkce musi vracet pole! */
-        sequention: function(...functions){return function(...input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](...current); } return current;};},
-        schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
-        conditionalCall: function(mixed,fun){
-            if(!mixed) return false;
-            if(typeof fun === "function") return fun(mixed);
-            return mixed;
-        }
-    };
-    
     var out= {$string: $string, $dom: $dom, $async: $async, $optimiziers: $optimizier, $time: $time, $array: $array, $object: $object, $function: $function};
     return out;
 });

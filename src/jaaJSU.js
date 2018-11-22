@@ -6,7 +6,7 @@
 })(gulp_place("app.name", "variable"), function(window, document){
     'use strict';
     gulp_place("global.sub.js");
-    //gulp.import.namespaces
+    gulp_place("namespaces/*.sub.js", "blob");
     var out= "gulp.variable.namespaces";
     return out;
 });

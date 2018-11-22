@@ -6,11 +6,13 @@
         'gulp-replace'
         'fs'
     @version
-        0.6.0
+        0.7.0
     @examples
-        gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" contend
-        gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' contend
+        gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" content
+        gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' content
+        gulp_place("files_subfolder/*.js", "files") === gulp_place("files_subfolder/*.js", "blob"): replaced by js files content on "files_subfolder"
         gulp_place("some_var_inside_gulp", "variable"): replaced by value of 'some_var_inside_gulp'
+        gulp_place("file_path", "file_once") === only first match will be replaced by file content
     @info
         Returned function 'gulp_place' must be used in gulp.pipe and replacing 'gulp_place' in source files by another files content or eval inputed data (i.e. variables inside gulpfile).
         In case of file replacing and situation "^    gulp_place("file");" also spaces and new line (and ";" if writted) is replaced (see "gulp_place_regex").
@@ -41,10 +43,10 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
 
             function parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol, jshint_global}){
                 if(!name) return full_match;
-                else if(type==="files"||type==="blob") return parseFile(parseBlob(folder, [name.substr(0, name.lastIndexOf("/")+1), name.substr(name.lastIndexOf("/")+1)]).replace(gulp_remove_line, "").replace(gulp_remove_jshint, ""));
+                else if(type==="files"||type==="blob") return parseFile(parseBlob(folder, [name, name.lastIndexOf("/")+1], spaces).replace(gulp_remove_line, "").replace(gulp_remove_jshint, ""));
                 else if(type==="file") return fileHandler(false, folder, fileNameVarHandler(name), spaces);
                 else if(type==="file_once") return fileHandler(true, folder, fileNameVarHandler(name), spaces);
-                else if(type==="variable") return spaces+string_wrapper+variable_eval(name)+string_wrapper+semicol;
+                else if(type==="variable") return spaces+string_wrapper+variable_eval(name)+string_wrapper+semicol+jshint_global;
             }
             function parseFile(file_data){
                 return file_data.replace(gulp_place_regex, function(full_match, spaces= "", name= false, type="file", semicol= "", jshint_global= ""){
@@ -58,17 +60,18 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
             }
         });
     };
-    function parseBlob(main_folder, match){
-        let [ sub_folder, files ] = match;
+    function parseBlob(main_folder, match, spaces){
+        const [ name, last_slash ] = match;
+        let [ sub_folder, files ] = [ name.substr(0, last_slash), name.substr(last_slash) ];
         const folder= main_folder+sub_folder;
-        if(!files) return "";
+        if(!last_slash) return "";
         files= new RegExp(files
             .replace(/[\.\(\)]/g, m=> "\\"+m)
             .replace(/\*/g, ".*")
         );
         return fs.readdirSync(folder)
                .filter(file_candidate=> files.test(file_candidate))
-               .map(file_name=> fs.readFileSync(folder+file_name, 'utf8'))
+               .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/^/gm, spaces))
                .join("\n");
     }
     function fileNameVarHandler(str){

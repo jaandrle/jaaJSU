@@ -69,5 +69,5 @@ var $dom={
     each: __eachInArrayLike
 };
 /* global gulp_place */
-gulp_place("$dom_add_${app.standalone}.sub.js");
-gulp_place("$dom_forceRedraw_${app.standalone}.sub.js");
+gulp_place("special_functions/$dom_add_${app.standalone}.sub.js");
+gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");
