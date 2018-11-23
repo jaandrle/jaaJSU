@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-/* global.sub.js *//* global __eachInArrayLike */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike */
 var $dom={
     /* tF_
     * Zajistuje volani .then, az je DOM dostupny

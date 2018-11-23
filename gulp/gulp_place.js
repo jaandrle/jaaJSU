@@ -6,7 +6,7 @@
         'gulp-replace'
         'fs'
     @version
-        0.7.0
+        0.7.1
     @examples
         gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" content
         gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' content
@@ -56,7 +56,7 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
             function fileHandler(once, folder, file_name, spaces){
                 if(once&&files_added.has(file_name)) return "";
                 files_added.add(file_name);
-                return parseFile(fs.readFileSync(folder+file_name, 'utf8').replace(gulp_remove_line, "").replace(gulp_remove_jshint, "").replace(/^/gm, spaces));
+                return parseFile(spaces+fs.readFileSync(folder+file_name, 'utf8').replace(gulp_remove_line, "").replace(gulp_remove_jshint, "").replace(/\r?\n/gm, "\n"+spaces));
             }
         });
     };
@@ -69,9 +69,9 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
             .replace(/[\.\(\)]/g, m=> "\\"+m)
             .replace(/\*/g, ".*")
         );
-        return fs.readdirSync(folder)
+        return spaces+fs.readdirSync(folder)
                .filter(file_candidate=> files.test(file_candidate))
-               .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/^/gm, spaces))
+               .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/\r?\n/gm, "\n"+spaces))
                .join("\n");
     }
     function fileNameVarHandler(str){
