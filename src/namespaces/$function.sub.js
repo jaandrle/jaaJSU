@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("$optimizier.sub.js", "file_once");/* global $optimizier */
+gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier */
 var $function= {
     each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
     map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },

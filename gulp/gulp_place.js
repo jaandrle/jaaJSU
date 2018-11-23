@@ -6,7 +6,7 @@
         'gulp-replace'
         'fs'
     @version
-        0.7.2
+        0.7.3
     @examples
         gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" content
         gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' content
@@ -43,7 +43,7 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
 
             function parseFileHandler({name, full_match, type, spaces, string_wrapper, semicol, jshint_global}){
                 if(!name) return full_match;
-                else if(type==="files"||type==="blob") return parseFile(parseBlob(folder, [name, name.lastIndexOf("/")+1], spaces).replace(gulp_remove_line, "").replace(gulp_remove_jshint, ""));
+                else if(type==="files"||type==="glob") return parseFile(parseBlob(folder, [name, name.lastIndexOf("/")+1], spaces).replace(gulp_remove_line, "")).replace(gulp_remove_jshint, "");
                 else if(type==="file") return fileHandler(false, folder, fileNameVarHandler(name), spaces);
                 else if(type==="file_once") return fileHandler(true, folder, fileNameVarHandler(name), spaces);
                 else if(type==="variable") return spaces+string_wrapper+variable_eval(name)+string_wrapper+semicol+jshint_global;
@@ -70,10 +70,10 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
             .replace(/\*/g, ".*")
         );
         return spaces+fs.readdirSync(folder)
-               .filter(file_candidate=> files.test(file_candidate))
-               .map(file_name => { files_added.add(file_name); return file_name;})
-               .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/\r?\n/gm, "\n"+spaces))
-               .join("\n");
+                .filter(file_candidate=> files.test(file_candidate))
+                .map(file_name => { files_added.add(sub_folder+file_name); return file_name;})
+                .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/\r?\n/gm, "\n"+spaces))
+                .join("\n");
     }
     function fileNameVarHandler(str){
         if(typeof str !== "string") throw Error("Type of 'str' is not string!");

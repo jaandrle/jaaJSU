@@ -7,6 +7,6 @@
     'use strict';
     var out= {};
     gulp_place("global.sub.js", "file_once");
-    gulp_place("namespaces/*.sub.js", "blob");
+    gulp_place("namespaces/*.sub.js", "glob");
     return out;
 });
