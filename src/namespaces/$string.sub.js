@@ -144,3 +144,5 @@ var $string= {
         });
     }
 };
+gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
+export_as($string, gulp_place("namespaces.$string", "variable"));

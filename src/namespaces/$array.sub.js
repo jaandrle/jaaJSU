@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, export_as */
 var $array= {
     /* 
     * FCE ketra vraci spravny index pro cyklicke prochazeni polem
@@ -58,3 +58,4 @@ var $array= {
         return Math.random() - 0.5;
     }
 };
+export_as($array, gulp_place("namespaces.$array", "variable"));

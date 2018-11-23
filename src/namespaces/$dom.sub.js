@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, export_as */
 var $dom={
     /* tF_
     * Zajistuje volani .then, az je DOM dostupny
@@ -68,6 +68,6 @@ var $dom={
     },
     each: __eachInArrayLike
 };
-/* global gulp_place */
 gulp_place("special_functions/$dom_add_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");
+export_as($dom, gulp_place("namespaces.$dom", "variable"));

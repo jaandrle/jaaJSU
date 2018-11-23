@@ -16,7 +16,6 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             let main_stream;
             if(!code){
                 main_stream= gulp.src([app.src_folder+"*.js", '!'+app.src_folder+'*.sub.js'])
-                    .pipe($g.replace("\"gulp.variable.namespaces\"", "{"+Object.keys(namespaces).reduce((acc,key,i)=> acc+(i ? ", " : "")+namespaces[key]+": "+ key, "")+"}"))
                     .pipe(gulp_place({folder: "src/", string_wrapper: '"'}))
                     .pipe($g.replace(/\/\* gulp \*\/\/\* global gulp_place \*\/\r?\n/g,""));
     

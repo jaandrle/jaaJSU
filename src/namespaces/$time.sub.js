@@ -116,3 +116,5 @@ var $time={
         else return "00";
     }
 };
+gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
+export_as($time, gulp_place("namespaces.$time", "variable"));

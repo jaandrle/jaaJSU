@@ -5,8 +5,8 @@
     gulp_place("jaaJSU_export_${app.standalone}.sub.js");
 })(gulp_place("app.name", "variable"), function(window, document){
     'use strict';
+    var out= {};
     gulp_place("global.sub.js", "file_once");
     gulp_place("namespaces/*.sub.js", "blob");
-    var out= "gulp.variable.namespaces";
     return out;
 });

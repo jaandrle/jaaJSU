@@ -100,3 +100,5 @@ var $optimizier= {
     },
     timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
 };
+gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
+export_as($optimizier, gulp_place("namespaces.$optimizier", "variable"));

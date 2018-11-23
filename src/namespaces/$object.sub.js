@@ -34,3 +34,5 @@ var $object= {
     },
     pluck: (key, object) => object[key],
 };
+gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
+export_as($object, gulp_place("namespaces.$object", "variable"));

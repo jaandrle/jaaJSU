@@ -16,6 +16,8 @@
     }
 })("jaaJSU", function(window, document){
     'use strict';
+    var out= {};
+    function export_as(obj, key){ out[key]= obj; }
     function __eachInArrayLike(iterable, i_function){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function(iterable[i],i,!j); } }
     /* tP
     * Slouzi k oznaceni povinnych parametru funkci
@@ -84,6 +86,7 @@
             return Math.random() - 0.5;
         }
     };
+    export_as($array, "$array");
     var $async={
         /* stara fce ==> postupne nahradit iterate_
         * 
@@ -149,6 +152,7 @@
             return Promise.all(functions.map(f=>f(...input)));
         };}
     };
+    export_as($async, "$async");
     var $dom={
         /* tF_
         * Zajistuje volani .then, az je DOM dostupny
@@ -296,6 +300,7 @@
         //document.documentElement.style.paddingRight = '1px';
         //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
+    export_as($dom, "$dom");
     var $function= {
         each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
         map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
@@ -308,6 +313,7 @@
             return mixed;
         }
     };
+    export_as($function, "$function");
     var $object= {
         each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
@@ -342,6 +348,7 @@
         },
         pluck: (key, object) => object[key],
     };
+    export_as($object, "$object");
     var $optimizier= {
         /* tP
         * FCE pro pravidelne volani dane (narocne) funkce se zpozdenim
@@ -443,6 +450,7 @@
         },
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
     };
+    export_as($optimizier, "$optimiziers");
     var $string= {
         //mazani mezer ve stringu
         clearSpaces: function(str) {
@@ -588,6 +596,7 @@
             });
         }
     };
+    export_as($string, "$string");
     /* global console *///gulp.keep.line
     var $time={
         /* 
@@ -705,6 +714,6 @@
             else return "00";
         }
     };
-    var out= {$string: $string, $dom: $dom, $async: $async, $optimiziers: $optimizier, $time: $time, $array: $array, $object: $object, $function: $function};
+    export_as($time, "$time");
     return out;
 });
