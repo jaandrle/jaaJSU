@@ -6,7 +6,7 @@
         'gulp-replace'
         'fs'
     @version
-        0.7.1
+        0.7.2
     @examples
         gulp_place("file_path") === gulp_place("file_path", "file"): replaced by "file_path" content
         gulp_place("file_path${some_var_inside_gulp}") === gulp_place("file_path${some_var_inside_gulp}", "file"): replaced by '"file_path"+some_var_inside_gulp' content
@@ -35,7 +35,7 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
     const files_added= new Set();
 
     return function gulp_place({folder= "js/", string_wrapper= '"'}= {}){
-        const gulp_place_regex= /( *)gulp_place\(\s*(?:\"|\')([^\"]+)(?:\"|\')(?:\s*,\s*(?:\"|\')([^\"]+)(?:\"|\'))?\s*\)(;?)(\/\*\sglobal[^\*]*\*\/)?/g;
+        const gulp_place_regex= /( *)gulp_place\(\s*(?:\"|\')([^\"]+)(?:\"|\')(?:\s*,\s*(?:\"|\')([^\"]+)(?:\"|\'))?\s*\)(;?)([^\r\n]*\/\*[^\*]*\*\/)?/g;
         const gulp_remove_line= /[^\n]*\/\/gulp\.remove\.line\r?\n/g;
         const gulp_remove_jshint= /[^\n]*(\/\*[^\*]*\*\/)?\/\*\s(jshint|global)[^\*]*\*\/(?!\/\/gulp\.keep\.line)\r?\n/g;
         return gulp_replace(gulp_place_regex,function(full_match, spaces= "", name= false, type="file", semicol= "", jshint_global= ""){
@@ -71,6 +71,7 @@ module.exports= function({gulp_replace= false, fs= false, variable_eval= false}=
         );
         return spaces+fs.readdirSync(folder)
                .filter(file_candidate=> files.test(file_candidate))
+               .map(file_name => { files_added.add(file_name); return file_name;})
                .map(file_name=> fs.readFileSync(folder+file_name, 'utf8').replace(/\r?\n/gm, "\n"+spaces))
                .join("\n");
     }
