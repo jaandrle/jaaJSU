@@ -51,6 +51,13 @@
     "gulp-rename": "1.4.0",
     "gulp-replace": "1.0.0",
     "gulp-sourcemaps": "2.6.4",
-    "gulp-util": "3.0.8"
+    "gulp-util": "3.0.8",
+    "jshint": "~2.9.6"
+  },
+  "__SECTION__JSHINT": "",
+  "jshintConfig": {
+    "esversion": 6,
+    "browser": "true",
+    "undef": "true"
   }
 }

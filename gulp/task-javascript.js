@@ -5,13 +5,9 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
     return function(cb){
         let cmd;
-        if($run.jshint_advanced){
-            cmd= $o.spawn($run.jshint_advanced, [app.src_folder], {});
-            cmd.stdout.on('data', function(data){ error.addText(data.toString()+"\n"); });
-            cmd.on('close', run);
-        } else {
-            run(0);
-        }
+        cmd= $o.spawn("node", ['node_modules/jshint/bin/jshint', app.src_folder], {});
+        cmd.stdout.on('data', function(data){ error.addText(data.toString()+"\n"); });
+        cmd.on('close', run);
         function run(code){
             let main_stream;
             if(!code){
