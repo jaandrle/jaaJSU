@@ -12,7 +12,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.1.2";
+        window[module_name+"_version"]= "0.1.3";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -592,16 +592,20 @@
             if(typeof str !== "string") throw Error("Type of 'str' is not string!");
             const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
             return Object.freeze({
-                execute: function(params_obj={}){
-                    const params_obj_keys= Object.keys(params_obj);
-                    if(!params_obj_keys.length) return str;
-                    str= str.replace(reg, replaceHandler); return str;
-                    function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : match;}
+                execute,
+                partial: function(params_obj={}){
+                    str= execute(params_obj); return str;
                 },
                 isSubstituted: function(){
                     return !reg.test(str);
                 }
             });
+            function execute(params_obj={}){
+                const params_obj_keys= Object.keys(params_obj);
+                if(!params_obj_keys.length) return str;
+                return str.replace(reg, replaceHandler);
+                function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : match;}
+            }
         }
     };
 
