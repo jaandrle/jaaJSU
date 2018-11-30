@@ -28,6 +28,7 @@
     function isMandatory(parameter){
         throw new Error('Missing parameter: '+parameter);
     }
+    
 
     var $array= {
         /* 
@@ -319,6 +320,7 @@
     };
 
     export_as($function, "$function");
+    
     
     var $object= {
         each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); for(let i=0, i_length= iterable_keys.length; i<i_length; i++){ const iterable_keys_i= iterable_keys[i];i_function(iterable[iterable_keys_i],iterable_keys_i,i); } },
