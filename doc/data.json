@@ -10,6 +10,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src\\namespaces\\$async.sub.js": {
+            "name": "src\\namespaces\\$async.sub.js",
+            "modules": {},
+            "classes": {
+                "$async": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src\\namespaces\\$object.sub.js": {
             "name": "src\\namespaces\\$object.sub.js",
             "modules": {},
@@ -42,6 +51,19 @@
             "file": "src\\namespaces\\$array.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for Arrays.",
+            "extends": "Global"
+        },
+        "$async": {
+            "name": "$async",
+            "shortname": "$async",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 2,
+            "description": "This NAMESPACE provides features for async (mainly Promise) functions.",
             "extends": "Global"
         },
         "$object": {
@@ -197,6 +219,74 @@
                 "type": "Number"
             },
             "class": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 8,
+            "description": "Procedure for iterating thorught **Promise** function array `funcs`.",
+            "itemtype": "method",
+            "name": "serialize",
+            "deprecated": true,
+            "deprecationMessage": "Use #iterate_",
+            "params": [
+                {
+                    "name": "funcs",
+                    "description": "* `funcs[*]` **\\<Promise\\>**\n * Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "Array"
+                }
+            ],
+            "throws": {
+                "description": "* `then` **\\<Mixed\\>**\n     * Depends on functions in `funcs`\n * `catch` **\\<Error\\>**\n     * Handle errors in `funcs[*]`",
+                "type": "Promise"
+            },
+            "class": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 27,
+            "description": "Procedure for iterating thorught **Promise** function array `funcs`.",
+            "itemtype": "method",
+            "name": "iterate_",
+            "params": [
+                {
+                    "name": "iterablePromises",
+                    "description": "* `iterablePromises[*]` **\\<Promise\\>**\n * Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "Array"
+                }
+            ],
+            "throws": {
+                "description": "* `then` **\\<Mixed\\>**\n     * Depends on functions in `iterablePromises`\n * `catch` **\\<Error\\>**\n     * Handle errors in `iterablePromises[*]`",
+                "type": "Promise"
+            },
+            "class": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 48,
+            "itemtype": "property",
+            "name": "CANCEL I used in iterateMixed_",
+            "type": "Symbol",
+            "class": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 70,
+            "description": "Procedure for iterating thorught **Promise** function array `funcs`.",
+            "itemtype": "method",
+            "name": "sequention_",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "Promise",
+                    "multiple": true
+                }
+            ],
+            "throws": {
+                "description": "* `then` **\\<Mixed\\>**\n     * Depends on functions in `...functions`\n * `catch` **\\<Error\\>**\n     * Handle errors in `...functions`",
+                "type": "Promise"
+            },
+            "class": "$async"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",

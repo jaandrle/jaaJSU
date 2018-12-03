@@ -1,32 +1,41 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/**
+ * This NAMESPACE provides features for async (mainly Promise) functions.
+ * @class $async
+ * @extends Global
+ */
 var $async={
-    /* stara fce ==> postupne nahradit iterate_
-    * 
-    * Zesekvencneni Promise instanci (v core.js fce koncici '_')
-    * ...jedna se o scope vracici funkci, tedy "$async.serialize= function(funcs){...}"
-    * parametry:
-    *  funcs= pole async funkci (instance Promise)
-    * vraci:
-    *  then= prikaz, ktery se ma provest na konci
-    *  */
+   /**
+    * Procedure for iterating thorught **Promise** function array `funcs`.
+    * @method serialize
+    * @deprecated Use #iterate_
+    * @param {Array} funcs
+    *  * `funcs[*]` **\<Promise\>**
+    *  * Promises for iterating (the next always waiting fro previous Promise).
+    * @throws {Promise}
+    *  * `then` **\<Mixed\>**
+    *      * Depends on functions in `funcs`
+    *  * `catch` **\<Error\>**
+    *      * Handle errors in `funcs[*]`
+    */
     serialize: (function(){
         const concat = list => Array.prototype.concat.bind(list);
         const promiseConcat = f => x => f().then(concat(x));
         const promiseReduce = (acc, f) => acc.then(promiseConcat(f));
         return funcs => funcs.reduce(promiseReduce, Promise.resolve([]));
     })(),
-    /* tF_
-    * Iterace pres Promise instance (v core.js fce koncici '_')
-    * ...jedna se o nahradu $async.serialize (obecnejsi + rychlejsi)
-    * parametry:
-    *  tF_ iterablePromises= pole funkci, ktere se budou volat vc. .then(...).catch(...)
-    *                    (typicky pole: [()=>{...zde Promise()...}, ...])
-    * vraci:
-    *  tF_ then= prikaz, ktery se ma provest na konci
-    *  tF_ catch= by nemel vracet asi nic
-    * 
-    * TODO: zjistit, zda dava smysl catch
-    *  */
+   /**
+    * Procedure for iterating thorught **Promise** function array `funcs`.
+    * @method iterate_
+    * @param {Array} iterablePromises
+    *  * `iterablePromises[*]` **\<Promise\>**
+    *  * Promises for iterating (the next always waiting fro previous Promise).
+    * @throws {Promise}
+    *  * `then` **\<Mixed\>**
+    *      * Depends on functions in `iterablePromises`
+    *  * `catch` **\<Error\>**
+    *      * Handle errors in `iterablePromises[*]`
+    */
     iterate_: function(iterablePromises){
         return new Promise(function(resolve, reject){
             let p= Promise.resolve();
@@ -36,6 +45,9 @@ var $async={
             p.then(resolve).catch(reject);
         });
     },
+    /**
+     * @property {Symbol} CANCEL I used in iterateMixed_
+     */
     CANCEL: Symbol("$async.CANCEL"),
     iterateMixed_: function(...tasks){
         return new Promise(function(resolve, reject){
@@ -55,6 +67,17 @@ var $async={
             })();
         });
     },
+   /**
+    * Procedure for iterating thorught **Promise** function array `funcs`.
+    * @method sequention_
+    * @param {Promise} ...functions
+    *  * Promises for iterating (the next always waiting fro previous Promise).
+    * @throws {Promise}
+    *  * `then` **\<Mixed\>**
+    *      * Depends on functions in `...functions`
+    *  * `catch` **\<Error\>**
+    *      * Handle errors in `...functions`
+    */
     sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
         let p= Promise.resolve(...input);
         for(let i= 0, i_length= functions.length; i < i_length; i++){ p= p.then(functions[i]); }
