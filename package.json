@@ -17,7 +17,8 @@
   },
   "__Comment__sequence": "exclamation mark (!) on the start of task name means to escape it",
   "sequence": [
-    "javascript"
+    "doc",
+    "!javascript"
   ],
   "__SECTION_NPM": "",
   "name": "jaajsu",
@@ -52,7 +53,8 @@
     "gulp-replace": "1.0.0",
     "gulp-sourcemaps": "2.6.4",
     "gulp-util": "3.0.8",
-    "jshint": "~2.9.6"
+    "jshint": "~2.9.6",
+    "yuidocjs": "^0.10.2"
   },
   "__SECTION__JSHINT": "",
   "jshintConfig": {

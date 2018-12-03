@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation: jaaJSU@0.1.3</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$object.sub.js</h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.3</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/$array.html">$array</a></li>
+                            <li><a href="../classes/$object.html">$object</a></li>
+                            <li><a href="../classes/Global.html">Global</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>src\namespaces\$object.sub.js</h4>
+
+<pre class="code prettyprint linenums">
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/* global isMandatory */
+/**
+ * This NAMESPACE provides features for Objects.
+ * @class $object
+ * @extends Global
+ */
+var $object= {
+    /**
+     * Function for iterating throught Object &#x60;iterable&#x60;.
+     * @method each
+     * @param {Object} iterable 
+     *  * An object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in &#x60;iterable&#x60; Object.
+     *  * &#x60;i_function(value,key,index)&#x60;
+     *      * &#x60;value&#x60; Mixed: Nth value for &#x60;key&#x60; in &#x60;iterable&#x60;.
+     *      * &#x60;key&#x60; String: Nth key.
+     *      * &#x60;index&#x60; Number: Idicies 0...&#x60;Object.keys(iterable).length&#x60;.
+     */
+    each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function(iterable[iterable_keys_i],iterable_keys_i,i); }},
+    /**
+     * Function for converting Array &#x60;arr&#x60; to Object. Uses &#x60;fun&#x60; for converting.
+     * @method fromArray
+     * @param {Array} arr 
+     *  * Array-like parameter.
+     * @param {Function} fun
+     *  * **Optional** [&#x60;fun= (acc, curr, i)=&gt; acc[&quot;&quot;+i]= curr&#x60;].
+     *  * Function for converting. In fact, it is wrapper around &#x60;Array.reduce&#x60;.
+     *  * &#x60;fun(acc,curr,i)&#x60;
+     *      * &#x60;acc&#x60; Object: Reference link to output Object.
+     *      * &#x60;curr&#x60; Mixed: Nth elemnt in Array &#x60;arr&#x60;.
+     *      * &#x60;i&#x60; Number: Nth index of &#x60;arr&#x60;.
+     * @param {Object} default_value
+     *  * **Optional** [&#x60;default_value={}&#x60;].
+     *  * Initial value.
+     * @return {Object}
+     *  * Created object.
+     */
+    fromArray: function(arr, fun= (acc, curr, i)=&gt; acc[&quot;&quot;+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=&gt;{ fun(acc, curr, i); return acc; }, default_value);},
+    /**
+     * Wrapper around &#x60;Object.prototype.hasOwnProperty&#x60;.
+     * @method hasProp
+     * @param {Object} obj
+     *  * **Mandatory**
+     *  * Object where to search &#x60;prop&#x60;.
+     * @param {String} prop
+     *  * **Mandatory**
+     *  * Poperty to searching for.
+     * @return {Boolean}
+     *  * True, if &#x60;obj&#x60; has property &#x60;prop&#x60;
+     */
+    hasProp: function(obj=isMandatory(&quot;obj&quot;), prop=isMandatory(&quot;prop&quot;)) { return Object.prototype.hasOwnProperty.call(obj, prop); },
+    /**
+     * Function for creating non-rewritable object
+     * @method immutable_keys
+     * @param {Object} obj_input
+     *  * **Optional** [&#x60;obj_input={}&#x60;]
+     *  * Initial value
+     * @return {Proxy}
+     *  * getter &#x60;Proxy.key_name&#x60; Mixed: returns key_name if defined
+     *  * getter &#x60;Proxy.set(key_name, value)&#x60; Function:
+     *      * define &#x60;key_name&#x60; in object if isn&#x27;t already defined (**returns True**, else **False**).
+     *  * getter &#x60;Proxy.keys&#x60; Number: Wrapper around &#x60;Object.keys(*)&#x60;
+     */
+    immutable_keys: function(obj_input={}){
+        return new Proxy(Object.keys(obj_input).reduce(function(obj,key){obj[key]= obj_input[key]; return obj;},{}),{
+            get(target, command){
+                if(Object.keys(target).indexOf(command)!==-1){
+                    return target[command];
+                } else {
+                    switch(command){
+                        case &quot;set&quot;:
+                            return setItemFCE(target);
+                        case &quot;keys&quot;:
+                            return function(){return Object.keys(target);};
+                        default:
+                            return;
+                    }
+                    
+                }
+            },
+            set(){return false;}
+        });
+
+        function setItemFCE(target){
+            return function(key, value){
+                if(Object.keys(target).indexOf(key)!==-1) return false;
+                target[key]= value;
+                return true;
+            };
+        }
+    },
+    /**
+     * Wrapper around &#x60;object[key]&#x60;, usefull for binding.
+     * @method pluck
+     * @param {String} key
+     *  * Key in Object &#x60;obj&#x60;.
+     * @param {Object} object
+     * @return {Mixed}
+     *  * Value in &#x60;object[key]&#x60;
+     */
+    pluck: (key, object) =&gt; object[key],
+};
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
+export_as($object, gulp_place(&quot;namespaces.$object&quot;, &quot;variable&quot;));
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>
