@@ -23,7 +23,9 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             .pipe($g.replace(hash_clear, ""))
             //.pipe($g.replace("Class defined in", "Namespace defined in"))
             .pipe($g.replace("<h3>API Docs - Main Index</h3>", "<h3>This is documentation of "+app.name+"@"+app.version+"</h3>"))
-            .pipe($g.replace("<p>Something smart and pretty should probably go here.</p>", "<p></p>"))
+            .pipe($g.replace("<p>Something smart and pretty should probably go here.</p>", "<p><a href='https://github.com/jaandrle/jaaJSU/'>Go to github repository</a></p>"))
+            .pipe($g.replace('<script src="{{yuiSeedUrl}}"></script>', '<script src="{{projectAssets}}/from_yahhoapis/yui-min.js"></script>'))
+            .pipe($g.replace('<link rel="stylesheet" href="{{yuiGridsUrl}}">', '<link rel="stylesheet" href="{{projectAssets}}/from_yahhoapis/cssgrids-min.css">\n<link rel="stylesheet" href="{{yuiGridsUrl}}">'))
             .on('error', error.handler)
             .pipe(gulp.dest('./gulp/theme/'))
             .on("end", function(){
