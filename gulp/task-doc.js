@@ -31,7 +31,7 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             .pipe($g.replace('<div id="classdocs">', '<div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; }</style>'))
             .pipe($g.replace('<li><a href="#', '<li class="menuli"><a href="#'))
             .pipe($g.replace('<div id="methods">', '<div id="methods"><h4>Methods</h4>'))
-            .pipe($g.replace('<div id="properties">', '<div id="properties"><h4>Properties</h4>'))
+            .pipe($g.replace('<div id="props">', '<div id="props"><h4>Properties</h4>'))
             .pipe($g.replace('<div id="attrs">', '<div id="attrs"><h4>Attributes</h4>'))
             .pipe($g.replace('<div id="events">', '<div id="events"><h4>Events</h4>'))
             .pipe($g.replace('<script src="{{projectAssets}}/js/tabs.js"></script>', ''))
