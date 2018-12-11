@@ -26,6 +26,14 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             .pipe($g.replace("<p>Something smart and pretty should probably go here.</p>", "<p><a href='https://github.com/jaandrle/jaaJSU/'>Go to github repository</a></p>"))
             .pipe($g.replace('<script src="{{yuiSeedUrl}}"></script>', '<script src="{{projectAssets}}/from_yahhoapis/yui-min.js"></script>'))
             .pipe($g.replace('<link rel="stylesheet" href="{{yuiGridsUrl}}">', '<link rel="stylesheet" href="{{projectAssets}}/from_yahhoapis/cssgrids-min.css">\n<link rel="stylesheet" href="{{yuiGridsUrl}}">'))
+            .pipe($g.replace("var code = Y.all('.prettyprint.linenums');", "Y.all= function(arg, parent= document){"+
+                    "let els= typeof arg==='string' ? parent.querySelectorAll(arg) : arg;"+
+                    "els.size= ()=>els.length;"+
+                    "els.each= (fn)=>[].forEach.call(els, el=> fn(Y.all(el)));"+
+                    "els.all= (arg)=>Y.all(arg, els);"+
+                    "els.prepend= (arg)=>els.innerHTML= arg+els.innerHTML;"+
+                    "return els;}"+
+                "\n    var code = Y.all('.prettyprint.linenums');"))
             .on('error', error.handler)
             .pipe(gulp.dest('./gulp/theme/'))
             .on("end", function(){
