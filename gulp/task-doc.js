@@ -1,6 +1,15 @@
 /* jshint esversion: 6,-W097, -W040, node: true, expr: true, undef: true */
 module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     const hash_clear= /\s*var h = location\.hash;\r?\n\s*location\.hash = '';\r?\n\s*h = h\.replace\('LINE_', 'LINENUM_'\);\r?\n\s*location\.hash = h;/gm;
+    const Y_support= "Y.all= function(arg, parent= document){"+
+        "let els= typeof arg==='string' ? parent.querySelectorAll(arg) : arg;"+
+        "els.size= ()=>els.length;"+
+        "els.each= (fn)=>[].forEach.call(els, el=> fn(Y.all(el)));"+
+        "els.all= (arg)=>Y.all(arg, els);"+
+        "els.addClass= (arg)=>[].forEach.call(els, el=> el.classList.add(arg));"+
+        "els.prepend= (arg)=>els.innerHTML= arg+els.innerHTML;"+
+        "return els;"+
+    "};";
     return function(cb){
         gulp.src(['./node_modules/yuidocjs/themes/simple/**/*'])
             .pipe($g.replace("{{htmlTitle}}", "Documentation: "+app.name+"@"+app.version))
@@ -17,23 +26,21 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
                     "{{/if}}"+
                     "{{#unless @last}}, {{/unless}}"+
                 "{{/params}}"))
-            //.pipe($g.replace("Class {{moduleName}}", "Namespace {{moduleName}}"))
-            //old .pipe($g.replace("h = h.replace('LINE_', 'LINENUM_')", "h = h.replace('LINE_', 'LINENUM_').replace('l', 'LINENUM_')"))
             .pipe($g.replace("n.prepend('<a name=\"LINENUM_' + l + '\"></a>');", "n.prepend('<a name=\"l' + l + '\"></a>');"))
             .pipe($g.replace(hash_clear, ""))
-            //.pipe($g.replace("Class defined in", "Namespace defined in"))
+            .pipe($g.replace('<div id="classdocs">', '<div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; }</style>'))
+            .pipe($g.replace('<li><a href="#', '<li class="menuli"><a href="#'))
+            .pipe($g.replace('<div id="methods">', '<div id="methods"><h4>Methods</h4>'))
+            .pipe($g.replace('<div id="properties">', '<div id="properties"><h4>Properties</h4>'))
+            .pipe($g.replace('<div id="attrs">', '<div id="attrs"><h4>Attributes</h4>'))
+            .pipe($g.replace('<div id="events">', '<div id="events"><h4>Events</h4>'))
+            .pipe($g.replace('<script src="{{projectAssets}}/js/tabs.js"></script>', ''))
             .pipe($g.replace("<h3>API Docs - Main Index</h3>", "<h3>This is documentation of "+app.name+"@"+app.version+"</h3>"))
             .pipe($g.replace("<p>Something smart and pretty should probably go here.</p>", "<p><a href='https://github.com/jaandrle/jaaJSU/'>Go to github repository</a></p>"))
             .pipe($g.replace('<script src="{{yuiSeedUrl}}"></script>', '<script src="{{projectAssets}}/from_yahhoapis/yui-min.js"></script>'))
             .pipe($g.replace('<link rel="stylesheet" href="{{yuiGridsUrl}}">', '<link rel="stylesheet" href="{{projectAssets}}/from_yahhoapis/cssgrids-min.css">\n<link rel="stylesheet" href="{{yuiGridsUrl}}">'))
-            .pipe($g.replace("var code = Y.all('.prettyprint.linenums');", "Y.all= function(arg, parent= document){"+
-                    "let els= typeof arg==='string' ? parent.querySelectorAll(arg) : arg;"+
-                    "els.size= ()=>els.length;"+
-                    "els.each= (fn)=>[].forEach.call(els, el=> fn(Y.all(el)));"+
-                    "els.all= (arg)=>Y.all(arg, els);"+
-                    "els.prepend= (arg)=>els.innerHTML= arg+els.innerHTML;"+
-                    "return els;}"+
-                "\n    var code = Y.all('.prettyprint.linenums');"))
+            .pipe($g.replace("var classdocs = Y.one('#classdocs'),", Y_support+"\n            var classdocs = Y.one('#classdocs'),"))
+            .pipe($g.replace("var code = Y.all('.prettyprint.linenums');", Y_support+"\n    var code = Y.all('.prettyprint.linenums');"))
             .on('error', error.handler)
             .pipe(gulp.dest('./gulp/theme/'))
             .on("end", function(){

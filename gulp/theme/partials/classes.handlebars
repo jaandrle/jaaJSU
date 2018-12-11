@@ -25,24 +25,24 @@
     {{/is_constructor}}
 {{/if}}
 
-<div id="classdocs">
+<div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; }</style>
     <ul>
         {{#if methods}}
-        <li><a href="#methods">Methods</a></li>
+        <li class="menuli"><a href="#methods">Methods</a></li>
         {{/if}}
         {{#if properties}}
-        <li><a href="#props">Properties</a></li>
+        <li class="menuli"><a href="#props">Properties</a></li>
         {{/if}}
         {{#if attrs}}
-        <li><a href="#attrs">Attributes</a></li>
+        <li class="menuli"><a href="#attrs">Attributes</a></li>
         {{/if}}
         {{#if events}}
-        <li><a href="#events">Events</a></li>
+        <li class="menuli"><a href="#events">Events</a></li>
         {{/if}}
     </ul>
     <div>
         {{#if methods}}
-            <div id="methods">
+            <div id="methods"><h4>Methods</h4>
             {{#methods}}
 {{>method}}
             {{/methods}}
@@ -56,14 +56,14 @@
             </div>
         {{/if}}
         {{#if attrs}}
-            <div id="attrs">
+            <div id="attrs"><h4>Attributes</h4>
             {{#attrs}}
                 {{>attrs}}
             {{/attrs}}
             </div>
         {{/if}}
         {{#if events}}
-            <div id="events">
+            <div id="events"><h4>Events</h4>
             {{#events}}
                 {{>events}}
             {{/events}}

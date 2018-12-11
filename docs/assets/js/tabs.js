@@ -1,7 +1,8 @@
 YUI({
     insertBefore: 'site_styles'
 }).use('tabview', function(Y) {
-    var classdocs = Y.one('#classdocs'),
+    Y.all= function(arg, parent= document){let els= typeof arg==='string' ? parent.querySelectorAll(arg) : arg;els.size= ()=>els.length;els.each= (fn)=>[].forEach.call(els, el=> fn(Y.all(el)));els.all= (arg)=>Y.all(arg, els);els.addClass= (arg)=>[].forEach.call(els, el=> el.classList.add(arg));els.prepend= (arg)=>els.innerHTML= arg+els.innerHTML;return els;};
+            var classdocs = Y.one('#classdocs'),
         tabviewIndexTable = {};
     if (classdocs) {
         if (classdocs.all('li').size()) {
