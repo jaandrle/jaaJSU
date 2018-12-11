@@ -12,7 +12,7 @@
     {{#params}}
         <li>
         {{#if optional}}
-            `[{{name}}{{#if optdefault}}={{optdefault}}{{/if}}]` <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
+            [`{{name}}`{{#if optdefault}}={{optdefault}}{{/if}}] <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
         {{else}}
             `{{name}}` <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
         {{/if}}

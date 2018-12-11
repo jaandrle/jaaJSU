@@ -7,9 +7,16 @@
 *  tD element ~active_page_el= ES6 element selector
 *  tS platform ~"iOS"= pro kterou platformu aplikovat: all, iOS, Android, ... (viz cordova)
 *  */
-$dom.forceRedraw= function(element,platform){
-    element= element || active_page_el;
-    platform= platform || "iOS";
+/**
+ * Redraw element using cheat `*.offsetHeight`
+ * @method forceRedraw [cordova]
+ * @for $dom.{namespace}
+ * @param {NodeElement} [element=active_page_el]
+ *  * Element for redraw
+ * @param {String} [platform="iOS"]
+ *  * Redraw only for specific `device.platform` ("Android", "iOS")
+ */
+$dom.forceRedraw= function(element= active_page_el, platform= "iOS"){
     if(device.platform===platform||platform==="all"){
         let d= element.style.display;
         element.style.display= 'none';

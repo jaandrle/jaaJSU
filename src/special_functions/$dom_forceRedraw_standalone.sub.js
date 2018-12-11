@@ -6,8 +6,14 @@
     * parametry:
     *  tD element ~document.body= ES6 element selector
     *  */
-$dom.forceRedraw= function(element){
-    element= element || document.body;
+/**
+ * Redraw element using cheat `*.offsetHeight`
+ * @method forceRedraw
+ * @for $dom.{namespace}
+ * @param {NodeElement} [element=document.body]
+ *  * Element for redraw
+ */
+$dom.forceRedraw= function(element= document.body){
     let d= element.style.display;
     element.style.display= 'none';
     let trick= element.offsetHeight;

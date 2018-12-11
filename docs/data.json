@@ -1,0 +1,1585 @@
+{
+    "project": {},
+    "files": {
+        "src\\namespaces\\$array.sub.js": {
+            "name": "src\\namespaces\\$array.sub.js",
+            "modules": {},
+            "classes": {
+                "$array.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$array": 1
+            }
+        },
+        "src\\namespaces\\$async.sub.js": {
+            "name": "src\\namespaces\\$async.sub.js",
+            "modules": {},
+            "classes": {
+                "$async.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$async": 1
+            }
+        },
+        "src\\namespaces\\$dom.sub.js": {
+            "name": "src\\namespaces\\$dom.sub.js",
+            "modules": {},
+            "classes": {
+                "$dom.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$dom": 1
+            }
+        },
+        "src\\namespaces\\$function.sub.js": {
+            "name": "src\\namespaces\\$function.sub.js",
+            "modules": {},
+            "classes": {
+                "$function.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$function": 1
+            }
+        },
+        "src\\namespaces\\$object.sub.js": {
+            "name": "src\\namespaces\\$object.sub.js",
+            "modules": {},
+            "classes": {
+                "$object.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$object": 1
+            }
+        },
+        "src\\namespaces\\$optimizier.sub.js": {
+            "name": "src\\namespaces\\$optimizier.sub.js",
+            "modules": {},
+            "classes": {
+                "$optimizier.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$optimizier": 1
+            }
+        },
+        "src\\namespaces\\$string.sub.js": {
+            "name": "src\\namespaces\\$string.sub.js",
+            "modules": {},
+            "classes": {
+                "$string.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$string": 1
+            }
+        },
+        "src\\namespaces\\$time.sub.js": {
+            "name": "src\\namespaces\\$time.sub.js",
+            "modules": {},
+            "classes": {
+                "$time.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "$time": 1
+            }
+        },
+        "src\\special_functions\\$dom_add_cordova.sub.js": {
+            "name": "src\\special_functions\\$dom_add_cordova.sub.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$dom.{namespace}": 1
+            },
+            "namespaces": {}
+        },
+        "src\\special_functions\\$dom_add_standalone.sub.js": {
+            "name": "src\\special_functions\\$dom_add_standalone.sub.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$dom.{namespace}": 1
+            },
+            "namespaces": {}
+        },
+        "src\\special_functions\\$dom_forceRedraw_cordova.sub.js": {
+            "name": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$dom.{namespace}": 1
+            },
+            "namespaces": {}
+        },
+        "src\\special_functions\\$dom_forceRedraw_standalone.sub.js": {
+            "name": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$dom.{namespace}": 1
+            },
+            "namespaces": {}
+        },
+        "src\\jaaJSU.js": {
+            "name": "src\\jaaJSU.js",
+            "modules": {
+                "jaaJSU.{global}": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "jaaJSU.{global}": {
+            "name": "jaaJSU.{global}",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "$array.{namespace}": 1,
+                "$async.{namespace}": 1,
+                "$dom.{namespace}": 1,
+                "$function.{namespace}": 1,
+                "$object.{namespace}": 1,
+                "$optimizier.{namespace}": 1,
+                "$string.{namespace}": 1,
+                "$time.{namespace}": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 3,
+            "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)"
+        }
+    },
+    "classes": {
+        "$array.{namespace}": {
+            "name": "$array.{namespace}",
+            "shortname": "$array.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$array",
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for Arrays."
+        },
+        "$async.{namespace}": {
+            "name": "$async.{namespace}",
+            "shortname": "$async.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$async",
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 2,
+            "description": "This NAMESPACE provides features for async (mainly Promise) functions."
+        },
+        "$dom.{namespace}": {
+            "name": "$dom.{namespace}",
+            "shortname": "$dom.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$dom",
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for DOM elemnts."
+        },
+        "$function.{namespace}": {
+            "name": "$function.{namespace}",
+            "shortname": "$function.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$function",
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for async (mainly Promise) functions."
+        },
+        "$object.{namespace}": {
+            "name": "$object.{namespace}",
+            "shortname": "$object.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$object",
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for Objects."
+        },
+        "$optimizier.{namespace}": {
+            "name": "$optimizier.{namespace}",
+            "shortname": "$optimizier.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$optimizier",
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 2,
+            "description": "This NAMESPACE provides features for optimizations."
+        },
+        "$string.{namespace}": {
+            "name": "$string.{namespace}",
+            "shortname": "$string.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$string",
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 2,
+            "description": "This NAMESPACE provides features for strings."
+        },
+        "$time.{namespace}": {
+            "name": "$time.{namespace}",
+            "shortname": "$time.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "namespace": "$time",
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for time."
+        }
+    },
+    "elements": {},
+    "classitems": [
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 9,
+            "description": "Function which calculate final index for cylce looping\nMeans from current index `i` get `s`th value in array which length is `l`",
+            "itemtype": "method",
+            "name": "arrayIndex",
+            "params": [
+                {
+                    "name": "i",
+                    "description": "* Current index in array (typycally 0)",
+                    "type": "Number"
+                },
+                {
+                    "name": "s",
+                    "description": "* Steps from `i`",
+                    "type": "Number"
+                },
+                {
+                    "name": "l",
+                    "description": "* Array length",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "* Index in array",
+                "type": "Number"
+            },
+            "example": [
+                "\n ```\n     const a= [\"0\", \"1\"];\n     console.log(a[0]===a[$array.arrayIndex(0,0,a.length)]);\n     console.log(a[0]===a[$array.arrayIndex(1,1,a.length)]);\n     console.log(a[0]===a[$array.arrayIndex(0,2,a.length)]);\n ```"
+            ],
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 32,
+            "description": "Procedure for iterating throught Array `iterable`.",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "* An array-like object for iterating.",
+                    "type": "...Mixed"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
+                    "type": "Function"
+                }
+            ],
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 45,
+            "description": "Function returns last element in array without editing the original.",
+            "itemtype": "method",
+            "name": "getLast",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "* Input array.",
+                    "type": "...Mixed"
+                }
+            ],
+            "return": {
+                "description": "* Last element in `arr`",
+                "type": "Mixed"
+            },
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 56,
+            "description": "Function returns methods for splitting array by condition.",
+            "itemtype": "method",
+            "name": "partition",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "* Input array.",
+                    "type": "...Mixed"
+                }
+            ],
+            "return": {
+                "description": "* `{headd, tail, onIndex, byCondition}`\n     * `head: function()`: returns two items Array [x, ...xs] (first element and rest array)\n     * `tail: function()`: returns two items Array [...xs, x] (rest array and last element)\n     * `onIndex: function(index)`: returns two items Array [arr1, arr2] (splite original `arr` into two arrays on given index `index`)\n     * `byCondition: function(fn)`: returns two items Array [arr1, arr2] (splite original `arr` into two arrays based on function `fn`)\n         * `fn(curr, i)`\n             * `curr` Mixed: Current element in array `arr`\n             * `i` Number: Current index in array `arr`\n             * **Returns** Boolean: 0/1 (True/false) if add to arr1/arr2",
+                "type": "Object"
+            },
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 94,
+            "description": "Function returns new array without any `item`",
+            "itemtype": "method",
+            "name": "removeItem",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "* Original array",
+                    "type": "...Mixed"
+                },
+                {
+                    "name": "item",
+                    "description": "* Item for searching in `arr`\n * Make sence, if it is possible to compare with `===` operation",
+                    "type": "Mixed"
+                }
+            ],
+            "return": {
+                "description": "* New {Array} from `arr` without `item`s",
+                "type": "Array"
+            },
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 114,
+            "description": "Function returns random number for Array.sort function",
+            "itemtype": "method",
+            "name": "sortRandom",
+            "return": {
+                "description": "* Number in interval <-0.5,0.5>",
+                "type": "Number"
+            },
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 8,
+            "description": "Procedure for iterating thorught **Promise** function array `funcs`.\n\n**Deprecated:** Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)",
+            "itemtype": "method",
+            "name": "serialize",
+            "params": [
+                {
+                    "name": "funcs",
+                    "description": "* Array of Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "...Promise"
+                }
+            ],
+            "return": {
+                "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `funcs`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `funcs[nth]`",
+                "type": "Promise"
+            },
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 27,
+            "description": "Procedure for iterating thorught **Promise** function array `funcs`.",
+            "itemtype": "method",
+            "name": "iterate_",
+            "params": [
+                {
+                    "name": "iterablePromises",
+                    "description": "* Array of Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "...Promise"
+                }
+            ],
+            "return": {
+                "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `iterablePromises`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `iterablePromises[nth]`",
+                "type": "Promise"
+            },
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 47,
+            "itemtype": "property",
+            "name": "CANCEL I used in iterateMixed_",
+            "type": "Symbol",
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 51,
+            "description": "Like `iterate_`, but also allows iterate throught non-promise functions\n\n**Beta:**  Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)",
+            "itemtype": "method",
+            "name": "iterateMixed_",
+            "params": [
+                {
+                    "name": "tasks",
+                    "description": "",
+                    "type": "Promise|Function",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Promise"
+            },
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 77,
+            "description": "Procedure for iterating throught **Promise** functions (wait pattern).",
+            "itemtype": "method",
+            "name": "sequention_",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* Promises for iterating (the next always waiting fro previous Promise).",
+                    "type": "Promise",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `functions`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `functions[nth]`",
+                "type": "Promise"
+            },
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$async.sub.js",
+            "line": 93,
+            "description": "Procedure for iterating throught **Promise** functions (race pattern).",
+            "itemtype": "method",
+            "name": "each_",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* Promises for iterating (race pattern).",
+                    "type": "Promise",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `functions`\n * `catch`\n     * `<= err` **\\<Error\\>**: Error in `functions[nth]`",
+                "type": "Promise"
+            },
+            "class": "$async.{namespace}",
+            "namespace": "$async"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 18,
+            "description": "Calls `.then` when the DOM is ready",
+            "itemtype": "method",
+            "name": "ready_",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "* As params for `.then`",
+                    "type": "Mixed",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* `.then`\n     * `<= ...args` **\\<Mixed\\>**",
+                "type": "Promise"
+            },
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 39,
+            "description": "Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)",
+            "itemtype": "method",
+            "name": "elementReady_",
+            "params": [
+                {
+                    "name": "el_selector",
+                    "description": "* `el_selector.*`\n     * Key is name of \"selection\" function ('querySelector, ..., getElementsByClassname, ...)\n     * Value is argument for selection function\n * example: `{getElementsByClassname: \"class_name\"}`",
+                    "type": "Object"
+                },
+                {
+                    "name": "parent",
+                    "description": "\n * Where to search `el_selector`",
+                    "type": "DOMElement",
+                    "optional": true,
+                    "optdefault": "document"
+                }
+            ],
+            "return": {
+                "description": "* `.then`\n     * Calls when `el` (see next line) ready\n     * `<= el` **\\<Node\\>**: is DOM element based on `parent` and `el_selector` (`el= parent[el_selector[Object.keys(el_selector)[0]]](el_selector[el_selector[Object.keys(el_selector)[0]]])`)",
+                "type": "Promise"
+            },
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 66,
+            "description": "Remove elements in given {NodeList} or {HTMLCollection}",
+            "itemtype": "method",
+            "name": "removeElements",
+            "params": [
+                {
+                    "name": "els_to_delete",
+                    "description": "* Array(-like) object of elements",
+                    "type": "NodeList|HTMLCollection"
+                },
+                {
+                    "name": "from_index",
+                    "description": "\n * Params allowing skip elements in `els_to_delete`",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                },
+                {
+                    "name": "to_index",
+                    "description": "\n * Params allowing skip elements in `els_to_delete`",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "els_to_delete.lenght"
+                }
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 84,
+            "description": "Procedure for iterating throught Array `iterable`.",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "* An array-like object for iterating.",
+                    "type": "...Mixed"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
+                    "type": "Function"
+                }
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 9,
+            "description": "Functional-like alternative for `for(...){functions[nth](..input);}`.",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* `...functions[nth](..input){...}`\n * List of functions.",
+                    "type": "Function",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)\n * `<= ...input` **\\<Mixed\\>**: arguments for `...functions`",
+                "type": "Function"
+            },
+            "class": "$function.{namespace}",
+            "namespace": "$function"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 20,
+            "description": "Converts `...input`s to new Array based on `...functions`",
+            "itemtype": "method",
+            "name": "map",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* `...functions[nth](..input){...return __OUTPUT__;}`\n * `__OUTPUT__` element of final array\n * List of functions.",
+                    "type": "Function",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)\n * `<= ...input` **\\<Mixed\\>**: arguments for `...functions`\n * @return {Array}",
+                "type": "Function"
+            },
+            "example": [
+                "\n    console.log($function.map(\n         a=>a+1,\n         a=>a-1,\n         a=>a+2,\n         a=>a-2\n     )(5));//= [6, 4, 7, 3]"
+            ],
+            "class": "$function.{namespace}",
+            "namespace": "$function"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 40,
+            "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
+            "itemtype": "method",
+            "name": "sequention",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* List of functions.\n * `...functions[nth](__INPUT__){... return __OUTPUT__;}`\n * `__INPUT__` is `...input` (for first function) or `...__OUTPUT__`\n * `__OUTPUT__` must be **\\<Array\\>**! `...__OUTPUT__` is used as argument for next function in `...functions`.",
+                    "type": "Function",
+                    "multiple": true
+                }
+            ],
+            "return": {
+                "description": "* For given `...input` calls all functions in `...functions` (use `...input` as arguments for first function)\n * `<= ...input` **\\<Mixed\\>**: arguments for first function",
+                "type": "Function"
+            },
+            "example": [
+                "\n    console.log($function.sequention(\n         a=>[a+1, a-1],\n         (a,b)=>[b-1, a+1]\n     )(5));//= [3, 7]\n\n     console.log($function.sequention(\n         a=>[a+1],\n         a=>[a+2]\n     )(5));//= [8]\n\n    console.log($function.sequention(\n         a=>a+1, //wrong non-array return\n         a=>a+2  //wrong non-array return\n     )(5));//...:4 Uncaught TypeError: (var)[Symbol.iterator] is not a function(…)"
+            ],
+            "class": "$function.{namespace}",
+            "namespace": "$function"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 68,
+            "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
+            "itemtype": "method",
+            "name": "schedule",
+            "params": [
+                {
+                    "name": "functions",
+                    "description": "* Array of functions for iteratings",
+                    "type": "...Functions"
+                },
+                {
+                    "name": "def",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "context",
+                            "description": "\n * Parameter for `*.call(context)`",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "window"
+                        },
+                        {
+                            "name": "delay",
+                            "description": "\n * Parameter for `$optimizier.timeoutAnimationFrame`",
+                            "type": "Object",
+                            "optional": true,
+                            "optdefault": "150"
+                        }
+                    ]
+                }
+            ],
+            "class": "$function.{namespace}",
+            "namespace": "$function"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 80,
+            "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
+            "itemtype": "method",
+            "name": "conditionalCall",
+            "params": [
+                {
+                    "name": "mixed",
+                    "description": "* If `mixed=true` the `fun` is called",
+                    "type": "Mixed"
+                },
+                {
+                    "name": "fun",
+                    "description": "* 'Refular' function as argument accepts `mixed`",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "* **False** or output of `fun`",
+                "type": "Boolean|Mixed"
+            },
+            "class": "$function.{namespace}",
+            "namespace": "$function"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 9,
+            "description": "Function for iterating throught Object `iterable`.",
+            "itemtype": "method",
+            "name": "each",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "\n * An object for iterating.",
+                    "type": "Object"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Object.\n * `i_function(value,key,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `key` String: Nth key.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.",
+                    "type": "Function"
+                }
+            ],
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 22,
+            "description": "Function for converting Array `arr` to Object. Uses `fun` for converting.",
+            "itemtype": "method",
+            "name": "fromArray",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "\n * Array-like parameter.",
+                    "type": "Array"
+                },
+                {
+                    "name": "fun",
+                    "description": "* **Optional** [`fun= (acc, curr, i)=> acc[\"\"+i]= curr`].\n * Function for converting. In fact, it is wrapper around `Array.reduce`.\n * `fun(acc,curr,i)`\n     * `acc` Object: Reference link to output Object.\n     * `curr` Mixed: Nth elemnt in Array `arr`.\n     * `i` Number: Nth index of `arr`.",
+                    "type": "Function"
+                },
+                {
+                    "name": "default_value",
+                    "description": "* **Optional** [`default_value={}`].\n * Initial value.",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "* Created object.",
+                "type": "Object"
+            },
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 41,
+            "description": "Wrapper around `Object.prototype.hasOwnProperty`.",
+            "itemtype": "method",
+            "name": "hasProp",
+            "params": [
+                {
+                    "name": "obj",
+                    "description": "* **Mandatory**\n * Object where to search `prop`.",
+                    "type": "Object"
+                },
+                {
+                    "name": "prop",
+                    "description": "* **Mandatory**\n * Poperty to searching for.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* True, if `obj` has property `prop`",
+                "type": "Boolean"
+            },
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 54,
+            "description": "Function for creating non-rewritable object",
+            "itemtype": "method",
+            "name": "immutable_keys",
+            "params": [
+                {
+                    "name": "obj_input",
+                    "description": "* **Optional** [`obj_input={}`]\n * Initial value",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "* getter `Proxy.key_name` Mixed: returns key_name if defined\n * getter `Proxy.set(key_name, value)` Function:\n     * define `key_name` in object if isn't already defined (**returns True**, else **False**).\n * getter `Proxy.keys` Number: Wrapper around `Object.keys(*)`",
+                "type": "Proxy"
+            },
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 94,
+            "description": "Wrapper around `object[key]`, usefull for binding.",
+            "itemtype": "method",
+            "name": "pluck",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "* Key in Object `obj`.",
+                    "type": "String"
+                },
+                {
+                    "name": "object",
+                    "description": "",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "* Value in `object[key]`",
+                "type": "Mixed"
+            },
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 8,
+            "description": "Prevent multiple calling (typically for \"onresize\" events) - use google for more detail",
+            "itemtype": "method",
+            "name": "debounce",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "* Function for debounce",
+                    "type": "Function"
+                },
+                {
+                    "name": "wait",
+                    "description": "\n * How much wait for next calling",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "150"
+                },
+                {
+                    "name": "immediate",
+                    "description": "\n * First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Debounced function `fun` (accepts same arguments)",
+                "type": "Function"
+            },
+            "example": [
+                "\n    graphically (wait= 4symbols)\n    I call (| symbol) fun:    .|||.|.|||..\n                 debounce:    .....|....|.\n                  trottle:    .|.....|...."
+            ],
+            "class": "$optimizier.{namespace}",
+            "namespace": "$optimizier"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 44,
+            "description": "Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`",
+            "itemtype": "method",
+            "name": "trottle",
+            "params": [
+                {
+                    "name": "func",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "cycles_leap",
+                    "description": "\n * similar to `wait` - how many times calls `requestAnimationFrame`",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "1"
+                }
+            ],
+            "return": {
+                "description": "* Trottled function `fun`",
+                "type": "Function"
+            },
+            "class": "$optimizier.{namespace}",
+            "namespace": "$optimizier"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 73,
+            "description": "Calls `.then` when `fn` returns **true**",
+            "itemtype": "method",
+            "name": "poll_",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "* Conditional function",
+                    "type": "Function"
+                },
+                {
+                    "name": "timeout",
+                    "description": "\n * Timeout limit for requesting `fn` (ms)",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "2000"
+                },
+                {
+                    "name": "interval",
+                    "description": "\n * Interval for calling `fn` (ms)",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "100"
+                }
+            ],
+            "return": {
+                "description": "* `.then` **\\<Mixed\\>**: result of `fn`\n * `.catch` **\\<Error\\>**: If timeout",
+                "type": "Promise"
+            },
+            "example": [
+                "\n    poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);"
+            ],
+            "class": "$optimizier.{namespace}",
+            "namespace": "$optimizier"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 106,
+            "description": "Prevent multiple calling of `fn`",
+            "itemtype": "method",
+            "name": "once",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "* Function which must be called only onetime",
+                    "type": "Function"
+                },
+                {
+                    "name": "context",
+                    "description": "* Typically `window`",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n    console_log= $optimizier.once(()=>console.log(\"hi\"));\n    console_log();//=hi\n    console_log();//nothing"
+            ],
+            "class": "$optimizier.{namespace}",
+            "namespace": "$optimizier"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 128,
+            "description": "Combination of `setTimeout`->`requestAnimationFrame`",
+            "itemtype": "method",
+            "name": "timeoutAnimationFrame",
+            "params": [
+                {
+                    "name": "f",
+                    "description": "* Function to call later (`delay`+next animation frame)",
+                    "type": "Function"
+                },
+                {
+                    "name": "delay",
+                    "description": "\n * When call `f` (ms)",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "150"
+                }
+            ],
+            "class": "$optimizier.{namespace}",
+            "namespace": "$optimizier"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 8,
+            "description": "Clear spaces (`\\s+`) in `str`",
+            "itemtype": "method",
+            "name": "clearSpaces",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* Cleaned `str`",
+                "type": "String"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 19,
+            "itemtype": "method",
+            "name": "countChars",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* Number of chars in `str`",
+                "type": "Number"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 36,
+            "itemtype": "method",
+            "name": "generateUnique",
+            "return": {
+                "description": "* An unique string",
+                "type": "String"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 44,
+            "description": "Wrapper around `*.substring(*,*)`",
+            "itemtype": "method",
+            "name": "getSubstring",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "len",
+                    "description": "* How many chars",
+                    "type": "Number"
+                },
+                {
+                    "name": "start",
+                    "description": "",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "0"
+                }
+            ],
+            "return": {
+                "description": "* Substring of `str`",
+                "type": "String"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 69,
+            "itemtype": "method",
+            "name": "letterInc",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "* [a-zA-z] at least on position `pos`",
+                    "type": "String"
+                },
+                {
+                    "name": "inc",
+                    "description": "\n * `inc=0` is convert to `inc=1`",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "1"
+                },
+                {
+                    "name": "pos",
+                    "description": "",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "str.length-1"
+                }
+            ],
+            "return": {
+                "description": "* New string with \"highter\" letter on position `pos`",
+                "type": "String"
+            },
+            "example": [
+                "\n    console.log($string.letterInc(\"125\"));//=\"126\"\n    console.log($string.letterInc(\"125a\"));//=\"125b\"\n    console.log($string.letterInc(\"HH\"));//=\"HI\"\n    console.log($string.letterInc(\"Hg\", 2, 1));//=\"Hi\""
+            ],
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 102,
+            "description": "Escapes \"<\", \">\", \"&\", '\"', \"'\"",
+            "itemtype": "method",
+            "name": "escapeHTML",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* Escaped text",
+                "type": "String"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 113,
+            "description": "Clear tags from `str`",
+            "itemtype": "method",
+            "name": "clearHTML",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* Text without HTML tags",
+                "type": "String"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 125,
+            "itemtype": "method",
+            "name": "containsRepeatingChars",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "quantity",
+                    "description": "",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "2"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n    console.log($string.containsRepeatingChars(\"AAbcd\"));//=false\n    console.log($string.containsRepeatingChars(\"AAAbcd\"));//=true\n    console.log($string.containsRepeatingChars(\"AAAbcd\", 3));//=false"
+            ],
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 141,
+            "itemtype": "method",
+            "name": "containsSequential",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                },
+                {
+                    "name": "quantity",
+                    "description": "",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": "2"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n    console.log($string.containsSequential(\"ABccc\"));//=false\n    console.log($string.containsSequential(\"ABCdd\"));//=true\n    console.log($string.containsSequential(\"ABCdd\", 3));//=false"
+            ],
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 182,
+            "itemtype": "method",
+            "name": "isEmail",
+            "params": [
+                {
+                    "name": "email_candidate",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 192,
+            "description": "Wrapper around `*.trim()`",
+            "itemtype": "method",
+            "name": "isFilled",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String|Boolean"
+            },
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 202,
+            "description": "Alternative to ` ```text with ${variable}``` ` (like `sprintf()`)",
+            "itemtype": "method",
+            "name": "template",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "* Text which contains `${0}, ${var}, ...`",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* `{execute, partial, isSubstituted}`\n     * String **execute** ( [ `params_obj` ={}] )\n         * [ `params_obj` ={}] {Object}\n             * Keys corresponding to `${0}, ${var}, ...` in `str`\n         * **Returns:** String\n             * New string with replaced vars\n     * String **partial** ( [ `params_obj` ={}] )\n         * Replace inside `str`\n         * [ `params_obj` ={}] {Object}\n             * Keys corresponding to `${0}, ${var}, ...` in `str`\n         * **Returns:** String\n             * `str` with replaced vars\n     * Boolean **isSubstituted** ()\n         * **Returns:** Boolean\n             * If `str` contains `${0}, ${var}, ...`",
+                "type": "Object"
+            },
+            "example": [
+                "\n    const test1= $string.template(\"${0}, ${1}, ${2}\");\n    console.log(test1.partial([\"A\"]));//=\"A, ${1}, ${2}\"\n    console.log(test1.execute([\"B\", \"C\", \"D\"]));//=\"A, C, D\"\n    console.log(test1.isSubstituted());//=false\n    console.log(test1.partial([\"_\", \"B\", \"C\"]));//=\"A, B, C\"\n    console.log(test1.isSubstituted());//=true\n\n    const test2= $string.template(\"${test0}, ${test1}, ${test2}\");\n    console.log(test2.partial({test0: \"A\"}));//=\"A, ${test1}, ${test2}\"\n    console.log(test2.execute({test0: \"B\", test1: \"C\", test2: \"D\"}));//=\"A, C, D\"\n    console.log(test2.isSubstituted());//=false\n    console.log(test2.partial({test0: \"_\", test1: \"B\", test2: \"C\"}));//=\"A, B, C\"\n    console.log(test2.isSubstituted());//=true"
+            ],
+            "class": "$string.{namespace}",
+            "namespace": "$string"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 9,
+            "itemtype": "method",
+            "name": "getOrdinalSuffix",
+            "params": [
+                {
+                    "name": "n",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "* `n`+English suffix",
+                "type": "String"
+            },
+            "example": [
+                "\n    console.log($time.getOrdinalSuffix(1));//\"1st\""
+            ],
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 24,
+            "itemtype": "method",
+            "name": "getMonthName",
+            "params": [
+                {
+                    "name": "n",
+                    "description": "* Month number (typically [1-12])\n * Works cyclically `13===1, ...`",
+                    "type": "Number"
+                },
+                {
+                    "name": "l",
+                    "description": "\n * Length of output Month name",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* English month name",
+                "type": "String"
+            },
+            "example": [
+                "\n    console.log($time.getMonthName(5));//\"May\"\n    console.log($time.getMonthName(24, 4));//\"Dece\""
+            ],
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 48,
+            "description": "Function returns timestamp in the form of \"YYYY-MM-DD HH:MM:SS\". Uses [double](#methods_double)",
+            "itemtype": "method",
+            "name": "getTimeStamp",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "\n * Uses as argument for `new Date(*)`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Timestamp",
+                "type": "String"
+            },
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 65,
+            "description": "Function returns timestamp in the form of \"YYYY-MM-DD\". Uses [double](#methods_double)",
+            "itemtype": "method",
+            "name": "getDateStamp",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "\n * Uses as argument for `new Date(*)`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Datestamp",
+                "type": "String"
+            },
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 79,
+            "description": "Function returns timestamp in the form of \"HH:MM:SS\". Uses [double](#methods_double)",
+            "itemtype": "method",
+            "name": "getTimeString",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "\n * Uses as argument for `new Date(*)`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Time string",
+                "type": "String"
+            },
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 93,
+            "description": "Function returns how much is `time` bigger than `refference_time`. Uses [getTimeStamp](#methods_getTimeStamp), [getDateStamp](#methods_getDateStamp), [getTimeString](#methods_getTimeString)",
+            "itemtype": "method",
+            "name": "getDiff",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "* Argument for `new Date(*)` or `getTimeStamp`, `getDateStamp`, `getTimeString`",
+                    "type": "Number"
+                },
+                {
+                    "name": "refference_time",
+                    "description": "\n * Must be convertable into the same format like `time`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Time diff in ms",
+                "type": "Number"
+            },
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\namespaces\\$time.sub.js",
+            "line": 123,
+            "description": "Function adds leading zero to the `time`",
+            "itemtype": "method",
+            "name": "double",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "",
+                    "type": "Number|String"
+                }
+            ],
+            "return": {
+                "description": "* 00, 01, 02, ..., 09, 10, ..., 100, ...",
+                "type": "String"
+            },
+            "class": "$time.{namespace}",
+            "namespace": "$time"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_cordova.sub.js",
+            "line": 4,
+            "description": "See [add](#methods_add)",
+            "itemtype": "method",
+            "name": "add [cordova]",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "$$$",
+                    "description": "\n * Works also with \"jsif_var\" and/or \"data-cmd='condition-changeval'\"",
+                    "type": "...Array"
+                },
+                {
+                    "name": "call_parseHTML",
+                    "description": "\n * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`",
+                    "type": "Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* First created element (usualy wrapper thanks nesting)",
+                "type": "NodeElement"
+            },
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_standalone.sub.js",
+            "line": 3,
+            "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
+            "itemtype": "method",
+            "name": "add",
+            "params": [
+                {
+                    "name": "parent",
+                    "description": "\n * Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "$$$",
+                    "description": "\n * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`\n * Element in array is automatically nested into the previous element. `[[\"UL\",...], [\"LI\",...], [\"SPAN\",...]]` creates `<ul><li><span></span></li></ul>`\n * `__NAME__` **\\<String\\>**: Name of element (for example `LI`, `P`, `A`, ...)\n * `__PARAMS__` **\\<Object\\>**: Parameters for elements as \"innerText\", \"className\", \"dataset\", ...\n     * `__PARAMS__.*`: In generall, uses similar naming for attributtes (setters) in _NodeElement_ (for example \"textContent\", \"innerHTML\", \"className\", \"dataset\", ...)\n     * `__PARAMS__.dataset`: Works as excepted `[\"SPAN\", {dataset: {param1: \"value\"}}] = <span data-param1=\"value\"></span>`\n     * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[[\"UL\",...], [\"LI\",...], [\"LI\",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`\n     * `__PARAMS__.href`: Alias for `*.setAttribute(\"href\", *)`\n     * `__PARAMS__.style`: Alias for `*.setAttribute(\"style\", *)`\n     * `__PARAMS__.style_vars`: Calls `*.style.setProperty(__key__, __value__)` for each `__key__` in object",
+                    "type": "...Array"
+                }
+            ],
+            "return": {
+                "description": "* First created element (usualy wrapper thanks nesting)",
+                "type": "NodeElement"
+            },
+            "example": [
+                "\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n            [\"SPAN\", {$:0, innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>\n    // !!! VS !!!\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n                [\"SPAN\", {innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>"
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
+            "line": 10,
+            "description": "Redraw element using cheat `*.offsetHeight`",
+            "itemtype": "method",
+            "name": "forceRedraw [cordova]",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "\n * Element for redraw",
+                    "type": "NodeElement",
+                    "optional": true,
+                    "optdefault": "active_page_el"
+                },
+                {
+                    "name": "platform",
+                    "description": "\n * Redraw only for specific `device.platform` (\"Android\", \"iOS\")",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": "\"iOS\""
+                }
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
+            "line": 9,
+            "description": "Redraw element using cheat `*.offsetHeight`",
+            "itemtype": "method",
+            "name": "forceRedraw",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "\n * Element for redraw",
+                    "type": "NodeElement",
+                    "optional": true,
+                    "optdefault": "document.body"
+                }
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        }
+    ],
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$array.sub.js:45"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$array.sub.js:56"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$array.sub.js:94"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$array.sub.js:114"
+        }
+    ]
+}

@@ -2,8 +2,8 @@
 /* global isMandatory */
 /**
  * This NAMESPACE provides features for Objects.
- * @class $object
- * @extends Global
+ * @namespace $object
+ * @class {namespace}
  */
 var $object= {
     /**

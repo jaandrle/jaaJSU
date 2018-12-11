@@ -28,6 +28,8 @@
                 </div>
                 <div class="bd">
                     <ul>
+                            <li><a href="../modules/jaaJSU.{global}.html">jaaJSU.{global}</a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -38,10 +40,14 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="../classes/$array.html">$array</a></li>
-                            <li><a href="../classes/$async.html">$async</a></li>
-                            <li><a href="../classes/$object.html">$object</a></li>
-                            <li><a href="../classes/Global.html">Global</a></li>
+                            <li><a href="../classes/$array.{namespace}.html">$array.{namespace}</a></li>
+                            <li><a href="../classes/$async.{namespace}.html">$async.{namespace}</a></li>
+                            <li><a href="../classes/$dom.{namespace}.html">$dom.{namespace}</a></li>
+                            <li><a href="../classes/$function.{namespace}.html">$function.{namespace}</a></li>
+                            <li><a href="../classes/$object.{namespace}.html">$object.{namespace}</a></li>
+                            <li><a href="../classes/$optimizier.{namespace}.html">$optimizier.{namespace}</a></li>
+                            <li><a href="../classes/$string.{namespace}.html">$string.{namespace}</a></li>
+                            <li><a href="../classes/$time.{namespace}.html">$time.{namespace}</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +71,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -79,8 +85,8 @@
 gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
- * @class $array
- * @extends Global
+ * @namespace $array
+ * @class {namespace}
  */
 var $array= {
     /**
@@ -109,7 +115,7 @@ var $array= {
     /**
      * Procedure for iterating throught Array &#x60;iterable&#x60;.
      * @method each
-     * @param {Array} iterable 
+     * @param {...Mixed} iterable
      *  * An array-like object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in &#x60;iterable&#x60; Array.
@@ -122,9 +128,10 @@ var $array= {
     /**
      * Function returns last element in array without editing the original.
      * @method getLast
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Input array.
      * @returns {Mixed}
+     *  * Last element in &#x60;arr&#x60;
      */
     getLast: function(arr){
         return arr[arr.length-1];
@@ -132,7 +139,7 @@ var $array= {
     /**
      * Function returns methods for splitting array by condition.
      * @method partition
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Input array.
      * @returns {Object}
      *  * &#x60;{headd, tail, onIndex, byCondition}&#x60;
@@ -170,12 +177,13 @@ var $array= {
     /**
      * Function returns new array without any &#x60;item&#x60;
      * @method removeItem
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Original array
      * @param {Mixed} item
      *  * Item for searching in &#x60;arr&#x60;
      *  * Make sence, if it is possible to compare with &#x60;===&#x60; operation
      * @returns {Array}
+     *  * New {Array} from &#x60;arr&#x60; without &#x60;item&#x60;s
      */
     removeItem: function(arr, item) {
         let p_arr= [...arr];//p_arr==private_arr
@@ -186,15 +194,11 @@ var $array= {
         }
         return p_arr;
     },
-    /* FCE pro pouziti v .sort zaridi promichani pole
-    * ...
-    * vraci:
-    *  number - nahodne cislo indexu v poli
-    *  */
     /**
      * Function returns random number for Array.sort function
      * @method sortRandom
-     * @returns {Number} &lt;-0.5,0.5&gt;
+     * @returns {Number}
+     *  * Number in interval &lt;-0.5,0.5&gt;
      */
     sortRandom: function(){
         return Math.random() - 0.5;

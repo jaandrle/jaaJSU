@@ -1,22 +1,22 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
- * @class $async
- * @extends Global
+ * @namespace $async
+ * @class {namespace}
  */
 var $async={
    /**
     * Procedure for iterating thorught **Promise** function array `funcs`.
+    *
+    * **Deprecated:** Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
     * @method serialize
-    * @deprecated Use #iterate_
-    * @param {Array} funcs
-    *  * `funcs[*]` **\<Promise\>**
-    *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * `then` **\<Mixed\>**
-    *      * Depends on functions in `funcs`
-    *  * `catch` **\<Error\>**
-    *      * Handle errors in `funcs[*]`
+    * @param {...Promise} funcs
+    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @return {Promise}
+    *  * `then`
+    *      * `<= prev` **\<Mixed\>**: result of prev function in `funcs`
+    *  * `catch` 
+    *      * `<= err` **\<Error\>**: Error in `funcs[nth]`
     */
     serialize: (function(){
         const concat = list => Array.prototype.concat.bind(list);
@@ -27,14 +27,13 @@ var $async={
    /**
     * Procedure for iterating thorught **Promise** function array `funcs`.
     * @method iterate_
-    * @param {Array} iterablePromises
-    *  * `iterablePromises[*]` **\<Promise\>**
-    *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * `then` **\<Mixed\>**
-    *      * Depends on functions in `iterablePromises`
-    *  * `catch` **\<Error\>**
-    *      * Handle errors in `iterablePromises[*]`
+    * @param {...Promise} iterablePromises
+    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @return {Promise}
+    *  * `then`
+    *      * `<= prev` **\<Mixed\>**: result of prev function in `iterablePromises`
+    *  * `catch` 
+    *      * `<= err` **\<Error\>**: Error in `iterablePromises[nth]`
     */
     iterate_: function(iterablePromises){
         return new Promise(function(resolve, reject){
@@ -49,6 +48,14 @@ var $async={
      * @property {Symbol} CANCEL I used in iterateMixed_
      */
     CANCEL: Symbol("$async.CANCEL"),
+    /**
+     * Like `iterate_`, but also allows iterate throught non-promise functions
+     * 
+     * **Beta:**  Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
+     * @method iterateMixed_
+     * @param  {Promise|Function} ...tasks
+     * @return {Promise}
+     */
     iterateMixed_: function(...tasks){
         return new Promise(function(resolve, reject){
             return (function run(result){
@@ -68,21 +75,32 @@ var $async={
         });
     },
    /**
-    * Procedure for iterating thorught **Promise** function array `funcs`.
+    * Procedure for iterating throught **Promise** functions (wait pattern).
     * @method sequention_
     * @param {Promise} ...functions
     *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * `then` **\<Mixed\>**
-    *      * Depends on functions in `...functions`
-    *  * `catch` **\<Error\>**
-    *      * Handle errors in `...functions`
+    * @return {Promise}
+    *  * `then`
+    *      * `<= prev` **\<Mixed\>**: result of prev function in `functions`
+    *  * `catch` 
+    *      * `<= err` **\<Error\>**: Error in `functions[nth]`
     */
     sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
         let p= Promise.resolve(...input);
         for(let i= 0, i_length= functions.length; i < i_length; i++){ p= p.then(functions[i]); }
         p.then(resolve).catch(reject);
     });};},
+   /**
+    * Procedure for iterating throught **Promise** functions (race pattern).
+    * @method each_
+    * @param {Promise} ...functions
+    *  * Promises for iterating (race pattern).
+    * @return {Promise}
+    *  * `then`
+    *      * `<= prev` **\<Mixed\>**: result of prev function in `functions`
+    *  * `catch`
+    *      * `<= err` **\<Error\>**: Error in `functions[nth]`
+    */
     each_: function(...functions){return function(...input){
         return Promise.all(functions.map(f=>f(...input)));
     };}

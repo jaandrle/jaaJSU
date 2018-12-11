@@ -1,9 +1,8 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* gulp *//* global gulp_place */
 /**
- * Provides the base jaaJSU
- *
- * @class Global
+ * Namespaces container (module) which registers namespaces into the global (typically `window`)
+ * @module jaaJSU.{global}
  */
 (function(module_name, factory) {
     'use strict';

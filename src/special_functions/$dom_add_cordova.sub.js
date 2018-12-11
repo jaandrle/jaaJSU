@@ -1,35 +1,18 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
 /* $dom *//* global $dom */
-/* tF
-* FCE pridava elementy do DOMu tak, aby byly rovnou pristupne napr. pro onclick handler
-* ...dokaze i rovnou zavolat parseHTML (v cyklech je vhodne parametr zapnout az pri poslednim elementu)
-* parametry:
-*  tD parent= DOM element (wrapper)
-*  tA $$$= 2D pole ([[],[],...]), kazdy radek reprezentuje element (automaticky se vnoruji):
-*        - prvni hodnota oznacuje tag napr.: A, P, SPAN, DIV, ...
-*        - druhy parametr je list klicu representujici ES6 DOM metody;
-*          -- pr.: ["A",{href: "url", className: "tridy"}]
-*          -- prepsan byl klic "style", do ktereho lze psat styly klasicky jako v css
-*          -- pridan byl klic "$", ketry umoznuje modifikovat vnorovani (odkazuje na index rodice v poli)
-*          -- ukazky:
-*              $dom.add(ul_element,[
-*                  ["LI", {className: "nejake-tridy", onclick: clickFCE}],
-*                      ["SPAN", {innerText: "Prvni SPAN v LI"}],
-*                      ["SPAN", {$:0, innerText: "Druhy SPAN v LI"}]
-*              ]);
-*              // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>
-*              // !!! VS !!!
-*              $dom.add(ul_element,[
-*                  ["LI", {className: "nejake-tridy", onclick: clickFCE}],
-*                      ["SPAN", {innerText: "Prvni SPAN v LI"}],
-*                          ["SPAN", {innerText: "Druhy SPAN v LI"}]
-*              ]);
-*              // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>
-*  tB call_parseHTML= po pridani elementu zavola parseHTML (v $$$ lze pouzivat dataset: {cmd: ..., done: false} podobne jako v html!)
-* vraci:
-*  tD element= vraci odkaz na prvni vytvoreny element v $$$ (v ukazkach LI)
-*  */
+/**
+ * See [add](#methods_add)
+ * @method add [cordova]
+ * @for $dom.{namespace}
+ * @param parent {NodeElement}
+ * @param $$$ {...Array}
+ *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'"
+ * @param [call_parseHTML=undefined] {Boolean}
+ *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
+ * @return {NodeElement}
+ *  * First created element (usualy wrapper thanks nesting)
+ */
 $dom.add= function(parent,$$$, call_parseHTML){
     let fragment= document.createDocumentFragment();
     let prepare_els= [], els= [];

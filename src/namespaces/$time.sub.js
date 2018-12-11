@@ -1,14 +1,19 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global console *///gulp.keep.line
+/**
+ * This NAMESPACE provides features for time.
+ * @namespace $time
+ * @class {namespace}
+ */
 var $time={
-    /* 
-    * FCE vraci EN priponu k radovym cislovkam
-    * ...
-    * parametry:
-    *  tN n= cislo bud jako number, nebo string
-    * vraci:
-    *  tS
-    *  */
+   /**
+    * @method getOrdinalSuffix
+    * @param {Number} n
+    * @return {String}
+    *  * `n`+English suffix
+    * @example
+    *     console.log($time.getOrdinalSuffix(1));//"1st"
+    */
     getOrdinalSuffix: function(n) {
         if(typeof n!=="number") n= parseInt(n);
         if(isNaN(n)) return false;
@@ -16,15 +21,19 @@ var $time={
         let v= n%100;
         return n+(s[(v-20)%10]||s[v]||s[0]);
     },
-    /* 
-    * FCE vraci EN nazev mesice
-    * ...chova se cyklicky => 13===1, ...
-    * parametry:
-    *  tN n= cislo bud jako number, nebo string
-    *  tN l= pocet pismenek (-1= 3, pro June/July 4)
-    * vraci:
-    *  tS nazev mesice
-    *  */
+   /**
+    * @method getMonthName
+    * @param {Number} n
+    *  * Month number (typically [1-12])
+    *  * Works cyclically `13===1, ...`
+    * @param {Number|Boolean} [l=undefined]
+    *  * Length of output Month name
+    * @return {String}
+    *  * English month name
+    * @example
+    *     console.log($time.getMonthName(5));//"May"
+    *     console.log($time.getMonthName(24, 4));//"Dece"
+    */
     getMonthName: function(n,l) {
         if(typeof n!=="number") n= parseInt(n);
         if(isNaN(n)) return false;
@@ -36,14 +45,14 @@ var $time={
         }
         return v;
     },
-    /* 
-    * FCE vracici timestamp ve tvaru YYYY-MM-DD HH:MM:SS
-    * ...
-    * parametry:
-    *  tN time= ms ziskane z metody getTime()
-    * vraci:
-    *  tS casu
-    *  */
+   /**
+    * Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS". Uses [double](#methods_double)
+    * @method getTimeStamp
+    * @param {Number|Boolean} [time=undefined]
+    *  * Uses as argument for `new Date(*)`
+    * @return {String}
+    *  * Timestamp
+    */
     getTimeStamp: function(time) {
         let now= time? new Date(time) : new Date();
         return  now.getFullYear()+'-'+
@@ -53,34 +62,44 @@ var $time={
                 this.double(now.getMinutes())+':'+
                 this.double(now.getSeconds());
     },
-    /* 
-    * FCE vracici datestamp ve tvaru YYYY-MM-DD
-    * ...
-    * parametry:
-    *  tN time= ms ziskane z metody getTime()
-    * vraci:
-    *  tS data
-    *  */
+   /**
+    * Function returns timestamp in the form of "YYYY-MM-DD". Uses [double](#methods_double)
+    * @method getDateStamp
+    * @param {Number|Boolean} [time=undefined]
+    *  * Uses as argument for `new Date(*)`
+    * @return {String}
+    *  * Datestamp
+    */
     getDateStamp: function(time) {
         let now= time? new Date(time) : new Date();
         return  now.getFullYear()+'-'+
                 this.double(now.getMonth() + 1)+'-'+
                 this.double(now.getDate());
     },
-    /* 
-    * FCE vracici cas ve tvaru HH:MM:SS
-    * ...
-    * parametry:
-    *  tN time= ms ziskane z metody getTime()
-    * vraci:
-    *  tS casu
-    *  */
+   /**
+    * Function returns timestamp in the form of "HH:MM:SS". Uses [double](#methods_double)
+    * @method getTimeString
+    * @param {Number|Boolean} [time=undefined]
+    *  * Uses as argument for `new Date(*)`
+    * @return {String}
+    *  * Time string
+    */
     getTimeString: function(time) {
         let now= time? new Date(time) : new Date();
         return  this.double(now.getHours())+':'+
                 this.double(now.getMinutes())+':'+
                 this.double(now.getSeconds());
     },
+   /**
+    * Function returns how much is `time` bigger than `refference_time`. Uses [getTimeStamp](#methods_getTimeStamp), [getDateStamp](#methods_getDateStamp), [getTimeString](#methods_getTimeString)
+    * @method getDiff
+    * @param {Number} time
+    *  * Argument for `new Date(*)` or `getTimeStamp`, `getDateStamp`, `getTimeString`
+    * @param {Number|Boolean} [refference_time=undefined]
+    *  * Must be convertable into the same format like `time`
+    * @return {Number}
+    *  * Time diff in ms
+    */
     getDiff: function(time, refference_time){
         var time_now;
         switch(time.length){
@@ -101,14 +120,13 @@ var $time={
         //console.log(time, time_now); DELETE
         return (new Date(time)).getTime() - (new Date(time_now)).getTime();
     },
-    /* 
-    * Pomocna FCE - prevadi dane cislo na dvouciferne
-    * ...tedy 01, ..., 09, 10, ...
-    * parametry:
-    *  tStN time= cislo/string
-    * vraci:
-    *  tS
-    *  */
+   /**
+    * Function adds leading zero to the `time`
+    * @method double
+    * @param {Number|String} time
+    * @return {String}
+    *  * 00, 01, 02, ..., 09, 10, ..., 100, ...
+    */
     double: function(time) {
         time= time.toString();
         if (time.length==1) return "0" + time;

@@ -18,7 +18,7 @@
   "__Comment__sequence": "exclamation mark (!) on the start of task name means to escape it",
   "sequence": [
     "doc",
-    "!javascript"
+    "javascript"
   ],
   "__SECTION_NPM": "",
   "name": "jaajsu",

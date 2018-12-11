@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Documentation: jaaJSU@0.1.3</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <script src="http://yui.yahooapis.com/combo?3.8.0pr2/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$optimizier.sub.js</h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.1.3</em>
+        </div>
+    </div>
+    <div class="yui3-g">
+
+        <div id="sidebar" class="yui3-u">
+            <div id="modules" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Modules</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../modules/jaaJSU.{global}.html">jaaJSU.{global}</a>
+                            </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="classes" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Classes</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                            <li><a href="../classes/$array.{namespace}.html">$array.{namespace}</a></li>
+                            <li><a href="../classes/$async.{namespace}.html">$async.{namespace}</a></li>
+                            <li><a href="../classes/$dom.{namespace}.html">$dom.{namespace}</a></li>
+                            <li><a href="../classes/$function.{namespace}.html">$function.{namespace}</a></li>
+                            <li><a href="../classes/$object.{namespace}.html">$object.{namespace}</a></li>
+                            <li><a href="../classes/$optimizier.{namespace}.html">$optimizier.{namespace}</a></li>
+                            <li><a href="../classes/$string.{namespace}.html">$string.{namespace}</a></li>
+                            <li><a href="../classes/$time.{namespace}.html">$time.{namespace}</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div id="elements" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Elements</h2>
+                </div>
+                <div class="bd">
+                    <ul>
+                    </ul>
+                </div>
+            </div>
+            
+            
+            
+            
+            
+            <div id="fileTree" class="sidebox">
+                <div class="hd">
+                    <h2 class="no-toc">Files</h2>
+                </div>
+                <div class="bd">
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="main" class="yui3-u">
+            <div class="content"><h4>src\namespaces\$optimizier.sub.js</h4>
+
+<pre class="code prettyprint linenums">
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/**
+ * This NAMESPACE provides features for optimizations.
+ * @namespace $optimizier
+ * @class {namespace}
+ */
+var $optimizier= {
+   /**
+    * Prevent multiple calling (typically for &quot;onresize&quot; events) - use google for more detail
+    * @method debounce
+    * @param {Function} func
+    *  * Function for debounce
+    * @param {Number} [wait=150]
+    *  * How much wait for next calling
+    * @param {Boolean} [immediate=undefined]
+    *  * First time wait since &#x60;wait&#x60; (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
+    * @return {Function}
+    *  * Debounced function &#x60;fun&#x60; (accepts same arguments)
+    * @example
+    *     graphically (wait= 4symbols)
+    *     I call (| symbol) fun:    .|||.|.|||..
+    *                  debounce:    .....|....|.
+    *                   trottle:    .|.....|....
+    */
+    debounce: function(func, wait, immediate) {
+        wait || (wait= 150);
+        var timeout, args, context, timestamp;
+        return function() {
+            context= this; args = [].slice.call(arguments, 0);
+            timestamp= new Date();
+            let later= function() {
+                let time_diff= (new Date()) - timestamp;
+                if (time_diff &lt; wait) {
+                    timeout= setTimeout(later, wait-time_diff);
+                } else {
+                    timeout= null;
+                    if(!immediate) func.apply(context, args);
+                }
+            };
+            if(immediate&amp;&amp;!timeout) func.apply(context, args);
+            if(!timeout) timeout= setTimeout(later, wait);
+        };
+    },
+   /**
+    * Very similar to [debounce](#methods_debounce), but uses &#x60;requestAnimationFrame&#x60;
+    * @method trottle
+    * @param {Function} func
+    * @param {Number} [cycles_leap=1]
+    *  * similar to &#x60;wait&#x60; - how many times calls &#x60;requestAnimationFrame&#x60;
+    * @return {Function}
+    *  * Trottled function &#x60;fun&#x60;
+    */
+    trottle: function(func, cycles_leap){
+        cycles_leap || (cycles_leap= 1);
+        var args, context, cycle, counter= 0;
+        function check(){
+            if(counter===cycles_leap){
+                counter= 0;
+                cancelAnimationFrame(cycle);
+            } else {
+                cycle= requestAnimationFrame(check);
+            }
+        }
+        return function(){
+            context= this; args = [].slice.call(arguments, 0);
+            if(!counter){
+                counter++;
+                func.apply(context, args);
+                cycle= requestAnimationFrame(check);
+            }
+        };
+    },
+   /**
+    * Calls &#x60;.then&#x60; when &#x60;fn&#x60; returns **true**
+    * @method poll_
+    * @param {Function} fn
+    *  * Conditional function
+    * @param {Number} [timeout=2000]
+    *  * Timeout limit for requesting &#x60;fn&#x60; (ms)
+    * @param {Number} [interval=100]
+    *  * Interval for calling &#x60;fn&#x60; (ms)
+    * @return {Promise}
+    *  * &#x60;.then&#x60; **\&lt;Mixed\&gt;**: result of &#x60;fn&#x60;
+    *  * &#x60;.catch&#x60; **\&lt;Error\&gt;**: If timeout
+    * @example
+    *     poll_(()=&gt;document.readyState!==&#x27;loading&#x27;).then(console.log).catch(console.error);
+    */
+    poll_: function(fn, timeout, interval) {
+        var endTime= Number(new Date()) + (timeout || 2000);
+        interval= interval || 100;
+
+        var checkCondition= function(resolve, reject) {
+            var result = fn();
+            if(result) {
+                resolve(result);
+            }
+            else if (Number(new Date()) &lt; endTime) {
+                setTimeout(checkCondition, interval, resolve, reject);
+            }
+            else {
+                reject(new Error(&#x27;timed out for &#x27; + fn + &#x27;: &#x27; + arguments));
+            }
+        };
+        return new Promise(checkCondition);
+    },
+   /**
+    * Prevent multiple calling of &#x60;fn&#x60;
+    * @method once
+    * @param {Function} fn
+    *  * Function which must be called only onetime
+    * @param {Object} context
+    *  * Typically &#x60;window&#x60;
+    * @example
+    *     console_log= $optimizier.once(()=&gt;console.log(&quot;hi&quot;));
+    *     console_log();//=hi
+    *     console_log();//nothing
+    */
+    once: function(fn, context) { 
+        var result;
+        return function() { 
+            if(fn) {
+                result = fn.apply(context || this, arguments);
+                fn = null;
+            }
+            return result;
+        };
+    },
+    /**
+     * Combination of &#x60;setTimeout&#x60;-&gt;&#x60;requestAnimationFrame&#x60;
+     * @method timeoutAnimationFrame
+     * @param {Function} f
+     *  * Function to call later (&#x60;delay&#x60;+next animation frame)
+     * @param {Number} [delay=150]
+     *  * When call &#x60;f&#x60; (ms)
+     */
+    timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+};
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
+export_as($optimizier, gulp_place(&quot;namespaces.$optimizier&quot;, &quot;variable&quot;));
+</pre>
+
+</div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/js/tabs.js"></script>
+</body>
+</html>

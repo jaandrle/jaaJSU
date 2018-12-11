@@ -1,6 +1,6 @@
 <a name="methods_{{name}}"></a>
 <div class="method item{{#if access}} {{access}}{{/if}}">
-    {{#if final}}<code>final</code> {{/if}}{{#if returnType}}{{#crossLink returnType}}{{/crossLink}} {{/if}}<strong class="name">`{{name}}`</strong>( `{{paramsList}} ` ) {{#if access}}<em>`/* {{access}} method */`</em>{{/if}}
+    {{#if final}}<code>final</code> {{/if}}{{#if returnType}}{{#crossLink returnType}}{{/crossLink}} {{/if}}<strong class="name">`{{name}}`</strong>( {{#params}}{{#if multiple}}...{{/if}}{{#if optional}}[ `{{name}}`{{#if optdefault}} ={{optdefault}}{{/if}} ]{{else}}`{{name}}`{{/if}}{{#unless @last}}, {{/unless}}{{/params}} ) {{#if access}}<em>`/* {{access}} method */`</em>{{/if}}
     <br>
     <span class="foundat">
     {{#if overwritten_from}}
@@ -17,7 +17,7 @@
     {{#params}}
         <li>
         {{#if optional}}
-            `[{{name}}{{#if optdefault}}={{optdefault}}{{/if}}]` <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
+            [`{{name}}`{{#if optdefault}}={{optdefault}}{{/if}}] <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
         {{else}}
             `{{name}}` <strong>&lt;{{#crossLink type}}{{/crossLink}}&gt;</strong>
         {{/if}}

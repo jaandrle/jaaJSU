@@ -2,8 +2,8 @@
 gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
- * @class $array
- * @extends Global
+ * @namespace $array
+ * @class {namespace}
  */
 var $array= {
     /**
@@ -32,7 +32,7 @@ var $array= {
     /**
      * Procedure for iterating throught Array `iterable`.
      * @method each
-     * @param {Array} iterable 
+     * @param {...Mixed} iterable
      *  * An array-like object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in `iterable` Array.
@@ -45,9 +45,10 @@ var $array= {
     /**
      * Function returns last element in array without editing the original.
      * @method getLast
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Input array.
      * @returns {Mixed}
+     *  * Last element in `arr`
      */
     getLast: function(arr){
         return arr[arr.length-1];
@@ -55,7 +56,7 @@ var $array= {
     /**
      * Function returns methods for splitting array by condition.
      * @method partition
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Input array.
      * @returns {Object}
      *  * `{headd, tail, onIndex, byCondition}`
@@ -93,12 +94,13 @@ var $array= {
     /**
      * Function returns new array without any `item`
      * @method removeItem
-     * @param {Array} arr
+     * @param {...Mixed} arr
      *  * Original array
      * @param {Mixed} item
      *  * Item for searching in `arr`
      *  * Make sence, if it is possible to compare with `===` operation
      * @returns {Array}
+     *  * New {Array} from `arr` without `item`s
      */
     removeItem: function(arr, item) {
         let p_arr= [...arr];//p_arr==private_arr
@@ -109,15 +111,11 @@ var $array= {
         }
         return p_arr;
     },
-    /* FCE pro pouziti v .sort zaridi promichani pole
-    * ...
-    * vraci:
-    *  number - nahodne cislo indexu v poli
-    *  */
     /**
      * Function returns random number for Array.sort function
      * @method sortRandom
-     * @returns {Number} <-0.5,0.5>
+     * @returns {Number}
+     *  * Number in interval <-0.5,0.5>
      */
     sortRandom: function(){
         return Math.random() - 0.5;

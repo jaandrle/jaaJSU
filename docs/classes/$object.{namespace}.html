@@ -13,7 +13,7 @@
 <div id="doc">
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
-            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $object</h1>
+            <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $object.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
             <em>API Docs for: 0.1.3</em>
@@ -28,6 +28,8 @@
                 </div>
                 <div class="bd">
                     <ul>
+                            <li><a href="../modules/jaaJSU.{global}.html">jaaJSU.{global}</a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -38,10 +40,14 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="../classes/$array.html">$array</a></li>
-                            <li><a href="../classes/$async.html">$async</a></li>
-                            <li><a href="../classes/$object.html">$object</a></li>
-                            <li><a href="../classes/Global.html">Global</a></li>
+                            <li><a href="../classes/$array.{namespace}.html">$array.{namespace}</a></li>
+                            <li><a href="../classes/$async.{namespace}.html">$async.{namespace}</a></li>
+                            <li><a href="../classes/$dom.{namespace}.html">$dom.{namespace}</a></li>
+                            <li><a href="../classes/$function.{namespace}.html">$function.{namespace}</a></li>
+                            <li><a href="../classes/$object.{namespace}.html">$object.{namespace}</a></li>
+                            <li><a href="../classes/$optimizier.{namespace}.html">$optimizier.{namespace}</a></li>
+                            <li><a href="../classes/$string.{namespace}.html">$string.{namespace}</a></li>
+                            <li><a href="../classes/$time.{namespace}.html">$time.{namespace}</a></li>
                     </ul>
                 </div>
             </div>
@@ -79,16 +85,15 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
         </div>
 
         <div id="main" class="yui3-u">
-            <div class="content"><h4>Namespace $object</h4>
-    Extends: <a href="../classes/Global.html" class="crosslink">Global</a><br>
-<span class="foundat">Namespace defined in: <a href="../files/src_namespaces_$object.sub.js.html#l3"><code>src\namespaces\$object.sub.js:3</code></a></span>
+            <div class="content"><h4>Class $object.{namespace}</h4>
+<span class="foundat">Class defined in: <a href="../files/src_namespaces_$object.sub.js.html#l3"><code>src\namespaces\$object.sub.js:3</code></a></span>
 <div class="intro"><p>This NAMESPACE provides features for Objects.</p>
 </div>
 
@@ -101,7 +106,7 @@
             <div id="methods">
 <a name="methods_each"></a>
 <div class="method item">
-     <strong class="name"><code>each</code></strong>( <code>iterable, i_function </code> ) 
+     <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code> ) 
     <br>
     <span class="foundat">
         
@@ -136,7 +141,7 @@
 </div>
 <a name="methods_fromArray"></a>
 <div class="method item">
-    Object <strong class="name"><code>fromArray</code></strong>( <code>arr, fun, default_value </code> ) 
+    Object <strong class="name"><code>fromArray</code></strong>( <code>arr</code>, <code>fun</code>, <code>default_value</code> ) 
     <br>
     <span class="foundat">
         
@@ -184,7 +189,7 @@
 </div>
 <a name="methods_hasProp"></a>
 <div class="method item">
-    Boolean <strong class="name"><code>hasProp</code></strong>( <code>obj, prop </code> ) 
+    Boolean <strong class="name"><code>hasProp</code></strong>( <code>obj</code>, <code>prop</code> ) 
     <br>
     <span class="foundat">
         
@@ -218,7 +223,7 @@
 </div>
 <a name="methods_immutable_keys"></a>
 <div class="method item">
-    Proxy <strong class="name"><code>immutable_keys</code></strong>( <code>obj_input </code> ) 
+    Proxy <strong class="name"><code>immutable_keys</code></strong>( <code>obj_input</code> ) 
     <br>
     <span class="foundat">
         
@@ -250,7 +255,7 @@
 </div>
 <a name="methods_pluck"></a>
 <div class="method item">
-    Mixed <strong class="name"><code>pluck</code></strong>( <code>key, object </code> ) 
+    Mixed <strong class="name"><code>pluck</code></strong>( <code>key</code>, <code>object</code> ) 
     <br>
     <span class="foundat">
         

@@ -28,6 +28,8 @@
                 </div>
                 <div class="bd">
                     <ul>
+                            <li><a href="../modules/jaaJSU.{global}.html">jaaJSU.{global}</a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -38,10 +40,14 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li><a href="../classes/$array.html">$array</a></li>
-                            <li><a href="../classes/$async.html">$async</a></li>
-                            <li><a href="../classes/$object.html">$object</a></li>
-                            <li><a href="../classes/Global.html">Global</a></li>
+                            <li><a href="../classes/$array.{namespace}.html">$array.{namespace}</a></li>
+                            <li><a href="../classes/$async.{namespace}.html">$async.{namespace}</a></li>
+                            <li><a href="../classes/$dom.{namespace}.html">$dom.{namespace}</a></li>
+                            <li><a href="../classes/$function.{namespace}.html">$function.{namespace}</a></li>
+                            <li><a href="../classes/$object.{namespace}.html">$object.{namespace}</a></li>
+                            <li><a href="../classes/$optimizier.{namespace}.html">$optimizier.{namespace}</a></li>
+                            <li><a href="../classes/$string.{namespace}.html">$string.{namespace}</a></li>
+                            <li><a href="../classes/$time.{namespace}.html">$time.{namespace}</a></li>
                     </ul>
                 </div>
             </div>
@@ -65,7 +71,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -78,22 +84,22 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
- * @class $async
- * @extends Global
+ * @namespace $async
+ * @class {namespace}
  */
 var $async={
    /**
     * Procedure for iterating thorught **Promise** function array &#x60;funcs&#x60;.
+    *
+    * **Deprecated:** Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
     * @method serialize
-    * @deprecated Use #iterate_
-    * @param {Array} funcs
-    *  * &#x60;funcs[*]&#x60; **\&lt;Promise\&gt;**
-    *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * &#x60;then&#x60; **\&lt;Mixed\&gt;**
-    *      * Depends on functions in &#x60;funcs&#x60;
-    *  * &#x60;catch&#x60; **\&lt;Error\&gt;**
-    *      * Handle errors in &#x60;funcs[*]&#x60;
+    * @param {...Promise} funcs
+    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @return {Promise}
+    *  * &#x60;then&#x60;
+    *      * &#x60;&lt;= prev&#x60; **\&lt;Mixed\&gt;**: result of prev function in &#x60;funcs&#x60;
+    *  * &#x60;catch&#x60; 
+    *      * &#x60;&lt;= err&#x60; **\&lt;Error\&gt;**: Error in &#x60;funcs[nth]&#x60;
     */
     serialize: (function(){
         const concat = list =&gt; Array.prototype.concat.bind(list);
@@ -104,14 +110,13 @@ var $async={
    /**
     * Procedure for iterating thorught **Promise** function array &#x60;funcs&#x60;.
     * @method iterate_
-    * @param {Array} iterablePromises
-    *  * &#x60;iterablePromises[*]&#x60; **\&lt;Promise\&gt;**
-    *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * &#x60;then&#x60; **\&lt;Mixed\&gt;**
-    *      * Depends on functions in &#x60;iterablePromises&#x60;
-    *  * &#x60;catch&#x60; **\&lt;Error\&gt;**
-    *      * Handle errors in &#x60;iterablePromises[*]&#x60;
+    * @param {...Promise} iterablePromises
+    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @return {Promise}
+    *  * &#x60;then&#x60;
+    *      * &#x60;&lt;= prev&#x60; **\&lt;Mixed\&gt;**: result of prev function in &#x60;iterablePromises&#x60;
+    *  * &#x60;catch&#x60; 
+    *      * &#x60;&lt;= err&#x60; **\&lt;Error\&gt;**: Error in &#x60;iterablePromises[nth]&#x60;
     */
     iterate_: function(iterablePromises){
         return new Promise(function(resolve, reject){
@@ -126,6 +131,14 @@ var $async={
      * @property {Symbol} CANCEL I used in iterateMixed_
      */
     CANCEL: Symbol(&quot;$async.CANCEL&quot;),
+    /**
+     * Like &#x60;iterate_&#x60;, but also allows iterate throught non-promise functions
+     * 
+     * **Beta:**  Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
+     * @method iterateMixed_
+     * @param  {Promise|Function} ...tasks
+     * @return {Promise}
+     */
     iterateMixed_: function(...tasks){
         return new Promise(function(resolve, reject){
             return (function run(result){
@@ -145,21 +158,32 @@ var $async={
         });
     },
    /**
-    * Procedure for iterating thorught **Promise** function array &#x60;funcs&#x60;.
+    * Procedure for iterating throught **Promise** functions (wait pattern).
     * @method sequention_
     * @param {Promise} ...functions
     *  * Promises for iterating (the next always waiting fro previous Promise).
-    * @throws {Promise}
-    *  * &#x60;then&#x60; **\&lt;Mixed\&gt;**
-    *      * Depends on functions in &#x60;...functions&#x60;
-    *  * &#x60;catch&#x60; **\&lt;Error\&gt;**
-    *      * Handle errors in &#x60;...functions&#x60;
+    * @return {Promise}
+    *  * &#x60;then&#x60;
+    *      * &#x60;&lt;= prev&#x60; **\&lt;Mixed\&gt;**: result of prev function in &#x60;functions&#x60;
+    *  * &#x60;catch&#x60; 
+    *      * &#x60;&lt;= err&#x60; **\&lt;Error\&gt;**: Error in &#x60;functions[nth]&#x60;
     */
     sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
         let p= Promise.resolve(...input);
         for(let i= 0, i_length= functions.length; i &lt; i_length; i++){ p= p.then(functions[i]); }
         p.then(resolve).catch(reject);
     });};},
+   /**
+    * Procedure for iterating throught **Promise** functions (race pattern).
+    * @method each_
+    * @param {Promise} ...functions
+    *  * Promises for iterating (race pattern).
+    * @return {Promise}
+    *  * &#x60;then&#x60;
+    *      * &#x60;&lt;= prev&#x60; **\&lt;Mixed\&gt;**: result of prev function in &#x60;functions&#x60;
+    *  * &#x60;catch&#x60;
+    *      * &#x60;&lt;= err&#x60; **\&lt;Error\&gt;**: Error in &#x60;functions[nth]&#x60;
+    */
     each_: function(...functions){return function(...input){
         return Promise.all(functions.map(f=&gt;f(...input)));
     };}
