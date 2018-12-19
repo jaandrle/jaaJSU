@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, export_as */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
  * @namespace $array
@@ -40,8 +40,25 @@ var $array= {
      *      * `value` Mixed: Nth value for `key` in `iterable`.
      *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
      *      * `last` Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
      */
     each: __eachInArrayLike,
+    /**
+     * Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
+     * @method eachDynamic
+     * @param {...Mixed} iterable
+     *  * An array-like object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in `iterable` Array.
+     *  * `i_function(value,index)`
+     *      * `value` Mixed: Nth value for `key` in `iterable`.
+     *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     *      * `last` Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
+     */
+    eachDynamic: __eachInArrayLikeDynamic,
     /**
      * Function returns last element in array without editing the original.
      * @method getLast

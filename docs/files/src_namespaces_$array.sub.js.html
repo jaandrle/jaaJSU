@@ -83,7 +83,7 @@
 
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, export_as */
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
  * @namespace $array
@@ -124,8 +124,25 @@ var $array= {
      *      * &#x60;value&#x60; Mixed: Nth value for &#x60;key&#x60; in &#x60;iterable&#x60;.
      *      * &#x60;index&#x60; Number: Idicies 0...&#x60;Object.keys(iterable).length&#x60;.
      *      * &#x60;last&#x60; Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for &#x60;i_function.call(*,...)&#x60;
      */
     each: __eachInArrayLike,
+    /**
+     * Procedure for iterating throught Array &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(...;(item= iterable[i]);i++)...&#x60;.
+     * @method eachDynamic
+     * @param {...Mixed} iterable
+     *  * An array-like object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in &#x60;iterable&#x60; Array.
+     *  * &#x60;i_function(value,index)&#x60;
+     *      * &#x60;value&#x60; Mixed: Nth value for &#x60;key&#x60; in &#x60;iterable&#x60;.
+     *      * &#x60;index&#x60; Number: Idicies 0...&#x60;Object.keys(iterable).length&#x60;.
+     *      * &#x60;last&#x60; Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for &#x60;i_function.call(*,...)&#x60;
+     */
+    eachDynamic: __eachInArrayLikeDynamic,
     /**
      * Function returns last element in array without editing the original.
      * @method getLast

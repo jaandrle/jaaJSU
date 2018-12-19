@@ -323,6 +323,11 @@
                     "name": "i_function",
                     "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
                     "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
                 }
             ],
             "class": "$array.{namespace}",
@@ -330,7 +335,33 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 45,
+            "line": 47,
+            "description": "Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
+            "itemtype": "method",
+            "name": "eachDynamic",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "* An array-like object for iterating.",
+                    "type": "...Mixed"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
+                    "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
+                }
+            ],
+            "class": "$array.{namespace}",
+            "namespace": "$array"
+        },
+        {
+            "file": "src\\namespaces\\$array.sub.js",
+            "line": 62,
             "description": "Function returns last element in array without editing the original.",
             "itemtype": "method",
             "name": "getLast",
@@ -350,7 +381,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 56,
+            "line": 73,
             "description": "Function returns methods for splitting array by condition.",
             "itemtype": "method",
             "name": "partition",
@@ -370,7 +401,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 94,
+            "line": 111,
             "description": "Function returns new array without any `item`",
             "itemtype": "method",
             "name": "removeItem",
@@ -395,7 +426,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 114,
+            "line": 131,
             "description": "Function returns random number for Array.sort function",
             "itemtype": "method",
             "name": "sortRandom",
@@ -599,7 +630,77 @@
         {
             "file": "src\\namespaces\\$dom.sub.js",
             "line": 84,
-            "description": "Procedure for iterating throught Array `iterable`.",
+            "description": "Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`",
+            "itemtype": "method",
+            "name": "toggleAttribute",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "* Element target",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "attribute_name",
+                    "description": "* Name of attribute",
+                    "type": "String"
+                },
+                {
+                    "name": "attribute_a",
+                    "description": "* Value of attribute",
+                    "type": "String"
+                },
+                {
+                    "name": "attribute_b",
+                    "description": "* Value of attribute",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* `attribute_a` or `attribute_b`",
+                "type": "String"
+            },
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 103,
+            "description": "Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`",
+            "itemtype": "method",
+            "name": "toggleDataset",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "* Element target",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "data_name",
+                    "description": "* Name of dataset key",
+                    "type": "String"
+                },
+                {
+                    "name": "data_a",
+                    "description": "* Name of dataset value",
+                    "type": "String"
+                },
+                {
+                    "name": "data_b",
+                    "description": "* Name of dataset",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "* `data_a` or `data_b`",
+                "type": "String"
+            },
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 120,
+            "description": "Procedure for iterating throught NodeList `iterable`.",
             "itemtype": "method",
             "name": "each",
             "params": [
@@ -612,6 +713,37 @@
                     "name": "i_function",
                     "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
                     "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
+                }
+            ],
+            "class": "$dom.{namespace}",
+            "namespace": "$dom"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 135,
+            "description": "Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
+            "itemtype": "method",
+            "name": "eachDynamic",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "* An array-like object for iterating.",
+                    "type": "...Mixed"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Array.\n * `i_function(value,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.\n     * `last` Boolean: Is setted True, if it is the last element in array.",
+                    "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
                 }
             ],
             "class": "$dom.{namespace}",
@@ -764,6 +896,11 @@
                     "name": "i_function",
                     "description": "* This procedure is called for each element in `iterable` Object.\n * `i_function(value,key,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `key` String: Nth key.\n     * `index` Number: Idicies 0...`Object.keys(iterable).length`.",
                     "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
                 }
             ],
             "class": "$object.{namespace}",
@@ -771,7 +908,33 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 22,
+            "line": 24,
+            "description": "Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.",
+            "itemtype": "method",
+            "name": "eachDynamic",
+            "params": [
+                {
+                    "name": "iterable",
+                    "description": "* An object for iterating.",
+                    "type": "Object"
+                },
+                {
+                    "name": "i_function",
+                    "description": "* This procedure is called for each element in `iterable` Object.\n * `i_function(value,key,index)`\n     * `value` Mixed: Nth value for `key` in `iterable`.\n     * `key` String: Nth key.\n     * `iterable` Object: Link to original `iterable`.",
+                    "type": "Function"
+                },
+                {
+                    "name": "scope",
+                    "description": "* An argument for `i_function.call(*,...)`",
+                    "type": "Object|undefined"
+                }
+            ],
+            "class": "$object.{namespace}",
+            "namespace": "$object"
+        },
+        {
+            "file": "src\\namespaces\\$object.sub.js",
+            "line": 39,
             "description": "Function for converting Array `arr` to Object. Uses `fun` for converting.",
             "itemtype": "method",
             "name": "fromArray",
@@ -801,8 +964,8 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 41,
-            "description": "Wrapper around `Object.prototype.hasOwnProperty`.",
+            "line": 58,
+            "description": "Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: \"gotcha\" }`",
             "itemtype": "method",
             "name": "hasProp",
             "params": [
@@ -826,7 +989,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 54,
+            "line": 71,
             "description": "Function for creating non-rewritable object",
             "itemtype": "method",
             "name": "immutable_keys",
@@ -846,7 +1009,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 94,
+            "line": 111,
             "description": "Wrapper around `object[key]`, usefull for binding.",
             "itemtype": "method",
             "name": "pluck",
@@ -1567,19 +1730,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:45"
+            "line": " src\\namespaces\\$array.sub.js:62"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:56"
+            "line": " src\\namespaces\\$array.sub.js:73"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:94"
+            "line": " src\\namespaces\\$array.sub.js:111"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:114"
+            "line": " src\\namespaces\\$array.sub.js:131"
         }
     ]
 }

@@ -17,8 +17,25 @@ var $object= {
      *      * `value` Mixed: Nth value for `key` in `iterable`.
      *      * `key` String: Nth key.
      *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
      */
-    each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function(iterable[iterable_keys_i],iterable_keys_i,i); }},
+    each: function(iterable, i_function, scope){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function.call(scope, iterable[iterable_keys_i],iterable_keys_i,i); }},
+    /**
+     * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
+     * @method eachDynamic
+     * @param {Object} iterable
+     *  * An object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in `iterable` Object.
+     *  * `i_function(value,key,index)`
+     *      * `value` Mixed: Nth value for `key` in `iterable`.
+     *      * `key` String: Nth key.
+     *      * `iterable` Object: Link to original `iterable`.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
+     */
+    eachDynamic: function (iterable, i_function, scope){for(let key in iterable) { if (iterable.hasOwnProperty(key)){ i_function.call(scope, iterable[key], key, iterable); } }},
     /**
      * Function for converting Array `arr` to Object. Uses `fun` for converting.
      * @method fromArray
@@ -39,7 +56,7 @@ var $object= {
      */
     fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
     /**
-     * Wrapper around `Object.prototype.hasOwnProperty`.
+     * Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: "gotcha" }`
      * @method hasProp
      * @param {Object} obj
      *  * **Mandatory**

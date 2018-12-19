@@ -70,6 +70,7 @@
                 <div class="bd">
                     <ul>
                             <li class="menuli"><a href="#methods_each">each</a></li>
+                            <li class="menuli"><a href="#methods_eachDynamic">eachDynamic</a></li>
                             <li class="menuli"><a href="#methods_fromArray">fromArray</a></li>
                             <li class="menuli"><a href="#methods_hasProp">hasProp</a></li>
                             <li class="menuli"><a href="#methods_immutable_keys">immutable_keys</a></li>
@@ -107,7 +108,7 @@
             <div id="methods"><h4>Methods</h4>
 <a name="methods_each"></a>
 <div class="method item">
-     <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code> ) 
+     <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code>, <code>scope</code> ) 
     <br>
     <span class="foundat">
         
@@ -138,6 +139,55 @@
 </ul>
 
         </li>
+        <li>
+            <code>scope</code> <strong>&lt;Object | Undefined&gt;</strong>
+        <ul>
+<li>An argument for <code>i_function.call(*,...)</code></li>
+</ul>
+
+        </li>
+    </ul>
+</div>
+<a name="methods_eachDynamic"></a>
+<div class="method item">
+     <strong class="name"><code>eachDynamic</code></strong>( <code>iterable</code>, <code>i_function</code>, <code>scope</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l24"><code>src\namespaces\$object.sub.js:24</code></a>
+    </span><br>
+    <p>Procedure for iterating throught Object <code>iterable</code> like <a href="#methods_each">each</a>, but use <code>for(... in ...)...if(Object.prototype.hasOwnProperty...</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>iterable</code> <strong>&lt;Object&gt;</strong>
+        <ul>
+<li>An object for iterating.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>i_function</code> <strong>&lt;Function&gt;</strong>
+        <ul>
+<li>This procedure is called for each element in <code>iterable</code> Object.</li>
+<li><code>i_function(value,key,index)</code>
+<ul>
+<li><code>value</code> Mixed: Nth value for <code>key</code> in <code>iterable</code>.</li>
+<li><code>key</code> String: Nth key.</li>
+<li><code>iterable</code> Object: Link to original <code>iterable</code>.</li>
+</ul>
+</li>
+</ul>
+
+        </li>
+        <li>
+            <code>scope</code> <strong>&lt;Object | Undefined&gt;</strong>
+        <ul>
+<li>An argument for <code>i_function.call(*,...)</code></li>
+</ul>
+
+        </li>
     </ul>
 </div>
 <a name="methods_fromArray"></a>
@@ -146,7 +196,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l22"><code>src\namespaces\$object.sub.js:22</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l39"><code>src\namespaces\$object.sub.js:39</code></a>
     </span><br>
     <p>Function for converting Array <code>arr</code> to Object. Uses <code>fun</code> for converting.</p>
 
@@ -194,9 +244,9 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l41"><code>src\namespaces\$object.sub.js:41</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l58"><code>src\namespaces\$object.sub.js:58</code></a>
     </span><br>
-    <p>Wrapper around <code>Object.prototype.hasOwnProperty</code>.</p>
+    <p>Wrapper around <code>Object.prototype.hasOwnProperty</code>. It is more trustable, because you can sets <code>var obj= { hasOwnProperty: &quot;gotcha&quot; }</code></p>
 
     <strong>Parameters:</strong>
     <ul class="params">
@@ -228,7 +278,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l54"><code>src\namespaces\$object.sub.js:54</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l71"><code>src\namespaces\$object.sub.js:71</code></a>
     </span><br>
     <p>Function for creating non-rewritable object</p>
 
@@ -260,7 +310,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l94"><code>src\namespaces\$object.sub.js:94</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l111"><code>src\namespaces\$object.sub.js:111</code></a>
     </span><br>
     <p>Wrapper around <code>object[key]</code>, usefull for binding.</p>
 

@@ -71,6 +71,7 @@
                     <ul>
                             <li class="menuli"><a href="#methods_arrayIndex">arrayIndex</a></li>
                             <li class="menuli"><a href="#methods_each">each</a></li>
+                            <li class="menuli"><a href="#methods_eachDynamic">eachDynamic</a></li>
                             <li class="menuli"><a href="#methods_getLast">getLast</a></li>
                             <li class="menuli"><a href="#methods_partition">partition</a></li>
                             <li class="menuli"><a href="#methods_removeItem">removeItem</a></li>
@@ -155,7 +156,7 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
 </div>
 <a name="methods_each"></a>
 <div class="method item">
-     <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code> ) 
+     <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code>, <code>scope</code> ) 
     <br>
     <span class="foundat">
         
@@ -186,6 +187,55 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
 </ul>
 
         </li>
+        <li>
+            <code>scope</code> <strong>&lt;Object | Undefined&gt;</strong>
+        <ul>
+<li>An argument for <code>i_function.call(*,...)</code></li>
+</ul>
+
+        </li>
+    </ul>
+</div>
+<a name="methods_eachDynamic"></a>
+<div class="method item">
+     <strong class="name"><code>eachDynamic</code></strong>( <code>iterable</code>, <code>i_function</code>, <code>scope</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$array.sub.js.html#l47"><code>src\namespaces\$array.sub.js:47</code></a>
+    </span><br>
+    <p>Procedure for iterating throught Array <code>iterable</code> like <a href="#methods_each">each</a>, but use <code>for(...;(item= iterable[i]);i++)...</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>iterable</code> <strong>&lt;...Mixed&gt;</strong>
+        <ul>
+<li>An array-like object for iterating.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>i_function</code> <strong>&lt;Function&gt;</strong>
+        <ul>
+<li>This procedure is called for each element in <code>iterable</code> Array.</li>
+<li><code>i_function(value,index)</code>
+<ul>
+<li><code>value</code> Mixed: Nth value for <code>key</code> in <code>iterable</code>.</li>
+<li><code>index</code> Number: Idicies 0...<code>Object.keys(iterable).length</code>.</li>
+<li><code>last</code> Boolean: Is setted True, if it is the last element in array.</li>
+</ul>
+</li>
+</ul>
+
+        </li>
+        <li>
+            <code>scope</code> <strong>&lt;Object | Undefined&gt;</strong>
+        <ul>
+<li>An argument for <code>i_function.call(*,...)</code></li>
+</ul>
+
+        </li>
     </ul>
 </div>
 <a name="methods_getLast"></a>
@@ -194,7 +244,7 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$array.sub.js.html#l45"><code>src\namespaces\$array.sub.js:45</code></a>
+        <a href="../files/src_namespaces_$array.sub.js.html#l62"><code>src\namespaces\$array.sub.js:62</code></a>
     </span><br>
     <p>Function returns last element in array without editing the original.</p>
 
@@ -219,7 +269,7 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$array.sub.js.html#l56"><code>src\namespaces\$array.sub.js:56</code></a>
+        <a href="../files/src_namespaces_$array.sub.js.html#l73"><code>src\namespaces\$array.sub.js:73</code></a>
     </span><br>
     <p>Function returns methods for splitting array by condition.</p>
 
@@ -261,7 +311,7 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$array.sub.js.html#l94"><code>src\namespaces\$array.sub.js:94</code></a>
+        <a href="../files/src_namespaces_$array.sub.js.html#l111"><code>src\namespaces\$array.sub.js:111</code></a>
     </span><br>
     <p>Function returns new array without any <code>item</code></p>
 
@@ -294,7 +344,7 @@ Means from current index <code>i</code> get <code>s</code>th value in array whic
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$array.sub.js.html#l114"><code>src\namespaces\$array.sub.js:114</code></a>
+        <a href="../files/src_namespaces_$array.sub.js.html#l131"><code>src\namespaces\$array.sub.js:131</code></a>
     </span><br>
     <p>Function returns random number for Array.sort function</p>
 

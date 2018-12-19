@@ -101,8 +101,25 @@ var $object= {
      *      * &#x60;value&#x60; Mixed: Nth value for &#x60;key&#x60; in &#x60;iterable&#x60;.
      *      * &#x60;key&#x60; String: Nth key.
      *      * &#x60;index&#x60; Number: Idicies 0...&#x60;Object.keys(iterable).length&#x60;.
+     * @param {Object|undefined} scope
+     *  * An argument for &#x60;i_function.call(*,...)&#x60;
      */
-    each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function(iterable[iterable_keys_i],iterable_keys_i,i); }},
+    each: function(iterable, i_function, scope){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function.call(scope, iterable[iterable_keys_i],iterable_keys_i,i); }},
+    /**
+     * Procedure for iterating throught Object &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(... in ...)...if(Object.prototype.hasOwnProperty...&#x60;.
+     * @method eachDynamic
+     * @param {Object} iterable
+     *  * An object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in &#x60;iterable&#x60; Object.
+     *  * &#x60;i_function(value,key,index)&#x60;
+     *      * &#x60;value&#x60; Mixed: Nth value for &#x60;key&#x60; in &#x60;iterable&#x60;.
+     *      * &#x60;key&#x60; String: Nth key.
+     *      * &#x60;iterable&#x60; Object: Link to original &#x60;iterable&#x60;.
+     * @param {Object|undefined} scope
+     *  * An argument for &#x60;i_function.call(*,...)&#x60;
+     */
+    eachDynamic: function (iterable, i_function, scope){for(let key in iterable) { if (iterable.hasOwnProperty(key)){ i_function.call(scope, iterable[key], key, iterable); } }},
     /**
      * Function for converting Array &#x60;arr&#x60; to Object. Uses &#x60;fun&#x60; for converting.
      * @method fromArray
@@ -123,7 +140,7 @@ var $object= {
      */
     fromArray: function(arr, fun= (acc, curr, i)=&gt; acc[&quot;&quot;+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=&gt;{ fun(acc, curr, i); return acc; }, default_value);},
     /**
-     * Wrapper around &#x60;Object.prototype.hasOwnProperty&#x60;.
+     * Wrapper around &#x60;Object.prototype.hasOwnProperty&#x60;. It is more trustable, because you can sets &#x60;var obj= { hasOwnProperty: &quot;gotcha&quot; }&#x60;
      * @method hasProp
      * @param {Object} obj
      *  * **Mandatory**

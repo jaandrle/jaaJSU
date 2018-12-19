@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, export_as */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for DOM elemnts.
  * @namespace $dom
@@ -82,7 +82,43 @@ var $dom={
         for(let i= 0, i_length= els_array.length; i < i_length; i++){els_array[i].remove();}
     },
     /**
-     * Procedure for iterating throught Array `iterable`.
+     * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
+     * @method toggleAttribute
+     * @param {NodeElement} element
+     *  * Element target
+     * @param {String} attribute_name
+     *  * Name of attribute
+     * @param {String} attribute_a
+     *  * Value of attribute
+     * @param {String} attribute_b
+     *  * Value of attribute
+     * @return {String}
+     *  * `attribute_a` or `attribute_b`
+     */
+    toggleAttribute: function(element, attribute_name, attribute_a, attribute_b){
+        const attribute_new= element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a;
+        element.setAttribute(attribute_name, attribute_new);
+        return attribute_new;
+    },
+    /**
+     * Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
+     * @method toggleDataset
+     * @param {NodeElement} element
+     *  * Element target
+     * @param {String} data_name
+     *  * Name of dataset key
+     * @param {String} data_a
+     *  * Name of dataset value
+     * @param {String} data_b
+     *  * Name of dataset
+     * @return {String}
+     *  * `data_a` or `data_b`
+     */
+    toggleDataset: function(element, data_name, data_a, data_b){
+        return ( element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a );
+    },
+    /**
+     * Procedure for iterating throught NodeList `iterable`.
      * @method each
      * @param {...Mixed} iterable
      *  * An array-like object for iterating.
@@ -92,8 +128,25 @@ var $dom={
      *      * `value` Mixed: Nth value for `key` in `iterable`.
      *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
      *      * `last` Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
      */
-    each: __eachInArrayLike
+    each: __eachInArrayLike,
+    /**
+     * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
+     * @method eachDynamic
+     * @param {...Mixed} iterable
+     *  * An array-like object for iterating.
+     * @param {Function} i_function
+     *  * This procedure is called for each element in `iterable` Array.
+     *  * `i_function(value,index)`
+     *      * `value` Mixed: Nth value for `key` in `iterable`.
+     *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     *      * `last` Boolean: Is setted True, if it is the last element in array.
+     * @param {Object|undefined} scope
+     *  * An argument for `i_function.call(*,...)`
+     */
+    eachDynamic: __eachInArrayLikeDynamic
 };
 gulp_place("special_functions/$dom_add_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");

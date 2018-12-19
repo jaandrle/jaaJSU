@@ -22,7 +22,8 @@
     'use strict';
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
-    function __eachInArrayLike(iterable, i_function){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function(iterable[i],i,!j); } }
+    function __eachInArrayLike(iterable, i_function, scope){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function.call(scope, iterable[i],i,!j); } }
+    function __eachInArrayLikeDynamic(iterable, i_function, scope){ for(let i=0, iterable_i; (iterable_i= iterable[i]); i++){ i_function.call(scope, iterable_i,i); } }
     /* tP
     * Slouzi k oznaceni povinnych parametru funkci
     * ...
@@ -74,8 +75,25 @@
          *      * `value` Mixed: Nth value for `key` in `iterable`.
          *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
          */
         each: __eachInArrayLike,
+        /**
+         * Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
+         * @method eachDynamic
+         * @param {...Mixed} iterable
+         *  * An array-like object for iterating.
+         * @param {Function} i_function
+         *  * This procedure is called for each element in `iterable` Array.
+         *  * `i_function(value,index)`
+         *      * `value` Mixed: Nth value for `key` in `iterable`.
+         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *      * `last` Boolean: Is setted True, if it is the last element in array.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
+         */
+        eachDynamic: __eachInArrayLikeDynamic,
         /**
          * Function returns last element in array without editing the original.
          * @method getLast
@@ -347,7 +365,43 @@
             for(let i= 0, i_length= els_array.length; i < i_length; i++){els_array[i].remove();}
         },
         /**
-         * Procedure for iterating throught Array `iterable`.
+         * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
+         * @method toggleAttribute
+         * @param {NodeElement} element
+         *  * Element target
+         * @param {String} attribute_name
+         *  * Name of attribute
+         * @param {String} attribute_a
+         *  * Value of attribute
+         * @param {String} attribute_b
+         *  * Value of attribute
+         * @return {String}
+         *  * `attribute_a` or `attribute_b`
+         */
+        toggleAttribute: function(element, attribute_name, attribute_a, attribute_b){
+            const attribute_new= element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a;
+            element.setAttribute(attribute_name, attribute_new);
+            return attribute_new;
+        },
+        /**
+         * Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
+         * @method toggleDataset
+         * @param {NodeElement} element
+         *  * Element target
+         * @param {String} data_name
+         *  * Name of dataset key
+         * @param {String} data_a
+         *  * Name of dataset value
+         * @param {String} data_b
+         *  * Name of dataset
+         * @return {String}
+         *  * `data_a` or `data_b`
+         */
+        toggleDataset: function(element, data_name, data_a, data_b){
+            return ( element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a );
+        },
+        /**
+         * Procedure for iterating throught NodeList `iterable`.
          * @method each
          * @param {...Mixed} iterable
          *  * An array-like object for iterating.
@@ -357,8 +411,25 @@
          *      * `value` Mixed: Nth value for `key` in `iterable`.
          *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
          */
-        each: __eachInArrayLike
+        each: __eachInArrayLike,
+        /**
+         * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
+         * @method eachDynamic
+         * @param {...Mixed} iterable
+         *  * An array-like object for iterating.
+         * @param {Function} i_function
+         *  * This procedure is called for each element in `iterable` Array.
+         *  * `i_function(value,index)`
+         *      * `value` Mixed: Nth value for `key` in `iterable`.
+         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *      * `last` Boolean: Is setted True, if it is the last element in array.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
+         */
+        eachDynamic: __eachInArrayLikeDynamic
     };
     /**
      * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
@@ -570,8 +641,25 @@
          *      * `value` Mixed: Nth value for `key` in `iterable`.
          *      * `key` String: Nth key.
          *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
          */
-        each: function(iterable, i_function){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function(iterable[iterable_keys_i],iterable_keys_i,i); }},
+        each: function(iterable, i_function, scope){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function.call(scope, iterable[iterable_keys_i],iterable_keys_i,i); }},
+        /**
+         * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
+         * @method eachDynamic
+         * @param {Object} iterable
+         *  * An object for iterating.
+         * @param {Function} i_function
+         *  * This procedure is called for each element in `iterable` Object.
+         *  * `i_function(value,key,index)`
+         *      * `value` Mixed: Nth value for `key` in `iterable`.
+         *      * `key` String: Nth key.
+         *      * `iterable` Object: Link to original `iterable`.
+         * @param {Object|undefined} scope
+         *  * An argument for `i_function.call(*,...)`
+         */
+        eachDynamic: function (iterable, i_function, scope){for(let key in iterable) { if (iterable.hasOwnProperty(key)){ i_function.call(scope, iterable[key], key, iterable); } }},
         /**
          * Function for converting Array `arr` to Object. Uses `fun` for converting.
          * @method fromArray
@@ -592,7 +680,7 @@
          */
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
         /**
-         * Wrapper around `Object.prototype.hasOwnProperty`.
+         * Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: "gotcha" }`
          * @method hasProp
          * @param {Object} obj
          *  * **Mandatory**
