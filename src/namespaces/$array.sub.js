@@ -2,8 +2,8 @@
 gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
- * @namespace $array
- * @class {namespace}
+ * @class $array.{namespace}
+ * @static
  */
 var $array= {
     /**

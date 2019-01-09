@@ -1,6 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
- * Namespaces container (module) which registers namespaces into the global (typically `window`)
+ * Namespaces container (module) which registers namespaces into the global (typically `window`).
+ * Original repository can be found at "https://github.com/jaandrle/jaaJSU#readme".
  * @module jaaJSU.{global}
  */
 (function(module_name, factory) {
@@ -37,8 +38,8 @@
 
     /**
      * This NAMESPACE provides features for Arrays.
-     * @namespace $array
-     * @class {namespace}
+     * @class $array.{namespace}
+     * @static
      */
     var $array= {
         /**
@@ -176,8 +177,8 @@
     export_as($array, "$array");
     /**
      * This NAMESPACE provides features for async (mainly Promise) functions.
-     * @namespace $async
-     * @class {namespace}
+     * @class $async.{namespace}
+     * @static
      */
     var $async={
        /**
@@ -285,8 +286,8 @@
 
     /**
      * This NAMESPACE provides features for DOM elemnts.
-     * @namespace $dom
-     * @class {namespace}
+     * @class $dom.{namespace}
+     * @static
      */
     var $dom={
         /* tF_
@@ -529,8 +530,8 @@
 
     /**
      * This NAMESPACE provides features for async (mainly Promise) functions.
-     * @namespace $function
-     * @class {namespace}
+     * @class $function.{namespace}
+     * @static
      */
     var $function= {
         /**
@@ -626,8 +627,8 @@
     
     /**
      * This NAMESPACE provides features for Objects.
-     * @namespace $object
-     * @class {namespace}
+     * @class $object.{namespace}
+     * @static
      */
     var $object= {
         /**
@@ -747,8 +748,8 @@
     export_as($object, "$object");
     /**
      * This NAMESPACE provides features for optimizations.
-     * @namespace $optimizier
-     * @class {namespace}
+     * @class $optimizier.{namespace}
+     * @static
      */
     var $optimizier= {
        /**
@@ -885,8 +886,8 @@
     export_as($optimizier, "$optimiziers");
     /**
      * This NAMESPACE provides features for strings.
-     * @namespace $string
-     * @class {namespace}
+     * @class $string.{namespace}
+     * @static
      */
     var $string= {
         /**
@@ -1144,8 +1145,8 @@
     /* global console *///gulp.keep.line
     /**
      * This NAMESPACE provides features for time.
-     * @namespace $time
-     * @class {namespace}
+     * @class $time.{namespace}
+     * @static
      */
     var $time={
        /**

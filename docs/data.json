@@ -8,9 +8,7 @@
                 "$array.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$array": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$async.sub.js": {
             "name": "src\\namespaces\\$async.sub.js",
@@ -19,9 +17,7 @@
                 "$async.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$async": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$dom.sub.js": {
             "name": "src\\namespaces\\$dom.sub.js",
@@ -30,9 +26,7 @@
                 "$dom.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$dom": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$function.sub.js": {
             "name": "src\\namespaces\\$function.sub.js",
@@ -41,9 +35,7 @@
                 "$function.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$function": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$object.sub.js": {
             "name": "src\\namespaces\\$object.sub.js",
@@ -52,9 +44,7 @@
                 "$object.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$object": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$optimizier.sub.js": {
             "name": "src\\namespaces\\$optimizier.sub.js",
@@ -63,9 +53,7 @@
                 "$optimizier.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$optimizier": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$string.sub.js": {
             "name": "src\\namespaces\\$string.sub.js",
@@ -74,9 +62,7 @@
                 "$string.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$string": 1
-            }
+            "namespaces": {}
         },
         "src\\namespaces\\$time.sub.js": {
             "name": "src\\namespaces\\$time.sub.js",
@@ -85,9 +71,7 @@
                 "$time.{namespace}": 1
             },
             "fors": {},
-            "namespaces": {
-                "$time": 1
-            }
+            "namespaces": {}
         },
         "src\\special_functions\\$dom_add_cordova.sub.js": {
             "name": "src\\special_functions\\$dom_add_cordova.sub.js",
@@ -155,7 +139,7 @@
             "tag": "module",
             "file": "src\\namespaces\\$time.sub.js",
             "line": 3,
-            "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)"
+            "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)."
         }
     },
     "classes": {
@@ -168,10 +152,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$array",
             "file": "src\\namespaces\\$array.sub.js",
             "line": 3,
-            "description": "This NAMESPACE provides features for Arrays."
+            "description": "This NAMESPACE provides features for Arrays.",
+            "static": 1
         },
         "$async.{namespace}": {
             "name": "$async.{namespace}",
@@ -182,10 +166,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$async",
             "file": "src\\namespaces\\$async.sub.js",
             "line": 2,
-            "description": "This NAMESPACE provides features for async (mainly Promise) functions."
+            "description": "This NAMESPACE provides features for async (mainly Promise) functions.",
+            "static": 1
         },
         "$dom.{namespace}": {
             "name": "$dom.{namespace}",
@@ -196,10 +180,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$dom",
             "file": "src\\namespaces\\$dom.sub.js",
             "line": 3,
-            "description": "This NAMESPACE provides features for DOM elemnts."
+            "description": "This NAMESPACE provides features for DOM elemnts.",
+            "static": 1
         },
         "$function.{namespace}": {
             "name": "$function.{namespace}",
@@ -210,10 +194,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$function",
             "file": "src\\namespaces\\$function.sub.js",
             "line": 3,
-            "description": "This NAMESPACE provides features for async (mainly Promise) functions."
+            "description": "This NAMESPACE provides features for async (mainly Promise) functions.",
+            "static": 1
         },
         "$object.{namespace}": {
             "name": "$object.{namespace}",
@@ -224,10 +208,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$object",
             "file": "src\\namespaces\\$object.sub.js",
             "line": 3,
-            "description": "This NAMESPACE provides features for Objects."
+            "description": "This NAMESPACE provides features for Objects.",
+            "static": 1
         },
         "$optimizier.{namespace}": {
             "name": "$optimizier.{namespace}",
@@ -238,10 +222,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$optimizier",
             "file": "src\\namespaces\\$optimizier.sub.js",
             "line": 2,
-            "description": "This NAMESPACE provides features for optimizations."
+            "description": "This NAMESPACE provides features for optimizations.",
+            "static": 1
         },
         "$string.{namespace}": {
             "name": "$string.{namespace}",
@@ -252,10 +236,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$string",
             "file": "src\\namespaces\\$string.sub.js",
             "line": 2,
-            "description": "This NAMESPACE provides features for strings."
+            "description": "This NAMESPACE provides features for strings.",
+            "static": 1
         },
         "$time.{namespace}": {
             "name": "$time.{namespace}",
@@ -266,10 +250,10 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "namespace": "$time",
             "file": "src\\namespaces\\$time.sub.js",
             "line": 3,
-            "description": "This NAMESPACE provides features for time."
+            "description": "This NAMESPACE provides features for time.",
+            "static": 1
         }
     },
     "elements": {},
@@ -304,8 +288,7 @@
             "example": [
                 "\n ```\n     const a= [\"0\", \"1\"];\n     console.log(a[0]===a[$array.arrayIndex(0,0,a.length)]);\n     console.log(a[0]===a[$array.arrayIndex(1,1,a.length)]);\n     console.log(a[0]===a[$array.arrayIndex(0,2,a.length)]);\n ```"
             ],
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -330,8 +313,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -356,8 +338,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -376,8 +357,7 @@
                 "description": "* Last element in `arr`",
                 "type": "Mixed"
             },
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -396,8 +376,7 @@
                 "description": "* `{headd, tail, onIndex, byCondition}`\n     * `head: function()`: returns two items Array [x, ...xs] (first element and rest array)\n     * `tail: function()`: returns two items Array [...xs, x] (rest array and last element)\n     * `onIndex: function(index)`: returns two items Array [arr1, arr2] (splite original `arr` into two arrays on given index `index`)\n     * `byCondition: function(fn)`: returns two items Array [arr1, arr2] (splite original `arr` into two arrays based on function `fn`)\n         * `fn(curr, i)`\n             * `curr` Mixed: Current element in array `arr`\n             * `i` Number: Current index in array `arr`\n             * **Returns** Boolean: 0/1 (True/false) if add to arr1/arr2",
                 "type": "Object"
             },
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -421,8 +400,7 @@
                 "description": "* New {Array} from `arr` without `item`s",
                 "type": "Array"
             },
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
@@ -434,8 +412,7 @@
                 "description": "* Number in interval <-0.5,0.5>",
                 "type": "Number"
             },
-            "class": "$array.{namespace}",
-            "namespace": "$array"
+            "class": "$array.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -454,8 +431,7 @@
                 "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `funcs`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `funcs[nth]`",
                 "type": "Promise"
             },
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -474,8 +450,7 @@
                 "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `iterablePromises`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `iterablePromises[nth]`",
                 "type": "Promise"
             },
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -483,8 +458,7 @@
             "itemtype": "property",
             "name": "CANCEL I used in iterateMixed_",
             "type": "Symbol",
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -504,8 +478,7 @@
                 "description": "",
                 "type": "Promise"
             },
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -525,8 +498,7 @@
                 "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `functions`\n * `catch` \n     * `<= err` **\\<Error\\>**: Error in `functions[nth]`",
                 "type": "Promise"
             },
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$async.sub.js",
@@ -546,8 +518,7 @@
                 "description": "* `then`\n     * `<= prev` **\\<Mixed\\>**: result of prev function in `functions`\n * `catch`\n     * `<= err` **\\<Error\\>**: Error in `functions[nth]`",
                 "type": "Promise"
             },
-            "class": "$async.{namespace}",
-            "namespace": "$async"
+            "class": "$async.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -567,8 +538,7 @@
                 "description": "* `.then`\n     * `<= ...args` **\\<Mixed\\>**",
                 "type": "Promise"
             },
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -594,8 +564,7 @@
                 "description": "* `.then`\n     * Calls when `el` (see next line) ready\n     * `<= el` **\\<Node\\>**: is DOM element based on `parent` and `el_selector` (`el= parent[el_selector[Object.keys(el_selector)[0]]](el_selector[el_selector[Object.keys(el_selector)[0]]])`)",
                 "type": "Promise"
             },
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -624,8 +593,7 @@
                     "optdefault": "els_to_delete.lenght"
                 }
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -659,8 +627,7 @@
                 "description": "* `attribute_a` or `attribute_b`",
                 "type": "String"
             },
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -694,8 +661,7 @@
                 "description": "* `data_a` or `data_b`",
                 "type": "String"
             },
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -720,8 +686,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
@@ -746,8 +711,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
@@ -767,8 +731,7 @@
                 "description": "* For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)\n * `<= ...input` **\\<Mixed\\>**: arguments for `...functions`",
                 "type": "Function"
             },
-            "class": "$function.{namespace}",
-            "namespace": "$function"
+            "class": "$function.{namespace}"
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
@@ -791,8 +754,7 @@
             "example": [
                 "\n    console.log($function.map(\n         a=>a+1,\n         a=>a-1,\n         a=>a+2,\n         a=>a-2\n     )(5));//= [6, 4, 7, 3]"
             ],
-            "class": "$function.{namespace}",
-            "namespace": "$function"
+            "class": "$function.{namespace}"
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
@@ -815,8 +777,7 @@
             "example": [
                 "\n    console.log($function.sequention(\n         a=>[a+1, a-1],\n         (a,b)=>[b-1, a+1]\n     )(5));//= [3, 7]\n\n     console.log($function.sequention(\n         a=>[a+1],\n         a=>[a+2]\n     )(5));//= [8]\n\n    console.log($function.sequention(\n         a=>a+1, //wrong non-array return\n         a=>a+2  //wrong non-array return\n     )(5));//...:4 Uncaught TypeError: (var)[Symbol.iterator] is not a function(…)"
             ],
-            "class": "$function.{namespace}",
-            "namespace": "$function"
+            "class": "$function.{namespace}"
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
@@ -852,8 +813,7 @@
                     ]
                 }
             ],
-            "class": "$function.{namespace}",
-            "namespace": "$function"
+            "class": "$function.{namespace}"
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
@@ -877,8 +837,7 @@
                 "description": "* **False** or output of `fun`",
                 "type": "Boolean|Mixed"
             },
-            "class": "$function.{namespace}",
-            "namespace": "$function"
+            "class": "$function.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -903,8 +862,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -929,8 +887,7 @@
                     "type": "Object|undefined"
                 }
             ],
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -959,8 +916,7 @@
                 "description": "* Created object.",
                 "type": "Object"
             },
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -984,8 +940,7 @@
                 "description": "* True, if `obj` has property `prop`",
                 "type": "Boolean"
             },
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -1004,8 +959,7 @@
                 "description": "* getter `Proxy.key_name` Mixed: returns key_name if defined\n * getter `Proxy.set(key_name, value)` Function:\n     * define `key_name` in object if isn't already defined (**returns True**, else **False**).\n * getter `Proxy.keys` Number: Wrapper around `Object.keys(*)`",
                 "type": "Proxy"
             },
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
@@ -1029,8 +983,7 @@
                 "description": "* Value in `object[key]`",
                 "type": "Mixed"
             },
-            "class": "$object.{namespace}",
-            "namespace": "$object"
+            "class": "$object.{namespace}"
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
@@ -1066,8 +1019,7 @@
             "example": [
                 "\n    graphically (wait= 4symbols)\n    I call (| symbol) fun:    .|||.|.|||..\n                 debounce:    .....|....|.\n                  trottle:    .|.....|...."
             ],
-            "class": "$optimizier.{namespace}",
-            "namespace": "$optimizier"
+            "class": "$optimizier.{namespace}"
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
@@ -1093,8 +1045,7 @@
                 "description": "* Trottled function `fun`",
                 "type": "Function"
             },
-            "class": "$optimizier.{namespace}",
-            "namespace": "$optimizier"
+            "class": "$optimizier.{namespace}"
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
@@ -1130,8 +1081,7 @@
             "example": [
                 "\n    poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);"
             ],
-            "class": "$optimizier.{namespace}",
-            "namespace": "$optimizier"
+            "class": "$optimizier.{namespace}"
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
@@ -1154,8 +1104,7 @@
             "example": [
                 "\n    console_log= $optimizier.once(()=>console.log(\"hi\"));\n    console_log();//=hi\n    console_log();//nothing"
             ],
-            "class": "$optimizier.{namespace}",
-            "namespace": "$optimizier"
+            "class": "$optimizier.{namespace}"
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
@@ -1177,8 +1126,7 @@
                     "optdefault": "150"
                 }
             ],
-            "class": "$optimizier.{namespace}",
-            "namespace": "$optimizier"
+            "class": "$optimizier.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1197,8 +1145,7 @@
                 "description": "* Cleaned `str`",
                 "type": "String"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1216,8 +1163,7 @@
                 "description": "* Number of chars in `str`",
                 "type": "Number"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1228,8 +1174,7 @@
                 "description": "* An unique string",
                 "type": "String"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1260,8 +1205,7 @@
                 "description": "* Substring of `str`",
                 "type": "String"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1296,8 +1240,7 @@
             "example": [
                 "\n    console.log($string.letterInc(\"125\"));//=\"126\"\n    console.log($string.letterInc(\"125a\"));//=\"125b\"\n    console.log($string.letterInc(\"HH\"));//=\"HI\"\n    console.log($string.letterInc(\"Hg\", 2, 1));//=\"Hi\""
             ],
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1316,8 +1259,7 @@
                 "description": "* Escaped text",
                 "type": "String"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1336,8 +1278,7 @@
                 "description": "* Text without HTML tags",
                 "type": "String"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1365,8 +1306,7 @@
             "example": [
                 "\n    console.log($string.containsRepeatingChars(\"AAbcd\"));//=false\n    console.log($string.containsRepeatingChars(\"AAAbcd\"));//=true\n    console.log($string.containsRepeatingChars(\"AAAbcd\", 3));//=false"
             ],
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1394,8 +1334,7 @@
             "example": [
                 "\n    console.log($string.containsSequential(\"ABccc\"));//=false\n    console.log($string.containsSequential(\"ABCdd\"));//=true\n    console.log($string.containsSequential(\"ABCdd\", 3));//=false"
             ],
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1413,8 +1352,7 @@
                 "description": "",
                 "type": "Boolean"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1433,8 +1371,7 @@
                 "description": "",
                 "type": "String|Boolean"
             },
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
@@ -1456,8 +1393,7 @@
             "example": [
                 "\n    const test1= $string.template(\"${0}, ${1}, ${2}\");\n    console.log(test1.partial([\"A\"]));//=\"A, ${1}, ${2}\"\n    console.log(test1.execute([\"B\", \"C\", \"D\"]));//=\"A, C, D\"\n    console.log(test1.isSubstituted());//=false\n    console.log(test1.partial([\"_\", \"B\", \"C\"]));//=\"A, B, C\"\n    console.log(test1.isSubstituted());//=true\n\n    const test2= $string.template(\"${test0}, ${test1}, ${test2}\");\n    console.log(test2.partial({test0: \"A\"}));//=\"A, ${test1}, ${test2}\"\n    console.log(test2.execute({test0: \"B\", test1: \"C\", test2: \"D\"}));//=\"A, C, D\"\n    console.log(test2.isSubstituted());//=false\n    console.log(test2.partial({test0: \"_\", test1: \"B\", test2: \"C\"}));//=\"A, B, C\"\n    console.log(test2.isSubstituted());//=true"
             ],
-            "class": "$string.{namespace}",
-            "namespace": "$string"
+            "class": "$string.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1478,8 +1414,7 @@
             "example": [
                 "\n    console.log($time.getOrdinalSuffix(1));//\"1st\""
             ],
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1507,8 +1442,7 @@
             "example": [
                 "\n    console.log($time.getMonthName(5));//\"May\"\n    console.log($time.getMonthName(24, 4));//\"Dece\""
             ],
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1529,8 +1463,7 @@
                 "description": "* Timestamp",
                 "type": "String"
             },
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1551,8 +1484,7 @@
                 "description": "* Datestamp",
                 "type": "String"
             },
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1573,8 +1505,7 @@
                 "description": "* Time string",
                 "type": "String"
             },
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1600,8 +1531,7 @@
                 "description": "* Time diff in ms",
                 "type": "Number"
             },
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\namespaces\\$time.sub.js",
@@ -1620,8 +1550,7 @@
                 "description": "* 00, 01, 02, ..., 09, 10, ..., 100, ...",
                 "type": "String"
             },
-            "class": "$time.{namespace}",
-            "namespace": "$time"
+            "class": "$time.{namespace}"
         },
         {
             "file": "src\\special_functions\\$dom_add_cordova.sub.js",
@@ -1652,8 +1581,7 @@
                 "description": "* First created element (usualy wrapper thanks nesting)",
                 "type": "NodeElement"
             },
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\special_functions\\$dom_add_standalone.sub.js",
@@ -1680,8 +1608,7 @@
             "example": [
                 "\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n            [\"SPAN\", {$:0, innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>\n    // !!! VS !!!\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n                [\"SPAN\", {innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>"
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
@@ -1705,8 +1632,7 @@
                     "optdefault": "\"iOS\""
                 }
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         },
         {
             "file": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
@@ -1723,8 +1649,7 @@
                     "optdefault": "document.body"
                 }
             ],
-            "class": "$dom.{namespace}",
-            "namespace": "$dom"
+            "class": "$dom.{namespace}"
         }
     ],
     "warnings": [

@@ -85,14 +85,14 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* gulp *//* global gulp_place */
 /**
- * Namespaces container (module) which registers namespaces into the global (typically &#x60;window&#x60;)
+ * Namespaces container (module) which registers namespaces into the global (typically &#x60;window&#x60;).
  * @module jaaJSU.{global}
  */
 (function(module_name, factory) {
-    &#x27;use strict&#x27;;
+    &#x27;use strict&#x27;;//gulp.remove_ifCordova.line
     gulp_place(&quot;jaaJSU_export_${app.standalone}.sub.js&quot;);
 })(gulp_place(&quot;app.name&quot;, &quot;variable&quot;), function(window, document){
-    &#x27;use strict&#x27;;
+    &#x27;use strict&#x27;;//gulp.remove_ifCordova.line
     var out= {};
     gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);
     gulp_place(&quot;namespaces/*.sub.js&quot;, &quot;glob&quot;);

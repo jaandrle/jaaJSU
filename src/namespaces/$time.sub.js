@@ -2,8 +2,8 @@
 /* global console *///gulp.keep.line
 /**
  * This NAMESPACE provides features for time.
- * @namespace $time
- * @class {namespace}
+ * @class $time.{namespace}
+ * @static
  */
 var $time={
    /**

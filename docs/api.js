@@ -17,7 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         {
             "displayName": "jaaJSU.{global}",
             "name": "jaaJSU.{global}",
-            "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)"
+            "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)."
         }
     ],
     "elements": []
