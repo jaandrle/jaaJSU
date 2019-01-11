@@ -73,8 +73,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_add_cordova.sub.js": {
-            "name": "src\\special_functions\\$dom_add_cordova.sub.js",
+        "src\\special_functions\\$dom_add_helpers_cordova.sub.js": {
+            "name": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
             "modules": {},
             "classes": {},
             "fors": {
@@ -82,8 +82,8 @@
             },
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_add_standalone.sub.js": {
-            "name": "src\\special_functions\\$dom_add_standalone.sub.js",
+        "src\\special_functions\\$dom_add_helpers_standalone.sub.js": {
+            "name": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
             "modules": {},
             "classes": {},
             "fors": {
@@ -569,6 +569,21 @@
         {
             "file": "src\\namespaces\\$dom.sub.js",
             "line": 66,
+            "description": "Procedure remove children of given element `container`.",
+            "itemtype": "method",
+            "name": "empty",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "Remove all its children",
+                    "type": "NodeElement"
+                }
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$dom.sub.js",
+            "line": 75,
             "description": "Remove elements in given {NodeList} or {HTMLCollection}",
             "itemtype": "method",
             "name": "removeElements",
@@ -597,7 +612,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 84,
+            "line": 93,
             "description": "Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`",
             "itemtype": "method",
             "name": "toggleAttribute",
@@ -631,7 +646,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 103,
+            "line": 112,
             "description": "Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`",
             "itemtype": "method",
             "name": "toggleDataset",
@@ -665,7 +680,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 120,
+            "line": 129,
             "description": "Procedure for iterating throught NodeList `iterable`.",
             "itemtype": "method",
             "name": "each",
@@ -690,7 +705,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 135,
+            "line": 144,
             "description": "Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -1553,8 +1568,35 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\special_functions\\$dom_add_cordova.sub.js",
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
             "line": 4,
+            "description": "This is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
+            "itemtype": "method",
+            "name": "component [cordova]",
+            "params": [
+                {
+                    "name": "el_name",
+                    "description": "- Name of element (for example `LI`, `P`, `A`, ...).\n - This is parent element of component.",
+                    "type": "String"
+                },
+                {
+                    "name": "attrs",
+                    "description": "- The second argument for [$dom.assign](#methods_assign)",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "- `c.add(el_name, attrs, shift= 0)` **{Function}**\n     - This method add child element into **parent**\n     - `el_name` **{String}**: Name of element (for example `LI`, `P`, `A`, ...).\n     - `attrs` **{Object}**: The second argument for [$dom.assign](#methods_assign)\n     - `[shift= 0]` **{Number}**: Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.\n - `c.component(c, shift= 0)` **{Function}**\n     - `c` **{Object}**: It schould be at minimum function `mount` from `$dom.component(*)`. But prefered way is to use `c.share` see later.\n     - `[shift= 0]` **{Number}**: Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.\n - `c.share` **{Object}**\n     - This is export for using in another `$dom.component(*)` by calling its `c.component`.\n - `c.mount(parent, [call_parseHTML=false], [type= \"end\"])` **{Function}**\n     - This append commponent to the `parent` node.\n     - `parent` **{NodeElement}**: Where to place component\n     - `[call_parseHTML=false]` {Boolean}: If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`\n     - `[type= \"end\"]` **{String}**: By default place component as last child. By using `type= \"start\"` place component as first child.\n     - **Returns {NodeElement}**: Component wrapper initialized by `$dom.component(*)`",
+                "type": "Object"
+            },
+            "example": [
+                "\n     //#1\n     const UL= document.getElementById('SOME UL');\n     const { add, share: { mount } }= $dom.component(\"LI\", { className: \"list_item\" });//<li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });//<li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });//...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });//...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);//...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 0 level\n     mount(UL);\n     //FINAL RESULT\n     //<ul id=\"SOME UL\"><li>\n     //    <div class=\"deep1\">\n     //        Child of .list_item\n     //        <div class=\"deep2\">\n     //            Child of div.deep1\n     //            <div class=\"deep3\">Child of div.deep2</div>\n     //            <div class=\"deep3 mark\">Child of div.deep2</div>\n     //        </div>\n     //        <div class=\"deep2 nextone\">Child of div.deep1</div>\n     //    </div>\n     //    <div class=\"deep1 nextone\">\n     //        Child of div.deep1</div>\n     //</li></ul>"
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+            "line": 94,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -1566,7 +1608,7 @@
                 },
                 {
                     "name": "$$$",
-                    "description": "\n * Works also with \"jsif_var\" and/or \"data-cmd='condition-changeval'\"",
+                    "description": "\n * Works also with \"jsif_var\" and/or \"data-cmd='condition-changeval'\" see [$dom.assign \\[cordova\\]](#methods_$dom.assign [cordova])",
                     "type": "...Array"
                 },
                 {
@@ -1584,8 +1626,58 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\special_functions\\$dom_add_standalone.sub.js",
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+            "line": 123,
+            "description": "Procedure for merging object into the element properties. See [$dom.assign](#methods_assign).\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.",
+            "itemtype": "method",
+            "name": "assign [cordova]",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "object_attributes",
+                    "description": "- there is also supprot for \"jsif_var\" and/or \"data-cmd='condition-changeval'\"",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\""
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
             "line": 3,
+            "description": "This is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
+            "itemtype": "method",
+            "name": "component",
+            "params": [
+                {
+                    "name": "el_name",
+                    "description": "- Name of element (for example `LI`, `P`, `A`, ...).\n - This is parent element of component.",
+                    "type": "String"
+                },
+                {
+                    "name": "attrs",
+                    "description": "- The second argument for [$dom.assign](#methods_assign)",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "- `c.add(el_name, attrs, shift= 0)` **{Function}**\n     - This method add child element into **parent**\n     - `el_name` **{String}**: Name of element (for example `LI`, `P`, `A`, ...).\n     - `attrs` **{Object}**: The second argument for [$dom.assign](#methods_assign)\n     - `[shift= 0]` **{Number}**: Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.\n - `c.component(c, shift= 0)` **{Function}**\n     - `c` **{Object}**: It schould be at minimum function `mount` from `$dom.component(*)`. But prefered way is to use `c.share` see later.\n     - `[shift= 0]` **{Number}**: Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.\n - `c.share` **{Object}**\n     - This is export for using in another `$dom.component(*)` by calling its `c.component`.\n - `c.mount(parent, [type= \"end\"])` **{Function}**\n     - This append commponent to the `parent` node.\n     - `parent` **{NodeElement}**: Where to place component\n     - `[type= \"end\"]` **{String}**: By default place component as last child. By using `type= \"start\"` place component as first child.\n     - **Returns {NodeElement}**: Component wrapper initialized by `$dom.component(*)`",
+                "type": "Object"
+            },
+            "example": [
+                "\n     //#1\n     const UL= document.getElementById('SOME UL');\n     const { add, share: { mount } }= $dom.component(\"LI\", { className: \"list_item\" });//<li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });//<li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });//...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });//...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);//...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 0 level\n     mount(UL);\n     //FINAL RESULT\n     //<ul id=\"SOME UL\"><li>\n     //    <div class=\"deep1\">\n     //        Child of .list_item\n     //        <div class=\"deep2\">\n     //            Child of div.deep1\n     //            <div class=\"deep3\">Child of div.deep2</div>\n     //            <div class=\"deep3 mark\">Child of div.deep2</div>\n     //        </div>\n     //        <div class=\"deep2 nextone\">Child of div.deep1</div>\n     //    </div>\n     //    <div class=\"deep1 nextone\">\n     //        Child of div.deep1</div>\n     //</li></ul>"
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+            "line": 91,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -1597,7 +1689,7 @@
                 },
                 {
                     "name": "$$$",
-                    "description": "\n * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`\n * Element in array is automatically nested into the previous element. `[[\"UL\",...], [\"LI\",...], [\"SPAN\",...]]` creates `<ul><li><span></span></li></ul>`\n * `__NAME__` **\\<String\\>**: Name of element (for example `LI`, `P`, `A`, ...)\n * `__PARAMS__` **\\<Object\\>**: Parameters for elements as \"innerText\", \"className\", \"dataset\", ...\n     * `__PARAMS__.*`: In generall, uses similar naming for attributtes (setters) in _NodeElement_ (for example \"textContent\", \"innerHTML\", \"className\", \"dataset\", ...)\n     * `__PARAMS__.dataset`: Works as excepted `[\"SPAN\", {dataset: {param1: \"value\"}}] = <span data-param1=\"value\"></span>`\n     * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[[\"UL\",...], [\"LI\",...], [\"LI\",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`\n     * `__PARAMS__.href`: Alias for `*.setAttribute(\"href\", *)`\n     * `__PARAMS__.style`: Alias for `*.setAttribute(\"style\", *)`\n     * `__PARAMS__.style_vars`: Calls `*.style.setProperty(__key__, __value__)` for each `__key__` in object",
+                    "description": "\n * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`\n * Element in array is automatically nested into the previous element. `[[\"UL\",...], [\"LI\",...], [\"SPAN\",...]]` creates `<ul><li><span></span></li></ul>`\n * `__NAME__` **\\<String\\>**: Name of element (for example `LI`, `P`, `A`, ...)\n * `__PARAMS__` **\\<Object\\>**: Parameters for elements as \"innerText\", \"className\", \"dataset\", ...\n     * see [$dom.assign](#methods_assign)\n     * There is one change with using key \"$\", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)\n         * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[[\"UL\",...], [\"LI\",...], [\"LI\",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`",
                     "type": "...Array"
                 }
             ],
@@ -1611,8 +1703,31 @@
             "class": "$dom.{namespace}"
         },
         {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+            "line": 139,
+            "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.",
+            "itemtype": "method",
+            "name": "assign",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "object_attributes",
+                    "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` is parsed as **text**, so `$dom.assign(el, { style: \"color: red;\" });` is equivalent to `el.setAttribute(\"style\", \"color: red;\");` **NOT to** `el.style.*`!!!\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\""
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
             "file": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
-            "line": 10,
+            "line": 3,
             "description": "Redraw element using cheat `*.offsetHeight`",
             "itemtype": "method",
             "name": "forceRedraw [cordova]",
@@ -1636,7 +1751,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
-            "line": 9,
+            "line": 3,
             "description": "Redraw element using cheat `*.offsetHeight`",
             "itemtype": "method",
             "name": "forceRedraw",
@@ -1668,6 +1783,14 @@
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src\\namespaces\\$array.sub.js:131"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:4"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:3"
         }
     ]
 }

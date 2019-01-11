@@ -63,6 +63,15 @@ var $dom={
             requestAnimationFrame(check);
         });
     },
+    /**
+     * Procedure remove children of given element `container`.
+     * @method empty
+     * @param {NodeElement} container Remove all its children
+     */
+    empty: function(container){
+        let len = container.childNodes.length;
+        while(len--){ container.removeChild(container.lastChild); }
+    },
    /**
     * Remove elements in given {NodeList} or {HTMLCollection}
     * @method removeElements
@@ -148,6 +157,6 @@ var $dom={
      */
     eachDynamic: __eachInArrayLikeDynamic
 };
-gulp_place("special_functions/$dom_add_${app.standalone}.sub.js");
+gulp_place("special_functions/$dom_add_helpers_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");
 export_as($dom, gulp_place("namespaces.$dom", "variable"));

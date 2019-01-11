@@ -1,11 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global $dom */
-    /* tP
-    * FCE zaridi prekresleni elementu, aby se na nem projevili nektere zmeny
-    * ...jedna se o fix typicky pro iOS
-    * parametry:
-    *  tD element ~document.body= ES6 element selector
-    *  */
 /**
  * Redraw element using cheat `*.offsetHeight`
  * @method forceRedraw

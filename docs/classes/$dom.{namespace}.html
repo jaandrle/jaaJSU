@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.1.3</title>
+    <title>Documentation: jaaJSU@0.1.4</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $dom.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.3</em>
+            <em>API Docs for: 0.1.4</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -71,9 +71,14 @@
                     <ul>
                             <li class="menuli"><a href="#methods_add">add</a></li>
                             <li class="menuli"><a href="#methods_add [cordova]">add [cordova]</a></li>
+                            <li class="menuli"><a href="#methods_assign">assign</a></li>
+                            <li class="menuli"><a href="#methods_assign [cordova]">assign [cordova]</a></li>
+                            <li class="menuli"><a href="#methods_component">component</a></li>
+                            <li class="menuli"><a href="#methods_component [cordova]">component [cordova]</a></li>
                             <li class="menuli"><a href="#methods_each">each</a></li>
                             <li class="menuli"><a href="#methods_eachDynamic">eachDynamic</a></li>
                             <li class="menuli"><a href="#methods_elementReady_">elementReady_</a></li>
+                            <li class="menuli"><a href="#methods_empty">empty</a></li>
                             <li class="menuli"><a href="#methods_forceRedraw">forceRedraw</a></li>
                             <li class="menuli"><a href="#methods_forceRedraw [cordova]">forceRedraw [cordova]</a></li>
                             <li class="menuli"><a href="#methods_ready_">ready_</a></li>
@@ -92,7 +97,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -117,7 +122,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_standalone.sub.js.html#l3"><code>src\special_functions\$dom_add_standalone.sub.js:3</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l91"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:91</code></a>
     </span><br>
     <p>Procedure for adding elements into the <code>parent</code> (in background use <code>createDocumentFragment</code>, <code>createElement</code>, <code>appendChild</code>)</p>
 
@@ -138,12 +143,12 @@
 <li><code>__NAME__</code> <strong>&lt;String&gt;</strong>: Name of element (for example <code>LI</code>, <code>P</code>, <code>A</code>, ...)</li>
 <li><code>__PARAMS__</code> <strong>&lt;Object&gt;</strong>: Parameters for elements as &quot;innerText&quot;, &quot;className&quot;, &quot;dataset&quot;, ...
 <ul>
-<li><code>__PARAMS__.*</code>: In generall, uses similar naming for attributtes (setters) in <em>NodeElement</em> (for example &quot;textContent&quot;, &quot;innerHTML&quot;, &quot;className&quot;, &quot;dataset&quot;, ...)</li>
-<li><code>__PARAMS__.dataset</code>: Works as excepted <code>[&quot;SPAN&quot;, {dataset: {param1: &quot;value&quot;}}] = &lt;span data-param1=&quot;value&quot;&gt;&lt;/span&gt;</code></li>
+<li>see <a href="#methods_assign">$dom.assign</a></li>
+<li>There is one change with using key &quot;$&quot;, which modify elements order and it is not parsed by <a href="#methods_assign">$dom.assign</a>
+<ul>
 <li><code>__PARAMS__.$</code>: Modify nesting behaviur (accepts index of element in <code>$$$</code>). <code>[[&quot;UL&quot;,...], [&quot;LI&quot;,...], [&quot;LI&quot;,{$:0,...}]]</code> creates <code>&lt;ul&gt;&lt;li&gt;&lt;/li&gt;&lt;li&gt;&lt;/li&gt;&lt;/ul&gt;</code></li>
-<li><code>__PARAMS__.href</code>: Alias for <code>*.setAttribute(&quot;href&quot;, *)</code></li>
-<li><code>__PARAMS__.style</code>: Alias for <code>*.setAttribute(&quot;style&quot;, *)</code></li>
-<li><code>__PARAMS__.style_vars</code>: Calls <code>*.style.setProperty(__key__, __value__)</code> for each <code>__key__</code> in object</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
@@ -176,7 +181,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_cordova.sub.js.html#l4"><code>src\special_functions\$dom_add_cordova.sub.js:4</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l94"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:94</code></a>
     </span><br>
     <p>See <a href="#methods_add">add</a></p>
 
@@ -189,7 +194,7 @@ $dom.add(ul_element,[
         <li>
             <code>$$$</code> <strong>&lt;...Array&gt;</strong>
         <ul>
-<li>Works also with &quot;jsif_var&quot; and/or &quot;data-cmd='condition-changeval'&quot;</li>
+<li>Works also with &quot;jsif_var&quot; and/or &quot;data-cmd='condition-changeval'&quot; see [$dom.assign [cordova]](#methods_$dom.assign [cordova])</li>
 </ul>
 
         </li>
@@ -206,13 +211,256 @@ $dom.add(ul_element,[
 </ul>
 </div>
 </div>
+<a name="methods_assign"></a>
+<div class="method item">
+     <strong class="name"><code>assign</code></strong>( <code>element</code>, <code>object_attributes</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l139"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:139</code></a>
+    </span><br>
+    <p>Procedure for merging object into the element properties.
+Very simple example: <code>$dom.assign(document.body, { className: &quot;test&quot; });</code> is equivalent to <code>document.body.className= &quot;test&quot;;</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>element</code> <strong>&lt;NodeElement&gt;</strong>
+         
+        </li>
+        <li>
+            <code>object_attributes</code> <strong>&lt;Object&gt;</strong>
+        <ul>
+<li>Object shall holds <strong>NodeElement</strong> properties like <code>className</code>, <code>textContent</code>, ...</li>
+<li>For <code>dataset</code> can be used also <code>Object</code> notation: <code>$dom.assign(document.getElementById(&quot;ID&quot;), { dataset: { test: &quot;TEST&quot; } }); //&lt;p id=&quot;ID&quot; data-test=&quot;TEST&quot;&gt;&lt;/p&gt;</code>.</li>
+<li>The same notation can be used for <strong>CSS variables</strong> (the key is called <code>style_vars</code>).</li>
+<li><strong>IMPORTANT CHANGE</strong>: Key <code>style</code> is parsed as <strong>text</strong>, so <code>$dom.assign(el, { style: &quot;color: red;&quot; });</code> is equivalent to <code>el.setAttribute(&quot;style&quot;, &quot;color: red;&quot;);</code> <strong>NOT to</strong> <code>el.style.*</code>!!!</li>
+<li><em>Speed optimalization</em>: It is recommended to use <code>textContent</code> (instead of <code>innerText</code>) and <code>$dom.add</code> or <code>$dom.component</code> (instead of <code>innerHTML</code>).</li>
+</ul>
+
+        </li>
+    </ul>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> const el= document.body;
+ const onclick= function(){ console.log(this.dataset.js_param); };
+ $dom.assign(el, { textContent: &quot;BODY&quot;, style: &quot;color: red;&quot;, dataset: { js_param: &quot;CLICKED&quot; }, onclick });
+ //result HTML: &lt;body style=&quot;color: red;&quot; data-js_param=&quot;CLICKED&quot;&gt;BODY&lt;/body&gt;
+ //console output on click: &quot;CLICKED&quot;</code></pre>
+
+</div>
+<a name="methods_assign [cordova]"></a>
+<div class="method item">
+     <strong class="name"><code>assign [cordova]</code></strong>( <code>element</code>, <code>object_attributes</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l123"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:123</code></a>
+    </span><br>
+    <p>Procedure for merging object into the element properties. See <a href="#methods_assign">$dom.assign</a>.
+Very simple example: <code>$dom.assign(document.body, { className: &quot;test&quot; });</code> is equivalent to <code>document.body.className= &quot;test&quot;;</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>element</code> <strong>&lt;NodeElement&gt;</strong>
+         
+        </li>
+        <li>
+            <code>object_attributes</code> <strong>&lt;Object&gt;</strong>
+        <ul>
+<li>there is also supprot for &quot;jsif_var&quot; and/or &quot;data-cmd='condition-changeval'&quot;</li>
+</ul>
+
+        </li>
+    </ul>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> const el= document.body;
+ const onclick= function(){ console.log(this.dataset.js_param); };
+ $dom.assign(el, { textContent: &quot;BODY&quot;, style: &quot;color: red;&quot;, dataset: { js_param: &quot;CLICKED&quot; }, onclick });
+ //result HTML: &lt;body style=&quot;color: red;&quot; data-js_param=&quot;CLICKED&quot;&gt;BODY&lt;/body&gt;
+ //console output on click: &quot;CLICKED&quot;</code></pre>
+
+</div>
+<a name="methods_component"></a>
+<div class="method item">
+    Object <strong class="name"><code>component</code></strong>( <code>el_name</code>, <code>attrs</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l3"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:3</code></a>
+    </span><br>
+    <p>This is syntax sugar around <a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment"><code>DocumentFragment</code></a> for creating DOM components and their adding to live DOM in performance friendly way.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>el_name</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Name of element (for example <code>LI</code>, <code>P</code>, <code>A</code>, ...).</li>
+<li>This is parent element of component.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>attrs</code> <strong>&lt;Object&gt;</strong>
+        <ul>
+<li>The second argument for <a href="#methods_assign">$dom.assign</a></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Object&gt; <ul>
+<li><code>c.add(el_name, attrs, shift= 0)</code> <strong>{Function}</strong>
+<ul>
+<li>This method add child element into <strong>parent</strong></li>
+<li><code>el_name</code> <strong>{String}</strong>: Name of element (for example <code>LI</code>, <code>P</code>, <code>A</code>, ...).</li>
+<li><code>attrs</code> <strong>{Object}</strong>: The second argument for <a href="#methods_assign">$dom.assign</a></li>
+<li><code>[shift= 0]</code> <strong>{Number}</strong>: Modify nesting behaviur. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
+</ul>
+</li>
+<li><code>c.component(c, shift= 0)</code> <strong>{Function}</strong>
+<ul>
+<li><code>c</code> <strong>{Object}</strong>: It schould be at minimum function <code>mount</code> from <code>$dom.component(*)</code>. But prefered way is to use <code>c.share</code> see later.</li>
+<li><code>[shift= 0]</code> <strong>{Number}</strong>: Modify nesting behaviur. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
+</ul>
+</li>
+<li><code>c.share</code> <strong>{Object}</strong>
+<ul>
+<li>This is export for using in another <code>$dom.component(*)</code> by calling its <code>c.component</code>.</li>
+</ul>
+</li>
+<li><code>c.mount(parent, [type= &quot;end&quot;])</code> <strong>{Function}</strong>
+<ul>
+<li>This append commponent to the <code>parent</code> node.</li>
+<li><code>parent</code> <strong>{NodeElement}</strong>: Where to place component</li>
+<li><code>[type= &quot;end&quot;]</code> <strong>{String}</strong>: By default place component as last child. By using <code>type= &quot;start&quot;</code> place component as first child.</li>
+<li><strong>Returns {NodeElement}</strong>: Component wrapper initialized by <code>$dom.component(*)</code></li>
+</ul>
+</li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> //#1
+ const UL= document.getElementById('SOME UL');
+ const { add, share: { mount } }= $dom.component(&quot;LI&quot;, { className: &quot;list_item&quot; });//&lt;li class=&quot;list_item&quot;&gt;...&lt;/li&gt;
+ add(&quot;DIV&quot;, { textContent: &quot;Child of .list_item&quot;, className: &quot;deep1&quot; });//&lt;li class=&quot;list_item&quot;&gt;&lt;div class=&quot;deep1&quot;&gt;...&lt;/div&gt;&lt;/li&gt;
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3 mark&quot; }, -1);//...&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+ //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 2nd level
+ add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 0 level
+ mount(UL);
+ //FINAL RESULT
+ //&lt;ul id=&quot;SOME UL&quot;&gt;&lt;li&gt;
+ //    &lt;div class=&quot;deep1&quot;&gt;
+ //        Child of .list_item
+ //        &lt;div class=&quot;deep2&quot;&gt;
+ //            Child of div.deep1
+ //            &lt;div class=&quot;deep3&quot;&gt;Child of div.deep2&lt;/div&gt;
+ //            &lt;div class=&quot;deep3 mark&quot;&gt;Child of div.deep2&lt;/div&gt;
+ //        &lt;/div&gt;
+ //        &lt;div class=&quot;deep2 nextone&quot;&gt;Child of div.deep1&lt;/div&gt;
+ //    &lt;/div&gt;
+ //    &lt;div class=&quot;deep1 nextone&quot;&gt;
+ //        Child of div.deep1&lt;/div&gt;
+ //&lt;/li&gt;&lt;/ul&gt;</code></pre>
+
+</div>
+<a name="methods_component [cordova]"></a>
+<div class="method item">
+    Object <strong class="name"><code>component [cordova]</code></strong>( <code>el_name</code>, <code>attrs</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l4"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:4</code></a>
+    </span><br>
+    <p>This is syntax sugar around <a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment"><code>DocumentFragment</code></a> for creating DOM components and their adding to live DOM in performance friendly way.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>el_name</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Name of element (for example <code>LI</code>, <code>P</code>, <code>A</code>, ...).</li>
+<li>This is parent element of component.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>attrs</code> <strong>&lt;Object&gt;</strong>
+        <ul>
+<li>The second argument for <a href="#methods_assign">$dom.assign</a></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Object&gt; <ul>
+<li><code>c.add(el_name, attrs, shift= 0)</code> <strong>{Function}</strong>
+<ul>
+<li>This method add child element into <strong>parent</strong></li>
+<li><code>el_name</code> <strong>{String}</strong>: Name of element (for example <code>LI</code>, <code>P</code>, <code>A</code>, ...).</li>
+<li><code>attrs</code> <strong>{Object}</strong>: The second argument for <a href="#methods_assign">$dom.assign</a></li>
+<li><code>[shift= 0]</code> <strong>{Number}</strong>: Modify nesting behaviur. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
+</ul>
+</li>
+<li><code>c.component(c, shift= 0)</code> <strong>{Function}</strong>
+<ul>
+<li><code>c</code> <strong>{Object}</strong>: It schould be at minimum function <code>mount</code> from <code>$dom.component(*)</code>. But prefered way is to use <code>c.share</code> see later.</li>
+<li><code>[shift= 0]</code> <strong>{Number}</strong>: Modify nesting behaviur. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
+</ul>
+</li>
+<li><code>c.share</code> <strong>{Object}</strong>
+<ul>
+<li>This is export for using in another <code>$dom.component(*)</code> by calling its <code>c.component</code>.</li>
+</ul>
+</li>
+<li><code>c.mount(parent, [call_parseHTML=false], [type= &quot;end&quot;])</code> <strong>{Function}</strong>
+<ul>
+<li>This append commponent to the <code>parent</code> node.</li>
+<li><code>parent</code> <strong>{NodeElement}</strong>: Where to place component</li>
+<li><code>[call_parseHTML=false]</code> {Boolean}: If <strong>true</strong> calls <code>parseHTML(parent.querySelectorAll(c_CMD))</code></li>
+<li><code>[type= &quot;end&quot;]</code> <strong>{String}</strong>: By default place component as last child. By using <code>type= &quot;start&quot;</code> place component as first child.</li>
+<li><strong>Returns {NodeElement}</strong>: Component wrapper initialized by <code>$dom.component(*)</code></li>
+</ul>
+</li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> //#1
+ const UL= document.getElementById('SOME UL');
+ const { add, share: { mount } }= $dom.component(&quot;LI&quot;, { className: &quot;list_item&quot; });//&lt;li class=&quot;list_item&quot;&gt;...&lt;/li&gt;
+ add(&quot;DIV&quot;, { textContent: &quot;Child of .list_item&quot;, className: &quot;deep1&quot; });//&lt;li class=&quot;list_item&quot;&gt;&lt;div class=&quot;deep1&quot;&gt;...&lt;/div&gt;&lt;/li&gt;
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3 mark&quot; }, -1);//...&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+ //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 2nd level
+ add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 0 level
+ mount(UL);
+ //FINAL RESULT
+ //&lt;ul id=&quot;SOME UL&quot;&gt;&lt;li&gt;
+ //    &lt;div class=&quot;deep1&quot;&gt;
+ //        Child of .list_item
+ //        &lt;div class=&quot;deep2&quot;&gt;
+ //            Child of div.deep1
+ //            &lt;div class=&quot;deep3&quot;&gt;Child of div.deep2&lt;/div&gt;
+ //            &lt;div class=&quot;deep3 mark&quot;&gt;Child of div.deep2&lt;/div&gt;
+ //        &lt;/div&gt;
+ //        &lt;div class=&quot;deep2 nextone&quot;&gt;Child of div.deep1&lt;/div&gt;
+ //    &lt;/div&gt;
+ //    &lt;div class=&quot;deep1 nextone&quot;&gt;
+ //        Child of div.deep1&lt;/div&gt;
+ //&lt;/li&gt;&lt;/ul&gt;</code></pre>
+
+</div>
 <a name="methods_each"></a>
 <div class="method item">
      <strong class="name"><code>each</code></strong>( <code>iterable</code>, <code>i_function</code>, <code>scope</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$dom.sub.js.html#l120"><code>src\namespaces\$dom.sub.js:120</code></a>
+        <a href="../files/src_namespaces_$dom.sub.js.html#l129"><code>src\namespaces\$dom.sub.js:129</code></a>
     </span><br>
     <p>Procedure for iterating throught NodeList <code>iterable</code>.</p>
 
@@ -254,7 +502,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$dom.sub.js.html#l135"><code>src\namespaces\$dom.sub.js:135</code></a>
+        <a href="../files/src_namespaces_$dom.sub.js.html#l144"><code>src\namespaces\$dom.sub.js:144</code></a>
     </span><br>
     <p>Procedure for iterating throught NodeList <code>iterable</code> like <a href="#methods_each">each</a>, but use <code>for(...;(item= iterable[i]);i++)...</code>.</p>
 
@@ -333,13 +581,32 @@ $dom.add(ul_element,[
 </ul>
 </div>
 </div>
+<a name="methods_empty"></a>
+<div class="method item">
+     <strong class="name"><code>empty</code></strong>( <code>container</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$dom.sub.js.html#l66"><code>src\namespaces\$dom.sub.js:66</code></a>
+    </span><br>
+    <p>Procedure remove children of given element <code>container</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>container</code> <strong>&lt;NodeElement&gt;</strong>
+        <p>Remove all its children</p>
+
+        </li>
+    </ul>
+</div>
 <a name="methods_forceRedraw"></a>
 <div class="method item">
      <strong class="name"><code>forceRedraw</code></strong>( [ <code>element</code> =document.body ] ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_forceRedraw_standalone.sub.js.html#l9"><code>src\special_functions\$dom_forceRedraw_standalone.sub.js:9</code></a>
+        <a href="../files/src_special_functions_$dom_forceRedraw_standalone.sub.js.html#l3"><code>src\special_functions\$dom_forceRedraw_standalone.sub.js:3</code></a>
     </span><br>
     <p>Redraw element using cheat <code>*.offsetHeight</code></p>
 
@@ -360,7 +627,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_forceRedraw_cordova.sub.js.html#l10"><code>src\special_functions\$dom_forceRedraw_cordova.sub.js:10</code></a>
+        <a href="../files/src_special_functions_$dom_forceRedraw_cordova.sub.js.html#l3"><code>src\special_functions\$dom_forceRedraw_cordova.sub.js:3</code></a>
     </span><br>
     <p>Redraw element using cheat <code>*.offsetHeight</code></p>
 
@@ -418,7 +685,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$dom.sub.js.html#l66"><code>src\namespaces\$dom.sub.js:66</code></a>
+        <a href="../files/src_namespaces_$dom.sub.js.html#l75"><code>src\namespaces\$dom.sub.js:75</code></a>
     </span><br>
     <p>Remove elements in given {NodeList} or {HTMLCollection}</p>
 
@@ -453,7 +720,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$dom.sub.js.html#l84"><code>src\namespaces\$dom.sub.js:84</code></a>
+        <a href="../files/src_namespaces_$dom.sub.js.html#l93"><code>src\namespaces\$dom.sub.js:93</code></a>
     </span><br>
     <p>Alias for <code>element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)</code></p>
 
@@ -499,7 +766,7 @@ $dom.add(ul_element,[
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$dom.sub.js.html#l103"><code>src\namespaces\$dom.sub.js:103</code></a>
+        <a href="../files/src_namespaces_$dom.sub.js.html#l112"><code>src\namespaces\$dom.sub.js:112</code></a>
     </span><br>
     <p>Alias for <code>element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a</code></p>
 
