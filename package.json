@@ -10,7 +10,7 @@
     "cordova",
     "standalone"
   ],
-  "standalone": "cordova",
+  "standalone": "standalone",
   "__Comment__namespaces_rename": "This settings allow to rename namespaces",
   "namespaces_rename": {
     "$optimizier": "$optimiziers"

@@ -5,16 +5,35 @@
  * @module jaaJSU.{global}
  */
 (function(module_name, factory) {
-    /* global factory, module_name, gulp_place *///gulp.keep.line
-    let window_export= factory(window, document);
-    Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.1.4";
+    'use strict';
+    /* global define, factory, module, module_name, gulp_place *///gulp.keep.line
+    let window_export;
+    if (typeof define === 'function' && define.amd) {
+        define([], function(){
+            return factory(window, document);
+        });
+    } else if (typeof exports !== 'undefined') {
+        module.exports = factory(window, document);
+    } else {
+        window_export= factory(window, document);
+        Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
+        window[module_name+"_version"]= "0.1.4";
+    }
 })("jaaJSU", function(window, document){
+    'use strict';
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
     function __eachInArrayLike(iterable, i_function, scope){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function.call(scope, iterable[i],i,!j); } }
     function __eachInArrayLikeDynamic(iterable, i_function, scope){ for(let i=0, iterable_i; (iterable_i= iterable[i]); i++){ i_function.call(scope, iterable_i,i); } }
-    /* global isMandatory *///gulp.keep.line
+    /* tP
+    * Slouzi k oznaceni povinnych parametru funkci
+    * ...
+    * parametry:
+    *  tS parameter ~prazdne= doplneni jmena parametru "Missing parameter: "+parameter
+    *  */
+    function isMandatory(parameter){
+        throw new Error('Missing parameter: '+parameter);
+    }
     
 
     /**
@@ -422,10 +441,9 @@
          */
         eachDynamic: __eachInArrayLikeDynamic
     };
-    /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
     /**
      * This is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
-     * @method component [cordova]
+     * @method component
      * @for $dom.{namespace}
      * @param {String} el_name
      *  - Name of element (for example `LI`, `P`, `A`, ...).
@@ -443,10 +461,9 @@
      *      - `[shift= 0]` **{Number}**: Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.
      *  - `c.share` **{Object}**
      *      - This is export for using in another `$dom.component(*)` by calling its `c.component`.
-     *  - `c.mount(parent, [call_parseHTML=false], [type= "end"])` **{Function}**
+     *  - `c.mount(parent, [type= "end"])` **{Function}**
      *      - This append commponent to the `parent` node.
      *      - `parent` **{NodeElement}**: Where to place component
-     *      - `[call_parseHTML=false]` {Boolean}: If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
      *      - `[type= "end"]` **{String}**: By default place component as last child. By using `type= "start"` place component as first child.
      *      - **Returns {NodeElement}**: Component wrapper initialized by `$dom.component(*)`
      * @example
@@ -499,10 +516,9 @@
             els[all_els_counter]= mount(els[getParentIndex()]);
             all_els_counter+= 1;
         }
-        function mount(parent, call_parseHTML= false, type= "end"){
+        function mount(parent, type= "end"){
             if(type==="top" && parent.childNodes.length) parent.insertBefore(fragment, parent.childNodes[0]);
             else parent.appendChild(fragment);
-            if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
             return els[0];
         }
         function recalculateDeep(shift){
@@ -514,18 +530,37 @@
         }
     };
     /**
-     * See [add](#methods_add)
-     * @method add [cordova]
+     * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
+     * @method add
      * @for $dom.{namespace}
      * @param parent {NodeElement}
+     *  * Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)
      * @param $$$ {...Array}
-     *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
-     * @param [call_parseHTML=undefined] {Boolean}
-     *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
+     *  * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`
+     *  * Element in array is automatically nested into the previous element. `[["UL",...], ["LI",...], ["SPAN",...]]` creates `<ul><li><span></span></li></ul>`
+     *  * `__NAME__` **\<String\>**: Name of element (for example `LI`, `P`, `A`, ...)
+     *  * `__PARAMS__` **\<Object\>**: Parameters for elements as "innerText", "className", "dataset", ...
+     *      * see [$dom.assign](#methods_assign)
+     *      * There is one change with using key "$", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)
+     *          * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[["UL",...], ["LI",...], ["LI",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`
      * @return {NodeElement}
      *  * First created element (usualy wrapper thanks nesting)
+     * @example
+     *     $dom.add(ul_element,[
+     *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
+     *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
+     *             ["SPAN", {$:0, innerText: "Druhy SPAN v LI"}]
+     *     ]);
+     *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>
+     *     // !!! VS !!!
+     *     $dom.add(ul_element,[
+     *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
+     *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
+     *                 ["SPAN", {innerText: "Druhy SPAN v LI"}]
+     *     ]);
+     *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>
      */
-    $dom.add= function(parent,$$$, call_parseHTML){
+    $dom.add= function(parent,$$$){
         let fragment= document.createDocumentFragment();
         let prepare_els= [], els= [];
         for(var i=0, i_length= $$$.length; i<i_length;i++){
@@ -539,17 +574,21 @@
             $dom.assign(els[i], $$$[i][1]);
         }
         parent.appendChild(fragment);
-        if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
         if(i) return els[0];
     };
+    
     /**
-     * Procedure for merging object into the element properties. See [$dom.assign](#methods_assign).
+     * Procedure for merging object into the element properties.
      * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
-     * @method assign [cordova]
+     * @method assign
      * @for $dom.{namespace}
      * @param {NodeElement} element
      * @param {Object} object_attributes
-     *  - there is also supprot for "jsif_var" and/or "data-cmd='condition-changeval'"
+     *  - Object shall holds **NodeElement** properties like `className`, `textContent`, ...
+     *  - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById("ID"), { dataset: { test: "TEST" } }); //<p id="ID" data-test="TEST"></p>`.
+     *  - The same notation can be used for **CSS variables** (the key is called `style_vars`).
+     *  - **IMPORTANT CHANGE**: Key `style` is parsed as **text**, so `$dom.assign(el, { style: "color: red;" });` is equivalent to `el.setAttribute("style", "color: red;");` **NOT to** `el.style.*`!!!
+     *  - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).
      * @example
      *      const el= document.body;
      *      const onclick= function(){ console.log(this.dataset.js_param); };
@@ -570,11 +609,7 @@
                     for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.style.setProperty(k_key, attr[k_key]); }
                     break;
                 case "dataset":
-                    for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){
-                        k_key= k_keys[k];
-                        if(k_key==="jsif_var"&&element.dataset.cmd!=="condition-changeval") element.dataset.jsif_eq= attr.jsif_val.indexOf(__internal_switch_values_holder.get(active_page+attr.jsif_var)) !== -1;
-                        element.dataset[k_key]= attr[k_key];
-                    }
+                    for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.dataset[k_key]= attr[k_key]; }
                     break;
                 case "href" || "src" || "class":
                     element.setAttribute(key, attr);
@@ -585,23 +620,21 @@
             }
         }
     };
-    /* global $dom, active_page_el, device *///gulp.keep.line
     /**
      * Redraw element using cheat `*.offsetHeight`
-     * @method forceRedraw [cordova]
+     * @method forceRedraw
      * @for $dom.{namespace}
-     * @param {NodeElement} [element=active_page_el]
+     * @param {NodeElement} [element=document.body]
      *  * Element for redraw
-     * @param {String} [platform="iOS"]
-     *  * Redraw only for specific `device.platform` ("Android", "iOS")
      */
-    $dom.forceRedraw= function(element= active_page_el, platform= "iOS"){
-        if(device.platform===platform||platform==="all"){
-            let d= element.style.display;
-            element.style.display= 'none';
-            let trick= element.offsetHeight;
-            element.style.display= d;
-        }
+    $dom.forceRedraw= function(element= document.body){
+        let d= element.style.display;
+        element.style.display= 'none';
+        let trick= element.offsetHeight;
+        element.style.display= d;
+        //v2
+        //document.documentElement.style.paddingRight = '1px';
+        //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
     export_as($dom, "$dom");
 
