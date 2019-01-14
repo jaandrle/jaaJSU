@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.1.4</title>
+    <title>Documentation: jaaJSU@0.1.5</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$dom.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.4</em>
+            <em>API Docs for: 0.1.5</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -43,6 +43,8 @@
                     <ul>
                             <li><a href="../classes/$array.{namespace}.html">$array.{namespace}</a></li>
                             <li><a href="../classes/$async.{namespace}.html">$async.{namespace}</a></li>
+                            <li><a href="../classes/$dom.component.html">$dom.component</a></li>
+                            <li><a href="../classes/$dom.component [cordova].html">$dom.component [cordova]</a></li>
                             <li><a href="../classes/$dom.{namespace}.html">$dom.{namespace}</a></li>
                             <li><a href="../classes/$function.{namespace}.html">$function.{namespace}</a></li>
                             <li><a href="../classes/$object.{namespace}.html">$object.{namespace}</a></li>
@@ -156,6 +158,17 @@ var $dom={
         let len = container.childNodes.length;
         while(len--){ container.removeChild(container.lastChild); }
     },
+    /**
+     * Procedure places &#x60;new_element&#x60; after &#x60;reference&#x60; elements
+     * @method insertAfter
+     * @param {NodeElement} new_element
+     * @param {NodeElement} reference
+     */
+    insertAfter: function(new_element, reference){
+        const { parentNode, nextSibling }= reference;
+        if(nextSibling) parentNode.insertBefore(new_element, nextSibling);
+        else parentNode.appendChild(new_element);
+    },
    /**
     * Remove elements in given {NodeList} or {HTMLCollection}
     * @method removeElements
@@ -173,6 +186,16 @@ var $dom={
         let j= 0;
         for(let i= from_index; i &lt; to_index; i++){els_array[j++]= els_to_delete[i];}
         for(let i= 0, i_length= els_array.length; i &lt; i_length; i++){els_array[i].remove();}
+    },
+    /**
+     * Procedure replaces &#x60;el_old&#x60; element by new one (&#x60;new_el&#x60;)
+     * @method replace
+     * @param {NodeElement} el_old
+     * @param {NodeElement} el_new
+     */
+    replace: function(el_old, el_new){
+        $dom.insertAfter(el_new, el_old);
+        el_old.remove();
     },
     /**
      * Alias for &#x60;element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)&#x60;

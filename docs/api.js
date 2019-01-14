@@ -3,6 +3,8 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "$array.{namespace}",
         "$async.{namespace}",
+        "$dom.component",
+        "$dom.component [cordova]",
         "$dom.{namespace}",
         "$function.{namespace}",
         "$object.{namespace}",

@@ -72,6 +72,17 @@ var $dom={
         let len = container.childNodes.length;
         while(len--){ container.removeChild(container.lastChild); }
     },
+    /**
+     * Procedure places `new_element` after `reference` elements
+     * @method insertAfter
+     * @param {NodeElement} new_element
+     * @param {NodeElement} reference
+     */
+    insertAfter: function(new_element, reference){
+        const { parentNode, nextSibling }= reference;
+        if(nextSibling) parentNode.insertBefore(new_element, nextSibling);
+        else parentNode.appendChild(new_element);
+    },
    /**
     * Remove elements in given {NodeList} or {HTMLCollection}
     * @method removeElements
@@ -89,6 +100,16 @@ var $dom={
         let j= 0;
         for(let i= from_index; i < to_index; i++){els_array[j++]= els_to_delete[i];}
         for(let i= 0, i_length= els_array.length; i < i_length; i++){els_array[i].remove();}
+    },
+    /**
+     * Procedure replaces `el_old` element by new one (`new_el`)
+     * @method replace
+     * @param {NodeElement} el_old
+     * @param {NodeElement} el_new
+     */
+    replace: function(el_old, el_new){
+        $dom.insertAfter(el_new, el_old);
+        el_old.remove();
     },
     /**
      * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`

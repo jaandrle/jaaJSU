@@ -1,7 +1,7 @@
 {
   "__SECTION_GULP": "",
   "fullName": "jaaJSU",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "build": "0001",
   "src_folder": "src/",
   "bin_folder": "bin/",
@@ -10,7 +10,7 @@
     "cordova",
     "standalone"
   ],
-  "standalone": "cordova",
+  "standalone": "standalone",
   "__Comment__namespaces_rename": "This settings allow to rename namespaces",
   "namespaces_rename": {
     "$optimizier": "$optimiziers"
