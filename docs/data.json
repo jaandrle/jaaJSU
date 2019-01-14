@@ -1,8 +1,8 @@
 {
     "project": {},
     "files": {
-        "src\\namespaces\\$array.sub.js": {
-            "name": "src\\namespaces\\$array.sub.js",
+        "src/namespaces/$array.sub.js": {
+            "name": "src/namespaces/$array.sub.js",
             "modules": {},
             "classes": {
                 "$array.{namespace}": 1
@@ -10,8 +10,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$async.sub.js": {
-            "name": "src\\namespaces\\$async.sub.js",
+        "src/namespaces/$async.sub.js": {
+            "name": "src/namespaces/$async.sub.js",
             "modules": {},
             "classes": {
                 "$async.{namespace}": 1
@@ -19,8 +19,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$dom.sub.js": {
-            "name": "src\\namespaces\\$dom.sub.js",
+        "src/namespaces/$dom.sub.js": {
+            "name": "src/namespaces/$dom.sub.js",
             "modules": {},
             "classes": {
                 "$dom.{namespace}": 1
@@ -28,8 +28,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$function.sub.js": {
-            "name": "src\\namespaces\\$function.sub.js",
+        "src/namespaces/$function.sub.js": {
+            "name": "src/namespaces/$function.sub.js",
             "modules": {},
             "classes": {
                 "$function.{namespace}": 1
@@ -37,8 +37,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$object.sub.js": {
-            "name": "src\\namespaces\\$object.sub.js",
+        "src/namespaces/$object.sub.js": {
+            "name": "src/namespaces/$object.sub.js",
             "modules": {},
             "classes": {
                 "$object.{namespace}": 1
@@ -46,8 +46,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$optimizier.sub.js": {
-            "name": "src\\namespaces\\$optimizier.sub.js",
+        "src/namespaces/$optimizier.sub.js": {
+            "name": "src/namespaces/$optimizier.sub.js",
             "modules": {},
             "classes": {
                 "$optimizier.{namespace}": 1
@@ -55,8 +55,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$string.sub.js": {
-            "name": "src\\namespaces\\$string.sub.js",
+        "src/namespaces/$string.sub.js": {
+            "name": "src/namespaces/$string.sub.js",
             "modules": {},
             "classes": {
                 "$string.{namespace}": 1
@@ -64,8 +64,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$time.sub.js": {
-            "name": "src\\namespaces\\$time.sub.js",
+        "src/namespaces/$time.sub.js": {
+            "name": "src/namespaces/$time.sub.js",
             "modules": {},
             "classes": {
                 "$time.{namespace}": 1
@@ -73,8 +73,8 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_add_helpers_cordova.sub.js": {
-            "name": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+        "src/special_functions/$dom_add_helpers_cordova.sub.js": {
+            "name": "src/special_functions/$dom_add_helpers_cordova.sub.js",
             "modules": {},
             "classes": {
                 "$dom.component [cordova]": 1
@@ -84,8 +84,8 @@
             },
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_add_helpers_standalone.sub.js": {
-            "name": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+        "src/special_functions/$dom_add_helpers_standalone.sub.js": {
+            "name": "src/special_functions/$dom_add_helpers_standalone.sub.js",
             "modules": {},
             "classes": {
                 "$dom.component": 1
@@ -95,8 +95,8 @@
             },
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_forceRedraw_cordova.sub.js": {
-            "name": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
+        "src/special_functions/$dom_forceRedraw_cordova.sub.js": {
+            "name": "src/special_functions/$dom_forceRedraw_cordova.sub.js",
             "modules": {},
             "classes": {},
             "fors": {
@@ -104,8 +104,8 @@
             },
             "namespaces": {}
         },
-        "src\\special_functions\\$dom_forceRedraw_standalone.sub.js": {
-            "name": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
+        "src/special_functions/$dom_forceRedraw_standalone.sub.js": {
+            "name": "src/special_functions/$dom_forceRedraw_standalone.sub.js",
             "modules": {},
             "classes": {},
             "fors": {
@@ -113,8 +113,8 @@
             },
             "namespaces": {}
         },
-        "src\\jaaJSU.js": {
-            "name": "src\\jaaJSU.js",
+        "src/jaaJSU.js": {
+            "name": "src/jaaJSU.js",
             "modules": {
                 "jaaJSU.{global}": 1
             },
@@ -158,7 +158,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for Arrays.",
             "static": 1
@@ -172,7 +172,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 2,
             "description": "This NAMESPACE provides features for async (mainly Promise) functions.",
             "static": 1
@@ -186,7 +186,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$dom.sub.js",
+            "file": "src/namespaces/$dom.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for DOM elemnts.",
             "static": 1
@@ -200,7 +200,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for async (mainly Promise) functions.",
             "static": 1
@@ -214,7 +214,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for Objects.",
             "static": 1
@@ -228,7 +228,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 2,
             "description": "This NAMESPACE provides features for optimizations.",
             "static": 1
@@ -242,7 +242,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 2,
             "description": "This NAMESPACE provides features for strings.",
             "static": 1
@@ -256,7 +256,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 3,
             "description": "This NAMESPACE provides features for time.",
             "static": 1
@@ -349,7 +349,7 @@
     "elements": {},
     "classitems": [
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 9,
             "description": "Function which calculate final index for cylce looping\nMeans from current index `i` get `s`th value in array which length is `l`",
             "itemtype": "method",
@@ -381,7 +381,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 32,
             "description": "Procedure for iterating throught Array `iterable`.",
             "itemtype": "method",
@@ -406,7 +406,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 47,
             "description": "Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
@@ -431,7 +431,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 62,
             "description": "Function returns last element in array without editing the original.",
             "itemtype": "method",
@@ -450,7 +450,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 73,
             "description": "Function returns methods for splitting array by condition.",
             "itemtype": "method",
@@ -469,7 +469,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 111,
             "description": "Function returns new array without any `item`",
             "itemtype": "method",
@@ -493,7 +493,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$array.sub.js",
+            "file": "src/namespaces/$array.sub.js",
             "line": 131,
             "description": "Function returns random number for Array.sort function",
             "itemtype": "method",
@@ -505,7 +505,7 @@
             "class": "$array.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 8,
             "description": "Procedure for iterating thorught **Promise** function array `funcs`.\n\n**Deprecated:** Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)",
             "itemtype": "method",
@@ -524,7 +524,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 27,
             "description": "Procedure for iterating thorught **Promise** function array `funcs`.",
             "itemtype": "method",
@@ -543,7 +543,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 47,
             "itemtype": "property",
             "name": "CANCEL I used in iterateMixed_",
@@ -551,7 +551,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 51,
             "description": "Like `iterate_`, but also allows iterate throught non-promise functions\n\n**Beta:**  Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)",
             "itemtype": "method",
@@ -571,7 +571,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 77,
             "description": "Procedure for iterating throught **Promise** functions (wait pattern).",
             "itemtype": "method",
@@ -591,7 +591,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$async.sub.js",
+            "file": "src/namespaces/$async.sub.js",
             "line": 93,
             "description": "Procedure for iterating throught **Promise** functions (race pattern).",
             "itemtype": "method",
@@ -611,7 +611,7 @@
             "class": "$async.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$dom.sub.js",
+            "file": "src/namespaces/$dom.sub.js",
             "line": 18,
             "description": "Calls `.then` when the DOM is ready",
             "itemtype": "method",
@@ -631,7 +631,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$dom.sub.js",
+            "file": "src/namespaces/$dom.sub.js",
             "line": 39,
             "description": "Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)",
             "itemtype": "method",
@@ -657,7 +657,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$dom.sub.js",
+            "file": "src/namespaces/$dom.sub.js",
             "line": 66,
             "description": "Procedure remove children of given element `container`.",
             "itemtype": "method",
@@ -672,7 +672,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$dom.sub.js",
+            "file": "src/namespaces/$dom.sub.js",
             "line": 75,
             "description": "Procedure places `new_element` after `reference` elements",
             "itemtype": "method",
@@ -859,7 +859,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 9,
             "description": "Functional-like alternative for `for(...){functions[nth](..input);}`.",
             "itemtype": "method",
@@ -879,7 +879,7 @@
             "class": "$function.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 20,
             "description": "Converts `...input`s to new Array based on `...functions`",
             "itemtype": "method",
@@ -902,7 +902,7 @@
             "class": "$function.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 40,
             "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
             "itemtype": "method",
@@ -925,7 +925,7 @@
             "class": "$function.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 68,
             "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
             "itemtype": "method",
@@ -961,7 +961,7 @@
             "class": "$function.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$function.sub.js",
+            "file": "src/namespaces/$function.sub.js",
             "line": 80,
             "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
             "itemtype": "method",
@@ -985,7 +985,7 @@
             "class": "$function.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 9,
             "description": "Function for iterating throught Object `iterable`.",
             "itemtype": "method",
@@ -1010,7 +1010,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 24,
             "description": "Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.",
             "itemtype": "method",
@@ -1035,7 +1035,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 39,
             "description": "Function for converting Array `arr` to Object. Uses `fun` for converting.",
             "itemtype": "method",
@@ -1064,7 +1064,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 58,
             "description": "Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: \"gotcha\" }`",
             "itemtype": "method",
@@ -1088,7 +1088,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 71,
             "description": "Function for creating non-rewritable object",
             "itemtype": "method",
@@ -1107,7 +1107,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$object.sub.js",
+            "file": "src/namespaces/$object.sub.js",
             "line": 111,
             "description": "Wrapper around `object[key]`, usefull for binding.",
             "itemtype": "method",
@@ -1131,7 +1131,7 @@
             "class": "$object.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 8,
             "description": "Prevent multiple calling (typically for \"onresize\" events) - use google for more detail",
             "itemtype": "method",
@@ -1167,7 +1167,7 @@
             "class": "$optimizier.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 44,
             "description": "Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`",
             "itemtype": "method",
@@ -1193,7 +1193,7 @@
             "class": "$optimizier.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 73,
             "description": "Calls `.then` when `fn` returns **true**",
             "itemtype": "method",
@@ -1229,7 +1229,7 @@
             "class": "$optimizier.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 106,
             "description": "Prevent multiple calling of `fn`",
             "itemtype": "method",
@@ -1252,7 +1252,7 @@
             "class": "$optimizier.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$optimizier.sub.js",
+            "file": "src/namespaces/$optimizier.sub.js",
             "line": 128,
             "description": "Combination of `setTimeout`->`requestAnimationFrame`",
             "itemtype": "method",
@@ -1274,7 +1274,7 @@
             "class": "$optimizier.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 8,
             "description": "Clear spaces (`\\s+`) in `str`",
             "itemtype": "method",
@@ -1293,7 +1293,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 19,
             "itemtype": "method",
             "name": "countChars",
@@ -1311,7 +1311,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 36,
             "itemtype": "method",
             "name": "generateUnique",
@@ -1322,7 +1322,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 44,
             "description": "Wrapper around `*.substring(*,*)`",
             "itemtype": "method",
@@ -1353,7 +1353,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 69,
             "itemtype": "method",
             "name": "letterInc",
@@ -1388,7 +1388,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 102,
             "description": "Escapes \"<\", \">\", \"&\", '\"', \"'\"",
             "itemtype": "method",
@@ -1407,7 +1407,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 113,
             "description": "Clear tags from `str`",
             "itemtype": "method",
@@ -1426,7 +1426,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 125,
             "itemtype": "method",
             "name": "containsRepeatingChars",
@@ -1454,7 +1454,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 141,
             "itemtype": "method",
             "name": "containsSequential",
@@ -1482,7 +1482,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 182,
             "itemtype": "method",
             "name": "isEmail",
@@ -1500,7 +1500,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 192,
             "description": "Wrapper around `*.trim()`",
             "itemtype": "method",
@@ -1519,7 +1519,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$string.sub.js",
+            "file": "src/namespaces/$string.sub.js",
             "line": 202,
             "description": "Alternative to ` ```text with ${variable}``` ` (like `sprintf()`)",
             "itemtype": "method",
@@ -1541,7 +1541,7 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 9,
             "itemtype": "method",
             "name": "getOrdinalSuffix",
@@ -1562,7 +1562,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 24,
             "itemtype": "method",
             "name": "getMonthName",
@@ -1590,7 +1590,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 48,
             "description": "Function returns timestamp in the form of \"YYYY-MM-DD HH:MM:SS\". Uses [double](#methods_double)",
             "itemtype": "method",
@@ -1611,7 +1611,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 65,
             "description": "Function returns timestamp in the form of \"YYYY-MM-DD\". Uses [double](#methods_double)",
             "itemtype": "method",
@@ -1632,7 +1632,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 79,
             "description": "Function returns timestamp in the form of \"HH:MM:SS\". Uses [double](#methods_double)",
             "itemtype": "method",
@@ -1653,7 +1653,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 93,
             "description": "Function returns how much is `time` bigger than `refference_time`. Uses [getTimeStamp](#methods_getTimeStamp), [getDateStamp](#methods_getDateStamp), [getTimeString](#methods_getTimeString)",
             "itemtype": "method",
@@ -1679,7 +1679,7 @@
             "class": "$time.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
+            "file": "src/namespaces/$time.sub.js",
             "line": 123,
             "description": "Function adds leading zero to the `time`",
             "itemtype": "method",
@@ -2163,7 +2163,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\special_functions\\$dom_forceRedraw_cordova.sub.js",
+            "file": "src/special_functions/$dom_forceRedraw_cordova.sub.js",
             "line": 3,
             "description": "Redraw element using cheat `*.offsetHeight`",
             "itemtype": "method",
@@ -2187,7 +2187,7 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\special_functions\\$dom_forceRedraw_standalone.sub.js",
+            "file": "src/special_functions/$dom_forceRedraw_standalone.sub.js",
             "line": 3,
             "description": "Redraw element using cheat `*.offsetHeight`",
             "itemtype": "method",
@@ -2207,19 +2207,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:62"
+            "line": " src/namespaces/$array.sub.js:62"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:73"
+            "line": " src/namespaces/$array.sub.js:73"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:111"
+            "line": " src/namespaces/$array.sub.js:111"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:131"
+            "line": " src/namespaces/$array.sub.js:131"
         },
         {
             "message": "replacing incorrect tag: returns with return",
