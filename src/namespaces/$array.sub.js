@@ -36,12 +36,15 @@ var $array= {
      *  * An array-like object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in `iterable` Array.
-     *  * `i_function(value,index)`
-     *      * `value` Mixed: Nth value for `key` in `iterable`.
-     *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     *  * `i_function(o: Object)`
+     *      * `item` Mixed: Nth value for `key` in `iterable`.
+     *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
      *      * `last` Boolean: Is setted True, if it is the last element in array.
+     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
      * @param {Object|undefined} scope
      *  * An argument for `i_function.call(*,...)`
+     * @return {Mixed}
+     *  * `share`
      */
     each: __eachInArrayLike,
     /**
@@ -51,12 +54,15 @@ var $array= {
      *  * An array-like object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in `iterable` Array.
-     *  * `i_function(value,index)`
-     *      * `value` Mixed: Nth value for `key` in `iterable`.
-     *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     *  * `i_function(o: Object)`
+     *      * `item` Mixed: Nth value for `key` in `iterable`.
+     *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
      *      * `last` Boolean: Is setted True, if it is the last element in array.
+     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
      * @param {Object|undefined} scope
      *  * An argument for `i_function.call(*,...)`
+     * @return {Mixed}
+     *  * `share`
      */
     eachDynamic: __eachInArrayLikeDynamic,
     /**

@@ -23,8 +23,22 @@
     'use strict';
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
-    function __eachInArrayLike(iterable, i_function, scope){ const i_length= iterable.length; for(let i=0, j=i_length-1; i<i_length; i++, j--){ i_function.call(scope, iterable[i],i,!j); } }
-    function __eachInArrayLikeDynamic(iterable, i_function, scope){ for(let i=0, iterable_i; (iterable_i= iterable[i]); i++){ i_function.call(scope, iterable_i,i); } }
+    function __eachInArrayLike(iterable, i_function, scope){
+        const i_length= iterable.length;
+        let share;
+        for(let i=0, j=i_length-1; i<i_length; i++, j--){
+            share= i_function.call(scope, { item: iterable[i], key: i, last: !j, share });
+        }
+        return share;
+    }
+    function __eachInArrayLikeDynamic(iterable, i_function, scope){
+        let share;
+        for(let i=0, iterable_i; (iterable_i= iterable[i]); i++){
+            share= i_function.call(scope, { item: iterable_i, key: i, share });
+        }
+        return share;
+    }
+    
     /* tP
     * Slouzi k oznaceni povinnych parametru funkci
     * ...
@@ -72,12 +86,15 @@
          *  * An array-like object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Array.
-         *  * `i_function(value,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
-         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
+         *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
         each: __eachInArrayLike,
         /**
@@ -87,12 +104,15 @@
          *  * An array-like object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Array.
-         *  * `i_function(value,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
-         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
+         *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
         eachDynamic: __eachInArrayLikeDynamic,
         /**
@@ -438,12 +458,15 @@
          *  * An array-like object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Array.
-         *  * `i_function(value,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
-         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
+         *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
         each: __eachInArrayLike,
         /**
@@ -453,12 +476,15 @@
          *  * An array-like object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Array.
-         *  * `i_function(value,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
-         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
+         *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
          *      * `last` Boolean: Is setted True, if it is the last element in array.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
         eachDynamic: __eachInArrayLikeDynamic
     };
@@ -834,6 +860,7 @@
      *  - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById("ID"), { dataset: { test: "TEST" } }); //<p id="ID" data-test="TEST"></p>`.
      *  - The same notation can be used for **CSS variables** (the key is called `style_vars`).
      *  - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: "color: red;" });` and `$dom.assign(el, { style: { color: "red" } })` is equivalent to `el.setAttribute("style", "color: red;");`
+     *  - **IMPORTANT DIFFERENCE**: `classList.toggle` accepts *Array* in the form of `[className: <String>, toggle: <Boolean>]` (basically it is used as argument of `*.classList.toggle(...***)` )
      *  - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).
      * @example
      *      const el= document.body;
@@ -847,6 +874,7 @@
         for(let i=0, key, attr, i_length= object_attributes_keys.length; i<i_length; i++){
             key= object_attributes_keys[i];
             attr= object_attributes[key];
+            if(typeof attr==="undefined"){ if(element[key]){ delete element[key]; } continue; }
             switch(key){
                 case "style":
                     if(typeof attr==="string") element.setAttribute("style", attr);
@@ -854,6 +882,9 @@
                     break;
                 case "style_vars":
                     for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.style.setProperty(k_key, attr[k_key]); }
+                    break;
+                case "classList":
+                    if(element[key].toggle&&attr.toggle) element[key].toggle(...attr.toggle);
                     break;
                 case "dataset":
                     for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.dataset[k_key]= attr[k_key]; }
@@ -867,6 +898,7 @@
             }
         }
     };
+    
     /**
      * Redraw element using cheat `*.offsetHeight`
      * @method forceRedraw
@@ -898,10 +930,10 @@
          *  * `...functions[nth](..input){...}`
          *  * List of functions.
          * @return {Function}
-         *  * For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)
-         *  * `<= ...input` **\<Mixed\>**: arguments for `...functions`
+         *  * For given `input` calls all functions in `...functions` (use `input` as arguments for these functions)
+         *  * `<= input` **\<Mixed\>**: arguments for `...functions`
          */
-        each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
+        each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
         /**
          * Converts `...input`s to new Array based on `...functions`
          * @method map
@@ -928,28 +960,23 @@
          * @param {Function} ...functions
          *  * List of functions.
          *  * `...functions[nth](__INPUT__){... return __OUTPUT__;}`
-         *  * `__INPUT__` is `...input` (for first function) or `...__OUTPUT__`
-         *  * `__OUTPUT__` must be **\<Array\>**! `...__OUTPUT__` is used as argument for next function in `...functions`.
+         *  * `__INPUT__` is `input` (for first function) or `__OUTPUT__`
+         *  * `__OUTPUT__`! `__OUTPUT__` is used as argument for next function in `...functions`.
          * @return {Function}
-         *  * For given `...input` calls all functions in `...functions` (use `...input` as arguments for first function)
-         *  * `<= ...input` **\<Mixed\>**: arguments for first function
+         *  * For given `input` calls all functions in `...functions` (use `input` as arguments for first function)
+         *  * `<= input` **\<Mixed\>**: arguments for first function
          * @example
          *     console.log($function.sequention(
          *          a=>[a+1, a-1],
-         *          (a,b)=>[b-1, a+1]
+         *          ([a,b])=>[b-1, a+1]
          *      )(5));//= [3, 7]
          * 
          *      console.log($function.sequention(
-         *          a=>[a+1],
-         *          a=>[a+2]
+         *          a=>a+1,
+         *          a=>a+2
          *      )(5));//= [8]
-         * 
-         *     console.log($function.sequention(
-         *          a=>a+1, //wrong non-array return
-         *          a=>a+2  //wrong non-array return
-         *      )(5));//...:4 Uncaught TypeError: (var)[Symbol.iterator] is not a function(…)
          */
-        sequention: function(...functions){return function(...input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](...current); } return current;};},
+        sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
         /**
          * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
          * @method schedule
@@ -995,14 +1022,24 @@
          *  * An object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Object.
-         *  * `i_function(value,key,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
          *      * `key` String: Nth key.
-         *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+         *      * `last` Boolean: Is setted True, if it is the last element in array.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
-        each: function(iterable, i_function, scope){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function.call(scope, iterable[iterable_keys_i],iterable_keys_i,i); }},
+        each: function(iterable, i_function, scope){
+            const iterable_keys= Object.keys(iterable);
+            let iterable_keys_i, share;
+            for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
+                share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+            }
+            return share;
+        },
         /**
          * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
          * @method eachDynamic
@@ -1010,14 +1047,25 @@
          *  * An object for iterating.
          * @param {Function} i_function
          *  * This procedure is called for each element in `iterable` Object.
-         *  * `i_function(value,key,index)`
-         *      * `value` Mixed: Nth value for `key` in `iterable`.
+         *  * `i_function(o: Object)`
+         *      * `item` Mixed: Nth value for `key` in `iterable`.
          *      * `key` String: Nth key.
          *      * `iterable` Object: Link to original `iterable`.
+         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
          * @param {Object|undefined} scope
          *  * An argument for `i_function.call(*,...)`
+         * @return {Mixed}
+         *  * `share`
          */
-        eachDynamic: function (iterable, i_function, scope){for(let key in iterable) { if (iterable.hasOwnProperty(key)){ i_function.call(scope, iterable[key], key, iterable); } }},
+        eachDynamic: function (iterable, i_function, scope){
+            let share;
+            for(let key in iterable){
+                if (iterable.hasOwnProperty(key)){
+                    share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
+                }
+            }
+            return share;
+        },
         /**
          * Function for converting Array `arr` to Object. Uses `fun` for converting.
          * @method fromArray
@@ -1621,7 +1669,7 @@
             return (new Date(time)).getTime() - (new Date(time_now)).getTime();
         },
        /**
-        * Function adds leading zero to the `time`
+        * Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
         * @method double
         * @param {Number|String} time
         * @return {String}

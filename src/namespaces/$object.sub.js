@@ -13,14 +13,24 @@ var $object= {
      *  * An object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in `iterable` Object.
-     *  * `i_function(value,key,index)`
-     *      * `value` Mixed: Nth value for `key` in `iterable`.
+     *  * `i_function(o: Object)`
+     *      * `item` Mixed: Nth value for `key` in `iterable`.
      *      * `key` String: Nth key.
-     *      * `index` Number: Idicies 0...`Object.keys(iterable).length`.
+     *      * `last` Boolean: Is setted True, if it is the last element in array.
+     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
      * @param {Object|undefined} scope
      *  * An argument for `i_function.call(*,...)`
+     * @return {Mixed}
+     *  * `share`
      */
-    each: function(iterable, i_function, scope){ const iterable_keys= Object.keys(iterable); let iterable_keys_i; for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ i_function.call(scope, iterable[iterable_keys_i],iterable_keys_i,i); }},
+    each: function(iterable, i_function, scope){
+        const iterable_keys= Object.keys(iterable);
+        let iterable_keys_i, share;
+        for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
+            share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+        }
+        return share;
+    },
     /**
      * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
      * @method eachDynamic
@@ -28,14 +38,25 @@ var $object= {
      *  * An object for iterating.
      * @param {Function} i_function
      *  * This procedure is called for each element in `iterable` Object.
-     *  * `i_function(value,key,index)`
-     *      * `value` Mixed: Nth value for `key` in `iterable`.
+     *  * `i_function(o: Object)`
+     *      * `item` Mixed: Nth value for `key` in `iterable`.
      *      * `key` String: Nth key.
      *      * `iterable` Object: Link to original `iterable`.
+     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
      * @param {Object|undefined} scope
      *  * An argument for `i_function.call(*,...)`
+     * @return {Mixed}
+     *  * `share`
      */
-    eachDynamic: function (iterable, i_function, scope){for(let key in iterable) { if (iterable.hasOwnProperty(key)){ i_function.call(scope, iterable[key], key, iterable); } }},
+    eachDynamic: function (iterable, i_function, scope){
+        let share;
+        for(let key in iterable){
+            if (iterable.hasOwnProperty(key)){
+                share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
+            }
+        }
+        return share;
+    },
     /**
      * Function for converting Array `arr` to Object. Uses `fun` for converting.
      * @method fromArray

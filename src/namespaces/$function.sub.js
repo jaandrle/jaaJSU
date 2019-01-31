@@ -13,10 +13,10 @@ var $function= {
      *  * `...functions[nth](..input){...}`
      *  * List of functions.
      * @return {Function}
-     *  * For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)
-     *  * `<= ...input` **\<Mixed\>**: arguments for `...functions`
+     *  * For given `input` calls all functions in `...functions` (use `input` as arguments for these functions)
+     *  * `<= input` **\<Mixed\>**: arguments for `...functions`
      */
-    each: function(...functions){return function(...input){for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](...input); }}; },
+    each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
     /**
      * Converts `...input`s to new Array based on `...functions`
      * @method map
@@ -43,28 +43,23 @@ var $function= {
      * @param {Function} ...functions
      *  * List of functions.
      *  * `...functions[nth](__INPUT__){... return __OUTPUT__;}`
-     *  * `__INPUT__` is `...input` (for first function) or `...__OUTPUT__`
-     *  * `__OUTPUT__` must be **\<Array\>**! `...__OUTPUT__` is used as argument for next function in `...functions`.
+     *  * `__INPUT__` is `input` (for first function) or `__OUTPUT__`
+     *  * `__OUTPUT__`! `__OUTPUT__` is used as argument for next function in `...functions`.
      * @return {Function}
-     *  * For given `...input` calls all functions in `...functions` (use `...input` as arguments for first function)
-     *  * `<= ...input` **\<Mixed\>**: arguments for first function
+     *  * For given `input` calls all functions in `...functions` (use `input` as arguments for first function)
+     *  * `<= input` **\<Mixed\>**: arguments for first function
      * @example
      *     console.log($function.sequention(
      *          a=>[a+1, a-1],
-     *          (a,b)=>[b-1, a+1]
+     *          ([a,b])=>[b-1, a+1]
      *      )(5));//= [3, 7]
      * 
      *      console.log($function.sequention(
-     *          a=>[a+1],
-     *          a=>[a+2]
+     *          a=>a+1,
+     *          a=>a+2
      *      )(5));//= [8]
-     * 
-     *     console.log($function.sequention(
-     *          a=>a+1, //wrong non-array return
-     *          a=>a+2  //wrong non-array return
-     *      )(5));//...:4 Uncaught TypeError: (var)[Symbol.iterator] is not a function(…)
      */
-    sequention: function(...functions){return function(...input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](...current); } return current;};},
+    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
     /**
      * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
      * @method schedule
