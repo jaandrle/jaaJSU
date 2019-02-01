@@ -109,7 +109,7 @@ var $array= {
             },
             byCondition: function(fn){
                 let out= [[],[]];
-                __eachInArrayLike(arr, (curr, i)=>out[+!Boolean(fn(curr, i))].push(curr));
+                __eachInArrayLike(arr, ({item, key})=>out[+!Boolean(fn(item, key))].push(item));
                 return out;
             }
         };
