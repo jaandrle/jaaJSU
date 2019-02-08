@@ -71,9 +71,9 @@
                 </div>
                 <div class="bd">
                     <ul>
+                            <li class="menuli"><a href="#methods_component">component</a></li>
                             <li class="menuli"><a href="#methods_conditionalCall">conditionalCall</a></li>
                             <li class="menuli"><a href="#methods_each">each</a></li>
-                            <li class="menuli"><a href="#methods_map">map</a></li>
                             <li class="menuli"><a href="#methods_schedule">schedule</a></li>
                             <li class="menuli"><a href="#methods_sequention">sequention</a></li>
                     </ul>
@@ -107,13 +107,38 @@
     </ul>
     <div>
             <div id="methods"><h4>Methods</h4>
+<a name="methods_component"></a>
+<div class="method item">
+    Component <strong class="name"><code>component</code></strong>( <code>transform</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$function.sub.js.html#l9"><code>src\namespaces\$function.sub.js:9</code></a>
+    </span><br>
+    <p>EXPERIMENT!: Function composing using <code>$dom.component</code> like syntax</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>transform</code> <strong>&lt;Function&gt;</strong>
+        <ul>
+<li>...</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Component&gt; <ul>
+<li><code>{ pipe, run }</code></li>
+</ul>
+</div>
+</div>
 <a name="methods_conditionalCall"></a>
 <div class="method item">
     Boolean | Mixed <strong class="name"><code>conditionalCall</code></strong>( <code>mixed</code>, <code>fun</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l75"><code>src\namespaces\$function.sub.js:75</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l70"><code>src\namespaces\$function.sub.js:70</code></a>
     </span><br>
     <p>Shorthand for <code>const mixed= ...; if(mixed) fun(mixed);</code></p>
 
@@ -145,7 +170,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l9"><code>src\namespaces\$function.sub.js:9</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l24"><code>src\namespaces\$function.sub.js:24</code></a>
     </span><br>
     <p>Functional-like alternative for <code>for(...){functions[nth](..input);}</code>.</p>
 
@@ -167,51 +192,13 @@
 </ul>
 </div>
 </div>
-<a name="methods_map"></a>
-<div class="method item">
-    Function <strong class="name"><code>map</code></strong>( ...<code>functions</code> ) 
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/src_namespaces_$function.sub.js.html#l20"><code>src\namespaces\$function.sub.js:20</code></a>
-    </span><br>
-    <p>Converts <code>...input</code>s to new Array based on <code>...functions</code></p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>functions</code> <strong>&lt;Function&gt;</strong>
-            <abbr title="Denotes that this argument can contain (n) number">(*..n)</abbr>
-        <ul>
-<li><code>...functions[nth](..input){...return __OUTPUT__;}</code></li>
-<li><code>__OUTPUT__</code> element of final array</li>
-<li>List of functions.</li>
-</ul>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
-<li>For given <code>...input</code> calls all functions in <code>...functions</code> (use <code>...input</code> as arguments for these functions)</li>
-<li><code>&lt;= ...input</code> <strong>&lt;Mixed&gt;</strong>: arguments for <code>...functions</code></li>
-<li>@return {Array}</li>
-</ul>
-</div>
-        <h5>Example</h5>
-        <pre class="code prettyprint"><code>console.log($function.map(
-     a=&gt;a+1,
-     a=&gt;a-1,
-     a=&gt;a+2,
-     a=&gt;a-2
- )(5));//= [6, 4, 7, 3]</code></pre>
-
-</div>
 <a name="methods_schedule"></a>
 <div class="method item">
      <strong class="name"><code>schedule</code></strong>( <code>functions</code>, <code>def</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l63"><code>src\namespaces\$function.sub.js:63</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l58"><code>src\namespaces\$function.sub.js:58</code></a>
     </span><br>
     <p>Optimized iterator for heavy functions in <code>functions</code>. Uses <a href="./$optimizier.%7Bnamespace%7D.html#methods_timeoutAnimationFrame">$optimizier.timeoutAnimationFrame</a></p>
 
@@ -248,7 +235,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l40"><code>src\namespaces\$function.sub.js:40</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l35"><code>src\namespaces\$function.sub.js:35</code></a>
     </span><br>
     <p>Procedure for creating functional flow (sequention <em>function1-&gt;function2-&gt;...</em>). Particually similar to <a href="#methods_each">each</a>. But, as arguments for current function is used output frome previous function.</p>
 

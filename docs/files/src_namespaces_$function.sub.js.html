@@ -93,6 +93,21 @@ gulp_place(&quot;namespaces/$optimizier.sub.js&quot;, &quot;file_once&quot;);/* 
  */
 var $function= {
     /**
+     * EXPERIMENT!: Function composing using &#x60;$dom.component&#x60; like syntax
+     * @method component
+     * @param {Function} transform
+     *  * ...
+     * @returns {component}
+     *  * &#x60;{ pipe, run }&#x60;
+     */
+    component: function(transform){
+        let functions= []; const out= { pipe, run };
+        return out;
+
+        function pipe(f){ functions.push(f); return out; }
+        function run(data){ return functions.reduce((prev,curr)=&gt;curr(prev), typeof transform===&quot;function&quot; ? transform(data) : data);}
+    },
+    /**
      * Functional-like alternative for &#x60;for(...){functions[nth](..input);}&#x60;.
      * @method each
      * @param {Function} ...functions
@@ -103,26 +118,6 @@ var $function= {
      *  * &#x60;&lt;= input&#x60; **\&lt;Mixed\&gt;**: arguments for &#x60;...functions&#x60;
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i&lt;i_length; i++){ functions[i](input); } }; },
-    /**
-     * Converts &#x60;...input&#x60;s to new Array based on &#x60;...functions&#x60;
-     * @method map
-     * @param {Function} ...functions
-     *  * &#x60;...functions[nth](..input){...return __OUTPUT__;}&#x60;
-     *  * &#x60;__OUTPUT__&#x60; element of final array
-     *  * List of functions.
-     * @return {Function}
-     *  * For given &#x60;...input&#x60; calls all functions in &#x60;...functions&#x60; (use &#x60;...input&#x60; as arguments for these functions)
-     *  * &#x60;&lt;= ...input&#x60; **\&lt;Mixed\&gt;**: arguments for &#x60;...functions&#x60;
-     *  * @return {Array}
-     * @example
-     *     console.log($function.map(
-     *          a=&gt;a+1,
-     *          a=&gt;a-1,
-     *          a=&gt;a+2,
-     *          a=&gt;a-2
-     *      )(5));//= [6, 4, 7, 3]
-     */
-    map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i&lt;i_length; i++){ out.push(functions[i](...input)); } return out;}; },
     /**
      * Procedure for creating functional flow (sequention *function1-&gt;function2-&gt;...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention

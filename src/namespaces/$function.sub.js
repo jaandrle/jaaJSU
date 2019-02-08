@@ -7,6 +7,21 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
  */
 var $function= {
     /**
+     * EXPERIMENT!: Function composing using `$dom.component` like syntax
+     * @method component
+     * @param {Function} transform
+     *  * ...
+     * @returns {component}
+     *  * `{ pipe, run }`
+     */
+    component: function(transform){
+        let functions= []; const out= { pipe, run };
+        return out;
+
+        function pipe(f){ functions.push(f); return out; }
+        function run(data){ return functions.reduce((prev,curr)=>curr(prev), typeof transform==="function" ? transform(data) : data);}
+    },
+    /**
      * Functional-like alternative for `for(...){functions[nth](..input);}`.
      * @method each
      * @param {Function} ...functions
@@ -17,26 +32,6 @@ var $function= {
      *  * `<= input` **\<Mixed\>**: arguments for `...functions`
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
-    /**
-     * Converts `...input`s to new Array based on `...functions`
-     * @method map
-     * @param {Function} ...functions
-     *  * `...functions[nth](..input){...return __OUTPUT__;}`
-     *  * `__OUTPUT__` element of final array
-     *  * List of functions.
-     * @return {Function}
-     *  * For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)
-     *  * `<= ...input` **\<Mixed\>**: arguments for `...functions`
-     *  * @return {Array}
-     * @example
-     *     console.log($function.map(
-     *          a=>a+1,
-     *          a=>a-1,
-     *          a=>a+2,
-     *          a=>a-2
-     *      )(5));//= [6, 4, 7, 3]
-     */
-    map: function(...functions){return function(...input){let out= []; for(let i=0, i_length= functions.length; i<i_length; i++){ out.push(functions[i](...input)); } return out;}; },
     /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention

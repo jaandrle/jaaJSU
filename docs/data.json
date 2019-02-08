@@ -877,6 +877,25 @@
         {
             "file": "src\\namespaces\\$function.sub.js",
             "line": 9,
+            "description": "EXPERIMENT!: Function composing using `$dom.component` like syntax",
+            "itemtype": "method",
+            "name": "component",
+            "params": [
+                {
+                    "name": "transform",
+                    "description": "* ...",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "* `{ pipe, run }`",
+                "type": "Component"
+            },
+            "class": "$function.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 24,
             "description": "Functional-like alternative for `for(...){functions[nth](..input);}`.",
             "itemtype": "method",
             "name": "each",
@@ -896,30 +915,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 20,
-            "description": "Converts `...input`s to new Array based on `...functions`",
-            "itemtype": "method",
-            "name": "map",
-            "params": [
-                {
-                    "name": "functions",
-                    "description": "* `...functions[nth](..input){...return __OUTPUT__;}`\n * `__OUTPUT__` element of final array\n * List of functions.",
-                    "type": "Function",
-                    "multiple": true
-                }
-            ],
-            "return": {
-                "description": "* For given `...input` calls all functions in `...functions` (use `...input` as arguments for these functions)\n * `<= ...input` **\\<Mixed\\>**: arguments for `...functions`\n * @return {Array}",
-                "type": "Function"
-            },
-            "example": [
-                "\n    console.log($function.map(\n         a=>a+1,\n         a=>a-1,\n         a=>a+2,\n         a=>a-2\n     )(5));//= [6, 4, 7, 3]"
-            ],
-            "class": "$function.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$function.sub.js",
-            "line": 40,
+            "line": 35,
             "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
             "itemtype": "method",
             "name": "sequention",
@@ -942,7 +938,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 63,
+            "line": 58,
             "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
             "itemtype": "method",
             "name": "schedule",
@@ -978,7 +974,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 75,
+            "line": 70,
             "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
             "itemtype": "method",
             "name": "conditionalCall",
@@ -2244,6 +2240,10 @@
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src\\namespaces\\$array.sub.js:137"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$function.sub.js:9"
         },
         {
             "message": "replacing incorrect tag: returns with return",
