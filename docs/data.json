@@ -1561,6 +1561,23 @@
             "class": "$string.{namespace}"
         },
         {
+            "file": "src\\namespaces\\$string.sub.js",
+            "line": 257,
+            "description": "Converts string to camel case format \"peter\"=>\"Peter\"",
+            "params": [
+                {
+                    "name": "str",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "$string.{namespace}"
+        },
+        {
             "file": "src\\namespaces\\$time.sub.js",
             "line": 9,
             "itemtype": "method",
@@ -2247,11 +2264,19 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$string.sub.js:257"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
             "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:184"
         },
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:176"
+        },
+        {
+            "message": "Missing item type\nConverts string to camel case format \"peter\"=>\"Peter\"",
+            "line": " src\\namespaces\\$string.sub.js:257"
         },
         {
             "message": "Missing item type",

@@ -339,6 +339,16 @@ var $string= {
             return str.replace(reg, replaceHandler);
             function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : &quot;${&quot;+match+&quot;}&quot;;}
         }
+    },
+    /**
+     * Converts string to camel case format &quot;peter&quot;=&gt;&quot;Peter&quot;
+     * @param {String} str
+     * @returns {String}
+     */
+    toCamelCase: function(str){
+        /* not string or empty */ if(typeof str !== &quot;string&quot;) throw Error(&quot;Type of &#x27;str&#x27; is not string!&quot;); if(!str) return str;
+        let [ firstLetter, ...rest ]= str.split(&quot;&quot;);
+        return ([ firstLetter.toUpperCase(), ...rest ]).join(&quot;&quot;);
     }
 };
 gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
