@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.2.0</title>
+    <title>Documentation: jaaJSU@0.3.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $dom.component</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.2.0</em>
+            <em>API Docs for: 0.3.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -127,13 +127,6 @@
             <code>attrs</code> <strong>&lt;Object&gt;</strong>
         <ul>
 <li>The second argument for <a href="./$dom.%7Bnamespace%7D.html#methods_assign"><code>$dom.assign</code></a></li>
-<li>There is one change. It is supported using <code>onupdate</code> key ... see <a href="#methods_add"><code>add</code></a>
-<ul>
-<li><code>onupdate</code> is array <code>[ object, function]</code>, the function is called during creating element and evry <code>update</code>calls</li>
-<li>It returns additional <code>attrs</code>, for example this <code>attrs</code>: <code>{ className: &quot;class&quot;, onupdate: [ { a }, _=&gt;({ textContent: a }) ] }</code> =&gt; final <code>attrs= { className: &quot;class&quot;, textContent: &quot;A&quot; }</code> (if <code>a=&quot;A&quot;</code>)</li>
-<li>it use similar algorithm like <a href="./$dom.%7Bnamespace%7D.html#methods_assign"><code>$dom.assign</code></a> (<strong>no deep copy!!!</strong>)</li>
-</ul>
-</li>
 </ul>
 
         </li>
@@ -151,10 +144,18 @@
         </li>
     </ul>
     <br><div class="returns"><strong>Returns:</strong> &lt;<a href="../classes/$dom.component.html" class="crosslink">$dom.component</a>&gt; <ul>
-<li>'functional class instance': object <code>{ add, component, mount, update, share }</code></li>
+<li>'functional class instance': object <code>{ add, component, mount, update, share, onupdate }</code></li>
 <li><code>share</code> is Object for transfering methods somewhere else (like for using in another component, see <a href="#methods_component"><code>component</code></a>)
 <ul>
 <li><code>share= { mount, update, destroy, isStatic }</code></li>
+</ul>
+</li>
+<li><code>onupdate</code>
+<ul>
+<li>It returns {$dom.component} and it is only one differnece against <a href="#methods_add"><code>add</code></a></li>
+<li><code>onupdate</code> is function which accepts two params <code>object, function</code>, the function is called during creating element and evry <code>update</code>calls</li>
+<li>It returns additional <code>attrs</code>, for example this <code>attrs</code>: <code>$dom.component(&quot;DIV&quot;, { className: &quot;class&quot; }).onupdate({ a }, _=&gt;({ textContent: a }))</code> =&gt; final <code>attrs= { className: &quot;class&quot;, textContent: &quot;A&quot; }</code> (if <code>a=&quot;A&quot;</code>)</li>
+<li>it use <a href="./$dom.%7Bnamespace%7D.html#methods_assign"><code>$dom.assign</code></a> (<strong>no deep copy!!!</strong>)</li>
 </ul>
 </li>
 </ul>
@@ -169,11 +170,11 @@
             <div id="methods"><h4>Methods</h4>
 <a name="methods_add"></a>
 <div class="method item public">
-     <strong class="name"><code>add</code></strong>( <code>el_name</code>, <code>attrs</code>, [ <code>shift</code> = 0 ] ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+    Object <strong class="name"><code>add</code></strong>( <code>el_name</code>, <code>attrs</code>, [ <code>shift</code> = 0 ] ) <em><code>&#x2F;* public method *&#x2F;</code></em>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l44"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:44</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l45"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:45</code></a>
     </span><br>
     <p>This add element to component</p>
 
@@ -193,16 +194,6 @@
 <li>The second argument for <a href="./$dom.%7Bnamespace%7D.html#methods_assign"><code>$dom.assign</code></a></li>
 </ul>
 
-            <ul>
-                <li><code>onupdate</code> <strong>&lt;Array&gt;</strong> <ul>
-<li>Pattern: <code>attrs.onupdate= [ Values: Object, Retuns_attrs_keys: Function ]</code></li>
-<li>This register listener/subscriber function (<code>Retuns_attrs_keys</code>) for keys (variables) in <code>Values</code></li>
-<li>Example: <code>[ {counter}, _=&gt;({ textContent: counter }) ]</code> registers listerner to <code>counter</code>. When the <code>udate({ ... counter: something, ...})</code> is called this element changes <code>textContent</code>.</li>
-<li>See <a href="#methods_update"><code>update</code></a></li>
-</ul>
-
-                </li>
-            </ul>
         </li>
         <li>
             [<code>shift</code>= 0] <strong>&lt;Number&gt;</strong>
@@ -212,6 +203,18 @@
 
         </li>
     </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Object&gt; <ul>
+<li><code>getReference</code> {Function}: return NodeElement reference of added element</li>
+<li><code>onupdate</code>
+<ul>
+<li>Pattern: <code>add(...).onupdate(Values: Object, Retuns_attrs_keys: Function)</code></li>
+<li>This register listener/subscriber function (<code>Retuns_attrs_keys</code>) for keys (variables) in <code>Values</code></li>
+<li>Example: <code>add(...).onupdate({counter}, _=&gt;({ textContent: counter }))</code> registers listerner to <code>counter</code>. When the <code>udate({ ... counter: something, ...})</code> is called this element changes <code>textContent</code>.</li>
+<li>See <a href="#methods_update"><code>update</code></a></li>
+</ul>
+</li>
+</ul>
+</div>
         <h5>Example</h5>
         <pre class="code prettyprint"><code> //#1
  const UL= document.getElementById('SOME UL');
@@ -233,7 +236,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l90"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:90</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l91"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:91</code></a>
     </span><br>
     <p>Method for including another component by usint its <code>share</code> key.</p>
 
@@ -258,7 +261,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l144"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:144</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l145"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:145</code></a>
     </span><br>
     <p>Method remove element form live DOM and returns null</p>
 
@@ -274,7 +277,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l168"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:168</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l169"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:169</code></a>
     </span><br>
     <p>Returns current <code>deep</code> (last element in array)</p>
 
@@ -285,7 +288,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l176"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:176</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l177"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:177</code></a>
     </span><br>
     <p>Initialize internal storage</p>
 
@@ -300,7 +303,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l276"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:276</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l277"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:277</code></a>
     </span><br>
     <p>Methods returns if it was <code>onupdate</code> used</p>
 
@@ -315,7 +318,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l107"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:107</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l108"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:108</code></a>
     </span><br>
     <p>Add element to live DOM</p>
 
@@ -349,7 +352,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l157"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:157</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l158"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:158</code></a>
     </span><br>
     <p>Updates <code>deep</code></p>
 
@@ -370,7 +373,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l250"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:250</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l251"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:251</code></a>
     </span><br>
     <p>Method updates all registered varibles by keys <code>onupdates</code> and calls follower functions</p>
 
