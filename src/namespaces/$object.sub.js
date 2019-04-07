@@ -133,12 +133,14 @@ var $object= {
      * Wrapper around `object[key]`, usefull for binding.
      * @method pluck
      * @param {String} key
-     *  * Key in Object `obj`.
-     * @param {Object} object
-     * @return {Mixed}
-     *  * Value in `object[key]`
+     *  * Key in Object `object`.
+     * @return {Function}
+     *  * `(object) => object[key]`
+     *  * @param {Object} object
+     *  * @returns Value in `object[key]`
      */
-    pluck: (key, object) => object[key],
+    pluck: (key) => (object) => object[key],
+    pluckFrom: (object) => (key) => object[key],
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($object, gulp_place("namespaces.$object", "variable"));

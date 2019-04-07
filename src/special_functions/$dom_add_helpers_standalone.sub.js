@@ -1,5 +1,39 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* $dom *//* global $dom */
+const $dom_emptyPseudoComponent= (function(){
+    const share= { mount, update, destroy, isStatic };
+    const component_out= { add, component, mount, update, share };
+    return component_out;
+
+    function mount(element, type= "childLast"){
+        let temp_el;
+        switch ( type ) {
+            case "replace":
+                element.remove();
+                break;
+            case "replaceContent":
+                $dom.empty(element);
+                break;
+            case "before":
+                temp_el= element.previousElementSibling;
+                if(temp_el) temp_el.remove();
+                break;
+            case "after":
+                temp_el= element.nextElementSibling;
+                if(temp_el) temp_el.remove();
+                break;
+            default:
+                if(element.childNodes.length) element.childNodes[type==="childFirst" ? 0 : element.childNodes.length-1].remove();
+                break;
+        }
+        return null;
+    }
+    function add(){ return component_out; }
+    function component(){ return component_out; }
+    function update(){ return true; }
+    function isStatic(){ return true; }
+    function destroy(){ return null; }
+})();
 /**
  * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
  * @class $dom.component
@@ -24,6 +58,7 @@
  *      - it use [`$dom.assign`](./$dom.{namespace}.html#methods_assign) (**no deep copy!!!**)
  */
 $dom.component= function(el_name, attrs, { mapUpdate }={}){
+    if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
     let /* holds `initStorage()` if `onupdate` was registered */
         internal_storage= null;
     const /* 'drawer' (container) for component elements */
@@ -38,10 +73,9 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             - see `shift` in `add`
         */
         deep= [];
-    const { onupdate }= add(el_name, attrs);
     const share= { mount, update, destroy, isStatic };
     const component_out= { add, component, mount, update, share };
-    return Object.assign({}, component_out, { onupdate: function(...attrs){ onupdate(...attrs); return component_out; } });
+    return add(el_name, attrs);
     /**
      * This add element to component
      * @method add
@@ -79,18 +113,20 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         attrs= attrs || {};
         const prepare_el= document.createElement(el_name);
         if(!all_els_counter) container= els[0]= fragment.appendChild(prepare_el);
-        else els[all_els_counter]= els[getParentIndex()].appendChild(prepare_el);
+        else els[all_els_counter]= getParentElement().appendChild(prepare_el);
         let el= els[all_els_counter];
         all_els_counter++;
         $dom.assign(el, attrs);
-        return {
+        return Object.assign({
             getReference: ()=> el,
+            oninit: function(fn){ fn(el); return component_out; },
             onupdate: function(data, onUpdateFunction){
                 if(!data) return false;
                 if(!internal_storage) internal_storage= initStorage();
                 $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
+                return component_out;
             }
-        };
+        }, component_out);
     }
     /**
      * Method for including another component by usint its `share` key.
@@ -102,12 +138,13 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
      */
     function component({ mount, update, isStatic }, shift= 0){
         recalculateDeep(shift);
-        els[all_els_counter]= mount(els[getParentIndex()]);
+        els[all_els_counter]= mount(getParentElement());
         if(!isStatic()){
             if(!internal_storage) internal_storage= initStorage();
             internal_storage.registerComponent(update);
         }
         all_els_counter+= 1;
+        return component_out;
     }
     /**
      * Add element to live DOM
@@ -171,12 +208,12 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         else { deep.splice(deep.length+1+shift); deep[deep.length-1]= all_els_counter; }
     }
     /**
-     * Returns current `deep` (last element in array)
-     * @method getParentIndex
+     * Returns parent element (or "fragment pseudo element")
+     * @method getParentElement
      * @private
      */
-    function getParentIndex(){
-        return deep[deep.length-2];
+    function getParentElement(){
+        return els[deep[deep.length-2]] || fragment;
     }
     /**
      * Initialize internal storage

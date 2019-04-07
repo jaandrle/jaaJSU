@@ -7,6 +7,20 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
  */
 var $function= {
     /**
+     * EXPERIMENT!: "Bind" alternative
+     * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
+     * @method partial
+     * @param {Function} fn
+     *  * ...
+     * @param {...Mixed} presetArgs
+     *  * ...
+     * @returns {Function}
+     *  * ...
+     */
+    partial: function(fn, ...presetArgs){
+        return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
+    },
+    /**
      * EXPERIMENT!: Function composing using `$dom.component` like syntax
      * @method component
      * @param {Function} transform

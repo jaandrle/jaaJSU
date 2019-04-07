@@ -238,15 +238,10 @@ var $string= {
     template: function(str){
         if(typeof str !== "string") throw Error("Type of 'str' is not string!");
         const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
-        return Object.freeze({
-            execute,
-            partial: function(params_obj={}){
-                str= execute(params_obj); return str;
-            },
-            isSubstituted: function(){
-                return !reg.test(str);
-            }
-        });
+        const _this= Object.freeze({ execute, partial, isSubstituted });
+        return _this;
+        function partial(params_obj={}){ str= execute(params_obj); return _this; }
+        function isSubstituted(){ return !reg.test(str); }
         function execute(params_obj={}){
             const params_obj_keys= Object.keys(params_obj);
             if(!params_obj_keys.length) return str;
