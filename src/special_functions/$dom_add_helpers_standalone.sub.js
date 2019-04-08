@@ -407,7 +407,7 @@ $dom.assign= function(element, object_attributes){
     for(let i=0, key, attr, i_length= object_attributes_keys.length; i<i_length; i++){
         key= object_attributes_keys[i];
         attr= object_attributes[key];
-        if(typeof attr==="undefined"){ if(element[key]){ delete element[key]; } continue; }
+        if(typeof attr==="undefined"){ if(Reflect.has(element, key)){ Reflect.deleteProperty(element, key); } continue; }
         switch(key){
             case "style":
                 if(typeof attr==="string") element.setAttribute("style", attr);
