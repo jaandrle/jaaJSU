@@ -7,7 +7,7 @@ const $dom_emptyPseudoComponent= (function(){
     return component_out;
 
     function mount(element, call_parseHTML, type= "childLast"){
-        let temp_el;
+        // let temp_el;
         switch ( type ) {
             case "replace":
                 element.remove();
@@ -15,17 +15,17 @@ const $dom_emptyPseudoComponent= (function(){
             case "replaceContent":
                 $dom.empty(element);
                 break;
-            case "before":
-                temp_el= element.previousElementSibling;
-                if(temp_el) temp_el.remove();
-                break;
-            case "after":
-                temp_el= element.nextElementSibling;
-                if(temp_el) temp_el.remove();
-                break;
-            default:
-                if(element.childNodes.length) element.childNodes[type==="childFirst" ? 0 : element.childNodes.length-1].remove();
-                break;
+            // case "before":
+            //     temp_el= element.previousElementSibling;
+            //     if(temp_el) temp_el.remove();
+            //     break;
+            // case "after":
+            //     temp_el= element.nextElementSibling;
+            //     if(temp_el) temp_el.remove();
+            //     break;
+            // default:
+            //     if(element.childNodes.length) element.childNodes[type==="childFirst" ? 0 : element.childNodes.length-1].remove();
+            //     break;
         }
         return null;
     }
