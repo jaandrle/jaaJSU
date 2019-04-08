@@ -144,7 +144,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 3,
+            "line": 37,
             "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)."
         }
     },
@@ -271,7 +271,7 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 4,
+            "line": 38,
             "description": "This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
             "is_constructor": 1,
             "params": [
@@ -313,7 +313,7 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 3,
+            "line": 37,
             "description": "This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
             "is_constructor": 1,
             "params": [
@@ -877,6 +877,30 @@
         {
             "file": "src\\namespaces\\$function.sub.js",
             "line": 9,
+            "description": "EXPERIMENT!: \"Bind\" alternative\nvs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)",
+            "itemtype": "method",
+            "name": "partial",
+            "params": [
+                {
+                    "name": "fn",
+                    "description": "* ...",
+                    "type": "Function"
+                },
+                {
+                    "name": "presetArgs",
+                    "description": "* ...",
+                    "type": "...Mixed"
+                }
+            ],
+            "return": {
+                "description": "* ...",
+                "type": "Function"
+            },
+            "class": "$function.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 23,
             "description": "EXPERIMENT!: Function composing using `$dom.component` like syntax",
             "itemtype": "method",
             "name": "component",
@@ -895,7 +919,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 24,
+            "line": 38,
             "description": "Functional-like alternative for `for(...){functions[nth](..input);}`.",
             "itemtype": "method",
             "name": "each",
@@ -915,7 +939,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 35,
+            "line": 49,
             "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
             "itemtype": "method",
             "name": "sequention",
@@ -938,7 +962,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 58,
+            "line": 72,
             "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
             "itemtype": "method",
             "name": "schedule",
@@ -974,7 +998,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 70,
+            "line": 84,
             "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
             "itemtype": "method",
             "name": "conditionalCall",
@@ -1135,18 +1159,13 @@
             "params": [
                 {
                     "name": "key",
-                    "description": "* Key in Object `obj`.",
+                    "description": "* Key in Object `object`.",
                     "type": "String"
-                },
-                {
-                    "name": "object",
-                    "description": "",
-                    "type": "Object"
                 }
             ],
             "return": {
-                "description": "* Value in `object[key]`",
-                "type": "Mixed"
+                "description": "* `(object) => object[key]`\n * @param {Object} object\n * @returns Value in `object[key]`",
+                "type": "Function"
             },
             "class": "$object.{namespace}"
         },
@@ -1562,7 +1581,7 @@
         },
         {
             "file": "src\\namespaces\\$string.sub.js",
-            "line": 257,
+            "line": 252,
             "description": "Converts string to camel case format \"peter\"=>\"Peter\"",
             "params": [
                 {
@@ -1736,7 +1755,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 46,
+            "line": 80,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "add",
@@ -1772,7 +1791,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 96,
+            "line": 132,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -1794,7 +1813,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 113,
+            "line": 150,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -1823,7 +1842,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 157,
+            "line": 194,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -1836,7 +1855,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 170,
+            "line": 207,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -1853,17 +1872,17 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 181,
-            "description": "Returns current `deep` (last element in array)",
+            "line": 218,
+            "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
-            "name": "getParentIndex",
+            "name": "getParentElement",
             "access": "private",
             "tagname": "",
             "class": "$dom.component [cordova]"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 189,
+            "line": 226,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -1877,7 +1896,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 263,
+            "line": 300,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -1897,7 +1916,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 289,
+            "line": 326,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -1911,7 +1930,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 300,
+            "line": 337,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -1942,7 +1961,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 330,
+            "line": 367,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign [cordova]",
@@ -1965,7 +1984,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 45,
+            "line": 79,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "add",
@@ -2001,7 +2020,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 95,
+            "line": 131,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -2023,7 +2042,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 112,
+            "line": 149,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2047,7 +2066,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 149,
+            "line": 186,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -2060,7 +2079,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 162,
+            "line": 199,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2077,17 +2096,17 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 173,
-            "description": "Returns current `deep` (last element in array)",
+            "line": 210,
+            "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
-            "name": "getParentIndex",
+            "name": "getParentElement",
             "access": "private",
             "tagname": "",
             "class": "$dom.component"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 181,
+            "line": 218,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2101,7 +2120,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 255,
+            "line": 292,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2121,7 +2140,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 281,
+            "line": 318,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2135,7 +2154,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 292,
+            "line": 329,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -2162,7 +2181,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 340,
+            "line": 377,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign",
@@ -2248,27 +2267,31 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$string.sub.js:257"
+            "line": " src\\namespaces\\$function.sub.js:23"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:46"
+            "line": " src\\namespaces\\$string.sub.js:252"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:189"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:80"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:45"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:226"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:181"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:79"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:218"
         },
         {
             "message": "Missing item type\nConverts string to camel case format \"peter\"=>\"Peter\"",
-            "line": " src\\namespaces\\$string.sub.js:257"
+            "line": " src\\namespaces\\$string.sub.js:252"
         }
     ]
 }

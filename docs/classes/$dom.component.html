@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.1</title>
+    <title>Documentation: jaaJSU@0.3.2</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $dom.component</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.1</em>
+            <em>API Docs for: 0.3.2</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -74,7 +74,7 @@
                             <li class="menuli"><a href="#methods_add">add</a></li>
                             <li class="menuli"><a href="#methods_component">component</a></li>
                             <li class="menuli"><a href="#methods_destroy">destroy</a></li>
-                            <li class="menuli"><a href="#methods_getParentIndex">getParentIndex</a></li>
+                            <li class="menuli"><a href="#methods_getParentElement">getParentElement</a></li>
                             <li class="menuli"><a href="#methods_initStorage">initStorage</a></li>
                             <li class="menuli"><a href="#methods_isStatic">isStatic</a></li>
                             <li class="menuli"><a href="#methods_mount">mount</a></li>
@@ -100,7 +100,7 @@
 
         <div id="main" class="yui3-u">
             <div class="content"><h4>Class $dom.component</h4>
-<span class="foundat">Class defined in: <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l3"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:3</code></a></span>
+<span class="foundat">Class defined in: <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l37"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:37</code></a></span>
 <div class="intro"><p>This 'functional class' is syntax sugar around <a href="https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment"><code>DocumentFragment</code></a> for creating DOM components and their adding to live DOM in performance friendly way.</p>
 </div>
 
@@ -110,7 +110,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l3"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:3</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l37"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:37</code></a>
     </span><br>
     
     <strong>Parameters:</strong>
@@ -174,7 +174,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l45"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:45</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l79"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:79</code></a>
     </span><br>
     <p>This add element to component</p>
 
@@ -236,7 +236,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l95"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:95</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l131"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:131</code></a>
     </span><br>
     <p>Method for including another component by usint its <code>share</code> key.</p>
 
@@ -261,7 +261,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l149"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:149</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l186"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:186</code></a>
     </span><br>
     <p>Method remove element form live DOM and returns null</p>
 
@@ -271,15 +271,15 @@ test.mount(document.body);
 test= test.destroy();</p>
 
 </div>
-<a name="methods_getParentIndex"></a>
+<a name="methods_getParentElement"></a>
 <div class="method item private">
-     <strong class="name"><code>getParentIndex</code></strong>(  ) <em><code>&#x2F;* private method *&#x2F;</code></em>
+     <strong class="name"><code>getParentElement</code></strong>(  ) <em><code>&#x2F;* private method *&#x2F;</code></em>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l173"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:173</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l210"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:210</code></a>
     </span><br>
-    <p>Returns current <code>deep</code> (last element in array)</p>
+    <p>Returns parent element (or &quot;fragment pseudo element&quot;)</p>
 
 </div>
 <a name="methods_initStorage"></a>
@@ -288,7 +288,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l181"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:181</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l218"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:218</code></a>
     </span><br>
     <p>Initialize internal storage</p>
 
@@ -303,7 +303,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l281"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:281</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l318"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:318</code></a>
     </span><br>
     <p>Methods returns if it was <code>onupdate</code> used</p>
 
@@ -318,7 +318,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l112"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:112</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l149"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:149</code></a>
     </span><br>
     <p>Add element to live DOM</p>
 
@@ -352,7 +352,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l162"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:162</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l199"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:199</code></a>
     </span><br>
     <p>Updates <code>deep</code></p>
 
@@ -373,7 +373,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l255"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:255</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l292"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:292</code></a>
     </span><br>
     <p>Method updates all registered varibles by keys <code>onupdates</code> and calls follower functions</p>
 

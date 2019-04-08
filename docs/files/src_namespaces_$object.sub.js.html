@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.1</title>
+    <title>Documentation: jaaJSU@0.3.2</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$object.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.1</em>
+            <em>API Docs for: 0.3.2</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -219,12 +219,14 @@ var $object= {
      * Wrapper around &#x60;object[key]&#x60;, usefull for binding.
      * @method pluck
      * @param {String} key
-     *  * Key in Object &#x60;obj&#x60;.
-     * @param {Object} object
-     * @return {Mixed}
-     *  * Value in &#x60;object[key]&#x60;
+     *  * Key in Object &#x60;object&#x60;.
+     * @return {Function}
+     *  * &#x60;(object) =&gt; object[key]&#x60;
+     *  * @param {Object} object
+     *  * @returns Value in &#x60;object[key]&#x60;
      */
-    pluck: (key, object) =&gt; object[key],
+    pluck: (key) =&gt; (object) =&gt; object[key],
+    pluckFrom: (object) =&gt; (key) =&gt; object[key],
 };
 gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
 export_as($object, gulp_place(&quot;namespaces.$object&quot;, &quot;variable&quot;));

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.1</title>
+    <title>Documentation: jaaJSU@0.3.2</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $object.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.1</em>
+            <em>API Docs for: 0.3.2</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -318,7 +318,7 @@
 </div>
 <a name="methods_pluck"></a>
 <div class="method item">
-    Mixed <strong class="name"><code>pluck</code></strong>( <code>key</code>, <code>object</code> ) 
+    Function <strong class="name"><code>pluck</code></strong>( <code>key</code> ) 
     <br>
     <span class="foundat">
         
@@ -331,17 +331,15 @@
         <li>
             <code>key</code> <strong>&lt;String&gt;</strong>
         <ul>
-<li>Key in Object <code>obj</code>.</li>
+<li>Key in Object <code>object</code>.</li>
 </ul>
 
         </li>
-        <li>
-            <code>object</code> <strong>&lt;Object&gt;</strong>
-         
-        </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;Mixed&gt; <ul>
-<li>Value in <code>object[key]</code></li>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>(object) =&gt; object[key]</code></li>
+<li>@param {Object} object</li>
+<li>@returns Value in <code>object[key]</code></li>
 </ul>
 </div>
 </div>
