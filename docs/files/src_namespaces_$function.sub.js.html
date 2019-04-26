@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.2</title>
+    <title>Documentation: jaaJSU@0.3.3</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$function.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.2</em>
+            <em>API Docs for: 0.3.3</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -132,6 +132,12 @@ var $function= {
      *  * &#x60;&lt;= input&#x60; **\&lt;Mixed\&gt;**: arguments for &#x60;...functions&#x60;
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i&lt;i_length; i++){ functions[i](input); } }; },
+    ifElse: function(onTrue, onFalse= v=&gt; v, onTest= v=&gt; v){
+        return function(val){
+            if(onTest(val)) return onTrue(val);
+            return onFalse(val);
+        };
+    },
     /**
      * Procedure for creating functional flow (sequention *function1-&gt;function2-&gt;...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention

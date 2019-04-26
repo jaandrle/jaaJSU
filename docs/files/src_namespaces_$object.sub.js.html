@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.2</title>
+    <title>Documentation: jaaJSU@0.3.3</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$object.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.2</em>
+            <em>API Docs for: 0.3.3</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -86,6 +86,7 @@
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global isMandatory */
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachBind, export_as */
 /**
  * This NAMESPACE provides features for Objects.
  * @class $object.{namespace}
@@ -109,14 +110,8 @@ var $object= {
      * @return {Mixed}
      *  * &#x60;share&#x60;
      */
-    each: function(iterable, i_function, scope){
-        const iterable_keys= Object.keys(iterable);
-        let iterable_keys_i, share;
-        for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
-            share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
-        }
-        return share;
-    },
+    each: __objectEach,
+    eachFun: __eachBind(__objectEach),
     /**
      * Procedure for iterating throught Object &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(... in ...)...if(Object.prototype.hasOwnProperty...&#x60;.
      * @method eachDynamic
@@ -134,15 +129,8 @@ var $object= {
      * @return {Mixed}
      *  * &#x60;share&#x60;
      */
-    eachDynamic: function (iterable, i_function, scope){
-        let share;
-        for(let key in iterable){
-            if (iterable.hasOwnProperty(key)){
-                share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
-            }
-        }
-        return share;
-    },
+    eachDynamic: __objectEachDynamic,
+    eachDynamicFun: __eachBind(__objectEachDynamic),
     /**
      * Function for converting Array &#x60;arr&#x60; to Object. Uses &#x60;fun&#x60; for converting.
      * @method fromArray
@@ -225,11 +213,28 @@ var $object= {
      *  * @param {Object} object
      *  * @returns Value in &#x60;object[key]&#x60;
      */
-    pluck: (key) =&gt; (object) =&gt; object[key],
-    pluckFrom: (object) =&gt; (key) =&gt; object[key],
+    pluck: (key)=&gt; (object)=&gt; object[key],
+    pluckFrom: (object)=&gt; (key)=&gt; object[key],
 };
-gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
 export_as($object, gulp_place(&quot;namespaces.$object&quot;, &quot;variable&quot;));
+
+function __objectEach(iterable, i_function, scope){
+    const iterable_keys= Object.keys(iterable);
+    let iterable_keys_i, share;
+    for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
+        share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+    }
+    return share;
+}
+function __objectEachDynamic(iterable, i_function, scope){
+    let share;
+    for(let key in iterable){
+        if (iterable.hasOwnProperty(key)){
+            share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
+        }
+    }
+    return share;
+}
 </pre>
 
 </div>

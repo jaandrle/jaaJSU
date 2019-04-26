@@ -1,5 +1,6 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global isMandatory */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachBind, export_as */
 /**
  * This NAMESPACE provides features for Objects.
  * @class $object.{namespace}
@@ -23,14 +24,8 @@ var $object= {
      * @return {Mixed}
      *  * `share`
      */
-    each: function(iterable, i_function, scope){
-        const iterable_keys= Object.keys(iterable);
-        let iterable_keys_i, share;
-        for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
-            share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
-        }
-        return share;
-    },
+    each: __objectEach,
+    eachFun: __eachBind(__objectEach),
     /**
      * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
      * @method eachDynamic
@@ -48,15 +43,8 @@ var $object= {
      * @return {Mixed}
      *  * `share`
      */
-    eachDynamic: function (iterable, i_function, scope){
-        let share;
-        for(let key in iterable){
-            if (iterable.hasOwnProperty(key)){
-                share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
-            }
-        }
-        return share;
-    },
+    eachDynamic: __objectEachDynamic,
+    eachDynamicFun: __eachBind(__objectEachDynamic),
     /**
      * Function for converting Array `arr` to Object. Uses `fun` for converting.
      * @method fromArray
@@ -139,8 +127,25 @@ var $object= {
      *  * @param {Object} object
      *  * @returns Value in `object[key]`
      */
-    pluck: (key) => (object) => object[key],
-    pluckFrom: (object) => (key) => object[key],
+    pluck: (key)=> (object)=> object[key],
+    pluckFrom: (object)=> (key)=> object[key],
 };
-gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($object, gulp_place("namespaces.$object", "variable"));
+
+function __objectEach(iterable, i_function, scope){
+    const iterable_keys= Object.keys(iterable);
+    let iterable_keys_i, share;
+    for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
+        share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+    }
+    return share;
+}
+function __objectEachDynamic(iterable, i_function, scope){
+    let share;
+    for(let key in iterable){
+        if (iterable.hasOwnProperty(key)){
+            share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
+        }
+    }
+    return share;
+}

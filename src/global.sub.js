@@ -1,6 +1,9 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global out */
 function export_as(obj, key){ out[key]= obj; }
+function __eachBind(fun){
+    return (i_function, scope)=> iterable=> fun(iterable, i_function, scope);
+}
 function __eachInArrayLike(iterable, i_function, scope){
     const i_length= iterable.length;
     let share;

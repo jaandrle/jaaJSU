@@ -215,7 +215,7 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 3,
+            "line": 4,
             "description": "This NAMESPACE provides features for Objects.",
             "static": 1
         },
@@ -411,7 +411,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 50,
+            "line": 51,
             "description": "Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -440,7 +440,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 68,
+            "line": 70,
             "description": "Function returns last element in array without editing the original.",
             "itemtype": "method",
             "name": "getLast",
@@ -459,7 +459,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 79,
+            "line": 81,
             "description": "Function returns methods for splitting array by condition.",
             "itemtype": "method",
             "name": "partition",
@@ -478,7 +478,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 117,
+            "line": 119,
             "description": "Function returns new array without any `item`",
             "itemtype": "method",
             "name": "removeItem",
@@ -502,7 +502,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 137,
+            "line": 139,
             "description": "Function returns random number for Array.sort function",
             "itemtype": "method",
             "name": "sortRandom",
@@ -847,7 +847,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 168,
+            "line": 169,
             "description": "Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -939,7 +939,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 49,
+            "line": 55,
             "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
             "itemtype": "method",
             "name": "sequention",
@@ -962,7 +962,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 72,
+            "line": 78,
             "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
             "itemtype": "method",
             "name": "schedule",
@@ -998,7 +998,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 84,
+            "line": 90,
             "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
             "itemtype": "method",
             "name": "conditionalCall",
@@ -1022,7 +1022,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 9,
+            "line": 10,
             "description": "Function for iterating throught Object `iterable`.",
             "itemtype": "method",
             "name": "each",
@@ -1051,7 +1051,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 34,
+            "line": 29,
             "description": "Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -1080,7 +1080,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 60,
+            "line": 48,
             "description": "Function for converting Array `arr` to Object. Uses `fun` for converting.",
             "itemtype": "method",
             "name": "fromArray",
@@ -1109,7 +1109,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 79,
+            "line": 67,
             "description": "Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: \"gotcha\" }`",
             "itemtype": "method",
             "name": "hasProp",
@@ -1133,7 +1133,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 92,
+            "line": 80,
             "description": "Function for creating non-rewritable object",
             "itemtype": "method",
             "name": "immutable_keys",
@@ -1152,7 +1152,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 132,
+            "line": 120,
             "description": "Wrapper around `object[key]`, usefull for binding.",
             "itemtype": "method",
             "name": "pluck",
@@ -2247,19 +2247,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:68"
+            "line": " src\\namespaces\\$array.sub.js:70"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:79"
+            "line": " src\\namespaces\\$array.sub.js:81"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:117"
+            "line": " src\\namespaces\\$array.sub.js:119"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:137"
+            "line": " src\\namespaces\\$array.sub.js:139"
         },
         {
             "message": "replacing incorrect tag: returns with return",

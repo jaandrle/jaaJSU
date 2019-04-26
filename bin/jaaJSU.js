@@ -17,12 +17,15 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.3.2";
+        window[module_name+"_version"]= "0.3.3";
     }
 })("jaaJSU", function(window, document){
     'use strict';
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
+    function __eachBind(fun){
+        return (i_function, scope)=> iterable=> fun(iterable, i_function, scope);
+    }
     function __eachInArrayLike(iterable, i_function, scope){
         const i_length= iterable.length;
         let share;
@@ -97,6 +100,7 @@
          *  * `share`
          */
         each: __eachInArrayLike,
+        eachFun: __eachBind(__eachInArrayLike),
         /**
          * Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
@@ -115,6 +119,7 @@
          *  * `share`
          */
         eachDynamic: __eachInArrayLikeDynamic,
+        eachDynamicFun: __eachBind(__eachInArrayLikeDynamic),
         /**
          * Function returns last element in array without editing the original.
          * @method getLast
@@ -469,6 +474,7 @@
          *  * `share`
          */
         each: __eachInArrayLike,
+        eachFun: __eachBind(__eachInArrayLike),
         /**
          * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
@@ -486,7 +492,8 @@
          * @return {Mixed}
          *  * `share`
          */
-        eachDynamic: __eachInArrayLikeDynamic
+        eachDynamic: __eachInArrayLikeDynamic,
+        eachDynamicFun: __eachBind(__eachInArrayLikeDynamic)
     };
     const $dom_emptyPseudoComponent= (function(){
         const share= { mount, update, destroy, isStatic };
@@ -989,6 +996,12 @@
          *  * `<= input` **\<Mixed\>**: arguments for `...functions`
          */
         each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
+        ifElse: function(onTrue, onFalse= v=> v, onTest= v=> v){
+            return function(val){
+                if(onTest(val)) return onTrue(val);
+                return onFalse(val);
+            };
+        },
         /**
          * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
          * @method sequention
@@ -1044,6 +1057,7 @@
     export_as($function, "$function");
     
     
+
     /**
      * This NAMESPACE provides features for Objects.
      * @class $object.{namespace}
@@ -1067,14 +1081,8 @@
          * @return {Mixed}
          *  * `share`
          */
-        each: function(iterable, i_function, scope){
-            const iterable_keys= Object.keys(iterable);
-            let iterable_keys_i, share;
-            for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
-                share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
-            }
-            return share;
-        },
+        each: __objectEach,
+        eachFun: __eachBind(__objectEach),
         /**
          * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
          * @method eachDynamic
@@ -1092,15 +1100,8 @@
          * @return {Mixed}
          *  * `share`
          */
-        eachDynamic: function (iterable, i_function, scope){
-            let share;
-            for(let key in iterable){
-                if (iterable.hasOwnProperty(key)){
-                    share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
-                }
-            }
-            return share;
-        },
+        eachDynamic: __objectEachDynamic,
+        eachDynamicFun: __eachBind(__objectEachDynamic),
         /**
          * Function for converting Array `arr` to Object. Uses `fun` for converting.
          * @method fromArray
@@ -1183,11 +1184,28 @@
          *  * @param {Object} object
          *  * @returns Value in `object[key]`
          */
-        pluck: (key) => (object) => object[key],
-        pluckFrom: (object) => (key) => object[key],
+        pluck: (key)=> (object)=> object[key],
+        pluckFrom: (object)=> (key)=> object[key],
     };
-
     export_as($object, "$object");
+    
+    function __objectEach(iterable, i_function, scope){
+        const iterable_keys= Object.keys(iterable);
+        let iterable_keys_i, share;
+        for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
+            share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+        }
+        return share;
+    }
+    function __objectEachDynamic(iterable, i_function, scope){
+        let share;
+        for(let key in iterable){
+            if (iterable.hasOwnProperty(key)){
+                share= i_function.call(scope, { item: iterable[key], key, target: iterable, share });
+            }
+        }
+        return share;
+    }
     /**
      * This NAMESPACE provides features for optimizations.
      * @class $optimizier.{namespace}

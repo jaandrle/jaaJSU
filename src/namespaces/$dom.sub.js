@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, __eachBind, export_as */
 /**
  * This NAMESPACE provides features for DOM elemnts.
  * @class $dom.{namespace}
@@ -165,6 +165,7 @@ var $dom={
      *  * `share`
      */
     each: __eachInArrayLike,
+    eachFun: __eachBind(__eachInArrayLike),
     /**
      * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
      * @method eachDynamic
@@ -182,7 +183,8 @@ var $dom={
      * @return {Mixed}
      *  * `share`
      */
-    eachDynamic: __eachInArrayLikeDynamic
+    eachDynamic: __eachInArrayLikeDynamic,
+    eachDynamicFun: __eachBind(__eachInArrayLikeDynamic)
 };
 gulp_place("special_functions/$dom_add_helpers_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");

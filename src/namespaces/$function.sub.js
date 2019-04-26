@@ -46,6 +46,12 @@ var $function= {
      *  * `<= input` **\<Mixed\>**: arguments for `...functions`
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
+    ifElse: function(onTrue, onFalse= v=> v, onTest= v=> v){
+        return function(val){
+            if(onTest(val)) return onTrue(val);
+            return onFalse(val);
+        };
+    },
     /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention
