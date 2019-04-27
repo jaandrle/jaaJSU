@@ -17,7 +17,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.3.3";
+        window[module_name+"_version"]= "0.3.4";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -1184,8 +1184,10 @@
          *  * @param {Object} object
          *  * @returns Value in `object[key]`
          */
-        pluck: (key)=> (object)=> object[key],
-        pluckFrom: (object)=> (key)=> object[key],
+        pluck: key=> object=> object[key],
+        pluckFrom: object=> key=> object[key],
+        pluckFun: (key, ...args)=> object=> object[key](...args),
+        pluckFunFrom: (object, key)=> (...args)=> object[key](...args)
     };
     export_as($object, "$object");
     
