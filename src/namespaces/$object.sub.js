@@ -127,8 +127,10 @@ var $object= {
      *  * @param {Object} object
      *  * @returns Value in `object[key]`
      */
-    pluck: (key)=> (object)=> object[key],
-    pluckFrom: (object)=> (key)=> object[key],
+    pluck: key=> object=> object[key],
+    pluckFrom: object=> key=> object[key],
+    pluckFun: (key, ...args)=> object=> object[key](...args),
+    pluckFunFrom: (object, key)=> (...args)=> object[key](...args)
 };
 export_as($object, gulp_place("namespaces.$object", "variable"));
 
