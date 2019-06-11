@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.4</title>
+    <title>Documentation: jaaJSU@0.4.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $object.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.4</em>
+            <em>API Docs for: 0.4.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -76,7 +76,12 @@
                             <li class="menuli"><a href="#methods_fromArray">fromArray</a></li>
                             <li class="menuli"><a href="#methods_hasProp">hasProp</a></li>
                             <li class="menuli"><a href="#methods_immutable_keys">immutable_keys</a></li>
+                            <li class="menuli"><a href="#methods_method">method</a></li>
+                            <li class="menuli"><a href="#methods_methodFrom">methodFrom</a></li>
                             <li class="menuli"><a href="#methods_pluck">pluck</a></li>
+                            <li class="menuli"><a href="#methods_pluckFrom">pluckFrom</a></li>
+                            <li class="menuli"><a href="#methods_setter">setter</a></li>
+                            <li class="menuli"><a href="#methods_setterFrom">setterFrom</a></li>
                     </ul>
                 </div>
             </div>
@@ -89,7 +94,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src/<ul><li><a href="../files/src_jaaJSU.js.html">jaaJSU.js</a></li><li>namespaces/<ul><li><a href="../files/src_namespaces_$array.sub.js.html">$array.sub.js</a></li><li><a href="../files/src_namespaces_$async.sub.js.html">$async.sub.js</a></li><li><a href="../files/src_namespaces_$dom.sub.js.html">$dom.sub.js</a></li><li><a href="../files/src_namespaces_$function.sub.js.html">$function.sub.js</a></li><li><a href="../files/src_namespaces_$object.sub.js.html">$object.sub.js</a></li><li><a href="../files/src_namespaces_$optimizier.sub.js.html">$optimizier.sub.js</a></li><li><a href="../files/src_namespaces_$string.sub.js.html">$string.sub.js</a></li><li><a href="../files/src_namespaces_$time.sub.js.html">$time.sub.js</a></li></ul></li><li>special_functions/<ul><li><a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html">$dom_add_helpers_cordova.sub.js</a></li><li><a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html">$dom_add_helpers_standalone.sub.js</a></li><li><a href="../files/src_special_functions_$dom_forceRedraw_cordova.sub.js.html">$dom_forceRedraw_cordova.sub.js</a></li><li><a href="../files/src_special_functions_$dom_forceRedraw_standalone.sub.js.html">$dom_forceRedraw_standalone.sub.js</a></li></ul></li></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -97,7 +102,7 @@
 
         <div id="main" class="yui3-u">
             <div class="content"><h4>Class $object.{namespace}</h4>
-<span class="foundat">Class defined in: <a href="../files/src_namespaces_$object.sub.js.html#l4"><code>src&#x2F;namespaces&#x2F;$object.sub.js:4</code></a></span>
+<span class="foundat">Class defined in: <a href="../files/src_namespaces_$object.sub.js.html#l4"><code>src\namespaces\$object.sub.js:4</code></a></span>
 <div class="intro"><p>This NAMESPACE provides features for Objects.</p>
 </div>
 
@@ -114,7 +119,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l10"><code>src&#x2F;namespaces&#x2F;$object.sub.js:10</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l10"><code>src\namespaces\$object.sub.js:10</code></a>
     </span><br>
     <p>Function for iterating throught Object <code>iterable</code>.</p>
 
@@ -161,7 +166,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l29"><code>src&#x2F;namespaces&#x2F;$object.sub.js:29</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l29"><code>src\namespaces\$object.sub.js:29</code></a>
     </span><br>
     <p>Procedure for iterating throught Object <code>iterable</code> like <a href="#methods_each">each</a>, but use <code>for(... in ...)...if(Object.prototype.hasOwnProperty...</code>.</p>
 
@@ -208,7 +213,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l48"><code>src&#x2F;namespaces&#x2F;$object.sub.js:48</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l48"><code>src\namespaces\$object.sub.js:48</code></a>
     </span><br>
     <p>Function for converting Array <code>arr</code> to Object. Uses <code>fun</code> for converting.</p>
 
@@ -256,7 +261,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l67"><code>src&#x2F;namespaces&#x2F;$object.sub.js:67</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l67"><code>src\namespaces\$object.sub.js:67</code></a>
     </span><br>
     <p>Wrapper around <code>Object.prototype.hasOwnProperty</code>. It is more trustable, because you can sets <code>var obj= { hasOwnProperty: &quot;gotcha&quot; }</code></p>
 
@@ -290,7 +295,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l80"><code>src&#x2F;namespaces&#x2F;$object.sub.js:80</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l80"><code>src\namespaces\$object.sub.js:80</code></a>
     </span><br>
     <p>Function for creating non-rewritable object</p>
 
@@ -316,13 +321,64 @@
 </ul>
 </div>
 </div>
+<a name="methods_method"></a>
+<div class="method item">
+    Function <strong class="name"><code>method</code></strong>( <code>methodName</code>, <code>args</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l120"><code>src\namespaces\$object.sub.js:120</code></a>
+    </span><br>
+    <p>Wrapper around <code>object[methodName](...args)</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>methodName</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Key in Object <code>object</code>.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>args</code> <strong>&lt;...Mixed&gt;</strong>
+        <ul>
+<li>Arguments for method <code>methodName</code></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>(object) =&gt; object[key](...args)</code></li>
+<li>@param {Object} target object</li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $object.method(&quot;trim&quot;)(&quot; Hi &quot;);//= <code>Hi</code>
+ $object.method(&quot;split&quot;, &quot; &quot;)(&quot;Hello world&quot;);//= <code>[ &amp;quot;Hello&amp;quot;, &amp;quot;world&amp;quot; ]</code></code></pre>
+
+</div>
+<a name="methods_methodFrom"></a>
+<div class="method item">
+     <strong class="name"><code>methodFrom</code></strong>(  ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l135"><code>src\namespaces\$object.sub.js:135</code></a>
+    </span><br>
+    
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $object.methodFrom(&quot; Hi &quot;)(&quot;trim&quot;)()====$object.method(&quot;trim&quot;)(&quot; Hi &quot;);
+ $object.methodFrom(&quot;Hello world&quot;)(&quot;split&quot;)(&quot; &quot;)===$object.method(&quot;split&quot;, &quot; &quot;)(&quot;Hello world&quot;);</code></pre>
+
+</div>
 <a name="methods_pluck"></a>
 <div class="method item">
     Function <strong class="name"><code>pluck</code></strong>( <code>key</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$object.sub.js.html#l120"><code>src&#x2F;namespaces&#x2F;$object.sub.js:120</code></a>
+        <a href="../files/src_namespaces_$object.sub.js.html#l142"><code>src\namespaces\$object.sub.js:142</code></a>
     </span><br>
     <p>Wrapper around <code>object[key]</code>, usefull for binding.</p>
 
@@ -338,10 +394,76 @@
     </ul>
     <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
 <li><code>(object) =&gt; object[key]</code></li>
-<li>@param {Object} object</li>
+<li>@param {Object} target object</li>
 <li>@returns Value in <code>object[key]</code></li>
 </ul>
 </div>
+        <h5>Example</h5>
+        <p>$object.pluck(&quot;length&quot;)(&quot;Test&quot;);//= <code>4</code></p>
+
+</div>
+<a name="methods_pluckFrom"></a>
+<div class="method item">
+     <strong class="name"><code>pluckFrom</code></strong>(  ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l155"><code>src\namespaces\$object.sub.js:155</code></a>
+    </span><br>
+    
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $object.pluckFrom(&quot;Test&quot;)(&quot;length&quot;)===$object.pluck(&quot;length&quot;)(&quot;Test&quot;);</code></pre>
+
+</div>
+<a name="methods_setter"></a>
+<div class="method item">
+    Function <strong class="name"><code>setter</code></strong>( <code>setterName</code>, <code>arg</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l161"><code>src\namespaces\$object.sub.js:161</code></a>
+    </span><br>
+    <p>Wrapper around <code>object[setterName]= arg</code></p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>setterName</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Key in Object <code>object</code>.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>arg</code> <strong>&lt;Mixed&gt;</strong>
+        <ul>
+<li>Setter value</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>object=&gt; (object[setterName]= arg, object)</code></li>
+<li>@param {Object} object: target object</li>
+<li>@return {Object} original object reference</li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $object.setter(&quot;test_key&quot;, &quot;test_value&quot;)({ test_key: &quot;test_init_value&quot;, other_key: &quot;other_value&quot; });//= <code>{ test_key: &amp;quot;test_value&amp;quot;, other_key: &amp;quot;other_value&amp;quot; }</code></code></pre>
+
+</div>
+<a name="methods_setterFrom"></a>
+<div class="method item">
+     <strong class="name"><code>setterFrom</code></strong>(  ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$object.sub.js.html#l176"><code>src\namespaces\$object.sub.js:176</code></a>
+    </span><br>
+    
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $object.setterFrom({ test_key: &quot;test_init_value&quot;, other_key: &quot;other_value&quot; })(&quot;test_key&quot;)(&quot;test_value&quot;)===$object.setter(&quot;test_key&quot;, &quot;test_value&quot;)({ test_key: &quot;test_init_value&quot;, other_key: &quot;other_value&quot; });</code></pre>
+
 </div>
             </div>
     </div>

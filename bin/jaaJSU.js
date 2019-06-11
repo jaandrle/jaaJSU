@@ -17,27 +17,25 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.3.4";
+        window[module_name+"_version"]= "0.4.0";
     }
 })("jaaJSU", function(window, document){
     'use strict';
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
     function __eachBind(fun){
-        return (i_function, scope)=> iterable=> fun(iterable, i_function, scope);
+        return (i_function, scope, share)=> iterable=> fun(iterable, i_function, scope, share);
     }
-    function __eachInArrayLike(iterable, i_function, scope){
-        const i_length= iterable.length;
-        let share;
-        for(let i=0, j=i_length-1; i<i_length; i++, j--){
-            share= i_function.call(scope, { item: iterable[i], key: i, last: !j, share });
+    function __eachInArrayLike(iterable, i_function, scope, share){
+        const key_length= iterable.length;
+        for(let key=0, j=key_length-1; key<key_length; key++, j--){
+            share= i_function.call(scope, { item: iterable[key], last: !j, key, share });
         }
         return share;
     }
-    function __eachInArrayLikeDynamic(iterable, i_function, scope){
-        let share;
-        for(let i=0, iterable_i; (iterable_i= iterable[i]); i++){
-            share= i_function.call(scope, { item: iterable_i, key: i, share });
+    function __eachInArrayLikeDynamic(iterable, i_function, scope, share){
+        for(let key=0; key<iterable.length; key++){
+            share= i_function.call(scope, { item: iterable[key], key, share });
         }
         return share;
     }
@@ -957,20 +955,6 @@
      */
     var $function= {
         /**
-         * EXPERIMENT!: "Bind" alternative
-         * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
-         * @method partial
-         * @param {Function} fn
-         *  * ...
-         * @param {...Mixed} presetArgs
-         *  * ...
-         * @returns {Function}
-         *  * ...
-         */
-        partial: function(fn, ...presetArgs){
-            return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
-        },
-        /**
          * EXPERIMENT!: Function composing using `$dom.component` like syntax
          * @method component
          * @param {Function} transform
@@ -986,6 +970,31 @@
             function run(data){ return functions.reduce((prev,curr)=>curr(prev), typeof transform==="function" ? transform(data) : data);}
         },
         /**
+         * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
+         * @method conditionalCall
+         * @param {Mixed} mixed
+         *  * If `mixed=true` the `fun` is called
+         * @param {Function} fun
+         *  * 'Refular' function as argument accepts `mixed`
+         * @return {Boolean|Mixed}
+         *  * **False** or output of `fun`
+         */
+        conditionalCall: function(mixed,fun){
+            if(!mixed) return false;
+            if(typeof fun === "function") return fun(mixed);
+            return mixed;
+        },
+        /**
+         * Helper for returnin constant
+         * @method constant
+         * @param {Mixed} constantArg
+         * @return {Function}
+         *  * `()=> constantArg`
+         * @example
+         *      $function.constant(5)(10);//= `5`
+         */
+        constant: constantArg=> ()=> constantArg,
+        /**
          * Functional-like alternative for `for(...){functions[nth](..input);}`.
          * @method each
          * @param {Function} ...functions
@@ -996,12 +1005,65 @@
          *  * `<= input` **\<Mixed\>**: arguments for `...functions`
          */
         each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
-        ifElse: function(onTrue, onFalse= v=> v, onTest= v=> v){
-            return function(val){
-                if(onTest(val)) return onTrue(val);
-                return onFalse(val);
+        /**
+         * `id=> id`
+         * @method identity
+         * @param {Mixed} id
+         * @return {Mixed}
+         *  * `id`
+         * @example
+         *      $function.identity(10);//= `10`
+         */
+        identity: id=> id,
+        /**
+         * If `onTest` returns `true` a `onTrue` is called else `onFalse`
+         * @param {Function} onTrue
+         *  * Test succcessful function
+         * @param {Function} [onFalse= v=> v]
+         *  * Test fail function
+         * @param {Function} [onTest= Boolean]
+         *  * Test function
+         * @return {Function}
+         *  * `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
+         *  * @return {Mixed}
+         * @example
+         *  $function.ifElse(v=> v+1)(0);//= `0`
+         *  $function.ifElse(v=> v+1)(1);//= `2`
+         *  $function.ifElse(v=> v+1, null, v=> v===1)(1);//= `2`
+         *  $function.ifElse(v=> v+1, null, v=> v===1)(2);//= `undefined`
+         */
+        ifElse: function(onTrue, onFalse= v=> v, onTest= Boolean){
+            return function(...val){
+                if(onTest(...val)) return onTrue(...val);
+                if(typeof onFalse==="function") return onFalse(...val);
             };
         },
+        /**
+         * EXPERIMENT!: "Bind" alternative
+         * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
+         * @method partial
+         * @param {Function} fn
+         *  * ...
+         * @param {...Mixed} presetArgs
+         *  * ...
+         * @returns {Function}
+         *  * ...
+         */
+        partial: function(fn, ...presetArgs){
+            return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
+        },
+        /**
+         * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
+         * @method schedule
+         * @param {...Functions} functions
+         *  * Array of functions for iteratings
+         * @param {Object} def
+         * @param {Object} [def.context=window]
+         *  * Parameter for `*.call(context)`
+         * @param {Object} [def.delay=150]
+         *  * Parameter for `$optimizier.timeoutAnimationFrame`
+         */
+        schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
         /**
          * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
          * @method sequention
@@ -1024,34 +1086,7 @@
          *          a=>a+2
          *      )(5));//= [8]
          */
-        sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
-        /**
-         * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
-         * @method schedule
-         * @param {...Functions} functions
-         *  * Array of functions for iteratings
-         * @param {Object} def
-         * @param {Object} [def.context=window]
-         *  * Parameter for `*.call(context)`
-         * @param {Object} [def.delay=150]
-         *  * Parameter for `$optimizier.timeoutAnimationFrame`
-         */
-        schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
-        /**
-         * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
-         * @method conditionalCall
-         * @param {Mixed} mixed
-         *  * If `mixed=true` the `fun` is called
-         * @param {Function} fun
-         *  * 'Refular' function as argument accepts `mixed`
-         * @return {Boolean|Mixed}
-         *  * **False** or output of `fun`
-         */
-        conditionalCall: function(mixed,fun){
-            if(!mixed) return false;
-            if(typeof fun === "function") return fun(mixed);
-            return mixed;
-        }
+        sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; }
     };
 
     export_as($function, "$function");
@@ -1175,27 +1210,74 @@
             }
         },
         /**
+         * Wrapper around `object[methodName](...args)`.
+         * @method method
+         * @param {String} methodName
+         *  * Key in Object `object`.
+         * @param {...Mixed} args
+         *  * Arguments for method `methodName`
+         * @return {Function}
+         *  * `(object) => object[key](...args)`
+         *  * @param {Object} target object
+         * @example
+         *      $object.method("trim")(" Hi ");//= `Hi`
+         *      $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
+         */
+        method: (methodName, ...args)=> object=> object[methodName](...args),
+        /**
+         * @method methodFrom
+         * @example
+         *      $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
+         *      $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("Hello world");
+         */
+        methodFrom: object=> methodName=> (...args)=> object[methodName](...args),
+        /**
          * Wrapper around `object[key]`, usefull for binding.
          * @method pluck
          * @param {String} key
          *  * Key in Object `object`.
          * @return {Function}
          *  * `(object) => object[key]`
-         *  * @param {Object} object
+         *  * @param {Object} target object
          *  * @returns Value in `object[key]`
+         * @example
+         *  $object.pluck("length")("Test");//= `4`
          */
         pluck: key=> object=> object[key],
+        /**
+         * @method pluckFrom
+         * @example
+         *      $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
+         */
         pluckFrom: object=> key=> object[key],
-        pluckFun: (key, ...args)=> object=> object[key](...args),
-        pluckFunFrom: (object, key)=> (...args)=> object[key](...args)
+        /**
+         * Wrapper around `object[setterName]= arg`
+         * @method setter
+         * @param {String} setterName
+         *  * Key in Object `object`.
+         * @param {Mixed} arg
+         *  * Setter value
+         * @return {Function}
+         *  * `object=> (object[setterName]= arg, object)`
+         *  * @param {Object} object: target object
+         *  * @return {Object} original object reference
+         * @example
+         *      $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
+         */
+        setter: (setterName, arg)=> object=> (object[setterName]= arg, object),
+        /**
+         * @method setterFrom
+         * @example
+         *      $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
+         */
+        setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
     };
     export_as($object, "$object");
     
-    function __objectEach(iterable, i_function, scope){
+    function __objectEach(iterable, i_function, scope, share){
         const iterable_keys= Object.keys(iterable);
-        let iterable_keys_i, share;
-        for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
-            share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+        for(let index=0, index_length= iterable_keys.length, key; index<index_length; index++){ key= iterable_keys[index];
+            share= i_function.call(scope, { item: iterable[key], key, index, share });
         }
         return share;
     }
@@ -1582,18 +1664,25 @@
          *     console.log(test2.partial({test0: "_", test1: "B", test2: "C"}));//="A, B, C"
          *     console.log(test2.isSubstituted());//=true
          */
-        template: function(str){
+        template: function(str, keysFun= Object.keys){
             if(typeof str !== "string") throw Error("Type of 'str' is not string!");
             const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
-            const _this= Object.freeze({ execute, partial, isSubstituted });
+            const _this= Object.freeze({ partial, partialRest, setKeysFilter, isSubstituted, execute });
             return _this;
             function partial(params_obj={}){ str= execute(params_obj); return _this; }
+            function partialRest(...args){
+                let i= 0, i_length= args.length;
+                str= str.replace(reg, replaceHandler);
+                return _this;
+                function replaceHandler(all){ return i++<i_length ? args[i-1] : all; }
+            }
+            function setKeysFilter(filterFun){ keysFun= filterFun; return _this; }
             function isSubstituted(){ return !reg.test(str); }
             function execute(params_obj={}){
-                const params_obj_keys= Object.keys(params_obj);
+                const params_obj_keys= keysFun(params_obj);
                 if(!params_obj_keys.length) return str;
                 return str.replace(reg, replaceHandler);
-                function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : "${"+match+"}";}
+                function replaceHandler(all, match){ return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : all; }
             }
         },
         /**

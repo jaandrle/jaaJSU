@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.3.4</title>
+    <title>Documentation: jaaJSU@0.4.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $function.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.3.4</em>
+            <em>API Docs for: 0.4.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -73,7 +73,9 @@
                     <ul>
                             <li class="menuli"><a href="#methods_component">component</a></li>
                             <li class="menuli"><a href="#methods_conditionalCall">conditionalCall</a></li>
+                            <li class="menuli"><a href="#methods_constant">constant</a></li>
                             <li class="menuli"><a href="#methods_each">each</a></li>
+                            <li class="menuli"><a href="#methods_identity">identity</a></li>
                             <li class="menuli"><a href="#methods_partial">partial</a></li>
                             <li class="menuli"><a href="#methods_schedule">schedule</a></li>
                             <li class="menuli"><a href="#methods_sequention">sequention</a></li>
@@ -89,7 +91,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src/<ul><li><a href="../files/src_jaaJSU.js.html">jaaJSU.js</a></li><li>namespaces/<ul><li><a href="../files/src_namespaces_$array.sub.js.html">$array.sub.js</a></li><li><a href="../files/src_namespaces_$async.sub.js.html">$async.sub.js</a></li><li><a href="../files/src_namespaces_$dom.sub.js.html">$dom.sub.js</a></li><li><a href="../files/src_namespaces_$function.sub.js.html">$function.sub.js</a></li><li><a href="../files/src_namespaces_$object.sub.js.html">$object.sub.js</a></li><li><a href="../files/src_namespaces_$optimizier.sub.js.html">$optimizier.sub.js</a></li><li><a href="../files/src_namespaces_$string.sub.js.html">$string.sub.js</a></li><li><a href="../files/src_namespaces_$time.sub.js.html">$time.sub.js</a></li></ul></li><li>special_functions/<ul><li><a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html">$dom_add_helpers_cordova.sub.js</a></li><li><a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html">$dom_add_helpers_standalone.sub.js</a></li><li><a href="../files/src_special_functions_$dom_forceRedraw_cordova.sub.js.html">$dom_forceRedraw_cordova.sub.js</a></li><li><a href="../files/src_special_functions_$dom_forceRedraw_standalone.sub.js.html">$dom_forceRedraw_standalone.sub.js</a></li></ul></li></ul></li></ul>
+                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -97,7 +99,7 @@
 
         <div id="main" class="yui3-u">
             <div class="content"><h4>Class $function.{namespace}</h4>
-<span class="foundat">Class defined in: <a href="../files/src_namespaces_$function.sub.js.html#l3"><code>src&#x2F;namespaces&#x2F;$function.sub.js:3</code></a></span>
+<span class="foundat">Class defined in: <a href="../files/src_namespaces_$function.sub.js.html#l3"><code>src\namespaces\$function.sub.js:3</code></a></span>
 <div class="intro"><p>This NAMESPACE provides features for async (mainly Promise) functions.</p>
 </div>
 
@@ -114,7 +116,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l23"><code>src&#x2F;namespaces&#x2F;$function.sub.js:23</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l9"><code>src\namespaces\$function.sub.js:9</code></a>
     </span><br>
     <p>EXPERIMENT!: Function composing using <code>$dom.component</code> like syntax</p>
 
@@ -139,7 +141,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l90"><code>src&#x2F;namespaces&#x2F;$function.sub.js:90</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l24"><code>src\namespaces\$function.sub.js:24</code></a>
     </span><br>
     <p>Shorthand for <code>const mixed= ...; if(mixed) fun(mixed);</code></p>
 
@@ -165,13 +167,38 @@
 </ul>
 </div>
 </div>
+<a name="methods_constant"></a>
+<div class="method item">
+    Function <strong class="name"><code>constant</code></strong>( <code>constantArg</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$function.sub.js.html#l39"><code>src\namespaces\$function.sub.js:39</code></a>
+    </span><br>
+    <p>Helper for returnin constant</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>constantArg</code> <strong>&lt;Mixed&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>()=&gt; constantArg</code></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $function.constant(5)(10);//= <code>5</code></code></pre>
+
+</div>
 <a name="methods_each"></a>
 <div class="method item">
     Function <strong class="name"><code>each</code></strong>( ...<code>functions</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l38"><code>src&#x2F;namespaces&#x2F;$function.sub.js:38</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l49"><code>src\namespaces\$function.sub.js:49</code></a>
     </span><br>
     <p>Functional-like alternative for <code>for(...){functions[nth](..input);}</code>.</p>
 
@@ -193,13 +220,38 @@
 </ul>
 </div>
 </div>
+<a name="methods_identity"></a>
+<div class="method item">
+    Mixed <strong class="name"><code>identity</code></strong>( <code>id</code> ) 
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_namespaces_$function.sub.js.html#l60"><code>src\namespaces\$function.sub.js:60</code></a>
+    </span><br>
+    <p><code>id=&gt; id</code></p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>id</code> <strong>&lt;Mixed&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Mixed&gt; <ul>
+<li><code>id</code></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $function.identity(10);//= <code>10</code></code></pre>
+
+</div>
 <a name="methods_partial"></a>
 <div class="method item">
     Function <strong class="name"><code>partial</code></strong>( <code>fn</code>, <code>presetArgs</code> ) 
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l9"><code>src&#x2F;namespaces&#x2F;$function.sub.js:9</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l93"><code>src\namespaces\$function.sub.js:93</code></a>
     </span><br>
     <p>EXPERIMENT!: &quot;Bind&quot; alternative
 vs *.bind(?,...) - it depends if/when you prefer to set <code>this</code> (<code>bind</code>= when you define partial fn or <code>partial</code>= when you call it)</p>
@@ -232,7 +284,7 @@ vs *.bind(?,...) - it depends if/when you prefer to set <code>this</code> (<code
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l78"><code>src&#x2F;namespaces&#x2F;$function.sub.js:78</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l107"><code>src\namespaces\$function.sub.js:107</code></a>
     </span><br>
     <p>Optimized iterator for heavy functions in <code>functions</code>. Uses <a href="./$optimizier.%7Bnamespace%7D.html#methods_timeoutAnimationFrame">$optimizier.timeoutAnimationFrame</a></p>
 
@@ -269,7 +321,7 @@ vs *.bind(?,...) - it depends if/when you prefer to set <code>this</code> (<code
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$function.sub.js.html#l55"><code>src&#x2F;namespaces&#x2F;$function.sub.js:55</code></a>
+        <a href="../files/src_namespaces_$function.sub.js.html#l119"><code>src\namespaces\$function.sub.js:119</code></a>
     </span><br>
     <p>Procedure for creating functional flow (sequention <em>function1-&gt;function2-&gt;...</em>). Particually similar to <a href="#methods_each">each</a>. But, as arguments for current function is used output frome previous function.</p>
 
