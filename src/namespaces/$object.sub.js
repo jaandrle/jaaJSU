@@ -118,27 +118,74 @@ var $object= {
         }
     },
     /**
+     * Wrapper around `object[methodName](...args)`.
+     * @method method
+     * @param {String} methodName
+     *  * Key in Object `object`.
+     * @param {...Mixed} args
+     *  * Arguments for method `methodName`
+     * @return {Function}
+     *  * `(object) => object[key](...args)`
+     *  * @param {Object} target object
+     * @example
+     *      $object.method("trim")(" Hi ");//= `Hi`
+     *      $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
+     */
+    method: (methodName, ...args)=> object=> object[methodName](...args),
+    /**
+     * @method methodFrom
+     * @example
+     *      $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
+     *      $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("Hello world");
+     */
+    methodFrom: object=> methodName=> (...args)=> object[methodName](...args),
+    /**
      * Wrapper around `object[key]`, usefull for binding.
      * @method pluck
      * @param {String} key
      *  * Key in Object `object`.
      * @return {Function}
      *  * `(object) => object[key]`
-     *  * @param {Object} object
+     *  * @param {Object} target object
      *  * @returns Value in `object[key]`
+     * @example
+     *  $object.pluck("length")("Test");//= `4`
      */
     pluck: key=> object=> object[key],
+    /**
+     * @method pluckFrom
+     * @example
+     *      $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
+     */
     pluckFrom: object=> key=> object[key],
-    pluckFun: (key, ...args)=> object=> object[key](...args),
-    pluckFunFrom: (object, key)=> (...args)=> object[key](...args)
+    /**
+     * Wrapper around `object[setterName]= arg`
+     * @method setter
+     * @param {String} setterName
+     *  * Key in Object `object`.
+     * @param {Mixed} arg
+     *  * Setter value
+     * @return {Function}
+     *  * `object=> (object[setterName]= arg, object)`
+     *  * @param {Object} object: target object
+     *  * @return {Object} original object reference
+     * @example
+     *      $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
+     */
+    setter: (setterName, arg)=> object=> (object[setterName]= arg, object),
+    /**
+     * @method setterFrom
+     * @example
+     *      $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
+     */
+    setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
 };
 export_as($object, gulp_place("namespaces.$object", "variable"));
 
-function __objectEach(iterable, i_function, scope){
+function __objectEach(iterable, i_function, scope, share){
     const iterable_keys= Object.keys(iterable);
-    let iterable_keys_i, share;
-    for(let i=0;(iterable_keys_i= iterable_keys[i]); i++){ 
-        share= i_function.call(scope, { item: iterable[iterable_keys_i], key: iterable_keys_i, index: i, share });
+    for(let index=0, index_length= iterable_keys.length, key; index<index_length; index++){ key= iterable_keys[index];
+        share= i_function.call(scope, { item: iterable[key], key, index, share });
     }
     return share;
 }

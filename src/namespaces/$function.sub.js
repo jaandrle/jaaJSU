@@ -7,20 +7,6 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
  */
 var $function= {
     /**
-     * EXPERIMENT!: "Bind" alternative
-     * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
-     * @method partial
-     * @param {Function} fn
-     *  * ...
-     * @param {...Mixed} presetArgs
-     *  * ...
-     * @returns {Function}
-     *  * ...
-     */
-    partial: function(fn, ...presetArgs){
-        return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
-    },
-    /**
      * EXPERIMENT!: Function composing using `$dom.component` like syntax
      * @method component
      * @param {Function} transform
@@ -36,6 +22,31 @@ var $function= {
         function run(data){ return functions.reduce((prev,curr)=>curr(prev), typeof transform==="function" ? transform(data) : data);}
     },
     /**
+     * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
+     * @method conditionalCall
+     * @param {Mixed} mixed
+     *  * If `mixed=true` the `fun` is called
+     * @param {Function} fun
+     *  * 'Refular' function as argument accepts `mixed`
+     * @return {Boolean|Mixed}
+     *  * **False** or output of `fun`
+     */
+    conditionalCall: function(mixed,fun){
+        if(!mixed) return false;
+        if(typeof fun === "function") return fun(mixed);
+        return mixed;
+    },
+    /**
+     * Helper for returnin constant
+     * @method constant
+     * @param {Mixed} constantArg
+     * @return {Function}
+     *  * `()=> constantArg`
+     * @example
+     *      $function.constant(5)(10);//= `5`
+     */
+    constant: constantArg=> ()=> constantArg,
+    /**
      * Functional-like alternative for `for(...){functions[nth](..input);}`.
      * @method each
      * @param {Function} ...functions
@@ -46,12 +57,65 @@ var $function= {
      *  * `<= input` **\<Mixed\>**: arguments for `...functions`
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
-    ifElse: function(onTrue, onFalse= v=> v, onTest= v=> v){
-        return function(val){
-            if(onTest(val)) return onTrue(val);
-            return onFalse(val);
+    /**
+     * `id=> id`
+     * @method identity
+     * @param {Mixed} id
+     * @return {Mixed}
+     *  * `id`
+     * @example
+     *      $function.identity(10);//= `10`
+     */
+    identity: id=> id,
+    /**
+     * If `onTest` returns `true` a `onTrue` is called else `onFalse`
+     * @param {Function} onTrue
+     *  * Test succcessful function
+     * @param {Function} [onFalse= v=> v]
+     *  * Test fail function
+     * @param {Function} [onTest= Boolean]
+     *  * Test function
+     * @return {Function}
+     *  * `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
+     *  * @return {Mixed}
+     * @example
+     *  $function.ifElse(v=> v+1)(0);//= `0`
+     *  $function.ifElse(v=> v+1)(1);//= `2`
+     *  $function.ifElse(v=> v+1, null, v=> v===1)(1);//= `2`
+     *  $function.ifElse(v=> v+1, null, v=> v===1)(2);//= `undefined`
+     */
+    ifElse: function(onTrue, onFalse= v=> v, onTest= Boolean){
+        return function(...val){
+            if(onTest(...val)) return onTrue(...val);
+            if(typeof onFalse==="function") return onFalse(...val);
         };
     },
+    /**
+     * EXPERIMENT!: "Bind" alternative
+     * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
+     * @method partial
+     * @param {Function} fn
+     *  * ...
+     * @param {...Mixed} presetArgs
+     *  * ...
+     * @returns {Function}
+     *  * ...
+     */
+    partial: function(fn, ...presetArgs){
+        return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
+    },
+    /**
+     * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
+     * @method schedule
+     * @param {...Functions} functions
+     *  * Array of functions for iteratings
+     * @param {Object} def
+     * @param {Object} [def.context=window]
+     *  * Parameter for `*.call(context)`
+     * @param {Object} [def.delay=150]
+     *  * Parameter for `$optimizier.timeoutAnimationFrame`
+     */
+    schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
     /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention
@@ -74,34 +138,7 @@ var $function= {
      *          a=>a+2
      *      )(5));//= [8]
      */
-    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
-    /**
-     * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
-     * @method schedule
-     * @param {...Functions} functions
-     *  * Array of functions for iteratings
-     * @param {Object} def
-     * @param {Object} [def.context=window]
-     *  * Parameter for `*.call(context)`
-     * @param {Object} [def.delay=150]
-     *  * Parameter for `$optimizier.timeoutAnimationFrame`
-     */
-    schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
-    /**
-     * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
-     * @method conditionalCall
-     * @param {Mixed} mixed
-     *  * If `mixed=true` the `fun` is called
-     * @param {Function} fun
-     *  * 'Refular' function as argument accepts `mixed`
-     * @return {Boolean|Mixed}
-     *  * **False** or output of `fun`
-     */
-    conditionalCall: function(mixed,fun){
-        if(!mixed) return false;
-        if(typeof fun === "function") return fun(mixed);
-        return mixed;
-    }
+    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; }
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($function, gulp_place("namespaces.$function", "variable"));

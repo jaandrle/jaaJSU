@@ -235,18 +235,25 @@ var $string= {
      *     console.log(test2.partial({test0: "_", test1: "B", test2: "C"}));//="A, B, C"
      *     console.log(test2.isSubstituted());//=true
      */
-    template: function(str){
+    template: function(str, keysFun= Object.keys){
         if(typeof str !== "string") throw Error("Type of 'str' is not string!");
         const reg= /\$\{([\s]*[^;\s\{]+[\s]*)\}/g;
-        const _this= Object.freeze({ execute, partial, isSubstituted });
+        const _this= Object.freeze({ partial, partialRest, setKeysFilter, isSubstituted, execute });
         return _this;
         function partial(params_obj={}){ str= execute(params_obj); return _this; }
+        function partialRest(...args){
+            let i= 0, i_length= args.length;
+            str= str.replace(reg, replaceHandler);
+            return _this;
+            function replaceHandler(all){ return i++<i_length ? args[i-1] : all; }
+        }
+        function setKeysFilter(filterFun){ keysFun= filterFun; return _this; }
         function isSubstituted(){ return !reg.test(str); }
         function execute(params_obj={}){
-            const params_obj_keys= Object.keys(params_obj);
+            const params_obj_keys= keysFun(params_obj);
             if(!params_obj_keys.length) return str;
             return str.replace(reg, replaceHandler);
-            function replaceHandler(_, match){return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : "${"+match+"}";}
+            function replaceHandler(all, match){ return params_obj_keys.indexOf(match)!==-1 ? params_obj[match] : all; }
         }
     },
     /**
