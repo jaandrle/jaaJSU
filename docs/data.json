@@ -1939,7 +1939,7 @@
                 },
                 {
                     "name": "shift",
-                    "description": "\n - Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.",
+                    "description": "\n - Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.",
                     "type": "Number",
                     "optional": true,
                     "optdefault": " 0"
@@ -1957,6 +1957,35 @@
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
             "line": 132,
+            "description": "This add element to component",
+            "itemtype": "method",
+            "name": "addText",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "- Argument for `document.createTextNode`",
+                    "type": "String"
+                },
+                {
+                    "name": "shift",
+                    "description": "- see [`add`](#methods_add)",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "- `oninit` {Function}: TBD",
+                "type": "Object"
+            },
+            "example": [
+                "\n     function testTextLi({ href= \"https://www.seznam.cz\" }= {}){\n         const { add, addText, share }= $dom.component(\"LI\", null);\n             add(\"P\", { textContent: \"Link test: \" });\n                 add(\"A\", { textContent: \"link \", href });\n                     add(\"STRONG\", { textContent: `(${href.replace(\"https://www.\", \"\")})` });\n                 addText(\"!\", -2);\n                 add(\"BR\", null, -1);\n                 addText(\"Test new line.\", -1);\n         return share;\n     }\n     //result: '<p>Link test: <a href=\"...\">link <strong>...</strong></a>!<br>Test new line.</p>'"
+            ],
+            "class": "$dom.component [cordova]"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+            "line": 164,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -1978,7 +2007,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 150,
+            "line": 182,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2007,7 +2036,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 194,
+            "line": 226,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -2020,7 +2049,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 207,
+            "line": 239,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2037,7 +2066,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 218,
+            "line": 250,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -2047,7 +2076,27 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 226,
+            "line": 258,
+            "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
+            "itemtype": "method",
+            "name": "setShift",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "shift",
+                    "description": "- see [`add`](#methods_add)",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n     function testNesting(){\n         const { add, setShift, share }= $dom.component(\"DIV\", null);\n             setShift(0);\n         for(let i= 0; i<5; i++){\n             add(\"P\", { textContent: `Paragraph no. ${i}.` }, -1);\n         }\n         return share;\n     }"
+            ],
+            "class": "$dom.component [cordova]"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+            "line": 279,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2061,7 +2110,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 300,
+            "line": 353,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2081,7 +2130,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 326,
+            "line": 379,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2095,7 +2144,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 337,
+            "line": 390,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -2126,7 +2175,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 367,
+            "line": 420,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign [cordova]",
@@ -2168,7 +2217,7 @@
                 },
                 {
                     "name": "shift",
-                    "description": "\n - Modify nesting behaviur. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.",
+                    "description": "\n - Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.",
                     "type": "Number",
                     "optional": true,
                     "optdefault": " 0"
@@ -2186,6 +2235,35 @@
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
             "line": 131,
+            "description": "This add element to component",
+            "itemtype": "method",
+            "name": "addText",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "text",
+                    "description": "- Argument for `document.createTextNode`",
+                    "type": "String"
+                },
+                {
+                    "name": "shift",
+                    "description": "- see [`add`](#methods_add)",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "- `oninit` {Function}: TBD",
+                "type": "Object"
+            },
+            "example": [
+                "\n     function testTextLi({ href= \"https://www.seznam.cz\" }= {}){\n         const { add, addText, share }= $dom.component(\"LI\", null);\n             add(\"P\", { textContent: \"Link test: \" });\n                 add(\"A\", { textContent: \"link \", href });\n                     add(\"STRONG\", { textContent: `(${href.replace(\"https://www.\", \"\")})` });\n                 addText(\"!\", -2);\n                 add(\"BR\", null, -1);\n                 addText(\"Test new line.\", -1);\n         return share;\n     }\n     //result: '<p>Link test: <a href=\"...\">link <strong>...</strong></a>!<br>Test new line.</p>'"
+            ],
+            "class": "$dom.component"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+            "line": 163,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -2207,7 +2285,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 149,
+            "line": 181,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2231,7 +2309,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 186,
+            "line": 218,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -2244,7 +2322,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 199,
+            "line": 231,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2261,7 +2339,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 210,
+            "line": 242,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -2271,7 +2349,27 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 218,
+            "line": 250,
+            "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
+            "itemtype": "method",
+            "name": "setShift",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "shift",
+                    "description": "- see [`add`](#methods_add)",
+                    "type": "Number"
+                }
+            ],
+            "example": [
+                "\n     function testNesting(){\n         const { add, setShift, share }= $dom.component(\"DIV\", null);\n             setShift(0);\n         for(let i= 0; i<5; i++){\n             add(\"P\", { textContent: `Paragraph no. ${i}.` }, -1);\n         }\n         return share;\n     }"
+            ],
+            "class": "$dom.component"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+            "line": 271,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2285,7 +2383,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 292,
+            "line": 345,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2305,7 +2403,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 318,
+            "line": 371,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2319,7 +2417,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 329,
+            "line": 382,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -2346,7 +2444,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 377,
+            "line": 430,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign",
@@ -2444,7 +2542,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:226"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:132"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:279"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -2452,7 +2554,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:218"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:131"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:271"
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.4.0</title>
+    <title>Documentation: jaaJSU@0.4.1</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $dom.component [cordova]</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.0</em>
+            <em>API Docs for: 0.4.1</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -71,15 +71,17 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li class="menuli"><a href="#methods_add">add</a></li>
-                            <li class="menuli"><a href="#methods_component">component</a></li>
-                            <li class="menuli"><a href="#methods_destroy">destroy</a></li>
-                            <li class="menuli"><a href="#methods_getParentElement">getParentElement</a></li>
-                            <li class="menuli"><a href="#methods_initStorage">initStorage</a></li>
-                            <li class="menuli"><a href="#methods_isStatic">isStatic</a></li>
-                            <li class="menuli"><a href="#methods_mount">mount</a></li>
-                            <li class="menuli"><a href="#methods_recalculateDeep">recalculateDeep</a></li>
-                            <li class="menuli"><a href="#methods_update">update</a></li>
+                            <li class="menuli"><a href="#methods_add">add</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_addText">addText</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_component">component</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_destroy">destroy</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getParentElement">getParentElement</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_initStorage">initStorage</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_isStatic">isStatic</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_mount">mount</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_recalculateDeep">recalculateDeep</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_setShift">setShift</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_update">update</a> <i class="public_method">(public)</i></li>
                     </ul>
                 </div>
             </div>
@@ -162,7 +164,7 @@
 </div>
 </div>
 
-<div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; }</style>
+<div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; } .private_method { color: grey; } .public_method { color: crimson; }</style>
     <ul>
         <li class="menuli"><a href="#methods">Methods</a></li>
     </ul>
@@ -170,7 +172,7 @@
             <div id="methods"><h4>Methods</h4>
 <a name="methods_add"></a>
 <div class="method item public">
-    Object <strong class="name"><code>add</code></strong>( <code>el_name</code>, <code>attrs</code>, [ <code>shift</code> = 0 ] ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+    Object <strong class="name"><code>add</code></strong>( <code>el_name</code>, <code>attrs</code>, [ <code>shift</code> = 0 ] ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
@@ -198,7 +200,7 @@
         <li>
             [<code>shift</code>= 0] <strong>&lt;Number&gt;</strong>
         <ul>
-<li>Modify nesting behaviur. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
+<li>Modify nesting behaviour. By default (<code>shift= 0</code>), new element is child of previus element. Every <code>-1</code> means moving to the upper level against current one - see example.</li>
 </ul>
 
         </li>
@@ -230,13 +232,58 @@
  ...</code></pre>
 
 </div>
-<a name="methods_component"></a>
+<a name="methods_addText"></a>
 <div class="method item public">
-     <strong class="name"><code>component</code></strong>( <code>share</code>, <code>shift</code> ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+    Object <strong class="name"><code>addText</code></strong>( <code>text</code>, <code>shift</code> ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
         <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l132"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:132</code></a>
+    </span><br>
+    <p>This add element to component</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>text</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Argument for <code>document.createTextNode</code></li>
+</ul>
+
+        </li>
+        <li>
+            <code>shift</code> <strong>&lt;Number&gt;</strong>
+        <ul>
+<li>see <a href="#methods_add"><code>add</code></a></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Object&gt; <ul>
+<li><code>oninit</code> {Function}: TBD</li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> function testTextLi({ href= &quot;https://www.seznam.cz&quot; }= {}){
+     const { add, addText, share }= $dom.component(&quot;LI&quot;, null);
+         add(&quot;P&quot;, { textContent: &quot;Link test: &quot; });
+             add(&quot;A&quot;, { textContent: &quot;link &quot;, href });
+                 add(&quot;STRONG&quot;, { textContent: <code>(${href.replace(&amp;quot;https:&#x2F;&#x2F;www.&amp;quot;, &amp;quot;&amp;quot;)})</code> });
+             addText(&quot;!&quot;, -2);
+             add(&quot;BR&quot;, null, -1);
+             addText(&quot;Test new line.&quot;, -1);
+     return share;
+ }
+ //result: '&lt;p&gt;Link test: &lt;a href=&quot;...&quot;&gt;link &lt;strong&gt;...&lt;/strong&gt;&lt;/a&gt;!&lt;br&gt;Test new line.&lt;/p&gt;'</code></pre>
+
+</div>
+<a name="methods_component"></a>
+<div class="method item public">
+     <strong class="name"><code>component</code></strong>( <code>share</code>, <code>shift</code> ) <strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l164"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:164</code></a>
     </span><br>
     <p>Method for including another component by usint its <code>share</code> key.</p>
 
@@ -257,11 +304,11 @@
 </div>
 <a name="methods_destroy"></a>
 <div class="method item public">
-     <strong class="name"><code>destroy</code></strong>(  ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+     <strong class="name"><code>destroy</code></strong>(  ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l194"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:194</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l226"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:226</code></a>
     </span><br>
     <p>Method remove element form live DOM and returns null</p>
 
@@ -273,22 +320,22 @@ test= test.destroy();</p>
 </div>
 <a name="methods_getParentElement"></a>
 <div class="method item private">
-     <strong class="name"><code>getParentElement</code></strong>(  ) <em><code>&#x2F;* private method *&#x2F;</code></em>
+     <strong class="name"><code>getParentElement</code></strong>(  ) <strong class="private_method">/* private method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l218"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:218</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l250"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:250</code></a>
     </span><br>
     <p>Returns parent element (or &quot;fragment pseudo element&quot;)</p>
 
 </div>
 <a name="methods_initStorage"></a>
 <div class="method item private">
-    Object <strong class="name"><code>initStorage</code></strong>(  ) <em><code>&#x2F;* private method *&#x2F;</code></em>
+    Object <strong class="name"><code>initStorage</code></strong>(  ) <strong class="private_method">/* private method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l226"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:226</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l279"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:279</code></a>
     </span><br>
     <p>Initialize internal storage</p>
 
@@ -299,11 +346,11 @@ test= test.destroy();</p>
 </div>
 <a name="methods_isStatic"></a>
 <div class="method item public">
-    Boolean <strong class="name"><code>isStatic</code></strong>(  ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+    Boolean <strong class="name"><code>isStatic</code></strong>(  ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l326"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:326</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l379"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:379</code></a>
     </span><br>
     <p>Methods returns if it was <code>onupdate</code> used</p>
 
@@ -314,11 +361,11 @@ test= test.destroy();</p>
 </div>
 <a name="methods_mount"></a>
 <div class="method item public">
-     <strong class="name"><code>mount</code></strong>( <code>element</code>, <code>call_parseHTML</code>, [ <code>type</code> = &quot;childLast&quot; ] ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+     <strong class="name"><code>mount</code></strong>( <code>element</code>, <code>call_parseHTML</code>, [ <code>type</code> = &quot;childLast&quot; ] ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l150"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:150</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l182"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:182</code></a>
     </span><br>
     <p>Add element to live DOM</p>
 
@@ -355,11 +402,11 @@ test= test.destroy();</p>
 </div>
 <a name="methods_recalculateDeep"></a>
 <div class="method item private">
-     <strong class="name"><code>recalculateDeep</code></strong>( <code>shift</code> ) <em><code>&#x2F;* private method *&#x2F;</code></em>
+     <strong class="name"><code>recalculateDeep</code></strong>( <code>shift</code> ) <strong class="private_method">/* private method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l207"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:207</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l239"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:239</code></a>
     </span><br>
     <p>Updates <code>deep</code></p>
 
@@ -374,13 +421,44 @@ test= test.destroy();</p>
         </li>
     </ul>
 </div>
-<a name="methods_update"></a>
+<a name="methods_setShift"></a>
 <div class="method item public">
-     <strong class="name"><code>update</code></strong>( <code>new_data</code> ) <em><code>&#x2F;* public method *&#x2F;</code></em>
+     <strong class="name"><code>setShift</code></strong>( <code>shift</code> ) <strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l300"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:300</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l258"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:258</code></a>
+    </span><br>
+    <p>Method provide way to change nesting behaviour. It can be helpful for loops</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>shift</code> <strong>&lt;Number&gt;</strong>
+        <ul>
+<li>see <a href="#methods_add"><code>add</code></a></li>
+</ul>
+
+        </li>
+    </ul>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> function testNesting(){
+     const { add, setShift, share }= $dom.component(&quot;DIV&quot;, null);
+         setShift(0);
+     for(let i= 0; i&lt;5; i++){
+         add(&quot;P&quot;, { textContent: <code>Paragraph no. ${i}.</code> }, -1);
+     }
+     return share;
+ }</code></pre>
+
+</div>
+<a name="methods_update"></a>
+<div class="method item public">
+     <strong class="name"><code>update</code></strong>( <code>new_data</code> ) <strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$dom_add_helpers_cordova.sub.js.html#l353"><code>src\special_functions\$dom_add_helpers_cordova.sub.js:353</code></a>
     </span><br>
     <p>Method updates all registered varibles by keys <code>onupdates</code> and calls follower functions</p>
 
