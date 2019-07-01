@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.4.1</title>
+    <title>Documentation: jaaJSU@0.4.2</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\special_functions\$dom_add_helpers_standalone.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.1</em>
+            <em>API Docs for: 0.4.2</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -125,14 +125,14 @@ const $dom_emptyPseudoComponent= (function(){
  * @class $dom.component
  * @constructor
  * @param {String} el_name
- *  - Name of element (for example &#x60;LI&#x60;, &#x60;P&#x60;, &#x60;A&#x60;, ...).
+ *  - Name of element (for example &#x60;LI&#x60;, &#x60;P&#x60;, &#x60;A&#x60;, …).
  *  - This is parent element of component.
  * @param {Object} attrs
  *  - The second argument for [&#x60;$dom.assign&#x60;](./$dom.{namespace}.html#methods_assign)
  * @param {Object} params
  * @param {Function|Boolean} params.mapUpdate
  *  - &#x60;[params.mapUpdate=undefined]&#x60;
- *  - This function (if defined) remap &#x60;update(DATA)&#x60; to varibales used in keys &#x60;attrs.onupdate&#x60; ... see [&#x60;add&#x60;](#methods_add)
+ *  - This function (if defined) remap &#x60;update(DATA)&#x60; to varibales used in keys &#x60;attrs.onupdate&#x60; … see [&#x60;add&#x60;](#methods_add)
  * @return {$dom.component}
  *  - &#x27;functional class instance&#x27;: object &#x60;{ add, component, mount, update, share, onupdate }&#x60;
  *  - &#x60;share&#x60; is Object for transfering methods somewhere else (like for using in another component, see [&#x60;component&#x60;](#methods_component))
@@ -207,7 +207,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             getReference: ()=&gt; el,
             oninit: function(fn){ fn(el); return component_out; },
             onupdate: function(data, onUpdateFunction){
-                if(!data) return false;
+                if(!data) return component_out;
                 if(!internal_storage) internal_storage= initStorage();
                 $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
                 return component_out;
@@ -414,6 +414,9 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
                     else $dom.assign(el, new_attrs);
                 }
             },
+            getData: function(){
+                return data;
+            },
             unregister
         };
         function unregister(el_id, data_keys){
@@ -452,7 +455,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
      */
     function update(new_data){
         if(!internal_storage) return false;
-        return internal_storage.update(new_data);
+        return internal_storage.update(typeof new_data===&quot;function&quot; ? new_data(internal_storage.getData()) : new_data);
     }
     /**
      * Methods returns if it was &#x60;onupdate&#x60; used

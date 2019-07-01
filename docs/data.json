@@ -277,7 +277,7 @@
             "params": [
                 {
                     "name": "el_name",
-                    "description": "- Name of element (for example `LI`, `P`, `A`, ...).\n - This is parent element of component.",
+                    "description": "- Name of element (for example `LI`, `P`, `A`, …).\n - This is parent element of component.",
                     "type": "String"
                 },
                 {
@@ -292,7 +292,7 @@
                     "props": [
                         {
                             "name": "mapUpdate",
-                            "description": "- `[params.mapUpdate=undefined]`\n - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` ... see [`add`](#methods_add)",
+                            "description": "- `[params.mapUpdate=undefined]`\n - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see [`add`](#methods_add)",
                             "type": "Function|Boolean"
                         }
                     ]
@@ -319,7 +319,7 @@
             "params": [
                 {
                     "name": "el_name",
-                    "description": "- Name of element (for example `LI`, `P`, `A`, ...).\n - This is parent element of component.",
+                    "description": "- Name of element (for example `LI`, `P`, `A`, …).\n - This is parent element of component.",
                     "type": "String"
                 },
                 {
@@ -334,7 +334,7 @@
                     "props": [
                         {
                             "name": "mapUpdate",
-                            "description": "- `[params.mapUpdate=undefined]`\n - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` ... see [`add`](#methods_add)",
+                            "description": "- `[params.mapUpdate=undefined]`\n - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see [`add`](#methods_add)",
                             "type": "Function|Boolean"
                         }
                     ]
@@ -2110,7 +2110,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 353,
+            "line": 356,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2130,7 +2130,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 379,
+            "line": 382,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2144,7 +2144,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 390,
+            "line": 393,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -2175,7 +2175,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 420,
+            "line": 423,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign [cordova]",
@@ -2383,7 +2383,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 345,
+            "line": 348,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2403,7 +2403,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 371,
+            "line": 374,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2417,7 +2417,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 382,
+            "line": 385,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -2444,7 +2444,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 430,
+            "line": 433,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign",

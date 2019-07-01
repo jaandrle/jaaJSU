@@ -40,14 +40,14 @@ const $dom_emptyPseudoComponent= (function(){
  * @class $dom.component [cordova]
  * @constructor
  * @param {String} el_name
- *  - Name of element (for example `LI`, `P`, `A`, ...).
+ *  - Name of element (for example `LI`, `P`, `A`, …).
  *  - This is parent element of component.
  * @param {Object} attrs
  *  - The second argument for [`$dom.assign`](./$dom.{namespace}.html#methods_assign)
  * @param {Object} params
  * @param {Function|Boolean} params.mapUpdate
  *  - `[params.mapUpdate=undefined]`
- *  - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` ... see [`add`](#methods_add)
+ *  - This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see [`add`](#methods_add)
  * @return {$dom.component}
  *  - 'functional class instance': object `{ add, component, mount, update, share, onupdate }`
  *  - `share` is Object for transfering methods somewhere else (like for using in another component, see [`component`](#methods_component))
@@ -122,7 +122,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             getReference: ()=> el,
             oninit: function(fn){ fn(el); return component_out; },
             onupdate: function(data, onUpdateFunction){
-                if(!data) return false;
+                if(!data) return component_out;
                 if(!internal_storage) internal_storage= initStorage();
                 $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
                 return component_out;
@@ -336,6 +336,9 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
                     else $dom.assign(el, new_attrs);
                 }
             },
+            getData: function(){
+                return data;
+            },
             unregister
         };
         function unregister(el_id, data_keys){
@@ -374,7 +377,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
      */
     function update(new_data){
         if(!internal_storage) return false;
-        return internal_storage.update(new_data);
+        return internal_storage.update(typeof new_data==="function" ? new_data(internal_storage.getData()) : new_data);
     }
     /**
      * Methods returns if it was `onupdate` used
