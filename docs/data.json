@@ -64,15 +64,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "src\\namespaces\\$time.sub.js": {
-            "name": "src\\namespaces\\$time.sub.js",
-            "modules": {},
-            "classes": {
-                "$time.{namespace}": 1
-            },
-            "fors": {},
-            "namespaces": {}
-        },
         "src\\special_functions\\$dom_add_helpers_cordova.sub.js": {
             "name": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
             "modules": {},
@@ -113,6 +104,26 @@
             },
             "namespaces": {}
         },
+        "src\\special_functions\\$time_cordova.sub.js": {
+            "name": "src\\special_functions\\$time_cordova.sub.js",
+            "modules": {},
+            "classes": {},
+            "fors": {
+                "$time.{namespace}": 1
+            },
+            "namespaces": {}
+        },
+        "src\\jaaJSU - $time.sub.js": {
+            "name": "src\\jaaJSU - $time.sub.js",
+            "modules": {},
+            "classes": {
+                "$time.{namespace}": 1
+            },
+            "fors": {
+                "$time.{namespace}": 1
+            },
+            "namespaces": {}
+        },
         "src\\jaaJSU.js": {
             "name": "src\\jaaJSU.js",
             "modules": {
@@ -136,15 +147,15 @@
                 "$object.{namespace}": 1,
                 "$optimizier.{namespace}": 1,
                 "$string.{namespace}": 1,
-                "$time.{namespace}": 1,
                 "$dom.component [cordova]": 1,
-                "$dom.component": 1
+                "$dom.component": 1,
+                "$time.{namespace}": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 37,
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 3,
             "description": "Namespaces container (module) which registers namespaces into the global (typically `window`)."
         }
     },
@@ -247,20 +258,6 @@
             "description": "This NAMESPACE provides features for strings.",
             "static": 1
         },
-        "$time.{namespace}": {
-            "name": "$time.{namespace}",
-            "shortname": "$time.{namespace}",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "jaaJSU.{global}",
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 3,
-            "description": "This NAMESPACE provides features for time.",
-            "static": 1
-        },
         "$dom.component [cordova]": {
             "name": "$dom.component [cordova]",
             "shortname": "$dom.component [cordova]",
@@ -344,6 +341,20 @@
                 "description": "- 'functional class instance': object `{ add, component, mount, update, share, onupdate }`\n - `share` is Object for transfering methods somewhere else (like for using in another component, see [`component`](#methods_component))\n     - `share= { mount, update, destroy, isStatic }`\n - `onupdate`\n     - It returns {$dom.component} and it is only one differnece against [`add`](#methods_add)\n     - `onupdate` is function which accepts two params `object, function`, the function is called during creating element and evry `update`calls\n     - It returns additional `attrs`, for example this `attrs`: `$dom.component(\"DIV\", { className: \"class\" }).onupdate({ a }, _=>({ textContent: a }))` => final `attrs= { className: \"class\", textContent: \"A\" }` (if `a=\"A\"`)\n     - it use [`$dom.assign`](./$dom.{namespace}.html#methods_assign) (**no deep copy!!!**)",
                 "type": "$dom.component"
             }
+        },
+        "$time.{namespace}": {
+            "name": "$time.{namespace}",
+            "shortname": "$time.{namespace}",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "jaaJSU.{global}",
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 3,
+            "description": "This NAMESPACE provides features for time.",
+            "static": 1
         }
     },
     "elements": {},
@@ -1762,163 +1773,6 @@
             "class": "$string.{namespace}"
         },
         {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 9,
-            "itemtype": "method",
-            "name": "getOrdinalSuffix",
-            "params": [
-                {
-                    "name": "n",
-                    "description": "",
-                    "type": "Number"
-                }
-            ],
-            "return": {
-                "description": "* `n`+English suffix",
-                "type": "String"
-            },
-            "example": [
-                "\n    console.log($time.getOrdinalSuffix(1));//\"1st\""
-            ],
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 24,
-            "itemtype": "method",
-            "name": "getMonthName",
-            "params": [
-                {
-                    "name": "n",
-                    "description": "* Month number (typically [1-12])\n * Works cyclically `13===1, ...`",
-                    "type": "Number"
-                },
-                {
-                    "name": "l",
-                    "description": "\n * Length of output Month name",
-                    "type": "Number|Boolean",
-                    "optional": true,
-                    "optdefault": "undefined"
-                }
-            ],
-            "return": {
-                "description": "* English month name",
-                "type": "String"
-            },
-            "example": [
-                "\n    console.log($time.getMonthName(5));//\"May\"\n    console.log($time.getMonthName(24, 4));//\"Dece\""
-            ],
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 48,
-            "description": "Function returns timestamp in the form of \"YYYY-MM-DD HH:MM:SS\". Uses [double](#methods_double)",
-            "itemtype": "method",
-            "name": "getTimeStamp",
-            "params": [
-                {
-                    "name": "time",
-                    "description": "\n * Uses as argument for `new Date(*)`",
-                    "type": "Number|Boolean",
-                    "optional": true,
-                    "optdefault": "undefined"
-                }
-            ],
-            "return": {
-                "description": "* Timestamp",
-                "type": "String"
-            },
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 65,
-            "description": "Function returns timestamp in the form of \"YYYY-MM-DD\". Uses [double](#methods_double)",
-            "itemtype": "method",
-            "name": "getDateStamp",
-            "params": [
-                {
-                    "name": "time",
-                    "description": "\n * Uses as argument for `new Date(*)`",
-                    "type": "Number|Boolean",
-                    "optional": true,
-                    "optdefault": "undefined"
-                }
-            ],
-            "return": {
-                "description": "* Datestamp",
-                "type": "String"
-            },
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 79,
-            "description": "Function returns timestamp in the form of \"HH:MM:SS\". Uses [double](#methods_double)",
-            "itemtype": "method",
-            "name": "getTimeString",
-            "params": [
-                {
-                    "name": "time",
-                    "description": "\n * Uses as argument for `new Date(*)`",
-                    "type": "Number|Boolean",
-                    "optional": true,
-                    "optdefault": "undefined"
-                }
-            ],
-            "return": {
-                "description": "* Time string",
-                "type": "String"
-            },
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 93,
-            "description": "Function returns how much is `time` bigger than `refference_time`. Uses [getTimeStamp](#methods_getTimeStamp), [getDateStamp](#methods_getDateStamp), [getTimeString](#methods_getTimeString)",
-            "itemtype": "method",
-            "name": "getDiff",
-            "params": [
-                {
-                    "name": "time",
-                    "description": "* Argument for `new Date(*)` or `getTimeStamp`, `getDateStamp`, `getTimeString`",
-                    "type": "Number"
-                },
-                {
-                    "name": "refference_time",
-                    "description": "\n * Must be convertable into the same format like `time`",
-                    "type": "Number|Boolean",
-                    "optional": true,
-                    "optdefault": "undefined"
-                }
-            ],
-            "return": {
-                "description": "* Time diff in ms",
-                "type": "Number"
-            },
-            "class": "$time.{namespace}"
-        },
-        {
-            "file": "src\\namespaces\\$time.sub.js",
-            "line": 123,
-            "description": "Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)",
-            "itemtype": "method",
-            "name": "double",
-            "params": [
-                {
-                    "name": "time",
-                    "description": "",
-                    "type": "Number|String"
-                }
-            ],
-            "return": {
-                "description": "* 00, 01, 02, ..., 09, 10, ..., 100, ...",
-                "type": "String"
-            },
-            "class": "$time.{namespace}"
-        },
-        {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
             "line": 80,
             "description": "This add element to component",
@@ -2505,6 +2359,528 @@
                 }
             ],
             "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$time_cordova.sub.js",
+            "line": 3,
+            "description": "Function returns timestamp in the form of \"YYYY-MM-DD HH:MM:SS\".",
+            "itemtype": "method",
+            "name": "getTimeStamp",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "\n * Uses as argument for `new Date(*)`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Timestamp",
+                "type": "String"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$time_cordova.sub.js",
+            "line": 14,
+            "description": "Function returns timestamp in the form of \"YYYY-MM-DD\".",
+            "itemtype": "method",
+            "name": "getDateStamp",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "\n * Uses as argument for `new Date(*)`",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* Datestamp",
+                "type": "String"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 10,
+            "description": "Internal object holding predefined formating arguments for `Date.prototype.toLocaleString`. For example `format_objects.HHmm==={ hour: \"2-digit\", minute: \"2-digit\" }`.",
+            "itemtype": "property",
+            "name": "format_objects",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 24,
+            "description": "Internal object holding predefined formating arguments for `getFormatObject`. For example `format_arrays.YYYYMMDD=== [ [\"year\", \"numeric\"], dash, [\"month\", two_dig], dash, [\"day\", two_dig] ]`.",
+            "itemtype": "property",
+            "name": "format_arrays",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 39,
+            "description": "Internal helper array for `getOrdinalSuffix`.",
+            "itemtype": "property",
+            "name": "ordinal_numbers",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 47,
+            "description": "Very simple test for 'YYYY-MM-DD' pattern. Returns `true` if `date_string` includes **`-`**.",
+            "itemtype": "method",
+            "name": "isDateString",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "date_string",
+                    "description": "",
+                    "type": "String|...String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n     isDateString(\"2019-05-06\");//= true\n     isDateString(\"06/05/2019\");//= false !!!!"
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 59,
+            "description": "Very simple test for 'T...' pattern. Returns `true` if `date_string` includes **`T`**.",
+            "itemtype": "method",
+            "name": "isTimeString",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "date_string",
+                    "description": "",
+                    "type": "String|...String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n     isDateString(\"T12:00:00\");//= true\n     isDateString(\"12:00:00\");//= false !!!\n     isDateString(\"Twrong\");//= true !!!!"
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 75,
+            "description": "This array stores all time zones names (eg. 'Europe/Andorra') supported by `{ timeZone: ... }` in second argument of `Date.prototype.toLocaleString`.",
+            "itemtype": "property",
+            "name": "ary_ianna_time_zones",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 429,
+            "description": "This object stores indeces for all timezones. (eg. `ary_ianna_time_offsets[\"CET\"]===113` and `ary_ianna_time_zones[113]==='Europe/Prague'` )",
+            "itemtype": "property",
+            "name": "ary_ianna_time_offsets",
+            "type": "Object",
+            "access": "private",
+            "tagname": "",
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 476,
+            "description": "Function generates `DateArray` from instance of `Date`.",
+            "itemtype": "method",
+            "name": "fromDate",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "date_instance",
+                    "description": "\n - instance of `Date` class",
+                    "type": "Date"
+                }
+            ],
+            "return": {
+                "description": "- See [toDateArray](#methods_toDateArray).",
+                "type": "DateArray"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 489,
+            "description": "Function generates `DateArray` from arguments to initialize `Date`.",
+            "itemtype": "method",
+            "name": "fromDateArguments",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "args",
+                    "description": "\n - parameters for initialize `Date` class",
+                    "type": "...Mixed"
+                }
+            ],
+            "return": {
+                "description": "- See [toDateArray](#methods_toDateArray).",
+                "type": "DateArray"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 502,
+            "description": "Function generates `DateArray` from current date and time.",
+            "itemtype": "method",
+            "name": "fromNow",
+            "access": "public",
+            "tagname": "",
+            "return": {
+                "description": "- See [toDateArray](#methods_toDateArray).",
+                "type": "DateArray"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 513,
+            "description": "Function generates `DateArray` from passed string.",
+            "itemtype": "method",
+            "name": "fromString",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "timestamp_string",
+                    "description": "\n - Supported forms are combinations of date (\"YYYY-MM-DD\", \"DD/MM/YYYY\"), time (\"HH:mm:ss\", \"HH:mm\") and timezone (\"CET\", \"+01:00\", \"-02:00\", ...)\n - Typically: \"2019-06-02 12:35:45 +01:00\", \"2019-06-02T12:35:45+01:00\", \"12:35:45+01:00 2019-06-02\", ...",
+                    "type": "String"
+                },
+                {
+                    "name": "timezone",
+                    "description": "\n - Override timezone in `timestamp_string`",
+                    "type": "String",
+                    "optional": true,
+                    "optdefault": " internal_zone"
+                }
+            ],
+            "return": {
+                "description": "- See [toDateArray](#methods_toDateArray).",
+                "type": "DateArray"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 540,
+            "description": "Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like string.",
+            "itemtype": "method",
+            "name": "toDateArray",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "timestamp_string",
+                    "description": "- Supported forms are combinations of date (\"YYYY-MM-DD\", \"DD/MM/YYYY\"), time (\"HH:mm:ss\", \"HH:mm\") and timezone (\"CET\", \"+01:00\", \"-02:00\", ...)\n - Typically: \"2019-06-02 12:35:45 +01:00\", \"2019-06-02T12:35:45+01:00\", \"12:35:45+01:00 2019-06-02\", ...",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "- `[ date, time, time_zone ]`\n - where:\n     - `date` is always \"YYYY-MM-DD\" or \"\"\n     - `time` is always \"HH:mm:SS\" or \"HH:mm:00\" or \"\"\n     - `time_zone` is always \"[+-]\\d\\d:\\d\\d\" or \"CET\" or \"\"",
+                "type": "DateArray"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 603,
+            "description": "Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.",
+            "itemtype": "method",
+            "name": "toStringFromObject",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "format",
+                    "description": "- Placeholder for replace/generate final string (eg. [[ \"month\", \"2-digits\" ]]===two digits month)\n - see [`getFormatObject`](#methods_getFormatObject) an [`format_arrays`](#props_format_arrays).",
+                    "type": "Array"
+                },
+                {
+                    "name": "params_obj",
+                    "description": "- It is in fact argument for [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString)",
+                    "type": "DateArray",
+                    "props": [
+                        {
+                            "name": "locale",
+                            "description": "- In which language/national format generate final string",
+                            "type": "String"
+                        },
+                        {
+                            "name": "timeZone",
+                            "description": "- Time zone name from [`ary_ianna_time_zones`](#props_ary_ianna_time_zones).",
+                            "type": "String"
+                        },
+                        {
+                            "name": "declension",
+                            "description": "- **default: true**\n - Needed for some languages — for example in Czech: \"10. července\" (`declension=true`), or \"10. červenec\" (`declension=false`)",
+                            "type": "String"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "- `DateArray`=> **&lt;String&gt;**",
+                "type": "Function"
+            },
+            "example": [
+                "\n     $time.toStringFromObject(\"DD/MM/YYYY HH:mm:SS\",{ locale: \"en-GB\" })($time.fromNow());//= \"05/06/2019 09:32:20\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 650,
+            "description": "Generates multidimensional array for formatting (eg. \"YYYY\"=> `[ [ \"year\", \"numeric\" ] ]`).",
+            "itemtype": "method",
+            "name": "getFormatObject",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "format_string",
+                    "description": "- supports \"YYYY\", \"YY\", \"MM\", \"MMM\", \"MMMM\", \"dddd\" (weekday - Monday), \"ddd\" (shorter weekday - Mon), \"dd\" (Mo), \"d\" (0===Sun <> 6===Sat), \"DD\", \"D\", \"Do\", \"HH\", \"H\", \"mm\", \"m\", \"SS\", \"S\", \"W\", \"Wo\"",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "- `[ [ operation, argument, params ] ]`\n - `Opertions` are in fact arguments for [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) and `arguments` are their values.",
+                "type": "...Array"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 779,
+            "description": "Function initializes `Date` from `DateArray`.",
+            "itemtype": "method",
+            "name": "toDate",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "date_array",
+                    "description": "- See [toDateArray](#methods_toDateArray).",
+                    "type": "DateArray"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Date"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 795,
+            "description": "Function generates text (including 2-digits month and day and full year) based on `locale` and `timeZone` from `DateArray`.",
+            "itemtype": "method",
+            "name": "toDateString",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "params_obj",
+                    "description": "- See [toStringFromObject](#methods_toStringFromObject).",
+                    "type": "DateArray"
+                }
+            ],
+            "return": {
+                "description": "- `DateArray`=> **<String>**",
+                "type": "Function"
+            },
+            "example": [
+                "\n     $time.toDateString({ locale: \"en-GB\" })($time.fromNow());//= \"05/06/2019\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 810,
+            "description": "Function generates text (including 2-digits month and day and full year and time) based on `locale` and `timeZone` from `DateArray`.",
+            "itemtype": "method",
+            "name": "toDateTimeString",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "params_obj",
+                    "description": "- See [toStringFromObject](#methods_toStringFromObject).",
+                    "type": "DateArray"
+                }
+            ],
+            "return": {
+                "description": "- `DateArray`=> **<String>**",
+                "type": "Function"
+            },
+            "example": [
+                "\n     $time.toDateTimeString({ locale: \"en-GB\" })($time.fromNow());//= \"05/06/2019 09:32:20\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 871,
+            "description": "Function generates text based on `format_string`, `locale` and `timeZone` from `DateArray`.",
+            "itemtype": "method",
+            "name": "toString",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "format_string",
+                    "description": "- Placeholder for replace/generate final string (eg. \"MM\"===two digits month)\n - see [`getFormatObject`](#methods_getFormatObject)",
+                    "type": "String"
+                },
+                {
+                    "name": "params_obj",
+                    "description": "- It is in fact argument for [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString)",
+                    "type": "DateArray",
+                    "props": [
+                        {
+                            "name": "locale",
+                            "description": "- In which language/national format generate final string",
+                            "type": "String"
+                        },
+                        {
+                            "name": "timeZone",
+                            "description": "- Time zone name from [`ary_ianna_time_zones`](#props_ary_ianna_time_zones).",
+                            "type": "String"
+                        },
+                        {
+                            "name": "declension",
+                            "description": "- **default: true**\n - Needed for some languages — for example in Czech: \"10. července\" (`declension=true`), or \"10. červenec\" (`declension=false`)",
+                            "type": "String"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "- `DateArray`=> **&lt;String&gt;**",
+                "type": "Function"
+            },
+            "example": [
+                "\n     $time.toStringFromObject(\"DD/MM/YYYY HH:mm:SS\",{ locale: \"en-GB\" })($time.fromNow());//= \"05/06/2019 09:32:20\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 980,
+            "description": "Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)",
+            "itemtype": "method",
+            "name": "double",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "time",
+                    "description": "",
+                    "type": "Number|String"
+                }
+            ],
+            "return": {
+                "description": "* 00, 01, 02, ..., 09, 10, ..., 100, ...",
+                "type": "String"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 996,
+            "itemtype": "method",
+            "name": "getMonthName",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "n",
+                    "description": "* Month number (typically [1-12])\n * Works cyclically `13===1, ...`",
+                    "type": "Number"
+                },
+                {
+                    "name": "l",
+                    "description": "\n * Length of output Month name",
+                    "type": "Number|Boolean",
+                    "optional": true,
+                    "optdefault": "undefined"
+                }
+            ],
+            "return": {
+                "description": "* English month name",
+                "type": "String"
+            },
+            "example": [
+                "\n    console.log($time.getMonthName(5));//\"May\"\n    console.log($time.getMonthName(24, 4));//\"Dece\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 1022,
+            "description": "See [`ordinal_numbers`](#props_ordinal_numbers).",
+            "itemtype": "method",
+            "name": "getOrdinalSuffix",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "n",
+                    "description": "",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "* `n`+English suffix",
+                "type": "String"
+            },
+            "example": [
+                "\n    console.log($time.getOrdinalSuffix(1));//\"1st\""
+            ],
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 1041,
+            "description": "Alias for `undefined` which can be used to trigger default value of argument. (eg. `test($time._)===\"A\"; function test(a= \"A\"){ return a; }`)",
+            "itemtype": "property",
+            "name": "_",
+            "type": "Undefined",
+            "access": "public",
+            "tagname": "",
+            "class": "$time.{namespace}"
         }
     ],
     "warnings": [
@@ -2559,6 +2935,58 @@
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:271"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:47"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:59"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:476"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:489"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:502"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:513"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:540"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:603"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:650"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:779"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:795"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:810"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:871"
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",

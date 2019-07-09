@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.4.2</title>
+    <title>Documentation: jaaJSU@0.5.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $time.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.4.2</em>
+            <em>API Docs for: 0.5.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -71,13 +71,24 @@
                 </div>
                 <div class="bd">
                     <ul>
-                            <li class="menuli"><a href="#methods_double">double</a></li>
-                            <li class="menuli"><a href="#methods_getDateStamp">getDateStamp</a></li>
-                            <li class="menuli"><a href="#methods_getDiff">getDiff</a></li>
-                            <li class="menuli"><a href="#methods_getMonthName">getMonthName</a></li>
-                            <li class="menuli"><a href="#methods_getOrdinalSuffix">getOrdinalSuffix</a></li>
-                            <li class="menuli"><a href="#methods_getTimeStamp">getTimeStamp</a></li>
-                            <li class="menuli"><a href="#methods_getTimeString">getTimeString</a></li>
+                            <li class="menuli"><a href="#methods_double">double</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_fromDate">fromDate</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_fromDateArguments">fromDateArguments</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_fromNow">fromNow</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_fromString">fromString</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getDateStamp">getDateStamp</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getFormatObject">getFormatObject</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_getMonthName">getMonthName</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getOrdinalSuffix">getOrdinalSuffix</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getTimeStamp">getTimeStamp</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_isDateString">isDateString</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_isTimeString">isTimeString</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_toDate">toDate</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_toDateArray">toDateArray</a> <i class="private_method">(private)</i></li>
+                            <li class="menuli"><a href="#methods_toDateString">toDateString</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_toDateTimeString">toDateTimeString</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_toString">toString</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_toStringFromObject">toStringFromObject</a> <i class="private_method">(private)</i></li>
                     </ul>
                 </div>
             </div>
@@ -90,7 +101,7 @@
                     <h2 class="no-toc">Files</h2>
                 </div>
                 <div class="bd">
-                    <ul><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\namespaces\$time.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li></ul>
+                    <ul><li>src\jaaJSU - $time.sub.js/<ul></ul></li><li>src\jaaJSU.js/<ul></ul></li><li>src\namespaces\$array.sub.js/<ul></ul></li><li>src\namespaces\$async.sub.js/<ul></ul></li><li>src\namespaces\$dom.sub.js/<ul></ul></li><li>src\namespaces\$function.sub.js/<ul></ul></li><li>src\namespaces\$object.sub.js/<ul></ul></li><li>src\namespaces\$optimizier.sub.js/<ul></ul></li><li>src\namespaces\$string.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_add_helpers_standalone.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_cordova.sub.js/<ul></ul></li><li>src\special_functions\$dom_forceRedraw_standalone.sub.js/<ul></ul></li><li>src\special_functions\$time_cordova.sub.js/<ul></ul></li></ul>
                 </div>
             </div>
             
@@ -98,7 +109,7 @@
 
         <div id="main" class="yui3-u">
             <div class="content"><h4>Class $time.{namespace}</h4>
-<span class="foundat">Class defined in: <a href="../files/src_namespaces_$time.sub.js.html#l3"><code>src\namespaces\$time.sub.js:3</code></a></span>
+<span class="foundat">Class defined in: <a href="../files/src_jaaJSU - $time.sub.js.html#l3"><code>src\jaaJSU - $time.sub.js:3</code></a></span>
 <div class="intro"><p>This NAMESPACE provides features for time.</p>
 </div>
 
@@ -106,16 +117,17 @@
 <div id="classdocs"><style>#classdocs .menuli { list-style: none; display: inline-block; border-left: 1px solid black; padding: .5em 1em; } .private_method { color: grey; } .public_method { color: crimson; }</style>
     <ul>
         <li class="menuli"><a href="#methods">Methods</a></li>
+        <li class="menuli"><a href="#props">Properties</a></li>
     </ul>
     <div>
             <div id="methods"><h4>Methods</h4>
 <a name="methods_double"></a>
-<div class="method item">
-    String <strong class="name"><code>double</code></strong>( <code>time</code> ) 
+<div class="method item public">
+    String <strong class="name"><code>double</code></strong>( <code>time</code> ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l123"><code>src\namespaces\$time.sub.js:123</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l980"><code>src\jaaJSU - $time.sub.js:980</code></a>
     </span><br>
     <p>Function adds leading zero to the <code>time</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart">It can be replaced in future: see <code>padStart</code></a></p>
 
@@ -131,15 +143,113 @@
 </ul>
 </div>
 </div>
-<a name="methods_getDateStamp"></a>
-<div class="method item">
-    String <strong class="name"><code>getDateStamp</code></strong>( [ <code>time</code> =undefined ] ) 
+<a name="methods_fromDate"></a>
+<div class="method item public">
+    DateArray <strong class="name"><code>fromDate</code></strong>( <code>date_instance</code> ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l65"><code>src\namespaces\$time.sub.js:65</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l476"><code>src\jaaJSU - $time.sub.js:476</code></a>
     </span><br>
-    <p>Function returns timestamp in the form of &quot;YYYY-MM-DD&quot;. Uses <a href="#methods_double">double</a></p>
+    <p>Function generates <code>DateArray</code> from instance of <code>Date</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>date_instance</code> <strong>&lt;Date&gt;</strong>
+        <ul>
+<li>instance of <code>Date</code> class</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+<li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
+</ul>
+</div>
+</div>
+<a name="methods_fromDateArguments"></a>
+<div class="method item public">
+    DateArray <strong class="name"><code>fromDateArguments</code></strong>( <code>args</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l489"><code>src\jaaJSU - $time.sub.js:489</code></a>
+    </span><br>
+    <p>Function generates <code>DateArray</code> from arguments to initialize <code>Date</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>args</code> <strong>&lt;...Mixed&gt;</strong>
+        <ul>
+<li>parameters for initialize <code>Date</code> class</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+<li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
+</ul>
+</div>
+</div>
+<a name="methods_fromNow"></a>
+<div class="method item public">
+    DateArray <strong class="name"><code>fromNow</code></strong>(  ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l502"><code>src\jaaJSU - $time.sub.js:502</code></a>
+    </span><br>
+    <p>Function generates <code>DateArray</code> from current date and time.</p>
+
+    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+<li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
+</ul>
+</div>
+</div>
+<a name="methods_fromString"></a>
+<div class="method item public">
+    DateArray <strong class="name"><code>fromString</code></strong>( <code>timestamp_string</code>, [ <code>timezone</code> = internal_zone ] ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l513"><code>src\jaaJSU - $time.sub.js:513</code></a>
+    </span><br>
+    <p>Function generates <code>DateArray</code> from passed string.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>timestamp_string</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Supported forms are combinations of date (&quot;YYYY-MM-DD&quot;, &quot;DD/MM/YYYY&quot;), time (&quot;HH:mm:ss&quot;, &quot;HH:mm&quot;) and timezone (&quot;CET&quot;, &quot;+01:00&quot;, &quot;-02:00&quot;, ...)</li>
+<li>Typically: &quot;2019-06-02 12:35:45 +01:00&quot;, &quot;2019-06-02T12:35:45+01:00&quot;, &quot;12:35:45+01:00 2019-06-02&quot;, ...</li>
+</ul>
+
+        </li>
+        <li>
+            [<code>timezone</code>= internal_zone] <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Override timezone in <code>timestamp_string</code></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+<li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
+</ul>
+</div>
+</div>
+<a name="methods_getDateStamp"></a>
+<div class="method item public">
+    String <strong class="name"><code>getDateStamp</code></strong>( [ <code>time</code> =undefined ] ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_special_functions_$time_cordova.sub.js.html#l14"><code>src\special_functions\$time_cordova.sub.js:14</code></a>
+    </span><br>
+    <p>Function returns timestamp in the form of &quot;YYYY-MM-DD&quot;.</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
@@ -156,45 +266,39 @@
 </ul>
 </div>
 </div>
-<a name="methods_getDiff"></a>
-<div class="method item">
-    Number <strong class="name"><code>getDiff</code></strong>( <code>time</code>, [ <code>refference_time</code> =undefined ] ) 
+<a name="methods_getFormatObject"></a>
+<div class="method item private">
+    ...Array <strong class="name"><code>getFormatObject</code></strong>( <code>format_string</code> ) <br/><strong class="private_method">/* private method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l93"><code>src\namespaces\$time.sub.js:93</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l650"><code>src\jaaJSU - $time.sub.js:650</code></a>
     </span><br>
-    <p>Function returns how much is <code>time</code> bigger than <code>refference_time</code>. Uses <a href="#methods_getTimeStamp">getTimeStamp</a>, <a href="#methods_getDateStamp">getDateStamp</a>, <a href="#methods_getTimeString">getTimeString</a></p>
+    <p>Generates multidimensional array for formatting (eg. &quot;YYYY&quot;=&gt; <code>[ [ &quot;year&quot;, &quot;numeric&quot; ] ]</code>).</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
-            <code>time</code> <strong>&lt;Number&gt;</strong>
+            <code>format_string</code> <strong>&lt;String&gt;</strong>
         <ul>
-<li>Argument for <code>new Date(*)</code> or <code>getTimeStamp</code>, <code>getDateStamp</code>, <code>getTimeString</code></li>
-</ul>
-
-        </li>
-        <li>
-            [<code>refference_time</code>=undefined] <strong>&lt;Number | Boolean&gt;</strong>
-        <ul>
-<li>Must be convertable into the same format like <code>time</code></li>
+<li>supports &quot;YYYY&quot;, &quot;YY&quot;, &quot;MM&quot;, &quot;MMM&quot;, &quot;MMMM&quot;, &quot;dddd&quot; (weekday - Monday), &quot;ddd&quot; (shorter weekday - Mon), &quot;dd&quot; (Mo), &quot;d&quot; (0===Sun &lt;&gt; 6===Sat), &quot;DD&quot;, &quot;D&quot;, &quot;Do&quot;, &quot;HH&quot;, &quot;H&quot;, &quot;mm&quot;, &quot;m&quot;, &quot;SS&quot;, &quot;S&quot;, &quot;W&quot;, &quot;Wo&quot;</li>
 </ul>
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;Number&gt; <ul>
-<li>Time diff in ms</li>
+    <br><div class="returns"><strong>Returns:</strong> &lt;...Array&gt; <ul>
+<li><code>[ [ operation, argument, params ] ]</code></li>
+<li><code>Opertions</code> are in fact arguments for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"><code>Date.prototype.toLocaleString</code></a> and <code>arguments</code> are their values.</li>
 </ul>
 </div>
 </div>
 <a name="methods_getMonthName"></a>
-<div class="method item">
-    String <strong class="name"><code>getMonthName</code></strong>( <code>n</code>, [ <code>l</code> =undefined ] ) 
+<div class="method item public">
+    String <strong class="name"><code>getMonthName</code></strong>( <code>n</code>, [ <code>l</code> =undefined ] ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l24"><code>src\namespaces\$time.sub.js:24</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l996"><code>src\jaaJSU - $time.sub.js:996</code></a>
     </span><br>
     
     <strong>Parameters:</strong>
@@ -225,14 +329,15 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 
 </div>
 <a name="methods_getOrdinalSuffix"></a>
-<div class="method item">
-    String <strong class="name"><code>getOrdinalSuffix</code></strong>( <code>n</code> ) 
+<div class="method item public">
+    String <strong class="name"><code>getOrdinalSuffix</code></strong>( <code>n</code> ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l9"><code>src\namespaces\$time.sub.js:9</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1022"><code>src\jaaJSU - $time.sub.js:1022</code></a>
     </span><br>
-    
+    <p>See <a href="#props_ordinal_numbers"><code>ordinal_numbers</code></a>.</p>
+
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
@@ -249,14 +354,14 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 
 </div>
 <a name="methods_getTimeStamp"></a>
-<div class="method item">
-    String <strong class="name"><code>getTimeStamp</code></strong>( [ <code>time</code> =undefined ] ) 
+<div class="method item public">
+    String <strong class="name"><code>getTimeStamp</code></strong>( [ <code>time</code> =undefined ] ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l48"><code>src\namespaces\$time.sub.js:48</code></a>
+        <a href="../files/src_special_functions_$time_cordova.sub.js.html#l3"><code>src\special_functions\$time_cordova.sub.js:3</code></a>
     </span><br>
-    <p>Function returns timestamp in the form of &quot;YYYY-MM-DD HH:MM:SS&quot;. Uses <a href="#methods_double">double</a></p>
+    <p>Function returns timestamp in the form of &quot;YYYY-MM-DD HH:MM:SS&quot;.</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
@@ -273,30 +378,315 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 </ul>
 </div>
 </div>
-<a name="methods_getTimeString"></a>
-<div class="method item">
-    String <strong class="name"><code>getTimeString</code></strong>( [ <code>time</code> =undefined ] ) 
+<a name="methods_isDateString"></a>
+<div class="method item private">
+    Boolean <strong class="name"><code>isDateString</code></strong>( <code>date_string</code> ) <br/><strong class="private_method">/* private method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_namespaces_$time.sub.js.html#l79"><code>src\namespaces\$time.sub.js:79</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l47"><code>src\jaaJSU - $time.sub.js:47</code></a>
     </span><br>
-    <p>Function returns timestamp in the form of &quot;HH:MM:SS&quot;. Uses <a href="#methods_double">double</a></p>
+    <p>Very simple test for 'YYYY-MM-DD' pattern. Returns <code>true</code> if <code>date_string</code> includes <strong><code>-</code></strong>.</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
-            [<code>time</code>=undefined] <strong>&lt;Number | Boolean&gt;</strong>
+            <code>date_string</code> <strong>&lt;String | ...String&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Boolean&gt; </div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> isDateString(&quot;2019-05-06&quot;);//= true
+ isDateString(&quot;06/05/2019&quot;);//= false !!!!</code></pre>
+
+</div>
+<a name="methods_isTimeString"></a>
+<div class="method item private">
+    Boolean <strong class="name"><code>isTimeString</code></strong>( <code>date_string</code> ) <br/><strong class="private_method">/* private method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l59"><code>src\jaaJSU - $time.sub.js:59</code></a>
+    </span><br>
+    <p>Very simple test for 'T...' pattern. Returns <code>true</code> if <code>date_string</code> includes <strong><code>T</code></strong>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>date_string</code> <strong>&lt;String | ...String&gt;</strong>
+         
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Boolean&gt; </div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> isDateString(&quot;T12:00:00&quot;);//= true
+ isDateString(&quot;12:00:00&quot;);//= false !!!
+ isDateString(&quot;Twrong&quot;);//= true !!!!</code></pre>
+
+</div>
+<a name="methods_toDate"></a>
+<div class="method item public">
+    Date <strong class="name"><code>toDate</code></strong>( <code>date_array</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l779"><code>src\jaaJSU - $time.sub.js:779</code></a>
+    </span><br>
+    <p>Function initializes <code>Date</code> from <code>DateArray</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>date_array</code> <strong>&lt;DateArray&gt;</strong>
         <ul>
-<li>Uses as argument for <code>new Date(*)</code></li>
+<li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
 </ul>
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;String&gt; <ul>
-<li>Time string</li>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Date&gt; </div>
+</div>
+<a name="methods_toDateArray"></a>
+<div class="method item private">
+    DateArray <strong class="name"><code>toDateArray</code></strong>( <code>timestamp_string</code> ) <br/><strong class="private_method">/* private method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l540"><code>src\jaaJSU - $time.sub.js:540</code></a>
+    </span><br>
+    <p>Function generates array in a form <code>[ date, time, time_zone ]</code> from 'ISO' like string.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>timestamp_string</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Supported forms are combinations of date (&quot;YYYY-MM-DD&quot;, &quot;DD/MM/YYYY&quot;), time (&quot;HH:mm:ss&quot;, &quot;HH:mm&quot;) and timezone (&quot;CET&quot;, &quot;+01:00&quot;, &quot;-02:00&quot;, ...)</li>
+<li>Typically: &quot;2019-06-02 12:35:45 +01:00&quot;, &quot;2019-06-02T12:35:45+01:00&quot;, &quot;12:35:45+01:00 2019-06-02&quot;, ...</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+<li><code>[ date, time, time_zone ]</code></li>
+<li>where:
+<ul>
+<li><code>date</code> is always &quot;YYYY-MM-DD&quot; or &quot;&quot;</li>
+<li><code>time</code> is always &quot;HH:mm:SS&quot; or &quot;HH:mm:00&quot; or &quot;&quot;</li>
+<li><code>time_zone</code> is always &quot;[+-]\d\d:\d\d&quot; or &quot;CET&quot; or &quot;&quot;</li>
+</ul>
+</li>
 </ul>
 </div>
+</div>
+<a name="methods_toDateString"></a>
+<div class="method item public">
+    Function <strong class="name"><code>toDateString</code></strong>( <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l795"><code>src\jaaJSU - $time.sub.js:795</code></a>
+    </span><br>
+    <p>Function generates text (including 2-digits month and day and full year) based on <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>params_obj</code> <strong>&lt;DateArray&gt;</strong>
+        <ul>
+<li>See <a href="#methods_toStringFromObject">toStringFromObject</a>.</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>DateArray</code>=&gt; <strong><String></strong></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $time.toDateString({ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019&quot;</code></pre>
+
+</div>
+<a name="methods_toDateTimeString"></a>
+<div class="method item public">
+    Function <strong class="name"><code>toDateTimeString</code></strong>( <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l810"><code>src\jaaJSU - $time.sub.js:810</code></a>
+    </span><br>
+    <p>Function generates text (including 2-digits month and day and full year and time) based on <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>params_obj</code> <strong>&lt;DateArray&gt;</strong>
+        <ul>
+<li>See <a href="#methods_toStringFromObject">toStringFromObject</a>.</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>DateArray</code>=&gt; <strong><String></strong></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $time.toDateTimeString({ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;</code></pre>
+
+</div>
+<a name="methods_toString"></a>
+<div class="method item public">
+    Function <strong class="name"><code>toString</code></strong>( <code>format_string</code>, <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l871"><code>src\jaaJSU - $time.sub.js:871</code></a>
+    </span><br>
+    <p>Function generates text based on <code>format_string</code>, <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>format_string</code> <strong>&lt;String&gt;</strong>
+        <ul>
+<li>Placeholder for replace/generate final string (eg. &quot;MM&quot;===two digits month)</li>
+<li>see <a href="#methods_getFormatObject"><code>getFormatObject</code></a></li>
+</ul>
+
+        </li>
+        <li>
+            <code>params_obj</code> <strong>&lt;DateArray&gt;</strong>
+        <ul>
+<li>It is in fact argument for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"><code>Date.prototype.toLocaleString</code></a></li>
+</ul>
+
+            <ul>
+                <li><code>locale</code> <strong>&lt;String&gt;</strong> <ul>
+<li>In which language/national format generate final string</li>
+</ul>
+
+                </li>
+                <li><code>timeZone</code> <strong>&lt;String&gt;</strong> <ul>
+<li>Time zone name from <a href="#props_ary_ianna_time_zones"><code>ary_ianna_time_zones</code></a>.</li>
+</ul>
+
+                </li>
+                <li><code>declension</code> <strong>&lt;String&gt;</strong> <ul>
+<li><strong>default: true</strong></li>
+<li>Needed for some languages — for example in Czech: &quot;10. července&quot; (<code>declension=true</code>), or &quot;10. červenec&quot; (<code>declension=false</code>)</li>
+</ul>
+
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>DateArray</code>=&gt; <strong>&lt;String&gt;</strong></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $time.toStringFromObject(&quot;DD/MM/YYYY HH:mm:SS&quot;,{ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;</code></pre>
+
+</div>
+<a name="methods_toStringFromObject"></a>
+<div class="method item private">
+    Function <strong class="name"><code>toStringFromObject</code></strong>( <code>format</code>, <code>params_obj</code> ) <br/><strong class="private_method">/* private method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l603"><code>src\jaaJSU - $time.sub.js:603</code></a>
+    </span><br>
+    <p>Function generates text based on <code>format</code>, <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>format</code> <strong>&lt;Array&gt;</strong>
+        <ul>
+<li>Placeholder for replace/generate final string (eg. [[ &quot;month&quot;, &quot;2-digits&quot; ]]===two digits month)</li>
+<li>see <a href="#methods_getFormatObject"><code>getFormatObject</code></a> an <a href="#props_format_arrays"><code>format_arrays</code></a>.</li>
+</ul>
+
+        </li>
+        <li>
+            <code>params_obj</code> <strong>&lt;DateArray&gt;</strong>
+        <ul>
+<li>It is in fact argument for <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"><code>Date.prototype.toLocaleString</code></a></li>
+</ul>
+
+            <ul>
+                <li><code>locale</code> <strong>&lt;String&gt;</strong> <ul>
+<li>In which language/national format generate final string</li>
+</ul>
+
+                </li>
+                <li><code>timeZone</code> <strong>&lt;String&gt;</strong> <ul>
+<li>Time zone name from <a href="#props_ary_ianna_time_zones"><code>ary_ianna_time_zones</code></a>.</li>
+</ul>
+
+                </li>
+                <li><code>declension</code> <strong>&lt;String&gt;</strong> <ul>
+<li><strong>default: true</strong></li>
+<li>Needed for some languages — for example in Czech: &quot;10. července&quot; (<code>declension=true</code>), or &quot;10. červenec&quot; (<code>declension=false</code>)</li>
+</ul>
+
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>DateArray</code>=&gt; <strong>&lt;String&gt;</strong></li>
+</ul>
+</div>
+        <h5>Example</h5>
+        <pre class="code prettyprint"><code> $time.toStringFromObject(&quot;DD/MM/YYYY HH:mm:SS&quot;,{ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;</code></pre>
+
+</div>
+            </div>
+            <div id="props"><h4>Properties</h4>
+<a name="props__"></a>
+<div class="props item">
+    <code>_</code> &lt;<strong>Undefined</strong>&gt;<br/><strong class="public_method">/* public property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1041"><code>src\jaaJSU - $time.sub.js:1041</code></a></span>
+    <p>Alias for <code>undefined</code> which can be used to trigger default value of argument. (eg. <code>test($time._)===&quot;A&quot;; function test(a= &quot;A&quot;){ return a; }</code>)</p>
+
+</div>
+<a name="props_ary_ianna_time_offsets"></a>
+<div class="props item">
+    <code>ary_ianna_time_offsets</code> &lt;<strong>Object</strong>&gt;<br/><strong class="private_method">/* private property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l429"><code>src\jaaJSU - $time.sub.js:429</code></a></span>
+    <p>This object stores indeces for all timezones. (eg. <code>ary_ianna_time_offsets[&quot;CET&quot;]===113</code> and <code>ary_ianna_time_zones[113]==='Europe/Prague'</code> )</p>
+
+</div>
+<a name="props_ary_ianna_time_zones"></a>
+<div class="props item">
+    <code>ary_ianna_time_zones</code> &lt;<strong>Array</strong>&gt;<br/><strong class="private_method">/* private property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l75"><code>src\jaaJSU - $time.sub.js:75</code></a></span>
+    <p>This array stores all time zones names (eg. 'Europe/Andorra') supported by <code>{ timeZone: ... }</code> in second argument of <code>Date.prototype.toLocaleString</code>.</p>
+
+</div>
+<a name="props_format_arrays"></a>
+<div class="props item">
+    <code>format_arrays</code> &lt;<strong>Object</strong>&gt;<br/><strong class="private_method">/* private property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l24"><code>src\jaaJSU - $time.sub.js:24</code></a></span>
+    <p>Internal object holding predefined formating arguments for <code>getFormatObject</code>. For example <code>format_arrays.YYYYMMDD=== [ [&quot;year&quot;, &quot;numeric&quot;], dash, [&quot;month&quot;, two_dig], dash, [&quot;day&quot;, two_dig] ]</code>.</p>
+
+</div>
+<a name="props_format_objects"></a>
+<div class="props item">
+    <code>format_objects</code> &lt;<strong>Object</strong>&gt;<br/><strong class="private_method">/* private property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l10"><code>src\jaaJSU - $time.sub.js:10</code></a></span>
+    <p>Internal object holding predefined formating arguments for <code>Date.prototype.toLocaleString</code>. For example <code>format_objects.HHmm==={ hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot; }</code>.</p>
+
+</div>
+<a name="props_ordinal_numbers"></a>
+<div class="props item">
+    <code>ordinal_numbers</code> &lt;<strong>Array</strong>&gt;<br/><strong class="private_method">/* private property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l39"><code>src\jaaJSU - $time.sub.js:39</code></a></span>
+    <p>Internal helper array for <code>getOrdinalSuffix</code>.</p>
+
 </div>
             </div>
     </div>
