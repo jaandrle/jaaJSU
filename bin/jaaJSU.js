@@ -17,7 +17,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.5.0";
+        window[module_name+"_version"]= "0.5.1";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -2588,9 +2588,9 @@
         
         function getDiff(reference_time, output_measure_string= "seconds", full_precision= false){
             const c_measure= { seconds: 1000, minutes: 60000 /* 60*sec */, hours: 3600000 /* 60*mins */, days: 86400000 /* 24*days */, weeks: 604800000 /* 7*days */, months: 2419200000 /* 4*weeks */, years: 29030400000 /* 12*months */ };
-            const reference_time_ms= reference_time ? toDate(reference_time).getTime() : false;
+            const diffFun= getDiffMs(reference_time, -c_measure[output_measure_string]);
             return function diff(target_time){
-                const diff_val= getDiffMs(reference_time_ms, -c_measure[output_measure_string])(target_time);
+                const diff_val= diffFun(target_time);
                 return full_precision ? diff_val : Math.floor(diff_val);
             };
         }
