@@ -96,7 +96,7 @@
  * @return {String}
  *  * Timestamp
  */
-$time.getTimeStamp= t=&gt; $time.toDateTimeString()($time.fromDateArguments(t));
+$time.getTimeStamp= t=&gt; $time.toStringPreDefined(&quot;YMDHms_2d&quot;)($time.fromDateArguments(t));
 /**
  * Function returns timestamp in the form of &quot;YYYY-MM-DD&quot;.
  * @method getDateStamp
@@ -107,7 +107,7 @@ $time.getTimeStamp= t=&gt; $time.toDateTimeString()($time.fromDateArguments(t));
  * @return {String}
  *  * Datestamp
  */
-$time.getDateStamp= t=&gt; $time.toDateString()($time.fromDateArguments(t));
+$time.getDateStamp= t=&gt; $time.toStringPreDefined(&quot;YMD_2d&quot;)($time.fromDateArguments(t));
 </pre>
 
 </div>
