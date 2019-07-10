@@ -2490,7 +2490,7 @@
         {
             "file": "src\\jaaJSU - $time.sub.js",
             "line": 90,
-            "description": "This array stores all time zones names (eg. 'Europe/Andorra') supported by `{ timeZone: ... }` in second argument of `Date.prototype.toLocaleString`.",
+            "description": "This array stores all time zones names (eg. 'Europe/Andorra') supported by `{ timeZone: ... }` in second argument of `Date.prototype.toLocaleString`.\n\nOriginal from [stackoverflow.com/a/54500197](https://stackoverflow.com/a/54500197).",
             "itemtype": "property",
             "name": "ary_ianna_time_zones",
             "type": "Array",
@@ -2500,8 +2500,8 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 444,
-            "description": "This object stores indeces for all timezones. (eg. `ary_ianna_time_offsets[\"CET\"]===113` and `ary_ianna_time_zones[113]==='Europe/Prague'` )",
+            "line": 446,
+            "description": "This object stores offsets in `ary_ianna_time_zones` (keys) and one corresponding index.\n\nSo for exmple, `ary_ianna_time_offsets[\"CET\"]` is equal to **284** which is index of `ary_ianna_time_zones[284]==='Europe/Prague'` (in winter \"+01:00\" and in summer \"+02:00\").\n\nNext example is `ary_ianna_time_offsets[\"-01:00\"]` is equal to **238** which is index of `ary_ianna_time_zones[238]==='Atlantic/Cape_Verde'` (always \"-01:00\").\n\n**IMPORTANT NOTE:** BST, EET, WET hasn't been validated! … idea is to behave the same way like CET",
             "itemtype": "property",
             "name": "ary_ianna_time_offsets",
             "type": "Object",
@@ -2511,7 +2511,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 491,
+            "line": 499,
             "description": "Function generates `DateArray` from instance of `Date`.",
             "itemtype": "method",
             "name": "fromDate",
@@ -2532,7 +2532,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 504,
+            "line": 512,
             "description": "Function generates `DateArray` from arguments to initialize `Date`.",
             "itemtype": "method",
             "name": "fromDateArguments",
@@ -2553,7 +2553,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 517,
+            "line": 525,
             "description": "Function generates `DateArray` from current date and time.",
             "itemtype": "method",
             "name": "fromNow",
@@ -2567,7 +2567,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 528,
+            "line": 536,
             "description": "Function generates `DateArray` from passed string.",
             "itemtype": "method",
             "name": "fromString",
@@ -2595,7 +2595,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 555,
+            "line": 563,
             "description": "Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like string.",
             "itemtype": "method",
             "name": "toDateArray",
@@ -2616,7 +2616,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 618,
+            "line": 626,
             "description": "Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.",
             "itemtype": "method",
             "name": "toStringFromObject",
@@ -2662,7 +2662,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 665,
+            "line": 673,
             "description": "Generates multidimensional array for formatting (eg. \"YYYY\"=> `[ [ \"year\", \"numeric\" ] ]`).",
             "itemtype": "method",
             "name": "getFormatObject",
@@ -2683,7 +2683,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 794,
+            "line": 802,
             "description": "Function initializes `Date` from `DateArray`.",
             "itemtype": "method",
             "name": "toDate",
@@ -2704,7 +2704,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 810,
+            "line": 818,
             "description": "It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).",
             "itemtype": "method",
             "name": "toLocaleString",
@@ -2742,7 +2742,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 873,
+            "line": 881,
             "description": "Function generates text based on `format_string`, `locale` and `timeZone` from `DateArray`.",
             "itemtype": "method",
             "name": "toString",
@@ -2788,7 +2788,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 898,
+            "line": 906,
             "description": "Similar to [`toString`](#methods_toString) generates string based on given format. But now based on existing predefined/cached formats see [`format_arrays`](#props_format_arrays).",
             "itemtype": "method",
             "name": "toStringPreDefined",
@@ -2817,7 +2817,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1000,
+            "line": 1008,
             "description": "Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)",
             "itemtype": "method",
             "name": "double",
@@ -2838,7 +2838,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1013,
+            "line": 1021,
             "description": "Returns number of days in given month (and year)",
             "itemtype": "method",
             "name": "daysInMonth",
@@ -2864,7 +2864,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1029,
+            "line": 1037,
             "description": "Returns number of days in given month",
             "itemtype": "method",
             "name": "getDaysInMonth",
@@ -2885,7 +2885,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1044,
+            "line": 1052,
             "itemtype": "method",
             "name": "getMonthName",
             "access": "public",
@@ -2915,7 +2915,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1070,
+            "line": 1078,
             "description": "See [`ordinal_numbers`](#props_ordinal_numbers).",
             "itemtype": "method",
             "name": "getOrdinalSuffix",
@@ -2939,7 +2939,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1089,
+            "line": 1097,
             "description": "Alias for `undefined` which can be used to trigger default value of argument. (eg. `test($time._)===\"A\"; function test(a= \"A\"){ return a; }`)",
             "itemtype": "property",
             "name": "_",
@@ -3012,55 +3012,55 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:491"
+            "line": " src\\jaaJSU - $time.sub.js:499"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:504"
+            "line": " src\\jaaJSU - $time.sub.js:512"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:517"
+            "line": " src\\jaaJSU - $time.sub.js:525"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:528"
+            "line": " src\\jaaJSU - $time.sub.js:536"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:555"
+            "line": " src\\jaaJSU - $time.sub.js:563"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:618"
+            "line": " src\\jaaJSU - $time.sub.js:626"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:665"
+            "line": " src\\jaaJSU - $time.sub.js:673"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:794"
+            "line": " src\\jaaJSU - $time.sub.js:802"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:810"
+            "line": " src\\jaaJSU - $time.sub.js:818"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:873"
+            "line": " src\\jaaJSU - $time.sub.js:881"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:898"
+            "line": " src\\jaaJSU - $time.sub.js:906"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:1013"
+            "line": " src\\jaaJSU - $time.sub.js:1021"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:1029"
+            "line": " src\\jaaJSU - $time.sub.js:1037"
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",
