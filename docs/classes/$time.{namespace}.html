@@ -71,12 +71,14 @@
                 </div>
                 <div class="bd">
                     <ul>
+                            <li class="menuli"><a href="#methods_daysInMonth">daysInMonth</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_double">double</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_fromDate">fromDate</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_fromDateArguments">fromDateArguments</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_fromNow">fromNow</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_fromString">fromString</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_getDateStamp">getDateStamp</a> <i class="public_method">(public)</i></li>
+                            <li class="menuli"><a href="#methods_getDaysInMonth">getDaysInMonth</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_getFormatObject">getFormatObject</a> <i class="private_method">(private)</i></li>
                             <li class="menuli"><a href="#methods_getMonthName">getMonthName</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_getOrdinalSuffix">getOrdinalSuffix</a> <i class="public_method">(public)</i></li>
@@ -121,6 +123,39 @@
     </ul>
     <div>
             <div id="methods"><h4>Methods</h4>
+<a name="methods_daysInMonth"></a>
+<div class="method item public">
+    Number <strong class="name"><code>daysInMonth</code></strong>( <code>month</code>, <code>year</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1013"><code>src\jaaJSU - $time.sub.js:1013</code></a>
+    </span><br>
+    <p>Returns number of days in given month (and year)</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>month</code> <strong>&lt;String | Number&gt;</strong>
+        <ul>
+<li>ISO number of month (eg 01 or 1 for January)</li>
+</ul>
+
+        </li>
+        <li>
+            <code>year</code> <strong>&lt;String | Number&gt;</strong>
+        <ul>
+<li><strong>Default: current year</strong></li>
+<li>ISO nimber of year (eg. 2019)</li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Number&gt; <ul>
+<li>total of days</li>
+</ul>
+</div>
+</div>
 <a name="methods_double"></a>
 <div class="method item public">
     String <strong class="name"><code>double</code></strong>( <code>time</code> ) <br/><strong class="public_method">/* public method */</strong>
@@ -266,6 +301,32 @@
 </ul>
 </div>
 </div>
+<a name="methods_getDaysInMonth"></a>
+<div class="method item public">
+    Number <strong class="name"><code>getDaysInMonth</code></strong>( <code>date_array</code> ) <br/><strong class="public_method">/* public method */</strong>
+    <br>
+    <span class="foundat">
+        
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1029"><code>src\jaaJSU - $time.sub.js:1029</code></a>
+    </span><br>
+    <p>Returns number of days in given month</p>
+
+    <strong>Parameters:</strong>
+    <ul class="params">
+        <li>
+            <code>date_array</code> <strong>&lt;DateArray&gt;</strong>
+        <ul>
+<li><strong>Default: current date</strong></li>
+<li>see <a href="#methods_toDateArray"><code>toDateArray</code></a></li>
+</ul>
+
+        </li>
+    </ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Number&gt; <ul>
+<li>total of days</li>
+</ul>
+</div>
+</div>
 <a name="methods_getFormatObject"></a>
 <div class="method item private">
     ...Array <strong class="name"><code>getFormatObject</code></strong>( <code>format_string</code> ) <br/><strong class="private_method">/* private method */</strong>
@@ -298,7 +359,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1016"><code>src\jaaJSU - $time.sub.js:1016</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1044"><code>src\jaaJSU - $time.sub.js:1044</code></a>
     </span><br>
     
     <strong>Parameters:</strong>
@@ -334,7 +395,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1042"><code>src\jaaJSU - $time.sub.js:1042</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1070"><code>src\jaaJSU - $time.sub.js:1070</code></a>
     </span><br>
     <p>See <a href="#props_ordinal_numbers"><code>ordinal_numbers</code></a>.</p>
 
@@ -677,7 +738,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 <a name="props__"></a>
 <div class="props item">
     <code>_</code> &lt;<strong>Undefined</strong>&gt;<br/><strong class="public_method">/* public property */</strong><br>
-    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1061"><code>src\jaaJSU - $time.sub.js:1061</code></a></span>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1089"><code>src\jaaJSU - $time.sub.js:1089</code></a></span>
     <p>Alias for <code>undefined</code> which can be used to trigger default value of argument. (eg. <code>test($time._)===&quot;A&quot;; function test(a= &quot;A&quot;){ return a; }</code>)</p>
 
 </div>
@@ -703,7 +764,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 <p>Keys:</p>
 <ul>
 <li><code>YMD_2d</code>: shows <strong>&quot;YYYY-MM-DD&quot;</strong></li>
-<li><code>YMDHmS_2d</code>: shows <strong>&quot;YYYY-MM-DD HH:mm:ss&quot;</strong></li>
+<li><code>YMDHms_2d</code>: shows <strong>&quot;YYYY-MM-DD HH:mm:ss&quot;</strong></li>
 <li><code>Hms_2d</code>: shows <strong>&quot;HH:mm:ss&quot;</strong></li>
 </ul>
 

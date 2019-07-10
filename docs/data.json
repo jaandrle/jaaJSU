@@ -2420,7 +2420,7 @@
         {
             "file": "src\\jaaJSU - $time.sub.js",
             "line": 33,
-            "description": "Internal object holding predefined formating arguments for `getFormatObject`. For example `format_arrays.YYYYMMDD=== [ [\"year\", \"numeric\"], dash, [\"month\", two_dig], dash, [\"day\", two_dig] ]`.\n\nKeys:\n - `YMD_2d`: shows **\"YYYY-MM-DD\"**\n - `YMDHmS_2d`: shows **\"YYYY-MM-DD HH:mm:ss\"**\n - `Hms_2d`: shows **\"HH:mm:ss\"**",
+            "description": "Internal object holding predefined formating arguments for `getFormatObject`. For example `format_arrays.YYYYMMDD=== [ [\"year\", \"numeric\"], dash, [\"month\", two_dig], dash, [\"day\", two_dig] ]`.\n\nKeys:\n - `YMD_2d`: shows **\"YYYY-MM-DD\"**\n - `YMDHms_2d`: shows **\"YYYY-MM-DD HH:mm:ss\"**\n - `Hms_2d`: shows **\"HH:mm:ss\"**",
             "itemtype": "property",
             "name": "format_arrays",
             "type": "Object",
@@ -2838,7 +2838,54 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1016,
+            "line": 1013,
+            "description": "Returns number of days in given month (and year)",
+            "itemtype": "method",
+            "name": "daysInMonth",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "month",
+                    "description": "- ISO number of month (eg 01 or 1 for January)",
+                    "type": "String|Number"
+                },
+                {
+                    "name": "year",
+                    "description": "- **Default: current year**\n - ISO nimber of year (eg. 2019)",
+                    "type": "String|Number"
+                }
+            ],
+            "return": {
+                "description": "- total of days",
+                "type": "Number"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 1029,
+            "description": "Returns number of days in given month",
+            "itemtype": "method",
+            "name": "getDaysInMonth",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "date_array",
+                    "description": "- **Default: current date**\n - see [`toDateArray`](#methods_toDateArray)",
+                    "type": "DateArray"
+                }
+            ],
+            "return": {
+                "description": "- total of days",
+                "type": "Number"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 1044,
             "itemtype": "method",
             "name": "getMonthName",
             "access": "public",
@@ -2868,7 +2915,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1042,
+            "line": 1070,
             "description": "See [`ordinal_numbers`](#props_ordinal_numbers).",
             "itemtype": "method",
             "name": "getOrdinalSuffix",
@@ -2892,7 +2939,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1061,
+            "line": 1089,
             "description": "Alias for `undefined` which can be used to trigger default value of argument. (eg. `test($time._)===\"A\"; function test(a= \"A\"){ return a; }`)",
             "itemtype": "property",
             "name": "_",
@@ -3006,6 +3053,14 @@
         {
             "message": "replacing incorrect tag: returns with return",
             "line": " src\\jaaJSU - $time.sub.js:898"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:1013"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:1029"
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",
