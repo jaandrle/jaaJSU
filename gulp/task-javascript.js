@@ -1,11 +1,11 @@
 /* jshint esversion: 6,-W097, -W040, node: true, expr: true, undef: true */
 module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
-    /* jshint -W061 */const gulp_place= require("./gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str)});/* jshint +W061 */
     let namespaces= {$string: "$string", $dom: "$dom", $async: "$async", $optimizier: "$optimizier", $time: "$time", $array: "$array", $object: "$object", $function: "$function"};
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
     const new_line= ()=>"\n";
     const original_doc= `* Original repository can be found at gulp_place("app.homepage", "variable").${new_line()} * @module jaaJSU.{global}`;
     return function(cb){
+        /* jshint -W061 */const gulp_place= require("./gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str)});/* jshint +W061 */
         let cmd;
         cmd= $o.spawn("node", ['node_modules/jshint/bin/jshint', app.src_folder], {});
         cmd.stdout.on('data', function(data){ error.addText(data.toString()+"\n"); });

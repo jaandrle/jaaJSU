@@ -10,7 +10,25 @@
     window[module_name+"_version"]= "0.5.2";
 })("jaaJSU", function(window, document){
     var out= {};
-
+    function export_as(obj, key){ out[key]= obj; }
+    function __eachBind(fun){
+        return (i_function, scope, share)=> iterable=> fun(iterable, i_function, scope, share);
+    }
+    function __eachInArrayLike(iterable, i_function, scope, share){
+        const key_length= iterable.length;
+        for(let key=0, j=key_length-1; key<key_length; key++, j--){
+            share= i_function.call(scope, { item: iterable[key], last: !j, key, share });
+        }
+        return share;
+    }
+    function __eachInArrayLikeDynamic(iterable, i_function, scope, share){
+        for(let key=0; key<iterable.length; key++){
+            share= i_function.call(scope, { item: iterable[key], key, share });
+        }
+        return share;
+    }
+    
+    /* global isMandatory *///gulp.keep.line
     
 
     /**
