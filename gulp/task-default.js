@@ -1,5 +1,6 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true */
-module.exports= function({app, $gulp_folder, $o, $run, gulp}){
+module.exports= function(config){
+    const {app, $gulp_folder, $o, $run, gulp}= config;
     return function(cb){
         $o.fs.writeFileSync($gulp_folder+'build.log', "");
         $o.fs.readFile($gulp_folder+'gulpfile.log', function(err,data){
@@ -17,7 +18,12 @@ module.exports= function({app, $gulp_folder, $o, $run, gulp}){
             for(let i= 0, i_length= app.sequence.length; i < i_length; i++){
                 if(app.sequence[i].charAt(0)!=="!") sequence[sequence.length]= app.sequence[i];
             }
-            gulp.series(...sequence)(cb);
+            config.app.standalone= "standalone";
+            gulp.series(...sequence)(function(){
+                config.app.standalone= "cordova";
+                config.app.bin_folder+= "_cordova";
+                gulp.series(...sequence.filter(v=> v!=="doc"))(cb);
+            });
         });
     };
 };
