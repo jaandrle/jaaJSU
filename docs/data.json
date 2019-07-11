@@ -888,6 +888,35 @@
         {
             "file": "src\\namespaces\\$function.sub.js",
             "line": 9,
+            "description": "Provide **input →⇶ …functions ⇛ reduction → output** functionality.",
+            "itemtype": "method",
+            "name": "branches",
+            "access": "public",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reduceFun",
+                    "description": "- **By default behaves like 'map'**\n - function in familiar form `(acc, nth_result)=> …`.",
+                    "type": "Function"
+                },
+                {
+                    "name": "reduceInitValueCreator",
+                    "description": "- **Default: function returning an empty array**\n - initial value for `acc` in `reduceFun`\n - **if** not functions, the same behaviour is used as in case of `*.reduce(...)`\n - **else** the result of function is used (because of *call-by-reference* in case of **Array**s, **Object**s, …).",
+                    "type": "Function|Mixed"
+                }
+            ],
+            "return": {
+                "description": "- `...functions`**&lt;…Function&gt;** `=>` **&lt;Function&gt;**\n     - `...inputs`**&lt;…Mixed&gt;** `=>` **&lt;Mixed&gt;**\n     - result of `reduceFun`",
+                "type": "Function"
+            },
+            "example": [
+                "\n     const testFunction= $function.branches((acc, curr)=> acc&&curr, true)(\n         ({ a })=> a===\"A\",\n         ({ b })=> b===\"B\"\n     );\n     testFunction({ a: \"A\", b: \"B\" });//= true\n     testFunction({ a: \"B\", b: \"A\" });//= false"
+            ],
+            "class": "$function.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$function.sub.js",
+            "line": 41,
             "description": "EXPERIMENT!: Function composing using `$dom.component` like syntax",
             "itemtype": "method",
             "name": "component",
@@ -906,7 +935,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 24,
+            "line": 56,
             "description": "Shorthand for `const mixed= ...; if(mixed) fun(mixed);`",
             "itemtype": "method",
             "name": "conditionalCall",
@@ -930,7 +959,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 39,
+            "line": 71,
             "description": "Helper for returnin constant",
             "itemtype": "method",
             "name": "constant",
@@ -952,7 +981,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 49,
+            "line": 81,
             "description": "Functional-like alternative for `for(...){functions[nth](..input);}`.",
             "itemtype": "method",
             "name": "each",
@@ -972,7 +1001,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 60,
+            "line": 92,
             "description": "`id=> id`",
             "itemtype": "method",
             "name": "identity",
@@ -994,7 +1023,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 70,
+            "line": 102,
             "description": "If `onTest` returns `true` a `onTrue` is called else `onFalse`",
             "params": [
                 {
@@ -1028,7 +1057,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 93,
+            "line": 125,
             "description": "EXPERIMENT!: \"Bind\" alternative\nvs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)",
             "itemtype": "method",
             "name": "partial",
@@ -1052,7 +1081,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 107,
+            "line": 139,
             "description": "Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)",
             "itemtype": "method",
             "name": "schedule",
@@ -1088,7 +1117,7 @@
         },
         {
             "file": "src\\namespaces\\$function.sub.js",
-            "line": 119,
+            "line": 151,
             "description": "Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.",
             "itemtype": "method",
             "name": "sequention",
@@ -3023,7 +3052,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$function.sub.js:93"
+            "line": " src\\namespaces\\$function.sub.js:41"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$function.sub.js:125"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -3123,7 +3156,7 @@
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",
-            "line": " src\\namespaces\\$function.sub.js:70"
+            "line": " src\\namespaces\\$function.sub.js:102"
         },
         {
             "message": "Missing item type\nConverts string to camel case format \"peter\"=>\"Peter\"",

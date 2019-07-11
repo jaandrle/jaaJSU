@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.5.2</title>
+    <title>Documentation: jaaJSU@0.5.3</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$function.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.2</em>
+            <em>API Docs for: 0.5.3</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -92,6 +92,38 @@ gulp_place(&quot;namespaces/$optimizier.sub.js&quot;, &quot;file_once&quot;);/* 
  * @static
  */
 var $function= {
+    /**
+     * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
+     * @method branches
+     * @public
+     * @param {Function} reduceFun
+     *  - **By default behaves like &#x27;map&#x27;**
+     *  - function in familiar form &#x60;(acc, nth_result)=&gt; …&#x60;.
+     * @param {Function|Mixed} reduceInitValueCreator
+     *  - **Default: function returning an empty array**
+     *  - initial value for &#x60;acc&#x60; in &#x60;reduceFun&#x60;
+     *  - **if** not functions, the same behaviour is used as in case of &#x60;*.reduce(...)&#x60;
+     *  - **else** the result of function is used (because of *call-by-reference* in case of **Array**s, **Object**s, …).
+     * @returns {Function}
+     *  - &#x60;...functions&#x60;**&amp;lt;…Function&amp;gt;** &#x60;=&gt;&#x60; **&amp;lt;Function&amp;gt;**
+     *      - &#x60;...inputs&#x60;**&amp;lt;…Mixed&amp;gt;** &#x60;=&gt;&#x60; **&amp;lt;Mixed&amp;gt;**
+     *      - result of &#x60;reduceFun&#x60;
+     * @example
+     *      const testFunction= $function.branches((acc, curr)=&gt; acc&amp;&amp;curr, true)(
+     *          ({ a })=&gt; a===&quot;A&quot;,
+     *          ({ b })=&gt; b===&quot;B&quot;
+     *      );
+     *      testFunction({ a: &quot;A&quot;, b: &quot;B&quot; });//= true
+     *      testFunction({ a: &quot;B&quot;, b: &quot;A&quot; });//= false
+     */
+    branches: function(reduceFun= (acc, res)=&gt; (acc.push(res), acc), reduceInitValueCreator= ()=&gt; []){
+        return function mapFunctions(...functions){
+            return function inputProccess(...inputs){
+                const finalReduceFun= (acc, fun)=&gt; reduceFun(acc, fun(...inputs));
+                return functions.reduce(finalReduceFun, typeof reduceInitValueCreator===&quot;function&quot; ? reduceInitValueCreator() : reduceInitValueCreator);
+            };
+        };
+    },
     /**
      * EXPERIMENT!: Function composing using &#x60;$dom.component&#x60; like syntax
      * @method component

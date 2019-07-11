@@ -7,7 +7,7 @@
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.5.2";
+    window[module_name+"_version"]= "0.5.3";
 })("jaaJSU", function(window, document){
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
@@ -986,6 +986,38 @@
      * @static
      */
     var $function= {
+        /**
+         * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
+         * @method branches
+         * @public
+         * @param {Function} reduceFun
+         *  - **By default behaves like 'map'**
+         *  - function in familiar form `(acc, nth_result)=> …`.
+         * @param {Function|Mixed} reduceInitValueCreator
+         *  - **Default: function returning an empty array**
+         *  - initial value for `acc` in `reduceFun`
+         *  - **if** not functions, the same behaviour is used as in case of `*.reduce(...)`
+         *  - **else** the result of function is used (because of *call-by-reference* in case of **Array**s, **Object**s, …).
+         * @returns {Function}
+         *  - `...functions`**&lt;…Function&gt;** `=>` **&lt;Function&gt;**
+         *      - `...inputs`**&lt;…Mixed&gt;** `=>` **&lt;Mixed&gt;**
+         *      - result of `reduceFun`
+         * @example
+         *      const testFunction= $function.branches((acc, curr)=> acc&&curr, true)(
+         *          ({ a })=> a==="A",
+         *          ({ b })=> b==="B"
+         *      );
+         *      testFunction({ a: "A", b: "B" });//= true
+         *      testFunction({ a: "B", b: "A" });//= false
+         */
+        branches: function(reduceFun= (acc, res)=> (acc.push(res), acc), reduceInitValueCreator= ()=> []){
+            return function mapFunctions(...functions){
+                return function inputProccess(...inputs){
+                    const finalReduceFun= (acc, fun)=> reduceFun(acc, fun(...inputs));
+                    return functions.reduce(finalReduceFun, typeof reduceInitValueCreator==="function" ? reduceInitValueCreator() : reduceInitValueCreator);
+                };
+            };
+        },
         /**
          * EXPERIMENT!: Function composing using `$dom.component` like syntax
          * @method component
