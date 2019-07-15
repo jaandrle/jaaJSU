@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.5.3</title>
+    <title>Documentation: jaaJSU@0.6.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\special_functions\$time_cordova.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.3</em>
+            <em>API Docs for: 0.6.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -96,7 +96,7 @@
  * @return {String}
  *  * Timestamp
  */
-$time.getTimeStamp= t=&gt; $time.toStringPreDefined(&quot;YMDHms_2d&quot;)($time.fromDateArguments(t));
+$time.getTimeStamp= t=&gt; $time.toString($time.formats.SQL)($time.fromDateArguments(t));
 /**
  * Function returns timestamp in the form of &quot;YYYY-MM-DD&quot;.
  * @method getDateStamp
@@ -107,7 +107,7 @@ $time.getTimeStamp= t=&gt; $time.toStringPreDefined(&quot;YMDHms_2d&quot;)($time
  * @return {String}
  *  * Datestamp
  */
-$time.getDateStamp= t=&gt; $time.toStringPreDefined(&quot;YMD_2d&quot;)($time.fromDateArguments(t));
+$time.getDateStamp= t=&gt; $time.toString($time.formats.SQL_DATE)($time.fromDateArguments(t));
 </pre>
 
 </div>

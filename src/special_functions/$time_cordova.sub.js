@@ -10,7 +10,7 @@
  * @return {String}
  *  * Timestamp
  */
-$time.getTimeStamp= t=> $time.toStringPreDefined("YMDHms_2d")($time.fromDateArguments(t));
+$time.getTimeStamp= t=> $time.toString($time.formats.SQL)($time.fromDateArguments(t));
 /**
  * Function returns timestamp in the form of "YYYY-MM-DD".
  * @method getDateStamp
@@ -21,4 +21,4 @@ $time.getTimeStamp= t=> $time.toStringPreDefined("YMDHms_2d")($time.fromDateArgu
  * @return {String}
  *  * Datestamp
  */
-$time.getDateStamp= t=> $time.toStringPreDefined("YMD_2d")($time.fromDateArguments(t));
+$time.getDateStamp= t=> $time.toString($time.formats.SQL_DATE)($time.fromDateArguments(t));

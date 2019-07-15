@@ -7,7 +7,7 @@
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.5.3";
+    window[module_name+"_version"]= "0.6.0";
 })("jaaJSU", function(window, document){
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
@@ -1767,7 +1767,7 @@
      * @class $time.{namespace}
      * @static
      */
-    const $time= (function init(){/* version: "0.3.0" */
+    const $time= (function init(){/* version: "0.4.0" */
         const /* internal store */
         /**
          * Internal object holding predefined formating arguments for `$time.toLocaleString`. For example `format_objects.time==={ hour: "2-digit", minute: "2-digit" }`.
@@ -1796,17 +1796,17 @@
          * Internal object holding predefined formating arguments for `getFormatObject`. For example `format_arrays.YYYYMMDD=== [ ["year", "numeric"], dash, ["month", two_dig], dash, ["day", two_dig] ]`.
          * 
          * Keys:
-         *  - `YMD_2d`: shows **"YYYY-MM-DD"**
-         *  - `YMDHms_2d`: shows **"YYYY-MM-DD HH:mm:ss"**
-         *  - `Hms_2d`: shows **"HH:mm:ss"**
+         *  - `SQL_DATE`: shows **"YYYY-MM-DD"**
+         *  - `SQL`: shows **"YYYY-MM-DD HH:mm:ss"**
+         *  - `SQL_TIME`: shows **"HH:mm:ss"**
          * @property {Object} format_arrays
          * @private
          * @for $time.{namespace}
          */
             format_arrays= (({ dash, colon, space, two_dig })=>({
-                YMD_2d: [ ["year", "numeric"], dash, ["month", two_dig], dash, ["day", two_dig] ],
-                Hms_2d: [ ["hour", two_dig, "h23"], colon, ["minute", two_dig], colon, ["second", two_dig] ],
-                YMDHms_2d: [ ["year", "numeric"], dash, ["month", two_dig], dash, ["day", two_dig], space, ["hour", two_dig, "h23"], colon, ["minute", two_dig], colon, ["second", two_dig] ]
+                SQL_DATE: [ ["year", "numeric"], dash, ["month", two_dig], dash, ["day", two_dig] ],
+                SQL_TIME: [ ["hour", two_dig, "h23"], colon, ["minute", two_dig], colon, ["second", two_dig] ],
+                SQL: [ ["year", "numeric"], dash, ["month", two_dig], dash, ["day", two_dig], space, ["hour", two_dig, "h23"], colon, ["minute", two_dig], colon, ["second", two_dig] ]
             }))({
                 dash: [ "text", "-" ],
                 colon: [ "text", ":" ],
@@ -2286,6 +2286,8 @@
         }
         /**
          * Function generates `DateArray` from current date and time.
+         * 
+         * **Warning:** Internally uses `toISOString` method so result is always converted to "+00:00": `p($time.fromNow, $time.setTimeZone("+02:00"), $time.toString())()` (`p` is some pipe function) — this returns "2019-07-10T16:48:43+02:00" instead of "2019-07-10T18:48:43+02:00" (current time) … the flow is "2019-07-10T18:48:43+02:00"-`fromNow`->"2019-07-10T16:48:43Z"-`setTimeZone`->"2019-07-10T16:48:43+02:00".
          * @method fromNow
          * @for $time.{namespace}
          * @public
@@ -2338,7 +2340,10 @@
          *      - `time_zone` is always "[+-]\d\d:\d\d" or "CET" or ""
          */
         function toDateArray(timestamp_string){
-            let letter, counter= 0, acc= "", substr_index, date= "", time= "", zone= "";
+            let /* these hold outputs */
+                date= "", time= "", zone= "";
+            let /* iteration vars: curr letter instring +helpers for timezones */
+                letter, acc= "", substr_index;
             while(timestamp_string.length){
                 letter= timestamp_string[0];
                 if(/\d/.test(letter)){
@@ -2346,7 +2351,7 @@
                         date= timestamp_string.substr(0, 10);
                         timestamp_string= timestamp_string.substr(10);
                     } else if(!timestamp_string.search(/\d\d\/\d\d\/\d\d\d\d/)){
-                        date= timestamp_string.substr(0, 10).split("/").sort((_,k)=> k).join("-");
+                        date= timestamp_string.substr(0, 10).split("/").sort(()=> -1).join("-");
                         timestamp_string= timestamp_string.substr(10);
                     } else if(!timestamp_string.search(/\d\d:\d\d:\d\d/)){
                         time= "T"+timestamp_string.substr(0, 8);
@@ -2380,7 +2385,7 @@
                 } else {
                     timestamp_string= timestamp_string.substr(1);
                 }
-                counter+= 1; if(counter>5 && date&&time&&zone){ timestamp_string= ""; }
+                if(date&&time&&zone){ timestamp_string= ""; }
             }
             return [ date, time, zone ];
         }
@@ -2407,15 +2412,14 @@
          * @example
          *      $time.toStringFromObject("DD/MM/YYYY HH:mm:SS",{ locale: "en-GB" })($time.fromNow());//= "05/06/2019 09:32:20"
          */
-        function toStringFromObject(format, { locale= internal_locale, declension= true, timeZone= internal_zone }= {}){
-            if(!format) return date_array=> date_array.join("");
+        function toStringFromObject(format= format_arrays.SQL, { locale= internal_locale, declension= true, timeZone= internal_zone }= {}){
             return date_array=> format.map(evaluateFormatObject(toDate(date_array), locale, timeZone, declension)).join("");
         }
         function evaluateFormatObject(date, locale, timeZone, declension){
             const localeObj= generateTimeZoneFormatObject.bind(null, timeZone);
             return function([type, value, modify]){
                 let out= evaluateNthFromObject(date, type, value, modify, declension, locale, localeObj);
-                if(value==="2-digit"&&out.length===1) out= "0"+out; //fix
+                if(value==="2-digit"&&String(out).length===1) out= "0"+out; //fix
                 if(modify==="two_letters") out= out.substr(0,2);
                 else if(modify==="ordinal_number"&&locale.indexOf("en")!==-1) out= getOrdinalSuffix(out);
                 return out;
@@ -2642,13 +2646,14 @@
             return out_text.replace("%s", ms_diff+" years");
         }
         /**
-         * Function generates text based on `format_string`, `locale` and `timeZone` from `DateArray`.
+         * Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.
          * @method toString
          * @for $time.{namespace}
          * @public
-         * @param {String} format_string
-         *  - Placeholder for replace/generate final string (eg. "MM"===two digits month)
-         *  - see [`getFormatObject`](#methods_getFormatObject)
+         * @param {String|...Array} format
+         *  - **Default: `$time.formats.SQL`**
+         *  - Placeholder for replace/generate final string (eg. "MM"===two digits month) — see [`getFormatObject`](#methods_getFormatObject).
+         *  - Or lists of predefined formats — see [`formats`](#props_formats).
          * @param {DateArray} params_obj
          *  - It is in fact argument for [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString)
          * @param {String} params_obj.locale
@@ -2661,28 +2666,11 @@
          * @returns {Function}
          *  - `DateArray`=> **&lt;String&gt;**
          * @example
-         *      $time.toStringFromObject("DD/MM/YYYY HH:mm:SS",{ locale: "en-GB" })($time.fromNow());//= "05/06/2019 09:32:20"
+         *      $time.toString("DD/MM/YYYY HH:mm:SS",{ locale: "en-GB" })($time.fromNow());//= "05/06/2019 09:32:20"
+         *      $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
          */
-        function toString(format_string, params_obj){
-            return toStringFromObject(format_string ? getFormatObject(format_string) : false, params_obj);
-        }
-        /**
-         * Similar to [`toString`](#methods_toString) generates string based on given format. But now based on existing predefined/cached formats see [`format_arrays`](#props_format_arrays).
-         * @method toStringPreDefined
-         * @for $time.{namespace}
-         * @public
-         * @param {String} format_name
-         *  - **Default: `"YMDHms_2d"`**
-         *  - See [`format_arrays`](#props_format_arrays).
-         * @param {DateArray} params_obj
-         *  - See [`toStringFromObject`](#methods_toStringFromObject).
-         * @returns {Function}
-         *  - **`date_array`&lt;DateArray&gt;=> &lt;String&gt;**
-         * @example
-         *      $time.toStringPreDefined("YMDHms_2d", { locale: "en-GB" })($time.fromNow());//= "2019-06-05 09:32:20"
-         */
-        function toStringPreDefined(format_name= "YMDHms_2d", params_obj= {}){
-            return toStringFromObject(format_arrays[format_name], params_obj);
+        function toString(format, params_obj){
+            return toStringFromObject(Array.isArray(format) ? format : format ? getFormatObject(format) : undefined, params_obj);
         }
         
         function getCETOffset([ date, time ]= []){
@@ -2750,6 +2738,7 @@
             return 1 + Math.ceil((firstThursday - tdt) / 604800000);
         }
         /**
+         * Curried method `mod_obj=> date_array=> result` – `mod_obj` holds information how modify given `date_array` **&lt;DateArray&gt;**. Result is again **&lt;DateArray&gt;**.
          * @method modify
          * @for $time.{namespace}
          * @public
@@ -2762,7 +2751,8 @@
          *      - for "setDate" there is alias "setDay"
          *      - for "addDate" there is alias "addDays"
          *  - Some operations: **"\*Date"** (or **"setDay"**, **"addDays"**), **"\*Month"**, **"\*FullYear"**, **"\*Hours"**, **"\*Minutes"**, **"\*Seconds"**
-         * @returns {DateArray}
+         * @returns {Function}
+         *  - `date_array`**&lt;DateArray&gt;** `=>` **&lt;DateArray&gt;**
          *  - See [toDateArray](#methods_toDateArray).
          */
         function modify(mod_obj){
@@ -2902,7 +2892,7 @@
         
             fromNow, fromString, fromDate, fromDateArguments,
         
-            toDate, toString, toStringPreDefined, toLocaleString, toRelative,
+            toDate, toString, toLocaleString, toRelative,
         
             getDiff, getRelative,
             getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone,
@@ -2914,7 +2904,13 @@
             getDaysInMonth, daysInMonth,
         
             getTimeZones: ()=> ary_ianna_time_zones, isTimeZone: candidate=> ary_ianna_time_zones.indexOf(candidate)!==-1,
-            setInternalZone: zone=> internal_zone= zone, setInternalLocale: locale=> internal_locale= locale
+            setInternalZone: zone=> internal_zone= zone, setInternalLocale: locale=> internal_locale= locale,
+            /**
+             * Public name of [`format_arrays`](#props_format_arrays).
+             * @property {Object} formats
+             * @public
+             */
+            formats: format_arrays
         };
     })();
     /**
@@ -2927,7 +2923,7 @@
      * @return {String}
      *  * Timestamp
      */
-    $time.getTimeStamp= t=> $time.toStringPreDefined("YMDHms_2d")($time.fromDateArguments(t));
+    $time.getTimeStamp= t=> $time.toString($time.formats.SQL)($time.fromDateArguments(t));
     /**
      * Function returns timestamp in the form of "YYYY-MM-DD".
      * @method getDateStamp
@@ -2938,7 +2934,7 @@
      * @return {String}
      *  * Datestamp
      */
-    $time.getDateStamp= t=> $time.toStringPreDefined("YMD_2d")($time.fromDateArguments(t));
+    $time.getDateStamp= t=> $time.toString($time.formats.SQL_DATE)($time.fromDateArguments(t));
     
 
     export_as($time, "$time");

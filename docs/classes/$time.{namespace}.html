@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.5.3</title>
+    <title>Documentation: jaaJSU@0.6.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $time.{namespace}</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.5.3</em>
+            <em>API Docs for: 0.6.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -92,7 +92,6 @@
                             <li class="menuli"><a href="#methods_toLocaleString">toLocaleString</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_toString">toString</a> <i class="public_method">(public)</i></li>
                             <li class="menuli"><a href="#methods_toStringFromObject">toStringFromObject</a> <i class="private_method">(private)</i></li>
-                            <li class="menuli"><a href="#methods_toStringPreDefined">toStringPreDefined</a> <i class="public_method">(public)</i></li>
                     </ul>
                 </div>
             </div>
@@ -131,7 +130,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1059"><code>src\jaaJSU - $time.sub.js:1059</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1049"><code>src\jaaJSU - $time.sub.js:1049</code></a>
     </span><br>
     <p>Returns number of days in given month (and year)</p>
 
@@ -164,7 +163,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1046"><code>src\jaaJSU - $time.sub.js:1046</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1036"><code>src\jaaJSU - $time.sub.js:1036</code></a>
     </span><br>
     <p>Function adds leading zero to the <code>time</code>. <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart">It can be replaced in future: see <code>padStart</code></a></p>
 
@@ -239,6 +238,7 @@
         <a href="../files/src_jaaJSU - $time.sub.js.html#l525"><code>src\jaaJSU - $time.sub.js:525</code></a>
     </span><br>
     <p>Function generates <code>DateArray</code> from current date and time.</p>
+<p><strong>Warning:</strong> Internally uses <code>toISOString</code> method so result is always converted to &quot;+00:00&quot;: <code>p($time.fromNow, $time.setTimeZone(&quot;+02:00&quot;), $time.toString())()</code> (<code>p</code> is some pipe function) — this returns &quot;2019-07-10T16:48:43+02:00&quot; instead of &quot;2019-07-10T18:48:43+02:00&quot; (current time) … the flow is &quot;2019-07-10T18:48:43+02:00&quot;-<code>fromNow</code>-&gt;&quot;2019-07-10T16:48:43Z&quot;-<code>setTimeZone</code>-&gt;&quot;2019-07-10T16:48:43+02:00&quot;.</p>
 
     <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
 <li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
@@ -251,7 +251,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l536"><code>src\jaaJSU - $time.sub.js:536</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l538"><code>src\jaaJSU - $time.sub.js:538</code></a>
     </span><br>
     <p>Function generates <code>DateArray</code> from passed string.</p>
 
@@ -309,7 +309,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1075"><code>src\jaaJSU - $time.sub.js:1075</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1065"><code>src\jaaJSU - $time.sub.js:1065</code></a>
     </span><br>
     <p>Returns number of days in given month</p>
 
@@ -335,7 +335,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l673"><code>src\jaaJSU - $time.sub.js:673</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l677"><code>src\jaaJSU - $time.sub.js:677</code></a>
     </span><br>
     <p>Generates multidimensional array for formatting (eg. &quot;YYYY&quot;=&gt; <code>[ [ &quot;year&quot;, &quot;numeric&quot; ] ]</code>).</p>
 
@@ -361,7 +361,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1090"><code>src\jaaJSU - $time.sub.js:1090</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1080"><code>src\jaaJSU - $time.sub.js:1080</code></a>
     </span><br>
     
     <strong>Parameters:</strong>
@@ -397,7 +397,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1116"><code>src\jaaJSU - $time.sub.js:1116</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1106"><code>src\jaaJSU - $time.sub.js:1106</code></a>
     </span><br>
     <p>See <a href="#props_ordinal_numbers"><code>ordinal_numbers</code></a>.</p>
 
@@ -490,13 +490,14 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 </div>
 <a name="methods_modify"></a>
 <div class="method item public">
-    DateArray <strong class="name"><code>modify</code></strong>( <code>mod_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
+    Function <strong class="name"><code>modify</code></strong>( <code>mod_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l991"><code>src\jaaJSU - $time.sub.js:991</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l979"><code>src\jaaJSU - $time.sub.js:979</code></a>
     </span><br>
-    
+    <p>Curried method <code>mod_obj=&gt; date_array=&gt; result</code> – <code>mod_obj</code> holds information how modify given <code>date_array</code> <strong>&lt;DateArray&gt;</strong>. Result is again <strong>&lt;DateArray&gt;</strong>.</p>
+
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
@@ -517,7 +518,8 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 
         </li>
     </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;DateArray&gt; <ul>
+    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
+<li><code>date_array</code><strong>&lt;DateArray&gt;</strong> <code>=&gt;</code> <strong>&lt;DateArray&gt;</strong></li>
 <li>See <a href="#methods_toDateArray">toDateArray</a>.</li>
 </ul>
 </div>
@@ -528,7 +530,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l1021"><code>src\jaaJSU - $time.sub.js:1021</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l1011"><code>src\jaaJSU - $time.sub.js:1011</code></a>
     </span><br>
     <p>Helper method for invoking &quot;add*&quot; operations in <a href="#methods_modify"><code>modify</code></a>.</p>
 <p>In general <code>d.set...(d.get...+${value})</code> (where <code>d</code> is instance of <code>Date</code>).</p>
@@ -568,7 +570,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l803"><code>src\jaaJSU - $time.sub.js:803</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l807"><code>src\jaaJSU - $time.sub.js:807</code></a>
     </span><br>
     <p>Function initializes <code>Date</code> from <code>DateArray</code>.</p>
 
@@ -590,7 +592,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l563"><code>src\jaaJSU - $time.sub.js:563</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l565"><code>src\jaaJSU - $time.sub.js:565</code></a>
     </span><br>
     <p>Function generates array in a form <code>[ date, time, time_zone ]</code> from 'ISO' like string.</p>
 
@@ -623,7 +625,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l819"><code>src\jaaJSU - $time.sub.js:819</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l823"><code>src\jaaJSU - $time.sub.js:823</code></a>
     </span><br>
     <p>It is wrapper arround <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"><code>Date.prototype.toLocaleString</code></a>.</p>
 
@@ -667,21 +669,22 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 </div>
 <a name="methods_toString"></a>
 <div class="method item public">
-    Function <strong class="name"><code>toString</code></strong>( <code>format_string</code>, <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
+    Function <strong class="name"><code>toString</code></strong>( <code>format</code>, <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l882"><code>src\jaaJSU - $time.sub.js:882</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l886"><code>src\jaaJSU - $time.sub.js:886</code></a>
     </span><br>
-    <p>Function generates text based on <code>format_string</code>, <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
+    <p>Function generates text based on <code>format</code>, <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
 
     <strong>Parameters:</strong>
     <ul class="params">
         <li>
-            <code>format_string</code> <strong>&lt;String&gt;</strong>
+            <code>format</code> <strong>&lt;String | ...Array&gt;</strong>
         <ul>
-<li>Placeholder for replace/generate final string (eg. &quot;MM&quot;===two digits month)</li>
-<li>see <a href="#methods_getFormatObject"><code>getFormatObject</code></a></li>
+<li><strong>Default: <code>$time.formats.SQL</code></strong></li>
+<li>Placeholder for replace/generate final string (eg. &quot;MM&quot;===two digits month) — see <a href="#methods_getFormatObject"><code>getFormatObject</code></a>.</li>
+<li>Or lists of predefined formats — see <a href="#props_formats"><code>formats</code></a>.</li>
 </ul>
 
         </li>
@@ -716,7 +719,8 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 </ul>
 </div>
         <h5>Example</h5>
-        <pre class="code prettyprint"><code> $time.toStringFromObject(&quot;DD/MM/YYYY HH:mm:SS&quot;,{ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;</code></pre>
+        <pre class="code prettyprint"><code> $time.toString(&quot;DD/MM/YYYY HH:mm:SS&quot;,{ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;
+ $time.toString($time.formats.SQL)($time.fromNow());//= &quot;2019-06-05 09:32:20&quot;</code></pre>
 
 </div>
 <a name="methods_toStringFromObject"></a>
@@ -725,7 +729,7 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l626"><code>src\jaaJSU - $time.sub.js:626</code></a>
+        <a href="../files/src_jaaJSU - $time.sub.js.html#l631"><code>src\jaaJSU - $time.sub.js:631</code></a>
     </span><br>
     <p>Function generates text based on <code>format</code>, <code>locale</code> and <code>timeZone</code> from <code>DateArray</code>.</p>
 
@@ -773,48 +777,12 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
         <pre class="code prettyprint"><code> $time.toStringFromObject(&quot;DD/MM/YYYY HH:mm:SS&quot;,{ locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;05/06/2019 09:32:20&quot;</code></pre>
 
 </div>
-<a name="methods_toStringPreDefined"></a>
-<div class="method item public">
-    Function <strong class="name"><code>toStringPreDefined</code></strong>( <code>format_name</code>, <code>params_obj</code> ) <br/><strong class="public_method">/* public method */</strong>
-    <br>
-    <span class="foundat">
-        
-        <a href="../files/src_jaaJSU - $time.sub.js.html#l907"><code>src\jaaJSU - $time.sub.js:907</code></a>
-    </span><br>
-    <p>Similar to <a href="#methods_toString"><code>toString</code></a> generates string based on given format. But now based on existing predefined/cached formats see <a href="#props_format_arrays"><code>format_arrays</code></a>.</p>
-
-    <strong>Parameters:</strong>
-    <ul class="params">
-        <li>
-            <code>format_name</code> <strong>&lt;String&gt;</strong>
-        <ul>
-<li><strong>Default: <code>&quot;YMDHms_2d&quot;</code></strong></li>
-<li>See <a href="#props_format_arrays"><code>format_arrays</code></a>.</li>
-</ul>
-
-        </li>
-        <li>
-            <code>params_obj</code> <strong>&lt;DateArray&gt;</strong>
-        <ul>
-<li>See <a href="#methods_toStringFromObject"><code>toStringFromObject</code></a>.</li>
-</ul>
-
-        </li>
-    </ul>
-    <br><div class="returns"><strong>Returns:</strong> &lt;Function&gt; <ul>
-<li><strong><code>date_array</code>&lt;DateArray&gt;=&gt; &lt;String&gt;</strong></li>
-</ul>
-</div>
-        <h5>Example</h5>
-        <pre class="code prettyprint"><code> $time.toStringPreDefined(&quot;YMDHms_2d&quot;, { locale: &quot;en-GB&quot; })($time.fromNow());//= &quot;2019-06-05 09:32:20&quot;</code></pre>
-
-</div>
             </div>
             <div id="props"><h4>Properties</h4>
 <a name="props__"></a>
 <div class="props item">
     <code>_</code> &lt;<strong>Undefined</strong>&gt;<br/><strong class="public_method">/* public property */</strong><br>
-    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1135"><code>src\jaaJSU - $time.sub.js:1135</code></a></span>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1125"><code>src\jaaJSU - $time.sub.js:1125</code></a></span>
     <p>Alias for <code>undefined</code> which can be used to trigger default value of argument. (eg. <code>test($time._)===&quot;A&quot;; function test(a= &quot;A&quot;){ return a; }</code>)</p>
 
 </div>
@@ -843,9 +811,9 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
     <p>Internal object holding predefined formating arguments for <code>getFormatObject</code>. For example <code>format_arrays.YYYYMMDD=== [ [&quot;year&quot;, &quot;numeric&quot;], dash, [&quot;month&quot;, two_dig], dash, [&quot;day&quot;, two_dig] ]</code>.</p>
 <p>Keys:</p>
 <ul>
-<li><code>YMD_2d</code>: shows <strong>&quot;YYYY-MM-DD&quot;</strong></li>
-<li><code>YMDHms_2d</code>: shows <strong>&quot;YYYY-MM-DD HH:mm:ss&quot;</strong></li>
-<li><code>Hms_2d</code>: shows <strong>&quot;HH:mm:ss&quot;</strong></li>
+<li><code>SQL_DATE</code>: shows <strong>&quot;YYYY-MM-DD&quot;</strong></li>
+<li><code>SQL</code>: shows <strong>&quot;YYYY-MM-DD HH:mm:ss&quot;</strong></li>
+<li><code>SQL_TIME</code>: shows <strong>&quot;HH:mm:ss&quot;</strong></li>
 </ul>
 
 </div>
@@ -862,6 +830,13 @@ console.log($time.getMonthName(24, 4));//&quot;Dece&quot;</code></pre>
 <li><code>date_time</code>: shows combination of <code>time</code> and <code>date</code></li>
 <li><code>date_time_seconds</code>: shows combination of <code>date_time</code> and <code>seconds</code></li>
 </ul>
+
+</div>
+<a name="props_formats"></a>
+<div class="props item">
+    <code>formats</code> &lt;<strong>Object</strong>&gt;<br/><strong class="public_method">/* public property */</strong><br>
+    <span class="foundat"><a href="../files/src_jaaJSU - $time.sub.js.html#l1147"><code>src\jaaJSU - $time.sub.js:1147</code></a></span>
+    <p>Public name of <a href="#props_format_arrays"><code>format_arrays</code></a>.</p>
 
 </div>
 <a name="props_ordinal_numbers"></a>
