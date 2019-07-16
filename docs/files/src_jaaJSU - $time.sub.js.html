@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.6.0</title>
+    <title>Documentation: jaaJSU@0.7.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\jaaJSU - $time.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.6.0</em>
+            <em>API Docs for: 0.7.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -91,7 +91,7 @@
  * @class $time.{namespace}
  * @static
  */
-const $time= (function init(){/* version: &quot;0.4.0&quot; */
+const $time= (function init(){/* version: &quot;0.5.0&quot; */
     const /* internal store */
     /**
      * Internal object holding predefined formating arguments for &#x60;$time.toLocaleString&#x60;. For example &#x60;format_objects.time==={ hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot; }&#x60;.
@@ -630,7 +630,7 @@ const $time= (function init(){/* version: &quot;0.4.0&quot; */
      *  - Supported forms are combinations of date (&quot;YYYY-MM-DD&quot;, &quot;DD/MM/YYYY&quot;), time (&quot;HH:mm:ss&quot;, &quot;HH:mm&quot;) and timezone (&quot;CET&quot;, &quot;+01:00&quot;, &quot;-02:00&quot;, ...)
      *  - Typically: &quot;2019-06-02 12:35:45 +01:00&quot;, &quot;2019-06-02T12:35:45+01:00&quot;, &quot;12:35:45+01:00 2019-06-02&quot;, ...
      * @param {String} [timezone= internal_zone]
-     *  - Override timezone in &#x60;timestamp_string&#x60;
+     *  - Default timezone — uses if is not setted in &#x60;timestamp_string&#x60;
      * @returns {DateArray}
      *  - See [toDateArray](#methods_toDateArray).
      */
@@ -640,12 +640,12 @@ const $time= (function init(){/* version: &quot;0.4.0&quot; */
         if(date_array.length!==3){
             if(!isDateString(date_array[0])) date_array.unshift(&quot;&quot;);
             else if(!isTimeString(date_array[1])){
-                date_array[2]= timezone ? timezone : date_array[1];
+                date_array[2]= date_array[1] || timezone;
                 date_array[1]= &quot;&quot;;
             } else {
-                date_array[2]= timezone ? timezone : &quot;&quot;;
+                date_array[2]= timezone;
             }
-        } else if(timezone){ date_array[2]= timezone; }
+        } else if(!date_array[2]&amp;&amp;timezone){ date_array[2]= timezone; }
         return date_array;
     }
     /**
@@ -1115,7 +1115,7 @@ const $time= (function init(){/* version: &quot;0.4.0&quot; */
         dateObject[&quot;set&quot;+cmd](dateObject[&quot;get&quot;+cmd]()+value);
         return dateObject;
     }
-    function setTimeZone(zone= internal_zone){
+    function redefineTimeZone(zone= internal_zone){
         return ([ date= &quot;&quot;, time= &quot;&quot; ]= [])=&gt; [ date, time, zone ];
     }
     
@@ -1223,7 +1223,7 @@ const $time= (function init(){/* version: &quot;0.4.0&quot; */
         getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone,
     
         Date: { getWeekDay, getWeekNumber, addDays, addMonths },
-        setTimeZone, modify,
+        redefineTimeZone, modify,
     
         /* backward compatibility */ double, getOrdinalSuffix, getMonthName,
         getDaysInMonth, daysInMonth,

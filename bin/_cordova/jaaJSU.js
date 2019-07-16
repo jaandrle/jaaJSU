@@ -7,7 +7,7 @@
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.6.0";
+    window[module_name+"_version"]= "0.7.0";
 })("jaaJSU", function(window, document){
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
@@ -1767,7 +1767,7 @@
      * @class $time.{namespace}
      * @static
      */
-    const $time= (function init(){/* version: "0.4.0" */
+    const $time= (function init(){/* version: "0.5.0" */
         const /* internal store */
         /**
          * Internal object holding predefined formating arguments for `$time.toLocaleString`. For example `format_objects.time==={ hour: "2-digit", minute: "2-digit" }`.
@@ -2306,7 +2306,7 @@
          *  - Supported forms are combinations of date ("YYYY-MM-DD", "DD/MM/YYYY"), time ("HH:mm:ss", "HH:mm") and timezone ("CET", "+01:00", "-02:00", ...)
          *  - Typically: "2019-06-02 12:35:45 +01:00", "2019-06-02T12:35:45+01:00", "12:35:45+01:00 2019-06-02", ...
          * @param {String} [timezone= internal_zone]
-         *  - Override timezone in `timestamp_string`
+         *  - Default timezone — uses if is not setted in `timestamp_string`
          * @returns {DateArray}
          *  - See [toDateArray](#methods_toDateArray).
          */
@@ -2316,12 +2316,12 @@
             if(date_array.length!==3){
                 if(!isDateString(date_array[0])) date_array.unshift("");
                 else if(!isTimeString(date_array[1])){
-                    date_array[2]= timezone ? timezone : date_array[1];
+                    date_array[2]= date_array[1] || timezone;
                     date_array[1]= "";
                 } else {
-                    date_array[2]= timezone ? timezone : "";
+                    date_array[2]= timezone;
                 }
-            } else if(timezone){ date_array[2]= timezone; }
+            } else if(!date_array[2]&&timezone){ date_array[2]= timezone; }
             return date_array;
         }
         /**
@@ -2790,7 +2790,7 @@
             dateObject["set"+cmd](dateObject["get"+cmd]()+value);
             return dateObject;
         }
-        function setTimeZone(zone= internal_zone){
+        function redefineTimeZone(zone= internal_zone){
             return ([ date= "", time= "" ]= [])=> [ date, time, zone ];
         }
         
@@ -2898,7 +2898,7 @@
             getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone,
         
             Date: { getWeekDay, getWeekNumber, addDays, addMonths },
-            setTimeZone, modify,
+            redefineTimeZone, modify,
         
             /* backward compatibility */ double, getOrdinalSuffix, getMonthName,
             getDaysInMonth, daysInMonth,
