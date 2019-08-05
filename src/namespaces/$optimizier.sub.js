@@ -134,6 +134,8 @@ var $optimizier= {
      *  * When call `f` (ms)
      */
     timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+    requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
+    setTimeout_: function(timeout){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); }
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($optimizier, gulp_place("namespaces.$optimizier", "variable"));

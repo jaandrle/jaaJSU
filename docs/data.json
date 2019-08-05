@@ -2071,7 +2071,7 @@
                 {
                     "name": "object_attributes",
                     "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
-                    "type": "Object"
+                    "type": "...Object"
                 }
             ],
             "example": [
@@ -2340,7 +2340,7 @@
                 {
                     "name": "object_attributes",
                     "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
-                    "type": "Object"
+                    "type": "...Object"
                 }
             ],
             "example": [
@@ -2817,7 +2817,82 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 979,
+            "line": 928,
+            "itemtype": "method",
+            "name": "getTimeZone",
+            "params": [
+                {
+                    "name": "date",
+                    "description": "- See [toDateArray](#methods_toDateArray).",
+                    "type": "DateArray"
+                },
+                {
+                    "name": "parameters",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "locale",
+                            "description": "- **Default: internal_locale**",
+                            "type": "String"
+                        },
+                        {
+                            "name": "description",
+                            "description": "- **Default: \"long\"**\n - The representation of the time zone name. Possible values are:\n     - `\"none\"` skip description\n     - `\"long\"` (e.g., `British Summer Time`)\n     - `\"short\"` (e.g., `GMT+1`)",
+                            "type": "String"
+                        },
+                        {
+                            "name": "offset",
+                            "description": "- **Default: false**\n - show offset part: `\"UTC+01:00 (…)\"` or `\"UTC+01:00\"` (if `description=\"none\"`)",
+                            "type": "String"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "- Timezone name/identificator (with offset)",
+                "type": "String"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 957,
+            "itemtype": "method",
+            "name": "getCurrentTimeZone",
+            "params": [
+                {
+                    "name": "parameters",
+                    "description": "",
+                    "type": "Object",
+                    "props": [
+                        {
+                            "name": "locale",
+                            "description": "- **Default: internal_locale**",
+                            "type": "String"
+                        },
+                        {
+                            "name": "description",
+                            "description": "- **Default: \"long\"**\n - The representation of the time zone name. Possible values are:\n     - `\"none\"` skip description\n     - `\"long\"` (e.g., `British Summer Time`)\n     - `\"short\"` (e.g., `GMT+1`)\n     - `\"ianna\"`/`\"IANNA\"` (e.g. `Europe/Prague`): `locale` has no effect for this",
+                            "type": "String"
+                        },
+                        {
+                            "name": "offset",
+                            "description": "- **Default: false**\n - show offset part: `\"UTC+01:00 (…)\"` or `\"UTC+01:00\"` (if `description=\"none\"`)",
+                            "type": "String"
+                        }
+                    ]
+                }
+            ],
+            "return": {
+                "description": "- Timezone name/identificator (with offset) for current timezone",
+                "type": "String"
+            },
+            "class": "$time.{namespace}"
+        },
+        {
+            "file": "src\\jaaJSU - $time.sub.js",
+            "line": 1041,
             "description": "Curried method `mod_obj=> date_array=> result` – `mod_obj` holds information how modify given `date_array` **&lt;DateArray&gt;**. Result is again **&lt;DateArray&gt;**.",
             "itemtype": "method",
             "name": "modify",
@@ -2838,7 +2913,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1011,
+            "line": 1073,
             "description": "Helper method for invoking \"add*\" operations in [`modify`](#methods_modify).\n\nIn general `d.set...(d.get...+${value})` (where `d` is instance of `Date`).",
             "itemtype": "method",
             "name": "modifyAdditions",
@@ -2869,7 +2944,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1036,
+            "line": 1098,
             "description": "Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)",
             "itemtype": "method",
             "name": "double",
@@ -2890,7 +2965,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1049,
+            "line": 1111,
             "description": "Returns number of days in given month (and year)",
             "itemtype": "method",
             "name": "daysInMonth",
@@ -2916,7 +2991,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1065,
+            "line": 1127,
             "description": "Returns number of days in given month",
             "itemtype": "method",
             "name": "getDaysInMonth",
@@ -2937,7 +3012,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1080,
+            "line": 1142,
             "itemtype": "method",
             "name": "getMonthName",
             "access": "public",
@@ -2967,7 +3042,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1106,
+            "line": 1168,
             "description": "See [`ordinal_numbers`](#props_ordinal_numbers).",
             "itemtype": "method",
             "name": "getOrdinalSuffix",
@@ -2991,7 +3066,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1125,
+            "line": 1187,
             "description": "Alias for `undefined` which can be used to trigger default value of argument. (eg. `test($time._)===\"A\"; function test(a= \"A\"){ return a; }`)",
             "itemtype": "property",
             "name": "_",
@@ -3002,7 +3077,7 @@
         },
         {
             "file": "src\\jaaJSU - $time.sub.js",
-            "line": 1147,
+            "line": 1209,
             "description": "Public name of [`format_arrays`](#props_format_arrays).",
             "itemtype": "property",
             "name": "formats",
@@ -3119,19 +3194,27 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:979"
+            "line": " src\\jaaJSU - $time.sub.js:928"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:1011"
+            "line": " src\\jaaJSU - $time.sub.js:957"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:1049"
+            "line": " src\\jaaJSU - $time.sub.js:1041"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\jaaJSU - $time.sub.js:1065"
+            "line": " src\\jaaJSU - $time.sub.js:1073"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:1111"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\jaaJSU - $time.sub.js:1127"
         },
         {
             "message": "Missing item type\nIf `onTest` returns `true` a `onTrue` is called else `onFalse`",

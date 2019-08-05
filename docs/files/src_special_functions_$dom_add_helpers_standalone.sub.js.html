@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.7.0</title>
+    <title>Documentation: jaaJSU@0.8.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\special_functions\$dom_add_helpers_standalone.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.0</em>
+            <em>API Docs for: 0.8.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -523,7 +523,7 @@ $dom.add= function(parent,$$$){
  * @method assign
  * @for $dom.{namespace}
  * @param {NodeElement} element
- * @param {Object} object_attributes
+ * @param {...Object} object_attributes
  *  - Object shall holds **NodeElement** properties like &#x60;className&#x60;, &#x60;textContent&#x60;, ...
  *  - For &#x60;dataset&#x60; can be used also &#x60;Object&#x60; notation: &#x60;$dom.assign(document.getElementById(&quot;ID&quot;), { dataset: { test: &quot;TEST&quot; } }); //&lt;p id=&quot;ID&quot; data-test=&quot;TEST&quot;&gt;&lt;/p&gt;&#x60;.
  *  - The same notation can be used for **CSS variables** (the key is called &#x60;style_vars&#x60;).
@@ -544,7 +544,8 @@ $dom.add= function(parent,$$$){
  *      //result HTML: &lt;body class=&quot;testClass&quot; style=&quot;color: red;&quot; data-js_param=&quot;CLICKED&quot;&gt;BODY&lt;/body&gt;
  *      //...
  */
-$dom.assign= function(element, object_attributes){
+$dom.assign= function(element, ...objects_attributes){
+    const object_attributes= Object.assign({}, ...objects_attributes);
     const object_attributes_keys= Object.keys(object_attributes);
     for(let i=0, key, attr, i_length= object_attributes_keys.length; i&lt;i_length; i++){
         key= object_attributes_keys[i];

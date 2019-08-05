@@ -437,7 +437,7 @@ $dom.add= function(parent,$$$){
  * @method assign
  * @for $dom.{namespace}
  * @param {NodeElement} element
- * @param {Object} object_attributes
+ * @param {...Object} object_attributes
  *  - Object shall holds **NodeElement** properties like `className`, `textContent`, ...
  *  - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById("ID"), { dataset: { test: "TEST" } }); //<p id="ID" data-test="TEST"></p>`.
  *  - The same notation can be used for **CSS variables** (the key is called `style_vars`).
@@ -458,7 +458,8 @@ $dom.add= function(parent,$$$){
  *      //result HTML: <body class="testClass" style="color: red;" data-js_param="CLICKED">BODY</body>
  *      //...
  */
-$dom.assign= function(element, object_attributes){
+$dom.assign= function(element, ...objects_attributes){
+    const object_attributes= Object.assign({}, ...objects_attributes);
     const object_attributes_keys= Object.keys(object_attributes);
     for(let i=0, key, attr, i_length= object_attributes_keys.length; i<i_length; i++){
         key= object_attributes_keys[i];

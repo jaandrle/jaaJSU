@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.7.0</title>
+    <title>Documentation: jaaJSU@0.8.0</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\jaaJSU - $time.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.7.0</em>
+            <em>API Docs for: 0.8.0</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -91,7 +91,7 @@
  * @class $time.{namespace}
  * @static
  */
-const $time= (function init(){/* version: &quot;0.5.0&quot; */
+const $time= (function init(){/* version: &quot;0.6.0&quot; */
     const /* internal store */
     /**
      * Internal object holding predefined formating arguments for &#x60;$time.toLocaleString&#x60;. For example &#x60;format_objects.time==={ hour: &quot;2-digit&quot;, minute: &quot;2-digit&quot; }&#x60;.
@@ -742,17 +742,17 @@ const $time= (function init(){/* version: &quot;0.5.0&quot; */
     function evaluateFormatObject(date, locale, timeZone, declension){
         const localeObj= generateTimeZoneFormatObject.bind(null, timeZone);
         return function([type, value, modify]){
-            let out= evaluateNthFromObject(date, type, value, modify, declension, locale, localeObj);
+            let out= evaluateNthFromObject(date, type, value, modify, declension, locale, timeZone, localeObj);
             if(value===&quot;2-digit&quot;&amp;&amp;String(out).length===1) out= &quot;0&quot;+out; //fix
             if(modify===&quot;two_letters&quot;) out= out.substr(0,2);
             else if(modify===&quot;ordinal_number&quot;&amp;&amp;locale.indexOf(&quot;en&quot;)!==-1) out= getOrdinalSuffix(out);
             return out;
         };
     }
-    function evaluateNthFromObject(date, type, value, modify, declension, locale, localeObj){
+    function evaluateNthFromObject(date, type, value, modify, declension, locale, timeZone, localeObj){
         switch (true){
             case type===&quot;text&quot;:                                     return value;
-            case type===&quot;week&quot;:                                     return getWeekNumber(date);
+            case type===&quot;week&quot;:                                     return getWeekNumber(date, timeZone);
             case type===&quot;weekday&quot;&amp;&amp;value===&quot;numeric&quot;:               return getWeekDay()(date);
             case type===&quot;month&quot;&amp;&amp;value===&quot;long&quot;&amp;&amp;declension:        return date.toLocaleString(locale,localeObj({ [type]: value, day: &quot;numeric&quot; })).replace(/[\d \.\/\\]/g, &quot;&quot;);
             case type===&quot;hour&quot;&amp;&amp;modify.toLowerCase()===&quot;a&quot;:         return date.toLocaleString(modify===&quot;A&quot; ? &quot;en-US&quot; : &quot;en-GB&quot;,localeObj({ [type]: value, hourCycle: &quot;h12&quot; })).replace(/[\d \.\/\\]/g, &quot;&quot;);
@@ -1011,15 +1011,76 @@ const $time= (function init(){/* version: &quot;0.5.0&quot; */
             [ date_one_hour, date_two_hours ]= [ &quot;+01:00&quot;, &quot;+02:00&quot; ].map(offset=&gt; new Date(date_and_time+offset).toLocaleString(locale, { timeZone }));
         return en_date_version===date_one_hour ? &quot;+01:00&quot; : en_date_version===date_two_hours ? &quot;+02:00&quot; : &quot;Z&quot;;
     }
+    /**
+     * @method getTimeZone
+     * @for $time.{namespace}
+     * @param {DateArray} date
+     *  - See [toDateArray](#methods_toDateArray).
+     * @param {Object} parameters
+     * @param {String} parameters.locale
+     *  - **Default: internal_locale**
+     * @param {String} parameters.description
+     *  - **Default: &quot;long&quot;**
+     *  - The representation of the time zone name. Possible values are:
+     *      - &#x60;&quot;none&quot;&#x60; skip description
+     *      - &#x60;&quot;long&quot;&#x60; (e.g., &#x60;British Summer Time&#x60;)
+     *      - &#x60;&quot;short&quot;&#x60; (e.g., &#x60;GMT+1&#x60;)
+     * @param {String} parameters.offset
+     *  - **Default: false**
+     *  - show offset part: &#x60;&quot;UTC+01:00 (…)&quot;&#x60; or &#x60;&quot;UTC+01:00&quot;&#x60; (if &#x60;description=&quot;none&quot;&#x60;)
+     * @returns {String}
+     *  - Timezone name/identificator (with offset)
+     */
     function getTimeZone(date, { locale= internal_locale, description= &quot;long&quot;, offset= false }= {}){
-        const date_instance= getDateInstaneFromDateArrayOrString(date);
-        let out_description= description===&quot;none&quot; ? &quot;&quot; : date_instance.toLocaleString(locale, { timeZoneName: description }).replace(date_instance.toLocaleString(locale), &quot;&quot;).trim();
-        const out_offset= !offset ? &quot;&quot; : &quot;UTC&quot;+getTimeZoneOffsetStringFromOffset(date_instance.getTimezoneOffset());
+        description= description.toLocaleLowerCase();
+        const [ date_part, time_part, offset_part ]= getDateArrayFromMixed(date), date_instance= new Date([ date_part, time_part, offset_part ].join(&quot;&quot;));
+        const locale_param= Object.keys(ary_ianna_time_offsets).indexOf(offset_part)!==-1 ? { timeZone: ary_ianna_time_zones[ary_ianna_time_offsets[offset_part]] } : {};
+        let out_description= description===&quot;none&quot; ? &quot;&quot; : date_instance.toLocaleString(locale, Object.assign({ timeZoneName: description }, locale_param)).replace(date_instance.toLocaleString(locale, locale_param), &quot;&quot;).trim();
+        const out_offset= !offset ? &quot;&quot; : &quot;UTC&quot;+(offset_part===&quot;Z&quot; ? getTimeZoneOffsetStringFromOffset(date_instance.getTimezoneOffset()) : date_instance.toLocaleString(locale, Object.assign({ timeZoneName: &quot;short&quot; }, locale_param)).replace(date_instance.toLocaleString(locale, locale_param), &quot;&quot;).replace(/[^\d\+\-\:]/g, &quot;&quot;).trim());
         if(out_description&amp;&amp;out_offset) out_description= &quot; (&quot;+out_description+&quot;)&quot;;
         return out_offset+out_description;
     }
-    function getTimeZoneOffset(date){
-        return getDateInstaneFromDateArrayOrString(date).getTimezoneOffset();
+    /**
+     * @method getCurrentTimeZone
+     * @for $time.{namespace}
+     * @param {Object} parameters
+     * @param {String} parameters.locale
+     *  - **Default: internal_locale**
+     * @param {String} parameters.description
+     *  - **Default: &quot;long&quot;**
+     *  - The representation of the time zone name. Possible values are:
+     *      - &#x60;&quot;none&quot;&#x60; skip description
+     *      - &#x60;&quot;long&quot;&#x60; (e.g., &#x60;British Summer Time&#x60;)
+     *      - &#x60;&quot;short&quot;&#x60; (e.g., &#x60;GMT+1&#x60;)
+     *      - &#x60;&quot;ianna&quot;&#x60;/&#x60;&quot;IANNA&quot;&#x60; (e.g. &#x60;Europe/Prague&#x60;): &#x60;locale&#x60; has no effect for this
+     * @param {String} parameters.offset
+     *  - **Default: false**
+     *  - show offset part: &#x60;&quot;UTC+01:00 (…)&quot;&#x60; or &#x60;&quot;UTC+01:00&quot;&#x60; (if &#x60;description=&quot;none&quot;&#x60;)
+     * @returns {String}
+     *  - Timezone name/identificator (with offset) for current timezone
+     */
+    function getCurrentTimeZone({ locale= internal_locale, description= &quot;long&quot;, offset= false }= {}){
+        description= description.toLocaleLowerCase();
+        if(description!==&quot;ianna&quot;) return getTimeZone(undefined, { locale, description, offset });
+        let out_description= &quot;&quot;, dtf;
+        if(typeof Intl!==&#x27;undefined&#x27;&amp;&amp;typeof Intl.DateTimeFormat===&#x27;function&#x27;){
+            dtf= Intl.DateTimeFormat() || {};
+            if(typeof dtf.resolvedOptions!==&quot;function&quot;) return undefined;
+            out_description= dtf.resolvedOptions().timeZone.replace(/_/g, &quot; &quot;);
+        }
+        const out_offset= !offset ? &quot;&quot; : getTimeZone(undefined, { locale, description: &quot;none&quot;, offset: true });
+        if(out_description&amp;&amp;out_offset) out_description= &quot; (&quot;+out_description+&quot;)&quot;;
+        return out_offset+out_description;
+    }
+    function getTimeZoneOffset(date, timeZone= internal_zone){
+        const date_instance= new Date(getDateArrayFromMixed(date).join(&quot;&quot;));
+        if(timeZone) return getTimeZoneDiffOffset(date_instance, timeZone);
+        return date_instance.getTimezoneOffset();
+    }
+    function getTimeZoneDiffOffset(date_instance, timeZone= internal_zone){
+        const [ sign= &quot;+&quot;, hours= 0, minutes= 0 ]= date_instance.toLocaleString(&#x27;en-GB&#x27;, { timeZone, weekday: &quot;short&quot;, timeZoneName: &quot;short&quot; }).replace(/(\+|\-)/g, (_, m)=&gt; m+&quot;:&quot;).replace(/[^\d:\+\-]/g, &quot;&quot;).split(&quot;:&quot;);
+        const target_offset= ( sign===&quot;-&quot; ? -1 : 1 )*(Number(hours)*60+Number(minutes));
+        return target_offset-date_instance.getTimezoneOffset();
     }
     function getTimeZoneOffsetString(date){
          return getTimeZoneOffsetStringFromOffset(getTimeZoneOffset(date));
@@ -1030,10 +1091,10 @@ const $time= (function init(){/* version: &quot;0.5.0&quot; */
         if(typeof ary_ianna_time_offsets[timeZone]!==&quot;undefined&quot;) return Object.assign({ timeZone: ary_ianna_time_zones[ary_ianna_time_offsets[timeZone]] }, format_object);
         return format_object;
     }
-    function getDateInstaneFromDateArrayOrString(date_string){
-        if(!date_string) return new Date();
-        if(!Array.isArray(date_string)) date_string= toDateArray(date_string);
-        return new Date(...date_string[0].split(&quot;-&quot;).map((v,k)=&gt; k===1 ? +v-1 : +v));
+    function getDateArrayFromMixed(date_string){
+        if(!date_string) return fromNow();
+        if(!Array.isArray(date_string)) return toDateArray(date_string);
+        return date_string;
     }
     function getTimeZoneOffsetStringFromOffset(offset){
         const { floor, abs }= Math;
@@ -1050,10 +1111,11 @@ const $time= (function init(){/* version: &quot;0.5.0&quot; */
         return date_instance=&gt; (date_instance.setMonth(date_instance.getMonth()+monthss_num), date_instance);
     }
     function getWeekDay(type= &quot;numeric&quot;, { locale= internal_locale, timeZone= internal_zone }= {}){
-        return type===&quot;numeric&quot; ? date_instance=&gt; date_instance.getDay() : date_instance=&gt; date_instance.toLocaleString(locale, { weekday: type });
+        return type===&quot;numeric&quot; ? date_instance=&gt; date_instance.getDay() : date_instance=&gt; date_instance.toLocaleString(locale, timeZone ? { timeZone, weekday: type } : { timeZone, weekday: type });
     }
-    function getWeekNumber(date_instance){ /* calculates no. of thursdays from this week to the first one (January 4 is always in week 1.) */
+    function getWeekNumber(date_instance, timeZone= internal_zone){ /* calculates no. of thursdays from this week to the first one (January 4 is always in week 1.) */
         const tdt= new Date(date_instance.valueOf());
+        if(timeZone){ tdt.setMinutes(tdt.getMinutes()+getTimeZoneDiffOffset(date_instance, timeZone)); }
         tdt.setDate(tdt.getDate() + 3 - (date_instance.getDay() + 6) % 7);
         var firstThursday = tdt.valueOf();
         tdt.setMonth(0, 1);
@@ -1220,7 +1282,7 @@ const $time= (function init(){/* version: &quot;0.5.0&quot; */
         toDate, toString, toLocaleString, toRelative,
     
         getDiff, getRelative,
-        getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone,
+        getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone, getCurrentTimeZone,
     
         Date: { getWeekDay, getWeekNumber, addDays, addMonths },
         redefineTimeZone, modify,
