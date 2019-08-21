@@ -422,7 +422,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 51,
+            "line": 50,
             "description": "Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -451,7 +451,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 70,
+            "line": 68,
             "description": "Function returns last element in array without editing the original.",
             "itemtype": "method",
             "name": "getLast",
@@ -470,7 +470,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 81,
+            "line": 79,
             "description": "Function returns methods for splitting array by condition.",
             "itemtype": "method",
             "name": "partition",
@@ -489,7 +489,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 119,
+            "line": 117,
             "description": "Function returns new array without any `item`",
             "itemtype": "method",
             "name": "removeItem",
@@ -513,7 +513,7 @@
         },
         {
             "file": "src\\namespaces\\$array.sub.js",
-            "line": 139,
+            "line": 137,
             "description": "Function returns random number for Array.sort function",
             "itemtype": "method",
             "name": "sortRandom",
@@ -858,7 +858,7 @@
         },
         {
             "file": "src\\namespaces\\$dom.sub.js",
-            "line": 169,
+            "line": 168,
             "description": "Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -1169,7 +1169,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 29,
+            "line": 28,
             "description": "Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.",
             "itemtype": "method",
             "name": "eachDynamic",
@@ -1198,7 +1198,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 48,
+            "line": 46,
             "description": "Function for converting Array `arr` to Object. Uses `fun` for converting.",
             "itemtype": "method",
             "name": "fromArray",
@@ -1227,7 +1227,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 67,
+            "line": 65,
             "description": "Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: \"gotcha\" }`",
             "itemtype": "method",
             "name": "hasProp",
@@ -1251,7 +1251,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 80,
+            "line": 78,
             "description": "Function for creating non-rewritable object",
             "itemtype": "method",
             "name": "immutable_keys",
@@ -1270,7 +1270,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 120,
+            "line": 118,
             "description": "Wrapper around `object[methodName](...args)`.",
             "itemtype": "method",
             "name": "method",
@@ -1297,7 +1297,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 135,
+            "line": 133,
             "itemtype": "method",
             "name": "methodFrom",
             "example": [
@@ -1307,7 +1307,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 142,
+            "line": 140,
             "description": "Wrapper around `object[key]`, usefull for binding.",
             "itemtype": "method",
             "name": "pluck",
@@ -1329,7 +1329,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 155,
+            "line": 153,
             "itemtype": "method",
             "name": "pluckFrom",
             "example": [
@@ -1339,7 +1339,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 161,
+            "line": 159,
             "description": "Wrapper around `object[setterName]= arg`",
             "itemtype": "method",
             "name": "setter",
@@ -1366,7 +1366,7 @@
         },
         {
             "file": "src\\namespaces\\$object.sub.js",
-            "line": 176,
+            "line": 174,
             "itemtype": "method",
             "name": "setterFrom",
             "example": [
@@ -3189,19 +3189,19 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:70"
+            "line": " src\\namespaces\\$array.sub.js:68"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:81"
+            "line": " src\\namespaces\\$array.sub.js:79"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:119"
+            "line": " src\\namespaces\\$array.sub.js:117"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\namespaces\\$array.sub.js:139"
+            "line": " src\\namespaces\\$array.sub.js:137"
         },
         {
             "message": "replacing incorrect tag: returns with return",

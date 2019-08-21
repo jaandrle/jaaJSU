@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, __eachBind, export_as */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
  * @class $array.{namespace}
@@ -47,7 +47,6 @@ var $array= {
      *  * `share`
      */
     each: __eachInArrayLike,
-    eachFun: __eachBind(__eachInArrayLike),
     /**
      * Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
      * @method eachDynamic
@@ -66,7 +65,6 @@ var $array= {
      *  * `share`
      */
     eachDynamic: __eachInArrayLikeDynamic,
-    eachDynamicFun: __eachBind(__eachInArrayLikeDynamic),
     /**
      * Function returns last element in array without editing the original.
      * @method getLast

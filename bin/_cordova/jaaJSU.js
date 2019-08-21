@@ -11,9 +11,6 @@
 })("jaaJSU", function(window, document){
     var out= {};
     function export_as(obj, key){ out[key]= obj; }
-    function __eachBind(fun){
-        return (i_function, scope, share)=> iterable=> fun(iterable, i_function, scope, share);
-    }
     function __eachInArrayLike(iterable, i_function, scope, share){
         const key_length= iterable.length;
         for(let key=0, j=key_length-1; key<key_length; key++, j--){
@@ -78,7 +75,6 @@
          *  * `share`
          */
         each: __eachInArrayLike,
-        eachFun: __eachBind(__eachInArrayLike),
         /**
          * Procedure for iterating throught Array `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
@@ -97,7 +93,6 @@
          *  * `share`
          */
         eachDynamic: __eachInArrayLikeDynamic,
-        eachDynamicFun: __eachBind(__eachInArrayLikeDynamic),
         /**
          * Function returns last element in array without editing the original.
          * @method getLast
@@ -452,7 +447,6 @@
          *  * `share`
          */
         each: __eachInArrayLike,
-        eachFun: __eachBind(__eachInArrayLike),
         /**
          * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
@@ -470,8 +464,7 @@
          * @return {Mixed}
          *  * `share`
          */
-        eachDynamic: __eachInArrayLikeDynamic,
-        eachDynamicFun: __eachBind(__eachInArrayLikeDynamic)
+        eachDynamic: __eachInArrayLikeDynamic
     };
     /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
     const $dom_emptyPseudoComponent= (function(){
@@ -1188,7 +1181,6 @@
          *  * `share`
          */
         each: __objectEach,
-        eachFun: __eachBind(__objectEach),
         /**
          * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
          * @method eachDynamic
@@ -1207,7 +1199,6 @@
          *  * `share`
          */
         eachDynamic: __objectEachDynamic,
-        eachDynamicFun: __eachBind(__objectEachDynamic),
         /**
          * Function for converting Array `arr` to Object. Uses `fun` for converting.
          * @method fromArray

@@ -1,6 +1,6 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global isMandatory */
-gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachBind, export_as */
+gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**
  * This NAMESPACE provides features for Objects.
  * @class $object.{namespace}
@@ -25,7 +25,6 @@ var $object= {
      *  * `share`
      */
     each: __objectEach,
-    eachFun: __eachBind(__objectEach),
     /**
      * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
      * @method eachDynamic
@@ -44,7 +43,6 @@ var $object= {
      *  * `share`
      */
     eachDynamic: __objectEachDynamic,
-    eachDynamicFun: __eachBind(__objectEachDynamic),
     /**
      * Function for converting Array `arr` to Object. Uses `fun` for converting.
      * @method fromArray

@@ -85,7 +85,7 @@
 
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, __eachBind, export_as */
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for DOM elemnts.
  * @class $dom.{namespace}
@@ -251,7 +251,6 @@ var $dom={
      *  * &#x60;share&#x60;
      */
     each: __eachInArrayLike,
-    eachFun: __eachBind(__eachInArrayLike),
     /**
      * Procedure for iterating throught NodeList &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(...;(item= iterable[i]);i++)...&#x60;.
      * @method eachDynamic
@@ -269,8 +268,7 @@ var $dom={
      * @return {Mixed}
      *  * &#x60;share&#x60;
      */
-    eachDynamic: __eachInArrayLikeDynamic,
-    eachDynamicFun: __eachBind(__eachInArrayLikeDynamic)
+    eachDynamic: __eachInArrayLikeDynamic
 };
 gulp_place(&quot;special_functions/$dom_add_helpers_${app.standalone}.sub.js&quot;);
 gulp_place(&quot;special_functions/$dom_forceRedraw_${app.standalone}.sub.js&quot;);

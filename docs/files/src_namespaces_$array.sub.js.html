@@ -85,7 +85,7 @@
 
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, __eachBind, export_as */
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for Arrays.
  * @class $array.{namespace}
@@ -133,7 +133,6 @@ var $array= {
      *  * &#x60;share&#x60;
      */
     each: __eachInArrayLike,
-    eachFun: __eachBind(__eachInArrayLike),
     /**
      * Procedure for iterating throught Array &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(...;(item= iterable[i]);i++)...&#x60;.
      * @method eachDynamic
@@ -152,7 +151,6 @@ var $array= {
      *  * &#x60;share&#x60;
      */
     eachDynamic: __eachInArrayLikeDynamic,
-    eachDynamicFun: __eachBind(__eachInArrayLikeDynamic),
     /**
      * Function returns last element in array without editing the original.
      * @method getLast

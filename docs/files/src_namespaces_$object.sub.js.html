@@ -86,7 +86,7 @@
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global isMandatory */
-gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, __eachBind, export_as */
+gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
 /**
  * This NAMESPACE provides features for Objects.
  * @class $object.{namespace}
@@ -111,7 +111,6 @@ var $object= {
      *  * &#x60;share&#x60;
      */
     each: __objectEach,
-    eachFun: __eachBind(__objectEach),
     /**
      * Procedure for iterating throught Object &#x60;iterable&#x60; like [each](#methods_each), but use &#x60;for(... in ...)...if(Object.prototype.hasOwnProperty...&#x60;.
      * @method eachDynamic
@@ -130,7 +129,6 @@ var $object= {
      *  * &#x60;share&#x60;
      */
     eachDynamic: __objectEachDynamic,
-    eachDynamicFun: __eachBind(__objectEachDynamic),
     /**
      * Function for converting Array &#x60;arr&#x60; to Object. Uses &#x60;fun&#x60; for converting.
      * @method fromArray
