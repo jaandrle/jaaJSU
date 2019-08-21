@@ -240,7 +240,7 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 2,
+            "line": 4,
             "description": "This NAMESPACE provides features for optimizations.",
             "static": 1
         },
@@ -1376,7 +1376,7 @@
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 8,
+            "line": 10,
             "description": "Prevent multiple calling (typically for \"onresize\" events) - use google for more detail",
             "itemtype": "method",
             "name": "debounce",
@@ -1412,7 +1412,7 @@
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 44,
+            "line": 46,
             "description": "Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`",
             "itemtype": "method",
             "name": "trottle",
@@ -1438,7 +1438,7 @@
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 73,
+            "line": 75,
             "description": "Calls `.then` when `fn` returns **true**",
             "itemtype": "method",
             "name": "poll_",
@@ -1474,7 +1474,7 @@
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 106,
+            "line": 108,
             "description": "Prevent multiple calling of `fn`",
             "itemtype": "method",
             "name": "once",
@@ -1497,7 +1497,7 @@
         },
         {
             "file": "src\\namespaces\\$optimizier.sub.js",
-            "line": 128,
+            "line": 130,
             "description": "Combination of `setTimeout`->`requestAnimationFrame`",
             "itemtype": "method",
             "name": "timeoutAnimationFrame",
@@ -1515,6 +1515,105 @@
                     "optdefault": "150"
                 }
             ],
+            "class": "$optimizier.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 139,
+            "description": "Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)",
+            "itemtype": "method",
+            "name": "requestAnimationFrame_",
+            "return": {
+                "description": "",
+                "type": "Promise"
+            },
+            "example": [
+                "\n     $optimizier.requestAnimationFrame_().then(()=> console.log(\"Hi\")); //-> \"Hi\"\n     Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log(\"Hi\")); //-> \"Hi\""
+            ],
+            "class": "$optimizier.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 148,
+            "description": "Promise wrapper around `setTimeout`.\n\nLinks:\n 1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)\n 2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)",
+            "itemtype": "method",
+            "name": "setTimeout_",
+            "params": [
+                {
+                    "name": "timeout",
+                    "description": "\n - Optional parameter to sets the time delay in milliseconds\n - `delay` argument for `setTimeout` — see **Links (2)**",
+                    "type": "Number",
+                    "optional": true,
+                    "optdefault": " 0"
+                }
+            ],
+            "return": {
+                "description": "- **(…params)=> \\<Promise\\>**\n - where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**",
+                "type": "Function"
+            },
+            "example": [
+                "\n         $optimizier.setTimeout_(30)(\"Hi\").then(console.log); //-> \"Hi\" \"after 30ms\"\n         Promise.resolve(\"Hi\").then($optimiziers.setTimeout_()).then(console.log); //-> \"Hi\" \"after 0ms\""
+            ],
+            "class": "$optimizier.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 166,
+            "description": "This function creates **\\<IdleValue\\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [`getIdleValue`](#methods_getIdleValue).\n\nThis is infact *idle-until-urgent* evaluation pattern.\n\nInternally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.",
+            "itemtype": "method",
+            "name": "setIdleValue",
+            "params": [
+                {
+                    "name": "initFunction",
+                    "description": "- this function is called to get value",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "- argument for [`getIdleValue`](#methods_getIdleValue) or [`cancelIdleValue`](#methods_cancelIdleValue).",
+                "type": "IdleValue"
+            },
+            "example": [
+                "\n     const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));\n     // …\n     console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));"
+            ],
+            "class": "$optimizier.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 183,
+            "description": "Returns result of **\\<IdleValue\\>**.",
+            "itemtype": "method",
+            "name": "getIdleValue",
+            "params": [
+                {
+                    "name": "idle_value",
+                    "description": "- Output of [`setIdleValue`](#methods_setIdleValue)",
+                    "type": "IdleValue"
+                }
+            ],
+            "return": {
+                "description": "- Output of `initFunction` — see [`setIdleValue`](#methods_setIdleValue)",
+                "type": "Mixed"
+            },
+            "class": "$optimizier.{namespace}"
+        },
+        {
+            "file": "src\\namespaces\\$optimizier.sub.js",
+            "line": 192,
+            "description": "Stops **\\<IdleValue\\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)",
+            "itemtype": "method",
+            "name": "clearIdleValue",
+            "params": [
+                {
+                    "name": "idle_value",
+                    "description": "- Output of [`setIdleValue`](#methods_setIdleValue)",
+                    "type": "IdleValue"
+                }
+            ],
+            "return": {
+                "description": "- returns current value or `undefined` if `initFunction` wasn't called — see see [`setIdleValue`](#methods_setIdleValue)",
+                "type": "Mixed|Undefined"
+            },
             "class": "$optimizier.{namespace}"
         },
         {
@@ -1833,13 +1932,13 @@
                 "type": "Object"
             },
             "example": [
-                "\n     //#1\n     const UL= document.getElementById('SOME UL');\n     const { add }= $dom.component(\"LI\", { className: \"list_item\" });//<li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });//<li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });//...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });//...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);//...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 0 level\n         add(\"DIV\", null); // just DIV without attributes\n     ..."
+                "\n     const UL= document.getElementById('SOME UL');\n     const { add }= $dom.component(\"LI\", { className: \"list_item\" });\n     //result: <li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });\n     //result: <li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });\n         //result: ...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });\n             //result: ...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);\n             //result: ...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);\n         //result: this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);\n     //result: this is on 0 level\n         add(\"DIV\", null);\n         //just DIV without attributes"
             ],
             "class": "$dom.component [cordova]"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 132,
+            "line": 138,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "addText",
@@ -1868,7 +1967,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 164,
+            "line": 170,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -1890,7 +1989,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 182,
+            "line": 188,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -1919,20 +2018,20 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 226,
+            "line": 232,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
             "access": "public",
             "tagname": "",
             "example": [
-                "\n let { share: test }= $dom.component(\"DIV\", null);\n test.mount(document.body);\n test= test.destroy();"
+                "\n     let { share: test }= $dom.component(\"DIV\", null);\n     test.mount(document.body);\n     test= test.destroy();"
             ],
             "class": "$dom.component [cordova]"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 239,
+            "line": 245,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -1949,7 +2048,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 250,
+            "line": 256,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -1959,7 +2058,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 258,
+            "line": 264,
             "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
             "itemtype": "method",
             "name": "setShift",
@@ -1979,7 +2078,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 279,
+            "line": 285,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -1993,7 +2092,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 356,
+            "line": 362,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2013,7 +2112,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 382,
+            "line": 388,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2027,7 +2126,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 393,
+            "line": 399,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -2058,7 +2157,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 423,
+            "line": 429,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign [cordova]",
@@ -2111,13 +2210,13 @@
                 "type": "Object"
             },
             "example": [
-                "\n     //#1\n     const UL= document.getElementById('SOME UL');\n     const { add }= $dom.component(\"LI\", { className: \"list_item\" });//<li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });//<li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });//...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });//...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);//...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);//this is on 0 level\n         add(\"DIV\", null); // just DIV without attributes\n     ..."
+                "\n     const UL= document.getElementById('SOME UL');\n     const { add }= $dom.component(\"LI\", { className: \"list_item\" });\n     //result: <li class=\"list_item\">...</li>\n     add(\"DIV\", { textContent: \"Child of .list_item\", className: \"deep1\" });\n     //result: <li class=\"list_item\"><div class=\"deep1\">...</div></li>\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2\" });\n         //result: ...<div class=\"deep1\"><div class=\"deep2\">...</div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3\" });\n             //result: ...<div class=\"deep1\"><div class=\"deep2\"><div class=\"deep3\">...</div></div></div>...\n             add(\"DIV\", { textContent: \"Child of div.deep2\", className: \"deep3 mark\" }, -1);\n             //result: ...<div class=\"deep2\"><div class=\"deep3\">...</div><div class=\"deep3\">...</div></div>...\n     //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level\n         add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);\n         //result: this is on 2nd level\n     add(\"DIV\", { textContent: \"Child of div.deep1\", className: \"deep2 nextone\" }, -2);\n     //result: this is on 0 level\n         add(\"DIV\", null);\n         //just DIV without attributes"
             ],
             "class": "$dom.component"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 131,
+            "line": 137,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "addText",
@@ -2146,7 +2245,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 163,
+            "line": 169,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -2168,7 +2267,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 181,
+            "line": 187,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2192,20 +2291,20 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 218,
+            "line": 224,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
             "access": "public",
             "tagname": "",
             "example": [
-                "\n let { share: test }= $dom.component(\"DIV\", null);\n test.mount(document.body);\n test= test.destroy();"
+                "\n     let { share: test }= $dom.component(\"DIV\", null);\n     test.mount(document.body);\n     test= test.destroy();"
             ],
             "class": "$dom.component"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 231,
+            "line": 237,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2222,7 +2321,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 242,
+            "line": 248,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -2232,7 +2331,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 250,
+            "line": 256,
             "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
             "itemtype": "method",
             "name": "setShift",
@@ -2252,7 +2351,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 271,
+            "line": 277,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2266,7 +2365,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 348,
+            "line": 354,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2286,7 +2385,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 374,
+            "line": 380,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2300,7 +2399,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 385,
+            "line": 391,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -2327,7 +2426,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 433,
+            "line": 439,
             "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
             "itemtype": "method",
             "name": "assign",
@@ -3118,6 +3217,26 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$optimizier.sub.js:139"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$optimizier.sub.js:148"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$optimizier.sub.js:166"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$optimizier.sub.js:183"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\namespaces\\$optimizier.sub.js:192"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
             "line": " src\\namespaces\\$string.sub.js:259"
         },
         {
@@ -3126,11 +3245,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:132"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:138"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:279"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:285"
         },
         {
             "message": "replacing incorrect tag: returns with return",
@@ -3138,11 +3257,11 @@
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:131"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:137"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:271"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:277"
         },
         {
             "message": "replacing incorrect tag: returns with return",

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.8.0</title>
+    <title>Documentation: jaaJSU@0.8.1</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: src\namespaces\$optimizier.sub.js</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.0</em>
+            <em>API Docs for: 0.8.1</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -85,6 +85,8 @@
 
 <pre class="code prettyprint linenums">
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+gulp_place(&quot;special_functions/IdleCallback.sub.js&quot;, &quot;file_once&quot;); /* global rIC, cIC */
+gulp_place(&quot;classes/IdleValue.sub.js&quot;, &quot;file_once&quot;); /* global IdleValue */
 /**
  * This NAMESPACE provides features for optimizations.
  * @class $optimizier.{namespace}
@@ -220,8 +222,68 @@ var $optimizier= {
      *  * When call &#x60;f&#x60; (ms)
      */
     timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+    /**
+     * Promise wrapper around [&#x60;requestAnimationFrame&#x60;](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+     * @method requestAnimationFrame_
+     * @returns {Promise}
+     * @example
+     *      $optimizier.requestAnimationFrame_().then(()=&gt; console.log(&quot;Hi&quot;)); //-&gt; &quot;Hi&quot;
+     *      Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=&gt; console.log(&quot;Hi&quot;)); //-&gt; &quot;Hi&quot;
+     */
     requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
-    setTimeout_: function(timeout){ return (...params)=&gt; new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); }
+    /**
+     * Promise wrapper around &#x60;setTimeout&#x60;.
+     * 
+     * Links:
+     *  1) [&#x60;setTimeout&#x60;](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+     *  2) [&#x60;setTimeout Arguments&#x60;](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
+     * @method setTimeout_
+     * @param {Number} [timeout= 0]
+     *  - Optional parameter to sets the time delay in milliseconds
+     *  - &#x60;delay&#x60; argument for &#x60;setTimeout&#x60; — see **Links (2)**
+     * @returns {Function}
+     *  - **(…params)=&gt; \&lt;Promise\&gt;**
+     *  - where &#x60;params&#x60; are &#x60;arg1, ..., argN&#x60; arguments for &#x60;setTimeout&#x60; — see **Links (2)**
+     * @example
+     *          $optimizier.setTimeout_(30)(&quot;Hi&quot;).then(console.log); //-&gt; &quot;Hi&quot; &quot;after 30ms&quot;
+     *          Promise.resolve(&quot;Hi&quot;).then($optimiziers.setTimeout_()).then(console.log); //-&gt; &quot;Hi&quot; &quot;after 0ms&quot;
+     */
+    setTimeout_: function(timeout= 0){ return (...params)=&gt; new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); },
+    /**
+     * This function creates **\&lt;IdleValue\&gt;**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [&#x60;getIdleValue&#x60;](#methods_getIdleValue).
+     * 
+     * This is infact *idle-until-urgent* evaluation pattern.
+     * 
+     * Internally uses &#x60;requestIdleCallback&#x60; (&#x60;cancelIdleCallback&#x60;), or &#x60;setTimeout&#x60; (&#x60;clearTimeout&#x60;) as shim/ponyfill.
+     * @method setIdleValue
+     * @param {Function} initFunction
+     *  - this function is called to get value
+     * @returns {IdleValue}
+     *  - argument for [&#x60;getIdleValue&#x60;](#methods_getIdleValue) or [&#x60;cancelIdleValue&#x60;](#methods_cancelIdleValue).
+     * @example
+     *      const formatter_idled= $optimizier.setIdleValue(()=&gt; new Intl.DateTimeFormat(&#x27;en-US&#x27;, { timeZone: &#x27;America/Los_Angeles&#x27; }));
+     *      // …
+     *      console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
+     */
+    setIdleValue: function(initFunction){ return new IdleValue(initFunction, &quot;&#x60;setIdleValue&#x60;: &#x60;initFunction&#x60; argument must be a function!&quot;); },
+    /**
+     * Returns result of **\&lt;IdleValue\&gt;**.
+     * @method getIdleValue
+     * @param {IdleValue} idle_value
+     *  - Output of [&#x60;setIdleValue&#x60;](#methods_setIdleValue)
+     * @returns {Mixed}
+     *  - Output of &#x60;initFunction&#x60; — see [&#x60;setIdleValue&#x60;](#methods_setIdleValue)
+     */
+    getIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, &quot;&#x60;getIdleValue&#x60;: Argument &#x60;idle_value&#x60; is not &#x60;IdleValue&#x60;!&quot;)) return idle_value.value(); },
+    /**
+     * Stops **\&lt;IdleValue\&gt;** evaluating. Infact calls &#x60;cancelIdleCallback&#x60; — see [&#x60;setIdleValue&#x60;](#methods_setIdleValue)
+     * @method clearIdleValue
+     * @param {IdleValue} idle_value
+     *  - Output of [&#x60;setIdleValue&#x60;](#methods_setIdleValue)
+     * @returns {Mixed|Undefined}
+     *  - returns current value or &#x60;undefined&#x60; if &#x60;initFunction&#x60; wasn&#x27;t called — see see [&#x60;setIdleValue&#x60;](#methods_setIdleValue)
+     */
+    clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, &quot;&#x60;clearIdleValue&#x60;: Argument &#x60;idle_value&#x60; is not &#x60;IdleValue&#x60;!&quot;)) idle_value.cancel(); }
 };
 gulp_place(&quot;global.sub.js&quot;, &quot;file_once&quot;);/* global gulp_place, export_as */
 export_as($optimizier, gulp_place(&quot;namespaces.$optimizier&quot;, &quot;variable&quot;));

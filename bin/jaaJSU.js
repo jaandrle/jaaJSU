@@ -17,7 +17,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.0";
+        window[module_name+"_version"]= "0.8.1";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -588,18 +588,24 @@
          *      - Example: `add(...).onupdate({counter}, _=>({ textContent: counter }))` registers listerner to `counter`. When the `udate({ ... counter: something, ...})` is called this element changes `textContent`.
          *      - See [`update`](#methods_update)
          * @example
-         *      //#1
          *      const UL= document.getElementById('SOME UL');
-         *      const { add }= $dom.component("LI", { className: "list_item" });//<li class="list_item">...</li>
-         *      add("DIV", { textContent: "Child of .list_item", className: "deep1" });//<li class="list_item"><div class="deep1">...</div></li>
-         *          add("DIV", { textContent: "Child of div.deep1", className: "deep2" });//...<div class="deep1"><div class="deep2">...</div></div>...
-         *              add("DIV", { textContent: "Child of div.deep2", className: "deep3" });//...<div class="deep1"><div class="deep2"><div class="deep3">...</div></div></div>...
-         *              add("DIV", { textContent: "Child of div.deep2", className: "deep3 mark" }, -1);//...<div class="deep2"><div class="deep3">...</div><div class="deep3">...</div></div>...
+         *      const { add }= $dom.component("LI", { className: "list_item" });
+         *      //result: <li class="list_item">...</li>
+         *      add("DIV", { textContent: "Child of .list_item", className: "deep1" });
+         *      //result: <li class="list_item"><div class="deep1">...</div></li>
+         *          add("DIV", { textContent: "Child of div.deep1", className: "deep2" });
+         *          //result: ...<div class="deep1"><div class="deep2">...</div></div>...
+         *              add("DIV", { textContent: "Child of div.deep2", className: "deep3" });
+         *              //result: ...<div class="deep1"><div class="deep2"><div class="deep3">...</div></div></div>...
+         *              add("DIV", { textContent: "Child of div.deep2", className: "deep3 mark" }, -1);
+         *              //result: ...<div class="deep2"><div class="deep3">...</div><div class="deep3">...</div></div>...
          *      //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level
-         *          add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);//this is on 2nd level
-         *      add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);//this is on 0 level
-         *          add("DIV", null); // just DIV without attributes
-         *      ...
+         *          add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);
+         *          //result: this is on 2nd level
+         *      add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);
+         *      //result: this is on 0 level
+         *          add("DIV", null);
+         *          //just DIV without attributes
          */
         function add(el_name, attrs, shift= 0){
             recalculateDeep(shift);
@@ -713,9 +719,9 @@
          * @method destroy
          * @public
          * @example
-         *  let { share: test }= $dom.component("DIV", null);
-         *  test.mount(document.body);
-         *  test= test.destroy();
+         *      let { share: test }= $dom.component("DIV", null);
+         *      test.mount(document.body);
+         *      test= test.destroy();
          */
         function destroy(){
             container.remove();
@@ -1379,6 +1385,56 @@
         }
         return share;
     }
+    /* see https://github.com/GoogleChromeLabs/idlize/ */
+    const [ rIC, cIC ]= (supports=> {
+        if(supports) return [ requestIdleCallback, cancelIdleCallback ];
+        /* minimal shim */
+        class IdleDeadline {
+            constructor(init_time){ this._init_time= init_time; }
+            get didTimeout(){ return false; }
+            timeRemaining(){ return Math.max(0, 50 - (now() - this._init_time)); }
+        }
+        return [
+            function requestIdleCallback(callback){
+                const deadline= new IdleDeadline(now());
+                return setTimeout(()=> callback(deadline), 0);
+            },
+            function cancelIdleCallback(handle){
+                clearTimeout(handle);
+            }
+        ];
+        function now(){ return +(new Date());}
+    })(typeof requestIdleCallback === 'function');
+    class IdleValue {
+        constructor(init, msg= "IdleValue: `init` argument for class constructor must be a function!"){
+            if(typeof init!=="function") throw new TypeError(msg);
+            this._init= init;
+            this._value= undefined;
+            this._idleHandle= rIC(this.initValue.bind(this));
+        }
+        initValue(){
+            if(!this._init) return this._value;
+            this._value= this._init();
+            this._init= undefined;
+            return this._value;
+        }
+        value(){
+            if(this._value!==undefined) return this._value;
+            this.cancel();
+            return this.initValue();
+        }
+        cancel(){
+            if(this._idleHandle){
+                cIC(this._idleHandle);
+                this._idleHandle= undefined;
+            }
+            return this._value;
+        }
+    }
+    IdleValue.throwErrorIfNotIdleValue= function(candidat, msg){
+        if(candidat instanceof IdleValue) return true;
+        throw new Error(msg);
+    };
     /**
      * This NAMESPACE provides features for optimizations.
      * @class $optimizier.{namespace}
@@ -1514,8 +1570,68 @@
          *  * When call `f` (ms)
          */
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+        /**
+         * Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+         * @method requestAnimationFrame_
+         * @returns {Promise}
+         * @example
+         *      $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
+         *      Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
+         */
         requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
-        setTimeout_: function(timeout){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); }
+        /**
+         * Promise wrapper around `setTimeout`.
+         * 
+         * Links:
+         *  1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+         *  2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
+         * @method setTimeout_
+         * @param {Number} [timeout= 0]
+         *  - Optional parameter to sets the time delay in milliseconds
+         *  - `delay` argument for `setTimeout` — see **Links (2)**
+         * @returns {Function}
+         *  - **(…params)=> \<Promise\>**
+         *  - where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**
+         * @example
+         *          $optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
+         *          Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
+         */
+        setTimeout_: function(timeout= 0){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); },
+        /**
+         * This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [`getIdleValue`](#methods_getIdleValue).
+         * 
+         * This is infact *idle-until-urgent* evaluation pattern.
+         * 
+         * Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
+         * @method setIdleValue
+         * @param {Function} initFunction
+         *  - this function is called to get value
+         * @returns {IdleValue}
+         *  - argument for [`getIdleValue`](#methods_getIdleValue) or [`cancelIdleValue`](#methods_cancelIdleValue).
+         * @example
+         *      const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
+         *      // …
+         *      console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
+         */
+        setIdleValue: function(initFunction){ return new IdleValue(initFunction, "`setIdleValue`: `initFunction` argument must be a function!"); },
+        /**
+         * Returns result of **\<IdleValue\>**.
+         * @method getIdleValue
+         * @param {IdleValue} idle_value
+         *  - Output of [`setIdleValue`](#methods_setIdleValue)
+         * @returns {Mixed}
+         *  - Output of `initFunction` — see [`setIdleValue`](#methods_setIdleValue)
+         */
+        getIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`getIdleValue`: Argument `idle_value` is not `IdleValue`!")) return idle_value.value(); },
+        /**
+         * Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)
+         * @method clearIdleValue
+         * @param {IdleValue} idle_value
+         *  - Output of [`setIdleValue`](#methods_setIdleValue)
+         * @returns {Mixed|Undefined}
+         *  - returns current value or `undefined` if `initFunction` wasn't called — see see [`setIdleValue`](#methods_setIdleValue)
+         */
+        clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`clearIdleValue`: Argument `idle_value` is not `IdleValue`!")) idle_value.cancel(); }
     };
 
     export_as($optimizier, "$optimiziers");

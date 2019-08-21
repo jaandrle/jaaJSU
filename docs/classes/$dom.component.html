@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Documentation: jaaJSU@0.8.0</title>
+    <title>Documentation: jaaJSU@0.8.1</title>
     <link rel="stylesheet" href="../assets/from_yahhoapis/cssgrids-min.css">
 <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0pr2/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
@@ -17,7 +17,7 @@
             <h1><a href="../index.html"><img src="../assets/css/logo.png" width="117" height="52">jaaJSU</a>: $dom.component</h1>
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.8.0</em>
+            <em>API Docs for: 0.8.1</em>
         </div>
     </div>
     <div class="yui3-g">
@@ -218,18 +218,24 @@
 </ul>
 </div>
         <h5>Example</h5>
-        <pre class="code prettyprint"><code> //#1
- const UL= document.getElementById('SOME UL');
- const { add }= $dom.component(&quot;LI&quot;, { className: &quot;list_item&quot; });//&lt;li class=&quot;list_item&quot;&gt;...&lt;/li&gt;
- add(&quot;DIV&quot;, { textContent: &quot;Child of .list_item&quot;, className: &quot;deep1&quot; });//&lt;li class=&quot;list_item&quot;&gt;&lt;div class=&quot;deep1&quot;&gt;...&lt;/div&gt;&lt;/li&gt;
-     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
-         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3&quot; });//...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;...
-         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3 mark&quot; }, -1);//...&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+        <pre class="code prettyprint"><code> const UL= document.getElementById('SOME UL');
+ const { add }= $dom.component(&quot;LI&quot;, { className: &quot;list_item&quot; });
+ //result: &lt;li class=&quot;list_item&quot;&gt;...&lt;/li&gt;
+ add(&quot;DIV&quot;, { textContent: &quot;Child of .list_item&quot;, className: &quot;deep1&quot; });
+ //result: &lt;li class=&quot;list_item&quot;&gt;&lt;div class=&quot;deep1&quot;&gt;...&lt;/div&gt;&lt;/li&gt;
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2&quot; });
+     //result: ...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3&quot; });
+         //result: ...&lt;div class=&quot;deep1&quot;&gt;&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;...
+         add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep2&quot;, className: &quot;deep3 mark&quot; }, -1);
+         //result: ...&lt;div class=&quot;deep2&quot;&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;div class=&quot;deep3&quot;&gt;...&lt;/div&gt;&lt;/div&gt;...
  //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level
-     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 2nd level
- add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);//this is on 0 level
-     add(&quot;DIV&quot;, null); // just DIV without attributes
- ...</code></pre>
+     add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);
+     //result: this is on 2nd level
+ add(&quot;DIV&quot;, { textContent: &quot;Child of div.deep1&quot;, className: &quot;deep2 nextone&quot; }, -2);
+ //result: this is on 0 level
+     add(&quot;DIV&quot;, null);
+     //just DIV without attributes</code></pre>
 
 </div>
 <a name="methods_addText"></a>
@@ -238,7 +244,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l131"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:131</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l137"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:137</code></a>
     </span><br>
     <p>This add element to component</p>
 
@@ -283,7 +289,7 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l163"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:163</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l169"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:169</code></a>
     </span><br>
     <p>Method for including another component by usint its <code>share</code> key.</p>
 
@@ -308,14 +314,14 @@
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l218"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:218</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l224"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:224</code></a>
     </span><br>
     <p>Method remove element form live DOM and returns null</p>
 
         <h5>Example</h5>
-        <p>let { share: test }= $dom.component(&quot;DIV&quot;, null);
-test.mount(document.body);
-test= test.destroy();</p>
+        <pre class="code prettyprint"><code> let { share: test }= $dom.component(&quot;DIV&quot;, null);
+ test.mount(document.body);
+ test= test.destroy();</code></pre>
 
 </div>
 <a name="methods_getParentElement"></a>
@@ -324,7 +330,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l242"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:242</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l248"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:248</code></a>
     </span><br>
     <p>Returns parent element (or &quot;fragment pseudo element&quot;)</p>
 
@@ -335,7 +341,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l271"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:271</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l277"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:277</code></a>
     </span><br>
     <p>Initialize internal storage</p>
 
@@ -350,7 +356,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l374"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:374</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l380"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:380</code></a>
     </span><br>
     <p>Methods returns if it was <code>onupdate</code> used</p>
 
@@ -365,7 +371,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l181"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:181</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l187"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:187</code></a>
     </span><br>
     <p>Add element to live DOM</p>
 
@@ -399,7 +405,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l231"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:231</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l237"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:237</code></a>
     </span><br>
     <p>Updates <code>deep</code></p>
 
@@ -420,7 +426,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l250"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:250</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l256"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:256</code></a>
     </span><br>
     <p>Method provide way to change nesting behaviour. It can be helpful for loops</p>
 
@@ -451,7 +457,7 @@ test= test.destroy();</p>
     <br>
     <span class="foundat">
         
-        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l348"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:348</code></a>
+        <a href="../files/src_special_functions_$dom_add_helpers_standalone.sub.js.html#l354"><code>src\special_functions\$dom_add_helpers_standalone.sub.js:354</code></a>
     </span><br>
     <p>Method updates all registered varibles by keys <code>onupdates</code> and calls follower functions</p>
 

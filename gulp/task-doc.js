@@ -12,6 +12,7 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     "};";
     return function(cb){
         gulp.src(['./node_modules/yuidocjs/themes/simple/**/*'])
+            .pipe($g.replace("#main { width: 754px; }", "#main { width: calc(100% - 310px); }"))
             .pipe($g.replace("{{htmlTitle}}", "Documentation: "+app.name+"@"+app.version))
             .pipe($g.replace("{{projectVersion}}", app.version))
             .pipe($g.replace("{{title}}</a>", app.name+"</a>: {{moduleName}}"))

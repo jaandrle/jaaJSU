@@ -95,18 +95,24 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
      *      - Example: `add(...).onupdate({counter}, _=>({ textContent: counter }))` registers listerner to `counter`. When the `udate({ ... counter: something, ...})` is called this element changes `textContent`.
      *      - See [`update`](#methods_update)
      * @example
-     *      //#1
      *      const UL= document.getElementById('SOME UL');
-     *      const { add }= $dom.component("LI", { className: "list_item" });//<li class="list_item">...</li>
-     *      add("DIV", { textContent: "Child of .list_item", className: "deep1" });//<li class="list_item"><div class="deep1">...</div></li>
-     *          add("DIV", { textContent: "Child of div.deep1", className: "deep2" });//...<div class="deep1"><div class="deep2">...</div></div>...
-     *              add("DIV", { textContent: "Child of div.deep2", className: "deep3" });//...<div class="deep1"><div class="deep2"><div class="deep3">...</div></div></div>...
-     *              add("DIV", { textContent: "Child of div.deep2", className: "deep3 mark" }, -1);//...<div class="deep2"><div class="deep3">...</div><div class="deep3">...</div></div>...
+     *      const { add }= $dom.component("LI", { className: "list_item" });
+     *      //result: <li class="list_item">...</li>
+     *      add("DIV", { textContent: "Child of .list_item", className: "deep1" });
+     *      //result: <li class="list_item"><div class="deep1">...</div></li>
+     *          add("DIV", { textContent: "Child of div.deep1", className: "deep2" });
+     *          //result: ...<div class="deep1"><div class="deep2">...</div></div>...
+     *              add("DIV", { textContent: "Child of div.deep2", className: "deep3" });
+     *              //result: ...<div class="deep1"><div class="deep2"><div class="deep3">...</div></div></div>...
+     *              add("DIV", { textContent: "Child of div.deep2", className: "deep3 mark" }, -1);
+     *              //result: ...<div class="deep2"><div class="deep3">...</div><div class="deep3">...</div></div>...
      *      //next add(*) schoul be child of div.deep3.mark, by -1 it is ch.of div.deep2, by -2 ch.of div.deep1, by -3 ch.of li.list_item because div.deep3.mark is on 3rd level
-     *          add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);//this is on 2nd level
-     *      add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);//this is on 0 level
-     *          add("DIV", null); // just DIV without attributes
-     *      ...
+     *          add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);
+     *          //result: this is on 2nd level
+     *      add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2);
+     *      //result: this is on 0 level
+     *          add("DIV", null);
+     *          //just DIV without attributes
      */
     function add(el_name, attrs, shift= 0){
         recalculateDeep(shift);
@@ -220,9 +226,9 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
      * @method destroy
      * @public
      * @example
-     *  let { share: test }= $dom.component("DIV", null);
-     *  test.mount(document.body);
-     *  test= test.destroy();
+     *      let { share: test }= $dom.component("DIV", null);
+     *      test.mount(document.body);
+     *      test= test.destroy();
      */
     function destroy(){
         container.remove();

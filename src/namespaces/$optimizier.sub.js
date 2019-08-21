@@ -1,4 +1,6 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+gulp_place("special_functions/IdleCallback.sub.js", "file_once"); /* global rIC, cIC */
+gulp_place("classes/IdleValue.sub.js", "file_once"); /* global IdleValue */
 /**
  * This NAMESPACE provides features for optimizations.
  * @class $optimizier.{namespace}
@@ -134,8 +136,68 @@ var $optimizier= {
      *  * When call `f` (ms)
      */
     timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
+    /**
+     * Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+     * @method requestAnimationFrame_
+     * @returns {Promise}
+     * @example
+     *      $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
+     *      Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
+     */
     requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
-    setTimeout_: function(timeout){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); }
+    /**
+     * Promise wrapper around `setTimeout`.
+     * 
+     * Links:
+     *  1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+     *  2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
+     * @method setTimeout_
+     * @param {Number} [timeout= 0]
+     *  - Optional parameter to sets the time delay in milliseconds
+     *  - `delay` argument for `setTimeout` — see **Links (2)**
+     * @returns {Function}
+     *  - **(…params)=> \<Promise\>**
+     *  - where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**
+     * @example
+     *          $optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
+     *          Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
+     */
+    setTimeout_: function(timeout= 0){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); },
+    /**
+     * This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [`getIdleValue`](#methods_getIdleValue).
+     * 
+     * This is infact *idle-until-urgent* evaluation pattern.
+     * 
+     * Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
+     * @method setIdleValue
+     * @param {Function} initFunction
+     *  - this function is called to get value
+     * @returns {IdleValue}
+     *  - argument for [`getIdleValue`](#methods_getIdleValue) or [`cancelIdleValue`](#methods_cancelIdleValue).
+     * @example
+     *      const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
+     *      // …
+     *      console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
+     */
+    setIdleValue: function(initFunction){ return new IdleValue(initFunction, "`setIdleValue`: `initFunction` argument must be a function!"); },
+    /**
+     * Returns result of **\<IdleValue\>**.
+     * @method getIdleValue
+     * @param {IdleValue} idle_value
+     *  - Output of [`setIdleValue`](#methods_setIdleValue)
+     * @returns {Mixed}
+     *  - Output of `initFunction` — see [`setIdleValue`](#methods_setIdleValue)
+     */
+    getIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`getIdleValue`: Argument `idle_value` is not `IdleValue`!")) return idle_value.value(); },
+    /**
+     * Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)
+     * @method clearIdleValue
+     * @param {IdleValue} idle_value
+     *  - Output of [`setIdleValue`](#methods_setIdleValue)
+     * @returns {Mixed|Undefined}
+     *  - returns current value or `undefined` if `initFunction` wasn't called — see see [`setIdleValue`](#methods_setIdleValue)
+     */
+    clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`clearIdleValue`: Argument `idle_value` is not `IdleValue`!")) idle_value.cancel(); }
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($optimizier, gulp_place("namespaces.$optimizier", "variable"));
