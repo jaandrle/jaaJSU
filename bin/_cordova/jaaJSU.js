@@ -467,6 +467,7 @@
         eachDynamic: __eachInArrayLikeDynamic
     };
     /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
+    /* standalone= "cordova"; */
     const $dom_emptyPseudoComponent= (function(){
         const share= { mount, update, destroy, isStatic };
         const component_out= { add, component, mount, update, share };
@@ -504,6 +505,7 @@
     /**
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @class $dom.component [cordova]
+     * @version 1.0.0
      * @constructor
      * @param {String} el_name
      *  - Name of element (for example `LI`, `P`, `A`, …).
@@ -601,6 +603,7 @@
                 }
             }, component_out);
         }
+        
         /**
          * This add element to component
          * @method addText
@@ -633,6 +636,7 @@
                 oninit: function(fn){ fn(el); return component_out; }
             }, component_out);
         }
+        
         /**
          * Method for including another component by usint its `share` key.
          * @method component
@@ -651,6 +655,7 @@
             all_els_counter+= 1;
             return component_out;
         }
+        
         /**
          * Add element to live DOM
          * @method mount
@@ -695,6 +700,7 @@
             }
             return container;
         }
+        
         /**
          * Method remove element form live DOM and returns null
          * @method destroy
@@ -708,6 +714,7 @@
             container.remove();
             return null;
         }
+        
         /**
          * Updates `deep`
          * @private
@@ -719,6 +726,7 @@
             if(!shift) deep.push(all_els_counter);
             else { deep.splice(deep.length+1+shift); deep[deep.length-1]= all_els_counter; }
         }
+        
         /**
          * Returns parent element (or "fragment pseudo element")
          * @method getParentElement
@@ -727,6 +735,7 @@
         function getParentElement(){
             return els[deep[deep.length-2]] || fragment;
         }
+        
         /**
          * Method provide way to change nesting behaviour. It can be helpful for loops
          * @method setShift
@@ -748,6 +757,7 @@
             if(!shift){ last= deep.pop(); deep.push(last, last); }
             else deep.splice(deep.length+1+shift);
         }
+        
         /**
          * Initialize internal storage
          * @method initStorage
@@ -825,32 +835,41 @@
                 function el_idFilter(v){ return v!==el_id; }
             }
         }
+        
         /**
          * Method updates all registered varibles by keys `onupdates` and calls follower functions
          * @method update
          * @public
-         * @param {Object} new_data
+         * @param {Object|Function} new_data
          *  - When `$dom.component` is initialized, it is possible to register `mapUpdate`
          *  - **It's because internally, it is used `Object.assign` (no deep copy) to merge new data with older one!!!**
+         *  - It is also possible to register function to detect changes itself see examples
          * @example
+         *      // SIMPLE example
          *      const data_A= { a: "A" };
          *      const data_A_update= { a: "AAA" };
          *      const { add, mount, update }= $dom.component("UL", null);
-         *          add("LI", { onupdate: [ { a }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for "a"
+         *          add("LI", { onupdate: [ data_A, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for "a"
          *      mount(document.body);
          *      update(data_A_update);
-         *      //BUT
+         *      // EXAMPLE WITH `mapUpdate`
          *      const data_B= { a: { b: "A" }};
          *      const data_B_update= { a: { b: "AAA" }};
          *      const { add, mount, update }= $dom.component("UL", null, { mapUpdate: d=>({ a: d.a.b }) });
-         *          add("LI", { onupdate: [ { a: data_B.a.b }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for "a"
+         *          add("LI", { onupdate: [ data_B, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for "a" see `mapUpdate`
          *      mount(document.body);
          *      update(data_B_update);
+         *      // EXAMPLE WITH FUNCTION AS ARGUMENT OF `update`
+         *      const { add, mount, update }= $dom.component("UL", null, { mapUpdate: d=>({ a: d.a.b }) });
+         *          add("LI", { onupdate: [ { a: 1 }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for "a" see `mapUpdate`
+         *      mount(document.body);
+         *      update(({ a })=> { a: ++a });
          */
         function update(new_data){
             if(!internal_storage) return false;
             return internal_storage.update(typeof new_data==="function" ? new_data(internal_storage.getData()) : new_data);
         }
+        
         /**
          * Methods returns if it was `onupdate` used
          * @method isStatic
@@ -861,37 +880,8 @@
         function isStatic(){
             return !internal_storage;
         }
+        
     };
-    /**
-     * See [add](#methods_add)
-     * @method add [cordova]
-     * @for $dom.{namespace}
-     * @param parent {NodeElement}
-     * @param $$$ {...Array}
-     *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
-     * @param [call_parseHTML=undefined] {Boolean}
-     *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
-     * @return {NodeElement}
-     *  * First created element (usualy wrapper thanks nesting)
-     */
-    $dom.add= function(parent,$$$, call_parseHTML){
-        let fragment= document.createDocumentFragment();
-        let prepare_els= [], els= [];
-        for(var i=0, i_length= $$$.length; i<i_length;i++){
-            prepare_els[i]= document.createElement($$$[i][0]);
-            if(!i) els[i]= fragment.appendChild(prepare_els[i]);
-            else if(typeof $$$[i][1].$!=="undefined"){
-                els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
-                delete $$$[i][1].$;
-            }
-            else els[i]= els[i-1].appendChild(prepare_els[i]);
-            $dom.assign(els[i], $$$[i][1]);
-        }
-        parent.appendChild(fragment);
-        if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
-        if(i) return els[0];
-    };
-    
     /**
      * Procedure for merging object into the element properties.
      * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
@@ -960,6 +950,35 @@
         }
     };
     
+    /**
+     * See [add](#methods_add)
+     * @method add [cordova]
+     * @for $dom.{namespace}
+     * @param parent {NodeElement}
+     * @param $$$ {...Array}
+     *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
+     * @param [call_parseHTML=undefined] {Boolean}
+     *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
+     * @return {NodeElement}
+     *  * First created element (usualy wrapper thanks nesting)
+     */
+    $dom.add= function(parent,$$$, call_parseHTML){
+        let fragment= document.createDocumentFragment();
+        let prepare_els= [], els= [];
+        for(var i=0, i_length= $$$.length; i<i_length;i++){
+            prepare_els[i]= document.createElement($$$[i][0]);
+            if(!i) els[i]= fragment.appendChild(prepare_els[i]);
+            else if(typeof $$$[i][1].$!=="undefined"){
+                els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
+                delete $$$[i][1].$;
+            }
+            else els[i]= els[i-1].appendChild(prepare_els[i]);
+            $dom.assign(els[i], $$$[i][1]);
+        }
+        parent.appendChild(fragment);
+        if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
+        if(i) return els[0];
+    };
     /* global $dom, active_page_el, device *///gulp.keep.line
     /**
      * Redraw element using cheat `*.offsetHeight`

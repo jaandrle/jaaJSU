@@ -1,5 +1,4 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-/* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
 /* $dom *//* global $dom */
 /* standalone= "standalone"; */
 const $dom_emptyPseudoComponent= (function(){
@@ -39,6 +38,7 @@ const $dom_emptyPseudoComponent= (function(){
 /**
  * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
  * @class $dom.component
+ * @version 1.0.0
  * @constructor
  * @param {String} el_name
  *  - Name of element (for example `LI`, `P`, `A`, …).

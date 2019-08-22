@@ -268,8 +268,9 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 38,
+            "line": 39,
             "description": "This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
+            "version": "1.0.0",
             "is_constructor": 1,
             "params": [
                 {
@@ -310,8 +311,9 @@
             "extension_for": [],
             "module": "jaaJSU.{global}",
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 37,
+            "line": 38,
             "description": "This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.",
+            "version": "1.0.0",
             "is_constructor": 1,
             "params": [
                 {
@@ -1902,7 +1904,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 80,
+            "line": 82,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "add",
@@ -1938,7 +1940,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 138,
+            "line": 141,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "addText",
@@ -1967,7 +1969,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 170,
+            "line": 174,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -1989,7 +1991,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 188,
+            "line": 193,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2018,7 +2020,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 232,
+            "line": 238,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -2031,7 +2033,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 245,
+            "line": 252,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2048,7 +2050,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 256,
+            "line": 264,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -2058,7 +2060,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 264,
+            "line": 273,
             "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
             "itemtype": "method",
             "name": "setShift",
@@ -2078,7 +2080,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 285,
+            "line": 295,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2092,7 +2094,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 362,
+            "line": 373,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2101,18 +2103,18 @@
             "params": [
                 {
                     "name": "new_data",
-                    "description": "- When `$dom.component` is initialized, it is possible to register `mapUpdate`\n - **It's because internally, it is used `Object.assign` (no deep copy) to merge new data with older one!!!**",
-                    "type": "Object"
+                    "description": "- When `$dom.component` is initialized, it is possible to register `mapUpdate`\n - **It's because internally, it is used `Object.assign` (no deep copy) to merge new data with older one!!!**\n - It is also possible to register function to detect changes itself see examples",
+                    "type": "Object|Function"
                 }
             ],
             "example": [
-                "\n     const data_A= { a: \"A\" };\n     const data_A_update= { a: \"AAA\" };\n     const { add, mount, update }= $dom.component(\"UL\", null);\n         add(\"LI\", { onupdate: [ { a }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_A_update);\n     //BUT\n     const data_B= { a: { b: \"A\" }};\n     const data_B_update= { a: { b: \"AAA\" }};\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ { a: data_B.a.b }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_B_update);"
+                "\n     // SIMPLE example\n     const data_A= { a: \"A\" };\n     const data_A_update= { a: \"AAA\" };\n     const { add, mount, update }= $dom.component(\"UL\", null);\n         add(\"LI\", { onupdate: [ data_A, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_A_update);\n     // EXAMPLE WITH `mapUpdate`\n     const data_B= { a: { b: \"A\" }};\n     const data_B_update= { a: { b: \"AAA\" }};\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ data_B, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\" see `mapUpdate`\n     mount(document.body);\n     update(data_B_update);\n     // EXAMPLE WITH FUNCTION AS ARGUMENT OF `update`\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ { a: 1 }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\" see `mapUpdate`\n     mount(document.body);\n     update(({ a })=> { a: ++a });"
             ],
             "class": "$dom.component [cordova]"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 388,
+            "line": 407,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2126,7 +2128,30 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 399,
+            "line": 419,
+            "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
+            "itemtype": "method",
+            "name": "assign [cordova]",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "object_attributes",
+                    "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
+                    "type": "...Object"
+                }
+            ],
+            "example": [
+                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\"\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: true } });//or 1\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //..."
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
+            "line": 487,
             "description": "See [add](#methods_add)",
             "itemtype": "method",
             "name": "add [cordova]",
@@ -2156,31 +2181,8 @@
             "class": "$dom.{namespace}"
         },
         {
-            "file": "src\\special_functions\\$dom_add_helpers_cordova.sub.js",
-            "line": 429,
-            "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
-            "itemtype": "method",
-            "name": "assign [cordova]",
-            "params": [
-                {
-                    "name": "element",
-                    "description": "",
-                    "type": "NodeElement"
-                },
-                {
-                    "name": "object_attributes",
-                    "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
-                    "type": "...Object"
-                }
-            ],
-            "example": [
-                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\"\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: true } });//or 1\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //..."
-            ],
-            "class": "$dom.{namespace}"
-        },
-        {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 79,
+            "line": 81,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "add",
@@ -2216,7 +2218,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 137,
+            "line": 140,
             "description": "This add element to component",
             "itemtype": "method",
             "name": "addText",
@@ -2245,7 +2247,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 169,
+            "line": 173,
             "description": "Method for including another component by usint its `share` key.",
             "itemtype": "method",
             "name": "component",
@@ -2267,7 +2269,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 187,
+            "line": 192,
             "description": "Add element to live DOM",
             "itemtype": "method",
             "name": "mount",
@@ -2291,7 +2293,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 224,
+            "line": 230,
             "description": "Method remove element form live DOM and returns null",
             "itemtype": "method",
             "name": "destroy",
@@ -2304,7 +2306,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 237,
+            "line": 244,
             "description": "Updates `deep`",
             "access": "private",
             "tagname": "",
@@ -2321,7 +2323,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 248,
+            "line": 256,
             "description": "Returns parent element (or \"fragment pseudo element\")",
             "itemtype": "method",
             "name": "getParentElement",
@@ -2331,7 +2333,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 256,
+            "line": 265,
             "description": "Method provide way to change nesting behaviour. It can be helpful for loops",
             "itemtype": "method",
             "name": "setShift",
@@ -2351,7 +2353,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 277,
+            "line": 287,
             "description": "Initialize internal storage",
             "itemtype": "method",
             "name": "initStorage",
@@ -2365,7 +2367,7 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 354,
+            "line": 365,
             "description": "Method updates all registered varibles by keys `onupdates` and calls follower functions",
             "itemtype": "method",
             "name": "update",
@@ -2374,18 +2376,18 @@
             "params": [
                 {
                     "name": "new_data",
-                    "description": "- When `$dom.component` is initialized, it is possible to register `mapUpdate`\n - **It's because internally, it is used `Object.assign` (no deep copy) to merge new data with older one!!!**",
-                    "type": "Object"
+                    "description": "- When `$dom.component` is initialized, it is possible to register `mapUpdate`\n - **It's because internally, it is used `Object.assign` (no deep copy) to merge new data with older one!!!**\n - It is also possible to register function to detect changes itself see examples",
+                    "type": "Object|Function"
                 }
             ],
             "example": [
-                "\n     const data_A= { a: \"A\" };\n     const data_A_update= { a: \"AAA\" };\n     const { add, mount, update }= $dom.component(\"UL\", null);\n         add(\"LI\", { onupdate: [ { a }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_A_update);\n     //BUT\n     const data_B= { a: { b: \"A\" }};\n     const data_B_update= { a: { b: \"AAA\" }};\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ { a: data_B.a.b }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_B_update);"
+                "\n     // SIMPLE example\n     const data_A= { a: \"A\" };\n     const data_A_update= { a: \"AAA\" };\n     const { add, mount, update }= $dom.component(\"UL\", null);\n         add(\"LI\", { onupdate: [ data_A, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\"\n     mount(document.body);\n     update(data_A_update);\n     // EXAMPLE WITH `mapUpdate`\n     const data_B= { a: { b: \"A\" }};\n     const data_B_update= { a: { b: \"AAA\" }};\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ data_B, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\" see `mapUpdate`\n     mount(document.body);\n     update(data_B_update);\n     // EXAMPLE WITH FUNCTION AS ARGUMENT OF `update`\n     const { add, mount, update }= $dom.component(\"UL\", null, { mapUpdate: d=>({ a: d.a.b }) });\n         add(\"LI\", { onupdate: [ { a: 1 }, ({ a })=>({ textContent: a }) ] });//`[ { a },` add listener for \"a\" see `mapUpdate`\n     mount(document.body);\n     update(({ a })=> { a: ++a });"
             ],
             "class": "$dom.component"
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 380,
+            "line": 399,
             "description": "Methods returns if it was `onupdate` used",
             "itemtype": "method",
             "name": "isStatic",
@@ -2399,7 +2401,30 @@
         },
         {
             "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 391,
+            "line": 411,
+            "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
+            "itemtype": "method",
+            "name": "assign",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "",
+                    "type": "NodeElement"
+                },
+                {
+                    "name": "object_attributes",
+                    "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
+                    "type": "...Object"
+                }
+            ],
+            "example": [
+                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\"\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: true } });//or 1\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //..."
+            ],
+            "class": "$dom.{namespace}"
+        },
+        {
+            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
+            "line": 475,
             "description": "Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)",
             "itemtype": "method",
             "name": "add",
@@ -2421,29 +2446,6 @@
             },
             "example": [
                 "\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n            [\"SPAN\", {$:0, innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>\n    // !!! VS !!!\n    $dom.add(ul_element,[\n        [\"LI\", {className: \"nejake-tridy\", onclick: clickFCE}],\n            [\"SPAN\", {innerText: \"Prvni SPAN v LI\"}],\n                [\"SPAN\", {innerText: \"Druhy SPAN v LI\"}]\n    ]);\n    // = <ul><li class=\"nejake-tridy\" onclick=\"clickFCE\"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>"
-            ],
-            "class": "$dom.{namespace}"
-        },
-        {
-            "file": "src\\special_functions\\$dom_add_helpers_standalone.sub.js",
-            "line": 439,
-            "description": "Procedure for merging object into the element properties.\nVery simple example: `$dom.assign(document.body, { className: \"test\" });` is equivalent to `document.body.className= \"test\";`.\nIt is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).",
-            "itemtype": "method",
-            "name": "assign",
-            "params": [
-                {
-                    "name": "element",
-                    "description": "",
-                    "type": "NodeElement"
-                },
-                {
-                    "name": "object_attributes",
-                    "description": "- Object shall holds **NodeElement** properties like `className`, `textContent`, ...\n - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById(\"ID\"), { dataset: { test: \"TEST\" } }); //<p id=\"ID\" data-test=\"TEST\"></p>`.\n - The same notation can be used for **CSS variables** (the key is called `style_vars`).\n - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: \"color: red;\" });` and `$dom.assign(el, { style: { color: \"red\" } })` is equivalent to `el.setAttribute(\"style\", \"color: red;\");`\n - **IMPORTANT DIFFERENCE**: `classList` accepts *Object* in the form of `class_name: -1|0|1` where '-1' means `el.classList(class_name)` others `el.classList(class_name, Booleans(...))`\n - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).",
-                    "type": "...Object"
-                }
-            ],
-            "example": [
-                "\n     const el= document.body;\n     const onclick= function(){ console.log(this.dataset.js_param); };\n     $dom.assign(el, { textContent: \"BODY\", style: \"color: red;\", dataset: { js_param: \"CLICKED\" }, onclick });\n     //result HTML: <body style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //console output on click: \"CLICKED\"\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: -1 } });\n     //result HTML: <body class=\"\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     $dom.assign(el, { classList: { testClass: true } });//or 1\n     //result HTML: <body class=\"testClass\" style=\"color: red;\" data-js_param=\"CLICKED\">BODY</body>\n     //..."
             ],
             "class": "$dom.{namespace}"
         },
@@ -3240,28 +3242,36 @@
             "line": " src\\namespaces\\$string.sub.js:259"
         },
         {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:80"
+            "message": "unknown tag: version",
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:39"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:138"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:82"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:285"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:141"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:79"
+            "line": " src\\special_functions\\$dom_add_helpers_cordova.sub.js:295"
+        },
+        {
+            "message": "unknown tag: version",
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:38"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:137"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:81"
         },
         {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:277"
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:140"
+        },
+        {
+            "message": "replacing incorrect tag: returns with return",
+            "line": " src\\special_functions\\$dom_add_helpers_standalone.sub.js:287"
         },
         {
             "message": "replacing incorrect tag: returns with return",

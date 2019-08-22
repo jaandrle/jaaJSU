@@ -87,6 +87,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
 /* $dom *//* global $dom */
+/* standalone= &quot;cordova&quot;; */
 const $dom_emptyPseudoComponent= (function(){
     const share= { mount, update, destroy, isStatic };
     const component_out= { add, component, mount, update, share };
@@ -124,6 +125,7 @@ const $dom_emptyPseudoComponent= (function(){
 /**
  * This &#x27;functional class&#x27; is syntax sugar around [&#x60;DocumentFragment&#x60;](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
  * @class $dom.component [cordova]
+ * @version 1.0.0
  * @constructor
  * @param {String} el_name
  *  - Name of element (for example &#x60;LI&#x60;, &#x60;P&#x60;, &#x60;A&#x60;, …).
@@ -221,6 +223,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             }
         }, component_out);
     }
+    
     /**
      * This add element to component
      * @method addText
@@ -253,6 +256,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             oninit: function(fn){ fn(el); return component_out; }
         }, component_out);
     }
+    
     /**
      * Method for including another component by usint its &#x60;share&#x60; key.
      * @method component
@@ -271,6 +275,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         all_els_counter+= 1;
         return component_out;
     }
+    
     /**
      * Add element to live DOM
      * @method mount
@@ -315,6 +320,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         }
         return container;
     }
+    
     /**
      * Method remove element form live DOM and returns null
      * @method destroy
@@ -328,6 +334,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         container.remove();
         return null;
     }
+    
     /**
      * Updates &#x60;deep&#x60;
      * @private
@@ -339,6 +346,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift) deep.push(all_els_counter);
         else { deep.splice(deep.length+1+shift); deep[deep.length-1]= all_els_counter; }
     }
+    
     /**
      * Returns parent element (or &quot;fragment pseudo element&quot;)
      * @method getParentElement
@@ -347,6 +355,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function getParentElement(){
         return els[deep[deep.length-2]] || fragment;
     }
+    
     /**
      * Method provide way to change nesting behaviour. It can be helpful for loops
      * @method setShift
@@ -368,6 +377,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift){ last= deep.pop(); deep.push(last, last); }
         else deep.splice(deep.length+1+shift);
     }
+    
     /**
      * Initialize internal storage
      * @method initStorage
@@ -445,32 +455,41 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             function el_idFilter(v){ return v!==el_id; }
         }
     }
+    
     /**
      * Method updates all registered varibles by keys &#x60;onupdates&#x60; and calls follower functions
      * @method update
      * @public
-     * @param {Object} new_data
+     * @param {Object|Function} new_data
      *  - When &#x60;$dom.component&#x60; is initialized, it is possible to register &#x60;mapUpdate&#x60;
      *  - **It&#x27;s because internally, it is used &#x60;Object.assign&#x60; (no deep copy) to merge new data with older one!!!**
+     *  - It is also possible to register function to detect changes itself see examples
      * @example
+     *      // SIMPLE example
      *      const data_A= { a: &quot;A&quot; };
      *      const data_A_update= { a: &quot;AAA&quot; };
      *      const { add, mount, update }= $dom.component(&quot;UL&quot;, null);
-     *          add(&quot;LI&quot;, { onupdate: [ { a }, ({ a })=&gt;({ textContent: a }) ] });//&#x60;[ { a },&#x60; add listener for &quot;a&quot;
+     *          add(&quot;LI&quot;, { onupdate: [ data_A, ({ a })=&gt;({ textContent: a }) ] });//&#x60;[ { a },&#x60; add listener for &quot;a&quot;
      *      mount(document.body);
      *      update(data_A_update);
-     *      //BUT
+     *      // EXAMPLE WITH &#x60;mapUpdate&#x60;
      *      const data_B= { a: { b: &quot;A&quot; }};
      *      const data_B_update= { a: { b: &quot;AAA&quot; }};
      *      const { add, mount, update }= $dom.component(&quot;UL&quot;, null, { mapUpdate: d=&gt;({ a: d.a.b }) });
-     *          add(&quot;LI&quot;, { onupdate: [ { a: data_B.a.b }, ({ a })=&gt;({ textContent: a }) ] });//&#x60;[ { a },&#x60; add listener for &quot;a&quot;
+     *          add(&quot;LI&quot;, { onupdate: [ data_B, ({ a })=&gt;({ textContent: a }) ] });//&#x60;[ { a },&#x60; add listener for &quot;a&quot; see &#x60;mapUpdate&#x60;
      *      mount(document.body);
      *      update(data_B_update);
+     *      // EXAMPLE WITH FUNCTION AS ARGUMENT OF &#x60;update&#x60;
+     *      const { add, mount, update }= $dom.component(&quot;UL&quot;, null, { mapUpdate: d=&gt;({ a: d.a.b }) });
+     *          add(&quot;LI&quot;, { onupdate: [ { a: 1 }, ({ a })=&gt;({ textContent: a }) ] });//&#x60;[ { a },&#x60; add listener for &quot;a&quot; see &#x60;mapUpdate&#x60;
+     *      mount(document.body);
+     *      update(({ a })=&gt; { a: ++a });
      */
     function update(new_data){
         if(!internal_storage) return false;
         return internal_storage.update(typeof new_data===&quot;function&quot; ? new_data(internal_storage.getData()) : new_data);
     }
+    
     /**
      * Methods returns if it was &#x60;onupdate&#x60; used
      * @method isStatic
@@ -481,37 +500,8 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function isStatic(){
         return !internal_storage;
     }
+    
 };
-/**
- * See [add](#methods_add)
- * @method add [cordova]
- * @for $dom.{namespace}
- * @param parent {NodeElement}
- * @param $$$ {...Array}
- *  * Works also with &quot;jsif_var&quot; and/or &quot;data-cmd=&#x27;condition-changeval&#x27;&quot; see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
- * @param [call_parseHTML=undefined] {Boolean}
- *  * If **true** calls &#x60;parseHTML(parent.querySelectorAll(c_CMD))&#x60;
- * @return {NodeElement}
- *  * First created element (usualy wrapper thanks nesting)
- */
-$dom.add= function(parent,$$$, call_parseHTML){
-    let fragment= document.createDocumentFragment();
-    let prepare_els= [], els= [];
-    for(var i=0, i_length= $$$.length; i&lt;i_length;i++){
-        prepare_els[i]= document.createElement($$$[i][0]);
-        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
-        else if(typeof $$$[i][1].$!==&quot;undefined&quot;){
-            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
-            delete $$$[i][1].$;
-        }
-        else els[i]= els[i-1].appendChild(prepare_els[i]);
-        $dom.assign(els[i], $$$[i][1]);
-    }
-    parent.appendChild(fragment);
-    if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
-    if(i) return els[0];
-};
-
 /**
  * Procedure for merging object into the element properties.
  * Very simple example: &#x60;$dom.assign(document.body, { className: &quot;test&quot; });&#x60; is equivalent to &#x60;document.body.className= &quot;test&quot;;&#x60;.
@@ -580,6 +570,35 @@ $dom.assign= function(element, ...objects_attributes){
     }
 };
 
+/**
+ * See [add](#methods_add)
+ * @method add [cordova]
+ * @for $dom.{namespace}
+ * @param parent {NodeElement}
+ * @param $$$ {...Array}
+ *  * Works also with &quot;jsif_var&quot; and/or &quot;data-cmd=&#x27;condition-changeval&#x27;&quot; see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
+ * @param [call_parseHTML=undefined] {Boolean}
+ *  * If **true** calls &#x60;parseHTML(parent.querySelectorAll(c_CMD))&#x60;
+ * @return {NodeElement}
+ *  * First created element (usualy wrapper thanks nesting)
+ */
+$dom.add= function(parent,$$$, call_parseHTML){
+    let fragment= document.createDocumentFragment();
+    let prepare_els= [], els= [];
+    for(var i=0, i_length= $$$.length; i&lt;i_length;i++){
+        prepare_els[i]= document.createElement($$$[i][0]);
+        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
+        else if(typeof $$$[i][1].$!==&quot;undefined&quot;){
+            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
+            delete $$$[i][1].$;
+        }
+        else els[i]= els[i-1].appendChild(prepare_els[i]);
+        $dom.assign(els[i], $$$[i][1]);
+    }
+    parent.appendChild(fragment);
+    if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
+    if(i) return els[0];
+};
 </pre>
 
 </div>
