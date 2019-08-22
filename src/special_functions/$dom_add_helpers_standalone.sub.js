@@ -1,5 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
 /* $dom *//* global $dom */
+/* standalone= "standalone"; */
 const $dom_emptyPseudoComponent= (function(){
     const share= { mount, update, destroy, isStatic };
     const component_out= { add, component, mount, update, share };
@@ -134,6 +136,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             }
         }, component_out);
     }
+    
     /**
      * This add element to component
      * @method addText
@@ -166,6 +169,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             oninit: function(fn){ fn(el); return component_out; }
         }, component_out);
     }
+    
     /**
      * Method for including another component by usint its `share` key.
      * @method component
@@ -184,6 +188,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         all_els_counter+= 1;
         return component_out;
     }
+    
     /**
      * Add element to live DOM
      * @method mount
@@ -221,6 +226,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         }
         return container;
     }
+    
     /**
      * Method remove element form live DOM and returns null
      * @method destroy
@@ -234,6 +240,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         container.remove();
         return null;
     }
+    
     /**
      * Updates `deep`
      * @private
@@ -245,6 +252,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift) deep.push(all_els_counter);
         else { deep.splice(deep.length+1+shift); deep[deep.length-1]= all_els_counter; }
     }
+    
     /**
      * Returns parent element (or "fragment pseudo element")
      * @method getParentElement
@@ -253,6 +261,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function getParentElement(){
         return els[deep[deep.length-2]] || fragment;
     }
+    
     /**
      * Method provide way to change nesting behaviour. It can be helpful for loops
      * @method setShift
@@ -274,6 +283,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift){ last= deep.pop(); deep.push(last, last); }
         else deep.splice(deep.length+1+shift);
     }
+    
     /**
      * Initialize internal storage
      * @method initStorage
@@ -351,6 +361,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             function el_idFilter(v){ return v!==el_id; }
         }
     }
+    
     /**
      * Method updates all registered varibles by keys `onupdates` and calls follower functions
      * @method update
@@ -377,6 +388,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!internal_storage) return false;
         return internal_storage.update(typeof new_data==="function" ? new_data(internal_storage.getData()) : new_data);
     }
+    
     /**
      * Methods returns if it was `onupdate` used
      * @method isStatic
@@ -387,55 +399,8 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function isStatic(){
         return !internal_storage;
     }
+    
 };
-/**
- * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
- * @method add
- * @for $dom.{namespace}
- * @param parent {NodeElement}
- *  * Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)
- * @param $$$ {...Array}
- *  * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`
- *  * Element in array is automatically nested into the previous element. `[["UL",...], ["LI",...], ["SPAN",...]]` creates `<ul><li><span></span></li></ul>`
- *  * `__NAME__` **\<String\>**: Name of element (for example `LI`, `P`, `A`, ...)
- *  * `__PARAMS__` **\<Object\>**: Parameters for elements as "innerText", "className", "dataset", ...
- *      * see [$dom.assign](#methods_assign)
- *      * There is one change with using key "$", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)
- *          * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[["UL",...], ["LI",...], ["LI",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`
- * @return {NodeElement}
- *  * First created element (usualy wrapper thanks nesting)
- * @example
- *     $dom.add(ul_element,[
- *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
- *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
- *             ["SPAN", {$:0, innerText: "Druhy SPAN v LI"}]
- *     ]);
- *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>
- *     // !!! VS !!!
- *     $dom.add(ul_element,[
- *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
- *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
- *                 ["SPAN", {innerText: "Druhy SPAN v LI"}]
- *     ]);
- *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>
- */
-$dom.add= function(parent,$$$){
-    let fragment= document.createDocumentFragment();
-    let prepare_els= [], els= [];
-    for(var i=0, i_length= $$$.length; i<i_length;i++){
-        prepare_els[i]= document.createElement($$$[i][0]);
-        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
-        else if(typeof $$$[i][1].$!=="undefined"){
-            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
-            delete $$$[i][1].$;
-        }
-        else els[i]= els[i-1].appendChild(prepare_els[i]);
-        $dom.assign(els[i], $$$[i][1]);
-    }
-    parent.appendChild(fragment);
-    if(i) return els[0];
-};
-
 /**
  * Procedure for merging object into the element properties.
  * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
@@ -498,4 +463,52 @@ $dom.assign= function(element, ...objects_attributes){
                 break;
         }
     }
+};
+
+/**
+ * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
+ * @method add
+ * @for $dom.{namespace}
+ * @param parent {NodeElement}
+ *  * Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)
+ * @param $$$ {...Array}
+ *  * `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`
+ *  * Element in array is automatically nested into the previous element. `[["UL",...], ["LI",...], ["SPAN",...]]` creates `<ul><li><span></span></li></ul>`
+ *  * `__NAME__` **\<String\>**: Name of element (for example `LI`, `P`, `A`, ...)
+ *  * `__PARAMS__` **\<Object\>**: Parameters for elements as "innerText", "className", "dataset", ...
+ *      * see [$dom.assign](#methods_assign)
+ *      * There is one change with using key "$", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)
+ *          * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[["UL",...], ["LI",...], ["LI",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`
+ * @return {NodeElement}
+ *  * First created element (usualy wrapper thanks nesting)
+ * @example
+ *     $dom.add(ul_element,[
+ *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
+ *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
+ *             ["SPAN", {$:0, innerText: "Druhy SPAN v LI"}]
+ *     ]);
+ *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>
+ *     // !!! VS !!!
+ *     $dom.add(ul_element,[
+ *         ["LI", {className: "nejake-tridy", onclick: clickFCE}],
+ *             ["SPAN", {innerText: "Prvni SPAN v LI"}],
+ *                 ["SPAN", {innerText: "Druhy SPAN v LI"}]
+ *     ]);
+ *     // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>
+ */
+$dom.add= function(parent,$$$){
+    let fragment= document.createDocumentFragment();
+    let prepare_els= [], els= [];
+    for(var i=0, i_length= $$$.length; i<i_length;i++){
+        prepare_els[i]= document.createElement($$$[i][0]);
+        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
+        else if(typeof $$$[i][1].$!=="undefined"){
+            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
+            delete $$$[i][1].$;
+        }
+        else els[i]= els[i-1].appendChild(prepare_els[i]);
+        $dom.assign(els[i], $$$[i][1]);
+    }
+    parent.appendChild(fragment);
+    if(i) return els[0];
 };

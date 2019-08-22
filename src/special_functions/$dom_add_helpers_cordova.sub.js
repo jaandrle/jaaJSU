@@ -1,6 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
 /* $dom *//* global $dom */
+/* standalone= "cordova"; */
 const $dom_emptyPseudoComponent= (function(){
     const share= { mount, update, destroy, isStatic };
     const component_out= { add, component, mount, update, share };
@@ -135,6 +136,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             }
         }, component_out);
     }
+    
     /**
      * This add element to component
      * @method addText
@@ -167,6 +169,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             oninit: function(fn){ fn(el); return component_out; }
         }, component_out);
     }
+    
     /**
      * Method for including another component by usint its `share` key.
      * @method component
@@ -185,6 +188,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         all_els_counter+= 1;
         return component_out;
     }
+    
     /**
      * Add element to live DOM
      * @method mount
@@ -229,6 +233,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         }
         return container;
     }
+    
     /**
      * Method remove element form live DOM and returns null
      * @method destroy
@@ -242,6 +247,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         container.remove();
         return null;
     }
+    
     /**
      * Updates `deep`
      * @private
@@ -253,6 +259,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift) deep.push(all_els_counter);
         else { deep.splice(deep.length+1+shift); deep[deep.length-1]= all_els_counter; }
     }
+    
     /**
      * Returns parent element (or "fragment pseudo element")
      * @method getParentElement
@@ -261,6 +268,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function getParentElement(){
         return els[deep[deep.length-2]] || fragment;
     }
+    
     /**
      * Method provide way to change nesting behaviour. It can be helpful for loops
      * @method setShift
@@ -282,6 +290,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!shift){ last= deep.pop(); deep.push(last, last); }
         else deep.splice(deep.length+1+shift);
     }
+    
     /**
      * Initialize internal storage
      * @method initStorage
@@ -359,6 +368,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
             function el_idFilter(v){ return v!==el_id; }
         }
     }
+    
     /**
      * Method updates all registered varibles by keys `onupdates` and calls follower functions
      * @method update
@@ -385,6 +395,7 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(!internal_storage) return false;
         return internal_storage.update(typeof new_data==="function" ? new_data(internal_storage.getData()) : new_data);
     }
+    
     /**
      * Methods returns if it was `onupdate` used
      * @method isStatic
@@ -395,37 +406,8 @@ $dom.component= function(el_name, attrs, { mapUpdate }={}){
     function isStatic(){
         return !internal_storage;
     }
+    
 };
-/**
- * See [add](#methods_add)
- * @method add [cordova]
- * @for $dom.{namespace}
- * @param parent {NodeElement}
- * @param $$$ {...Array}
- *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
- * @param [call_parseHTML=undefined] {Boolean}
- *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
- * @return {NodeElement}
- *  * First created element (usualy wrapper thanks nesting)
- */
-$dom.add= function(parent,$$$, call_parseHTML){
-    let fragment= document.createDocumentFragment();
-    let prepare_els= [], els= [];
-    for(var i=0, i_length= $$$.length; i<i_length;i++){
-        prepare_els[i]= document.createElement($$$[i][0]);
-        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
-        else if(typeof $$$[i][1].$!=="undefined"){
-            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
-            delete $$$[i][1].$;
-        }
-        else els[i]= els[i-1].appendChild(prepare_els[i]);
-        $dom.assign(els[i], $$$[i][1]);
-    }
-    parent.appendChild(fragment);
-    if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
-    if(i) return els[0];
-};
-
 /**
  * Procedure for merging object into the element properties.
  * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
@@ -492,4 +474,34 @@ $dom.assign= function(element, ...objects_attributes){
                 break;
         }
     }
+};
+
+/**
+ * See [add](#methods_add)
+ * @method add [cordova]
+ * @for $dom.{namespace}
+ * @param parent {NodeElement}
+ * @param $$$ {...Array}
+ *  * Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
+ * @param [call_parseHTML=undefined] {Boolean}
+ *  * If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
+ * @return {NodeElement}
+ *  * First created element (usualy wrapper thanks nesting)
+ */
+$dom.add= function(parent,$$$, call_parseHTML){
+    let fragment= document.createDocumentFragment();
+    let prepare_els= [], els= [];
+    for(var i=0, i_length= $$$.length; i<i_length;i++){
+        prepare_els[i]= document.createElement($$$[i][0]);
+        if(!i) els[i]= fragment.appendChild(prepare_els[i]);
+        else if(typeof $$$[i][1].$!=="undefined"){
+            els[i]= els[$$$[i][1].$].appendChild(prepare_els[i]);
+            delete $$$[i][1].$;
+        }
+        else els[i]= els[i-1].appendChild(prepare_els[i]);
+        $dom.assign(els[i], $$$[i][1]);
+    }
+    parent.appendChild(fragment);
+    if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
+    if(i) return els[0];
 };
