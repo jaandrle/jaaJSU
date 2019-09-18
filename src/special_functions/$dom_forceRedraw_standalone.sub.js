@@ -3,9 +3,8 @@
 /**
  * Redraw element using cheat `*.offsetHeight`
  * @method forceRedraw
- * @for $dom.{namespace}
- * @param {NodeElement} [element=document.body]
- *  * Element for redraw
+ * @memberof $dom
+ * @param {NodeElement} [element=document.body] Element for redraw
  */
 $dom.forceRedraw= function(element= document.body){
     let d= element.style.display;

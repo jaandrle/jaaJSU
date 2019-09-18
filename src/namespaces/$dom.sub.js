@@ -2,28 +2,19 @@
 gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike, __eachInArrayLikeDynamic, export_as */
 /**
  * This NAMESPACE provides features for DOM elemnts.
- * @class $dom.{namespace}
- * @static
+ * @namespace $dom
+ * @typicalname gulp_place("namespaces.$dom", "eval_out")
+ * @global
  */
 var $dom={
-    /* tF_
-    * Zajistuje volani .then, az je DOM dostupny
-    * ...
-    * parametry:
-    *  tNN ~= argumenty jsou do .then predavany jako pole,
-    *      resp. pokud je jen jeden, je predan primo.
-    * .then:
-    *  tNN_= zadane parametry, viz vyse
-    *  */
-   /**
-    * Calls `.then` when the DOM is ready
-    * @method ready_
-    * @param {Mixed} ...args
-    *  * As params for `.then`
-    * @return {Promise}
-    *  * `.then`
-    *      * `<= ...args` **\<Mixed\>**
-    */
+    /**
+     * Calls `.then` when the DOM is ready
+     * @method ready_
+     * @memberof $dom
+     * @param {...Mixed} args As params for `.then`
+     * @return {Promise}
+     * @.then {Mixed} See `args`
+     */
     ready_: function(...args){
         return new Promise(function(resolve) {
             function checkState() {
@@ -36,21 +27,23 @@ var $dom={
             else document.addEventListener('readystatechange', checkState);
         });
     },
-   /**
-    * Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
-    * @method elementReady_
-    * @param {Object} el_selector
-    *  * `el_selector.*`
-    *      * Key is name of "selection" function ('querySelector, ..., getElementsByClassname, ...)
-    *      * Value is argument for selection function
-    *  * example: `{getElementsByClassname: "class_name"}`
-    * @param {DOMElement} [parent=document]
-    *  * Where to search `el_selector`
-    * @return {Promise}
-    *  * `.then`
-    *      * Calls when `el` (see next line) ready
-    *      * `<= el` **\<Node\>**: is DOM element based on `parent` and `el_selector` (`el= parent[el_selector[Object.keys(el_selector)[0]]](el_selector[el_selector[Object.keys(el_selector)[0]]])`)
-    */
+    /**
+     * Key is name of "selection" function ('querySelector, ..., getElementsByClassname, ...).
+     * Value is argument for selection function
+     * @typedef {Object} DomPreparedSelector
+     * @memberof types
+     * @example
+     * { getElementsByClassname: "class_name" }
+     */
+    /**
+     * Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
+     * @method elementReady_
+     * @memberof $dom
+     * @param {types.DomPreparedSelector} el_selector
+     * @param {DOMElement} [parent=document] Where to search `el_selector`
+     * @return {Promise}
+     * @.then {NodeElement} Target elemnet based on `el_selector`
+     */
     elementReady_: function(el_selector, parent= document){
         const sel_key= Object.keys(el_selector)[0];
         const sel_val= el_selector[sel_key];
@@ -66,6 +59,7 @@ var $dom={
     /**
      * Procedure remove children of given element `container`.
      * @method empty
+     * @memberof $dom
      * @param {NodeElement} container Remove all its children
      */
     empty: function(container){
@@ -75,6 +69,7 @@ var $dom={
     /**
      * Procedure places `new_element` after `reference` elements
      * @method insertAfter
+     * @memberof $dom
      * @param {NodeElement} new_element
      * @param {NodeElement} reference
      */
@@ -86,12 +81,10 @@ var $dom={
    /**
     * Remove elements in given {NodeList} or {HTMLCollection}
     * @method removeElements
-    * @param {NodeList|HTMLCollection} els_to_delete
-    *  * Array(-like) object of elements
-    * @param {Number} [from_index=0]
-    *  * Params allowing skip elements in `els_to_delete`
-    * @param {Number} [to_index=els_to_delete.lenght]
-    *  * Params allowing skip elements in `els_to_delete`
+    * @memberof $dom
+    * @param {NodeList|HTMLCollection} els_to_delete Array(-like) object of elements
+    * @param {Number} [from_index=0] Params allowing skip elements in `els_to_delete`
+    * @param {Number} [to_index=els_to_delete.lenght] Params allowing skip elements in `els_to_delete`
     */
     removeElements: function(els_to_delete,from_index,to_index){
         from_index= from_index || 0;
@@ -104,6 +97,7 @@ var $dom={
     /**
      * Procedure replaces `el_old` element by new one (`new_el`)
      * @method replace
+     * @memberof $dom
      * @param {NodeElement} el_old
      * @param {NodeElement} el_new
      */
@@ -114,16 +108,12 @@ var $dom={
     /**
      * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
      * @method toggleAttribute
-     * @param {NodeElement} element
-     *  * Element target
-     * @param {String} attribute_name
-     *  * Name of attribute
-     * @param {String} attribute_a
-     *  * Value of attribute
-     * @param {String} attribute_b
-     *  * Value of attribute
-     * @return {String}
-     *  * `attribute_a` or `attribute_b`
+     * @memberof $dom
+     * @param {NodeElement} element Element target
+     * @param {String} attribute_name Name of attribute
+     * @param {String} attribute_a Value of attribute
+     * @param {String} attribute_b Value of attribute
+     * @return {String} `attribute_a` or `attribute_b`
      */
     toggleAttribute: function(element, attribute_name, attribute_a, attribute_b){
         const attribute_new= element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a;
@@ -133,16 +123,12 @@ var $dom={
     /**
      * Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
      * @method toggleDataset
-     * @param {NodeElement} element
-     *  * Element target
-     * @param {String} data_name
-     *  * Name of dataset key
-     * @param {String} data_a
-     *  * Name of dataset value
-     * @param {String} data_b
-     *  * Name of dataset
-     * @return {String}
-     *  * `data_a` or `data_b`
+     * @memberof $dom
+     * @param {NodeElement} element Element target
+     * @param {String} data_name Name of dataset key
+     * @param {String} data_a Name of dataset value
+     * @param {String} data_b Name of dataset
+     * @return {String} `data_a` or `data_b`
      */
     toggleDataset: function(element, data_name, data_a, data_b){
         return ( element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a );
@@ -150,37 +136,21 @@ var $dom={
     /**
      * Procedure for iterating throught NodeList `iterable`.
      * @method each
-     * @param {...Mixed} iterable
-     *  * An array-like object for iterating.
-     * @param {Function} i_function
-     *  * This procedure is called for each element in `iterable` Array.
-     *  * `i_function(o: Object)`
-     *      * `item` Mixed: Nth value for `key` in `iterable`.
-     *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
-     *      * `last` Boolean: Is setted True, if it is the last element in array.
-     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
-     * @param {Object|undefined} scope
-     *  * An argument for `i_function.call(*,...)`
-     * @return {Mixed}
-     *  * `share`
+     * @memberof $dom
+     * @param {Mixed[]} iterable An array-like object for iterating.
+     * @param {types.IterableCallback} i_function
+     * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
+     * @return {Mixed} `share`
      */
     each: __eachInArrayLike,
     /**
-     * Procedure for iterating throught NodeList `iterable` like [each](#methods_each), but use `for(...;(item= iterable[i]);i++)...`.
+     * Procedure for iterating throught NodeList `iterable` like {@link $dom.each}, but use `for(...;(item= iterable[i]);i++)...`.
      * @method eachDynamic
-     * @param {...Mixed} iterable
-     *  * An array-like object for iterating.
-     * @param {Function} i_function
-     *  * This procedure is called for each element in `iterable` Array.
-     *  * `i_function(o: Object)`
-     *      * `item` Mixed: Nth value for `key` in `iterable`.
-     *      * `key` Number: Idicies 0...`Object.keys(iterable).length`.
-     *      * `last` Boolean: Is setted True, if it is the last element in array.
-     *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
-     * @param {Object|undefined} scope
-     *  * An argument for `i_function.call(*,...)`
-     * @return {Mixed}
-     *  * `share`
+     * @memberof $dom
+     * @param {Mixed[]} iterable An array-like object for iterating.
+     * @param {types.IterableCallback} i_function
+     * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
+     * @return {Mixed} `share`
      */
     eachDynamic: __eachInArrayLikeDynamic
 };

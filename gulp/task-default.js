@@ -1,4 +1,4 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true */
+/* jshint esversion: 6,-W097, -W040, node: true, expr: true */
 module.exports= function(config){
     const {app, $gulp_folder, $o, $run, gulp}= config;
     return function(cb){
@@ -21,8 +21,9 @@ module.exports= function(config){
             config.app.standalone= "standalone";
             gulp.series(...sequence)(function(){
                 config.app.standalone= "cordova";
-                config.app.bin_folder+= "_cordova";
-                gulp.series(...sequence.filter(v=> v!=="doc"))(cb);
+                config.app.bin_folder+= "cordova/";
+                config.app.doc_folder+= "cordova/";
+                gulp.series(...sequence)(cb);
             });
         });
     };

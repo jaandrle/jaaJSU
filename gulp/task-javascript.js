@@ -3,7 +3,6 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     let namespaces= {$string: "$string", $dom: "$dom", $async: "$async", $optimizier: "$optimizier", $time: "$time", $array: "$array", $object: "$object", $function: "$function"};
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
     const new_line= ()=>"\n";
-    const original_doc= `* Original repository can be found at gulp_place("app.homepage", "variable").${new_line()} * @module jaaJSU.{global}`;
     return function(cb){
         /* jshint -W061 */const gulp_place= require("./gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str)});/* jshint +W061 */
         let cmd;
@@ -14,7 +13,6 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             let main_stream;
             if(!code){
                 main_stream= gulp.src([app.src_folder+"*.js", '!'+app.src_folder+'*.sub.js'])
-                    .pipe($g.replace("* @module jaaJSU.{global}",original_doc))
                     .pipe(gulp_place({folder: "src/", string_wrapper: '"'}))
                     .pipe($g.replace(/\/\* gulp \*\/\/\* global gulp_place \*\/\r?\n/g,""))
                     .pipe($g.replace(/([^\n]*)\/\/gulp\.remove_ifCordova\.line(\r?\n?)/g, (full, pre, after)=>app.standalone==="cordova" ? "" : pre+after));

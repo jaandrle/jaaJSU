@@ -1,5 +1,5 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-/* global requestIdleCallback, cancelIdleCallback */
+/* global requestIdleCallback, cancelIdleCallback *///gulp.keep.line
 /* see https://github.com/GoogleChromeLabs/idlize/ */
 const [ rIC, cIC ]= (supports=> {
     if(supports) return [ requestIdleCallback, cancelIdleCallback ];

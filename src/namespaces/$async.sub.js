@@ -1,22 +1,46 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
- * @class $async.{namespace}
- * @static
+ * @namespace $async
+ * @typicalname gulp_place("namespaces.$async", "eval_out")
+ * @global
+ */
+/**
+ * @namespace types
+ * @memberof $async
+ * @private
+ */
+/**
+ * This kind of function schould returns `Promise`.
+ * @function function_Undefined2Promise
+ * @memberof $async.types
+ * @returns {Promise}
+ */
+/**
+ * This kind of function schould returns `Promise`.
+ * @function function_MultipleMixed2Promise
+ * @memberof $async.types
+ * @param {...Mixed} Mixed Various arguments
+ * @returns {Promise}
  */
 var $async={
    /**
     * Procedure for iterating thorught **Promise** function array `funcs`.
     *
-    * **Deprecated:** Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
     * @method serialize
-    * @param {...Promise} funcs
-    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @memberof $async
+    * @deprecated Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
+    * @param {$async.types.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
-    *  * `then`
-    *      * `<= prev` **\<Mixed\>**: result of prev function in `funcs`
-    *  * `catch` 
-    *      * `<= err` **\<Error\>**: Error in `funcs[nth]`
+    * @.then {Mixed[]} Array of results from `funcs`
+    * @.catch {Error} Error in `funcs[nth]`
+    * @example
+    * const timeout= interval=> function(){return new Promise(function(resolve,reject){
+    *     setTimeout(resolve, interval, interval);
+    * });}
+    * const timeouts= [ 50, 100, 150 ].map(timeout);
+    * $async.serialize(timeouts).then(console.log).catch(console.error);
+    * //log> [50, 100, 150]
     */
     serialize: (function(){
         const concat = list => Array.prototype.concat.bind(list);
@@ -27,13 +51,18 @@ var $async={
    /**
     * Procedure for iterating thorught **Promise** function array `funcs`.
     * @method iterate_
-    * @param {...Promise} iterablePromises
-    *  * Array of Promises for iterating (the next always waiting fro previous Promise).
+    * @memberof $async
+    * @param {$async.types.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
-    *  * `then`
-    *      * `<= prev` **\<Mixed\>**: result of prev function in `iterablePromises`
-    *  * `catch` 
-    *      * `<= err` **\<Error\>**: Error in `iterablePromises[nth]`
+    * @.then {Mixed} Result of last function in `iterablePromises`
+    * @.catch {Error} Error in `iterablePromises[nth]`
+    * @example
+    * const timeout= interval=> function(){return new Promise(function(resolve,reject){
+    *     setTimeout(resolve, interval, interval);
+    * });}
+    * const timeouts= [ 50, 100, 150 ].map(timeout);
+    * $async.serialize(timeouts).then(console.log).catch(console.error);
+    * //log> 150
     */
     iterate_: function(iterablePromises){
         return new Promise(function(resolve, reject){
@@ -45,15 +74,18 @@ var $async={
         });
     },
     /**
-     * @property {Symbol} CANCEL I used in iterateMixed_
+     * It is used in {@link $async.iterateMixed_}
+     * @property {Symbol} CANCEL
+     * @memberof $async
      */
     CANCEL: Symbol("$async.CANCEL"),
     /**
      * Like `iterate_`, but also allows iterate throught non-promise functions
      * 
-     * **Beta:**  Use [iterate_](#methods_iterate_), [sequention_](#methods_sequention_), [each_](#methods_each_)
      * @method iterateMixed_
-     * @param  {Promise|Function} ...tasks
+     * @beta Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
+     * @memberof $async
+     * @param {...Promise|function_Undefined2Promise} tasks
      * @return {Promise}
      */
     iterateMixed_: function(...tasks){
@@ -77,13 +109,11 @@ var $async={
    /**
     * Procedure for iterating throught **Promise** functions (wait pattern).
     * @method sequention_
-    * @param {Promise} ...functions
-    *  * Promises for iterating (the next always waiting fro previous Promise).
+    * @memberof $async
+    * @param {...function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
     * @return {Promise}
-    *  * `then`
-    *      * `<= prev` **\<Mixed\>**: result of prev function in `functions`
-    *  * `catch` 
-    *      * `<= err` **\<Error\>**: Error in `functions[nth]`
+    * @.then {Mixed} Result of last function in `functions`
+    * @.catch {Error} Error in `functions[nth]`
     */
     sequention_: function(...functions){return function(...input){return new Promise(function(resolve, reject){
         let p= Promise.resolve(...input);
@@ -93,13 +123,18 @@ var $async={
    /**
     * Procedure for iterating throught **Promise** functions (race pattern).
     * @method each_
-    * @param {Promise} ...functions
-    *  * Promises for iterating (race pattern).
-    * @return {Promise}
-    *  * `then`
-    *      * `<= prev` **\<Mixed\>**: result of prev function in `functions`
-    *  * `catch`
-    *      * `<= err` **\<Error\>**: Error in `functions[nth]`
+    * @memberof $async
+    * @param {...function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
+    * @return {$async.types.function_MultipleMixed2Promise}
+    * @.then {Mixed} Result of last function in `functions`
+    * @.catch {Error} Error in `functions[nth]`
+    * @example
+    * const timeout= interval=> function(){return new Promise(function(resolve,reject){
+    *     setTimeout(resolve, interval, interval);
+    * });}
+    * const timeouts= [ 50, 100, 150 ].map(timeout);
+    * $async.each_(...timeouts)().then(console.log).catch(console.error);
+    * //log> [50, 100, 150]
     */
     each_: function(...functions){return function(...input){
         return Promise.all(functions.map(f=>f(...input)));

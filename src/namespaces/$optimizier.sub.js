@@ -3,26 +3,24 @@ gulp_place("special_functions/IdleCallback.sub.js", "file_once"); /* global rIC,
 gulp_place("classes/IdleValue.sub.js", "file_once"); /* global IdleValue */
 /**
  * This NAMESPACE provides features for optimizations.
- * @class $optimizier.{namespace}
- * @static
+ * @namespace $optimizier
+ * @typicalname gulp_place("namespaces.$optimizier", "eval_out")
+ * @global
  */
 var $optimizier= {
    /**
     * Prevent multiple calling (typically for "onresize" events) - use google for more detail
     * @method debounce
-    * @param {Function} func
-    *  * Function for debounce
-    * @param {Number} [wait=150]
-    *  * How much wait for next calling
-    * @param {Boolean} [immediate=undefined]
-    *  * First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
-    * @return {Function}
-    *  * Debounced function `fun` (accepts same arguments)
+    * @memberof $optimizier
+    * @param {Function} func Function for debounce
+    * @param {Number} [wait=150] How much wait for next calling
+    * @param {Boolean} [immediate=undefined] First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
+    * @return {Function} Debounced function `fun` (accepts same arguments)
     * @example
-    *     graphically (wait= 4symbols)
-    *     I call (| symbol) fun:    .|||.|.|||..
-    *                  debounce:    .....|....|.
-    *                   trottle:    .|.....|....
+    * graphically (wait= 4symbols)
+    * I call (| symbol) fun:    .|||.|.|||..
+    *              debounce:    .....|....|.
+    *               trottle:    .|.....|....
     */
     debounce: function(func, wait, immediate) {
         wait || (wait= 150);
@@ -46,11 +44,10 @@ var $optimizier= {
    /**
     * Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`
     * @method trottle
+    * @memberof $optimizier
     * @param {Function} func
-    * @param {Number} [cycles_leap=1]
-    *  * similar to `wait` - how many times calls `requestAnimationFrame`
-    * @return {Function}
-    *  * Trottled function `fun`
+    * @param {Number} [cycles_leap=1] similar to `wait` - how many times calls `requestAnimationFrame`
+    * @return {Function} Trottled function `fun`
     */
     trottle: function(func, cycles_leap){
         cycles_leap || (cycles_leap= 1);
@@ -75,17 +72,15 @@ var $optimizier= {
    /**
     * Calls `.then` when `fn` returns **true**
     * @method poll_
-    * @param {Function} fn
-    *  * Conditional function
-    * @param {Number} [timeout=2000]
-    *  * Timeout limit for requesting `fn` (ms)
-    * @param {Number} [interval=100]
-    *  * Interval for calling `fn` (ms)
+    * @memberof $optimizier
+    * @param {Function} fn Conditional function
+    * @param {Number} [timeout=2000] Timeout limit for requesting `fn` (ms)
+    * @param {Number} [interval=100] Interval for calling `fn` (ms)
     * @return {Promise}
-    *  * `.then` **\<Mixed\>**: result of `fn`
-    *  * `.catch` **\<Error\>**: If timeout
+    * @.then {Mixed} result of `fn`
+    * @.catch {Error} If timeout
     * @example
-    *     poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);
+    * poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);
     */
     poll_: function(fn, timeout, interval) {
         var endTime= Number(new Date()) + (timeout || 2000);
@@ -108,6 +103,7 @@ var $optimizier= {
    /**
     * Prevent multiple calling of `fn`
     * @method once
+    * @memberof $optimizier
     * @param {Function} fn
     *  * Function which must be called only onetime
     * @param {Object} context
@@ -130,6 +126,7 @@ var $optimizier= {
     /**
      * Combination of `setTimeout`->`requestAnimationFrame`
      * @method timeoutAnimationFrame
+     * @memberof $optimizier
      * @param {Function} f
      *  * Function to call later (`delay`+next animation frame)
      * @param {Number} [delay=150]
@@ -139,6 +136,7 @@ var $optimizier= {
     /**
      * Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
      * @method requestAnimationFrame_
+     * @memberof $optimizier
      * @returns {Promise}
      * @example
      *      $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
@@ -152,6 +150,7 @@ var $optimizier= {
      *  1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
      *  2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
      * @method setTimeout_
+     * @memberof $optimizier
      * @param {Number} [timeout= 0]
      *  - Optional parameter to sets the time delay in milliseconds
      *  - `delay` argument for `setTimeout` — see **Links (2)**
@@ -170,6 +169,7 @@ var $optimizier= {
      * 
      * Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
      * @method setIdleValue
+     * @memberof $optimizier
      * @param {Function} initFunction
      *  - this function is called to get value
      * @returns {IdleValue}
@@ -183,6 +183,7 @@ var $optimizier= {
     /**
      * Returns result of **\<IdleValue\>**.
      * @method getIdleValue
+     * @memberof $optimizier
      * @param {IdleValue} idle_value
      *  - Output of [`setIdleValue`](#methods_setIdleValue)
      * @returns {Mixed}
@@ -192,6 +193,7 @@ var $optimizier= {
     /**
      * Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)
      * @method clearIdleValue
+     * @memberof $optimizier
      * @param {IdleValue} idle_value
      *  - Output of [`setIdleValue`](#methods_setIdleValue)
      * @returns {Mixed|Undefined}

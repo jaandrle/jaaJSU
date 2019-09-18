@@ -1,13 +1,14 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true *///gulp.remove.line
 /**
  * This NAMESPACE provides features for strings.
- * @class $string.{namespace}
- * @static
+ * @namespace $string
+ * @typicalname gulp_place("namespaces.$string", "eval_out")
  */
 var $string= {
     /**
      * Clear spaces (`\s+`) in `str`
      * @method clearSpaces
+     * @memberof $string
      * @param {String} str
      * @return {String}
      *  * Cleaned `str`
@@ -18,6 +19,7 @@ var $string= {
     },
     /**
      * @method countChars
+     * @memberof $string
      * @param {String} str
      * @return {Number}
      *  * Number of chars in `str`
@@ -35,6 +37,7 @@ var $string= {
     },
     /**
      * @method generateUnique
+     * @memberof $string
      * @return {String}
      *  * An unique string
      */
@@ -44,6 +47,7 @@ var $string= {
     /**
      * Wrapper around `*.substring(*,*)`
      * @method getSubstring
+     * @memberof $string
      * @param {String} str
      * @param {Number} len
      *  * How many chars
@@ -68,6 +72,7 @@ var $string= {
     *  */
    /**
     * @method letterInc
+    * @memberof $string
     * @param {String} str
     *  * [a-zA-z] at least on position `pos`
     * @param {Number} [inc=1]
@@ -102,6 +107,7 @@ var $string= {
     /**
      * Escapes "<", ">", "&", '"', "'"
      * @method escapeHTML
+     * @memberof $string
      * @param {String} str
      * @return {String}
      *  * Escaped text
@@ -113,6 +119,7 @@ var $string= {
     /**
      * Clear tags from `str`
      * @method clearHTML
+     * @memberof $string
      * @param {String} str
      * @return {String}
      *  * Text without HTML tags
@@ -124,6 +131,7 @@ var $string= {
     },
    /**
     * @method containsRepeatingChars
+    * @memberof $string
     * @param {String} str
     * @param {Number} [quantity=2]
     * @return {Boolean}
@@ -140,6 +148,7 @@ var $string= {
     },
    /**
     * @method containsSequential
+    * @memberof $string
     * @param {String} str
     * @param {Number} [quantity=2]
     * @return {Boolean}
@@ -181,6 +190,7 @@ var $string= {
     },
     /**
      * @method isEmail
+     * @memberof $string
      * @param {String} email_candidate
      * @return {Boolean}
      */
@@ -192,6 +202,7 @@ var $string= {
     /**
      * Wrapper around `*.trim()`
      * @method isFilled
+     * @memberof $string
      * @param {String} str
      * @return {String|Boolean}
      */
@@ -202,6 +213,7 @@ var $string= {
     /**
      * Alternative to ` ```text with ${variable}``` ` (like `sprintf()`)
      * @method template
+     * @memberof $string
      * @param {String} str
      *  * Text which contains `${0}, ${var}, ...`
      * @return {Object}

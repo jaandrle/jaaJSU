@@ -3,22 +3,10 @@
  * @module jaaJSU
  */
 (function(module_name, factory) {
-    'use strict';
-    /* global define, factory, module, module_name, gulp_place *///gulp.keep.line
-    let window_export;
-    if (typeof define === 'function' && define.amd) {
-        define([], function(){
-            return factory(window, document);
-        });
-    } else if (typeof exports !== 'undefined') {
-        module.exports = factory(window, document);
-    } else {
-        window_export= factory(window, document);
-        Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.1";
-    }
+    let window_export= factory(window, document);
+    Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
+    window[module_name+"_version"]= "0.8.1";
 })("jaaJSU", function(window, document){
-    'use strict';
     var out= {};
     /**
      * Just virtual key!!! This is overwiev of all internal types for better description.
@@ -73,15 +61,7 @@
         return share;
     }
     
-    /* tP
-    * Slouzi k oznaceni povinnych parametru funkci
-    * ...
-    * parametry:
-    *  tS parameter ~prazdne= doplneni jmena parametru "Missing parameter: "+parameter
-    *  */
-    function isMandatory(parameter){
-        throw new Error('Missing parameter: '+parameter);
-    }
+    /* global isMandatory *///gulp.keep.line
     
 
     /**
@@ -521,7 +501,8 @@
          */
         eachDynamic: __eachInArrayLikeDynamic
     };
-    /* standalone= "standalone"; */
+    /* core.js *//* global parseHTML, c_CMD, active_page, __internal_switch_values_holder *///gulp.keep.line
+    /* standalone= "cordova"; */
     /**
      * In generall, all methods from {@link $dom.types.Component} don't do anything. Also during "mounting" there are some changes see method {@link $dom.types.ComponentEmpty.mount}.
      * @typedef ComponentEmpty
@@ -537,7 +518,7 @@
          * @method mount
          * @memberof $dom.types.ComponentEmpty
          */
-        function mount(element, type= "childLast"){
+        function mount(element, call_parseHTML, type= "childLast"){
             // let temp_el;
             switch ( type ) {
                 case "replace":
@@ -574,7 +555,7 @@
      */
     /**
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
-     * @method component
+     * @method component_cordova
      * @memberof $dom
      * @version 1.0.0
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
@@ -798,6 +779,7 @@
          * @memberof $dom.types.Component
          * @public
          * @param {NodeElement} element Element where to places this component
+         * @param {Boolean} call_parseHTML If call parseHTML
          * @param {String} [type= "childLast"]
          *  <br/>- Change type of mounting
          *  <br/>- `childLast` places component as last child
@@ -806,26 +788,30 @@
          *  <br/>- `replace` replaces `element` by component
          *  <br/>- `before` places component before `element`
          *  <br/>- `after` places component after `element` (uses `$dom.insertAfter`)
-         * @returns {NodeElement} `container`
          */
-        function mount(element, type= "childLast"){
+        function mount(element, call_parseHTML, type= "childLast"){
             switch ( type ) {
                 case "replace":
                     $dom.replace(element, fragment);
+                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
                     break;
                 case "replaceContent":
                     $dom.empty(element);
                     element.appendChild(fragment);
+                    if(call_parseHTML) parseHTML(element.querySelectorAll(c_CMD));
                     break;
                 case "before":
                     element.parentNode.insertBefore(fragment, element);
+                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
                     break;
                 case "after":
                     $dom.insertAfter(fragment, element);
+                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
                     break;
                 default:
                     if(type==="childFirst" && element.childNodes.length) element.insertBefore(fragment, element.childNodes[0]);
                     else element.appendChild(fragment);
+                    if(call_parseHTML) parseHTML(element.querySelectorAll(c_CMD));
                     break;
             }
             return container;
@@ -1056,7 +1042,7 @@
      * Procedure for merging object into the element properties.
      * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
      * It is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).
-     * @method assign
+     * @method assign_cordova
      * @memberof $dom
      * @param {NodeElement} element
      * @param {...$dom.types.DomAssignObject} object_attributes
@@ -1110,7 +1096,11 @@
                     }
                     break;
                 case "dataset":
-                    for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.dataset[k_key]= attr[k_key]; }
+                    for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){
+                        k_key= k_keys[k];
+                        if(k_key==="jsif_var"&&element.dataset.cmd!=="condition-changeval") element.dataset.jsif_eq= attr.jsif_val.indexOf(__internal_switch_values_holder.get(active_page+attr.jsif_var)) !== -1;
+                        element.dataset[k_key]= attr[k_key];
+                    }
                     break;
                 case "href" || "src" || "class":
                     element.setAttribute(key, attr);
@@ -1123,36 +1113,16 @@
     };
     
     /**
-     * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
-     * @method add
+     * See {@link $dom.add}
+     * @method add_cordova
      * @memberof $dom
      * @deprecated
-     * @param {NodeElement} parent Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)
-     * @param $$$ {...Array}
-     *  <br/>* `[ [ __NAME__, __PARAMS__ ], [ __NAME__, __PARAMS__ ], ..., [ __NAME__, __PARAMS__ ] ]`
-     *  <br/>* Element in array is automatically nested into the previous element. `[["UL",...], ["LI",...], ["SPAN",...]]` creates `<ul><li><span></span></li></ul>`
-     *  <br/>* `__NAME__` **\<String\>**: Name of element (for example `LI`, `P`, `A`, ...)
-     *  <br/>* `__PARAMS__` **\<Object\>**: Parameters for elements as "innerText", "className", "dataset", ...
-     *  <br/>    * see [$dom.assign](#methods_assign)
-     *  <br/>    * There is one change with using key "$", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)
-     *  <br/>        * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[["UL",...], ["LI",...], ["LI",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`
+     * @param {NodeElement} parent
+     * @param {...Array} $$$ Works also with "jsif_var" and/or "data-cmd='condition-changeval'" see [$dom.assign \[cordova\]](#methods_$dom.assign [cordova])
+     * @param {Boolean} [call_parseHTML=undefined] If **true** calls `parseHTML(parent.querySelectorAll(c_CMD))`
      * @return {NodeElement} First created element (usualy wrapper thanks nesting)
-     * @example
-     * $dom.add(ul_element,[
-     *     ["LI", {className: "nejake-tridy", onclick: clickFCE}],
-     *         ["SPAN", {innerText: "Prvni SPAN v LI"}],
-     *         ["SPAN", {$:0, innerText: "Druhy SPAN v LI"}]
-     * ]);
-     * // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI</span><span>Druhy SPAN v LI</span></li></ul>
-     * // !!! VS !!!
-     * $dom.add(ul_element,[
-     *     ["LI", {className: "nejake-tridy", onclick: clickFCE}],
-     *         ["SPAN", {innerText: "Prvni SPAN v LI"}],
-     *             ["SPAN", {innerText: "Druhy SPAN v LI"}]
-     * ]);
-     * // = <ul><li class="nejake-tridy" onclick="clickFCE"><span>Prvni SPAN v LI<span>Druhy SPAN v LI</span></span></li></ul>
      */
-    $dom.add= function(parent,$$$){
+    $dom.add= function(parent,$$$, call_parseHTML){
         let fragment= document.createDocumentFragment();
         let prepare_els= [], els= [];
         for(var i=0, i_length= $$$.length; i<i_length;i++){
@@ -1166,22 +1136,24 @@
             $dom.assign(els[i], $$$[i][1]);
         }
         parent.appendChild(fragment);
+        if(call_parseHTML) parseHTML(parent.querySelectorAll(c_CMD));
         if(i) return els[0];
     };
+    /* global $dom, active_page_el, device *///gulp.keep.line
     /**
      * Redraw element using cheat `*.offsetHeight`
-     * @method forceRedraw
+     * @method forceRedraw_cordova
      * @memberof $dom
-     * @param {NodeElement} [element=document.body] Element for redraw
+     * @param {NodeElement} [element=active_page_el] Element for redraw
+     * @param {String} [platform="iOS"] Redraw only for specific `device.platform` ("Android", "iOS")
      */
-    $dom.forceRedraw= function(element= document.body){
-        let d= element.style.display;
-        element.style.display= 'none';
-        let trick= element.offsetHeight;
-        element.style.display= d;
-        //v2
-        //document.documentElement.style.paddingRight = '1px';
-        //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
+    $dom.forceRedraw= function(element= active_page_el, platform= "iOS"){
+        if(device.platform===platform||platform==="all"){
+            let d= element.style.display;
+            element.style.display= 'none';
+            let trick= element.offsetHeight;
+            element.style.display= d;
+        }
     };
     export_as($dom, "$dom");
 
@@ -3379,7 +3351,28 @@
             formats: format_arrays
         };
     })();
-    
+    /**
+     * Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS".
+     * @method getTimeStamp
+     * @memberof $time
+     * @public
+     * @param {Number|Boolean} [time=undefined]
+     *  * Uses as argument for `new Date(*)`
+     * @return {String}
+     *  * Timestamp
+     */
+    $time.getTimeStamp= t=> $time.toString($time.formats.SQL)($time.fromDateArguments(t));
+    /**
+     * Function returns timestamp in the form of "YYYY-MM-DD".
+     * @method getDateStamp
+     * @memberof $time
+     * @public
+     * @param {Number|Boolean} [time=undefined]
+     *  * Uses as argument for `new Date(*)`
+     * @return {String}
+     *  * Datestamp
+     */
+    $time.getDateStamp= t=> $time.toString($time.formats.SQL_DATE)($time.fromDateArguments(t));
     
 
     export_as($time, "$time");
