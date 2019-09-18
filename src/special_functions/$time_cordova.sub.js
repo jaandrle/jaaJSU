@@ -3,7 +3,7 @@
 /**
  * Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS".
  * @method getTimeStamp
- * @for $time.{namespace}
+ * @memberof $time
  * @public
  * @param {Number|Boolean} [time=undefined]
  *  * Uses as argument for `new Date(*)`
@@ -14,7 +14,7 @@ $time.getTimeStamp= t=> $time.toString($time.formats.SQL)($time.fromDateArgument
 /**
  * Function returns timestamp in the form of "YYYY-MM-DD".
  * @method getDateStamp
- * @for $time.{namespace}
+ * @memberof $time
  * @public
  * @param {Number|Boolean} [time=undefined]
  *  * Uses as argument for `new Date(*)`

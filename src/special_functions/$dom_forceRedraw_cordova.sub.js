@@ -2,7 +2,7 @@
 /* global $dom, active_page_el, device *///gulp.keep.line
 /**
  * Redraw element using cheat `*.offsetHeight`
- * @method forceRedraw [cordova]
+ * @method forceRedraw_cordova
  * @for $dom.{namespace}
  * @param {NodeElement} [element=active_page_el]
  *  * Element for redraw
