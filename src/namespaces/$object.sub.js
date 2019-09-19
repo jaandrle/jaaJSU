@@ -44,7 +44,7 @@ var $object= {
      * @method each
      * @memberof module:jaaJSU~$object
      * @param {Object} iterable  An object for iterating.
-     * @param {module:jaaJSU~IterableObjectCallback} i_function
+     * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
@@ -54,7 +54,7 @@ var $object= {
      * @method eachDynamic
      * @memberof module:jaaJSU~$object
      * @param {Object} iterable An object for iterating.
-     * @param {module:jaaJSU~IterableObjectCallback} i_function
+     * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
