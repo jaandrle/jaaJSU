@@ -2,7 +2,7 @@
 /* global $dom, active_page_el, device *///gulp.keep.line
 /**
  * Redraw element using cheat `*.offsetHeight`
- * @method forceRedraw_cordova
+ * @method forceRedraw
  * @memberof module:jaaJSU~$dom
  * @param {NodeElement} [element=active_page_el] Element for redraw
  * @param {String} [platform="iOS"] Redraw only for specific `device.platform` ("Android", "iOS")

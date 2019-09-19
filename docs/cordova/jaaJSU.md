@@ -76,10 +76,10 @@
             * [.toggleDataset(element, data_name, data_a, data_b)](#module_jaaJSU..$dom.toggleDataset) ⇒ <code>String</code>
             * [.each(iterable, i_function, scope)](#module_jaaJSU..$dom.each) ⇒ <code>Mixed</code>
             * [.eachDynamic(iterable, i_function, scope)](#module_jaaJSU..$dom.eachDynamic) ⇒ <code>Mixed</code>
-            * [.component_cordova([el_name], attrs, [params])](#module_jaaJSU..$dom.component_cordova) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
+            * [.component([el_name], attrs, [params])](#module_jaaJSU..$dom.component) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
             * [.assign_cordova(element, ...object_attributes)](#module_jaaJSU..$dom.assign_cordova)
-            * ~~[.add_cordova(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add_cordova) ⇒ <code>NodeElement</code>~~
-            * [.forceRedraw_cordova([element], [platform])](#module_jaaJSU..$dom.forceRedraw_cordova)
+            * ~~[.add(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add) ⇒ <code>NodeElement</code>~~
+            * [.forceRedraw([element], [platform])](#module_jaaJSU..$dom.forceRedraw)
             * _virtual_
                 * [.DomPreparedSelector](#module_jaaJSU..$dom.DomPreparedSelector) : <code>Object</code>
                 * [.instance_componentEmpty](#module_jaaJSU..$dom.instance_componentEmpty) : [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
@@ -606,10 +606,10 @@ This NAMESPACE provides features for DOM elemnts.
     * [.toggleDataset(element, data_name, data_a, data_b)](#module_jaaJSU..$dom.toggleDataset) ⇒ <code>String</code>
     * [.each(iterable, i_function, scope)](#module_jaaJSU..$dom.each) ⇒ <code>Mixed</code>
     * [.eachDynamic(iterable, i_function, scope)](#module_jaaJSU..$dom.eachDynamic) ⇒ <code>Mixed</code>
-    * [.component_cordova([el_name], attrs, [params])](#module_jaaJSU..$dom.component_cordova) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
+    * [.component([el_name], attrs, [params])](#module_jaaJSU..$dom.component) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
     * [.assign_cordova(element, ...object_attributes)](#module_jaaJSU..$dom.assign_cordova)
-    * ~~[.add_cordova(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add_cordova) ⇒ <code>NodeElement</code>~~
-    * [.forceRedraw_cordova([element], [platform])](#module_jaaJSU..$dom.forceRedraw_cordova)
+    * ~~[.add(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add) ⇒ <code>NodeElement</code>~~
+    * [.forceRedraw([element], [platform])](#module_jaaJSU..$dom.forceRedraw)
     * _virtual_
         * [.DomPreparedSelector](#module_jaaJSU..$dom.DomPreparedSelector) : <code>Object</code>
         * [.instance_componentEmpty](#module_jaaJSU..$dom.instance_componentEmpty) : [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
@@ -802,12 +802,12 @@ Procedure for iterating throught NodeList `iterable` like [each](#module_jaaJSU.
 
 * * *
 
-<a name="module_jaaJSU..$dom.component_cordova"></a>
+<a name="module_jaaJSU..$dom.component"></a>
 
-#### $dom.component\_cordova([el_name], attrs, [params]) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
+#### $dom.component([el_name], attrs, [params]) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
 This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.component_cordova" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L551" title="jaaJSU.js:551"><small>(defined@551)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L551" title="jaaJSU.js:551"><small>(defined@551)</small></a>  
 **Returns**: [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty) - Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!  
 **Version**: 1.0.0  
 
@@ -871,14 +871,14 @@ $dom.assign(IMG_ELEMENT, { src: "image.png" });//=> <img src="image.png" …
 
 * * *
 
-<a name="module_jaaJSU..$dom.add_cordova"></a>
+<a name="module_jaaJSU..$dom.add"></a>
 
-#### ~~$dom.add\_cordova(parent, ...$$$, [call_parseHTML]) ⇒ <code>NodeElement</code>~~
+#### ~~$dom.add(parent, ...$$$, [call_parseHTML]) ⇒ <code>NodeElement</code>~~
 ***Deprecated:*** true
 
-See [module:jaaJSU~$dom.add](module:jaaJSU~$dom.add)
+See [add](#module_jaaJSU..$dom.add)
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.add_cordova" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1115" title="jaaJSU.js:1115"><small>(defined@1115)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.add" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1115" title="jaaJSU.js:1115"><small>(defined@1115)</small></a>  
 **Returns**: <code>NodeElement</code> - First created element (usualy wrapper thanks nesting)  
 
 | Param | Type | Description |
@@ -890,12 +890,12 @@ See [module:jaaJSU~$dom.add](module:jaaJSU~$dom.add)
 
 * * *
 
-<a name="module_jaaJSU..$dom.forceRedraw_cordova"></a>
+<a name="module_jaaJSU..$dom.forceRedraw"></a>
 
-#### $dom.forceRedraw\_cordova([element], [platform])
+#### $dom.forceRedraw([element], [platform])
 Redraw element using cheat `*.offsetHeight`
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.forceRedraw_cordova" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1143" title="jaaJSU.js:1143"><small>(defined@1143)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.forceRedraw" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1143" title="jaaJSU.js:1143"><small>(defined@1143)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -942,7 +942,7 @@ The same syntax as [mount](#module_jaaJSU..$dom.instance_component.mount). But o
 <a name="module_jaaJSU..$dom.instance_component"></a>
 
 #### $dom.instance\_component : <code>Object</code>
-This is minimal export of "functional class" [module:jaaJSU~$dom.component](module:jaaJSU~$dom.component) and its methods (if they are chainable).
+This is minimal export of "functional class" [component](#module_jaaJSU..$dom.component) and its methods (if they are chainable).
 
 **Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L588" title="jaaJSU.js:588"><small>(defined@588)</small></a>  
 **Category**: virtual  
