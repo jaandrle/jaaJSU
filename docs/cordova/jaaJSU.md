@@ -77,7 +77,7 @@
             * [.each(iterable, i_function, scope)](#module_jaaJSU..$dom.each) ⇒ <code>Mixed</code>
             * [.eachDynamic(iterable, i_function, scope)](#module_jaaJSU..$dom.eachDynamic) ⇒ <code>Mixed</code>
             * [.component([el_name], attrs, [params])](#module_jaaJSU..$dom.component) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
-            * [.assign_cordova(element, ...object_attributes)](#module_jaaJSU..$dom.assign_cordova)
+            * [.assign(element, ...object_attributes)](#module_jaaJSU..$dom.assign)
             * ~~[.add(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add) ⇒ <code>NodeElement</code>~~
             * [.forceRedraw([element], [platform])](#module_jaaJSU..$dom.forceRedraw)
             * _virtual_
@@ -607,7 +607,7 @@ $async.each_(...timeouts)().then(console.log).catch(console.error);
     * [.each(iterable, i_function, scope)](#module_jaaJSU..$dom.each) ⇒ <code>Mixed</code>
     * [.eachDynamic(iterable, i_function, scope)](#module_jaaJSU..$dom.eachDynamic) ⇒ <code>Mixed</code>
     * [.component([el_name], attrs, [params])](#module_jaaJSU..$dom.component) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
-    * [.assign_cordova(element, ...object_attributes)](#module_jaaJSU..$dom.assign_cordova)
+    * [.assign(element, ...object_attributes)](#module_jaaJSU..$dom.assign)
     * ~~[.add(parent, ...$$$, [call_parseHTML])](#module_jaaJSU..$dom.add) ⇒ <code>NodeElement</code>~~
     * [.forceRedraw([element], [platform])](#module_jaaJSU..$dom.forceRedraw)
     * _virtual_
@@ -814,21 +814,21 @@ $async.each_(...timeouts)().then(console.log).catch(console.error);
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | [el_name] | <code>String</code> | <code>&quot;EMPTY&quot;</code> | Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated. |
-| attrs | [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject) |  | The second argument for [module:jaaJSU~$dom.assign](module:jaaJSU~$dom.assign) |
+| attrs | [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject) |  | The second argument for [assign](#module_jaaJSU..$dom.assign) |
 | [params] | <code>Object</code> | <code>{}</code> | Parameters |
 | [params.mapUpdate] | <code>function</code> \| <code>Undefined</code> | <code>Undefined</code> | This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method [add](#module_jaaJSU..$dom.instance_component.add) |
 
 
 * * *
 
-<a name="module_jaaJSU..$dom.assign_cordova"></a>
+<a name="module_jaaJSU..$dom.assign"></a>
 
-#### $dom.assign\_cordova(element, ...object_attributes)
+#### $dom.assign(element, ...object_attributes)
 >Procedure for merging object into the element properties.
 Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
 It is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.assign_cordova" href="https://github.com/jaandrle/jaaJSU/blob/master/bin\cordova/jaaJSU.js#L1041" title="jaaJSU.js:1041"><small>(defined@1041)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.assign" href="https://github.com/jaandrle/jaaJSU/blob/master/bin\cordova/jaaJSU.js#L1041" title="jaaJSU.js:1041"><small>(defined@1041)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -975,7 +975,7 @@ Value is argument for selection function
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
 | el_name | <code>String</code> |  | Name of element (for example `LI`, `P`, `A`, ...). |
-| attrs | [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject) |  | Internally uses [module:jaaJSU~$dom.assign](module:jaaJSU~$dom.assign), `null`\|`undefined` is also supported (`null` is probably better for readability). |
+| attrs | [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject) |  | Internally uses [assign](#module_jaaJSU..$dom.assign), `null`\|`undefined` is also supported (`null` is probably better for readability). |
 | [shift] | <code>Number</code> | <code>0</code> | Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example. |
 
 **Example**  
