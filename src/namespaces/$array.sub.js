@@ -3,7 +3,7 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike
 /**
  * This NAMESPACE provides features for Arrays.
  * @namespace $array
- * @global
+ * @category namespaces
  * @typicalname gulp_place("namespaces.$array", "eval_out")
  */
 var $array= {
@@ -11,7 +11,7 @@ var $array= {
      * Function which calculate final index for cylce looping.
      * Means from current index `i` get `s`th value in array which length is `l`.
      * @method arrayIndex
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Number} i Current index in array (typycally 0)
      * @param {Number} s Steps from `i`
      * @param {Number} l Array length
@@ -28,19 +28,19 @@ var $array= {
     /**
      * Procedure for iterating throught Array `iterable`.
      * @method each
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Mixed[]} iterable An array-like object for iterating.
-     * @param {types.IterableCallback} i_function
+     * @param {module:jaaJSU~IterableCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
     each: __eachInArrayLike,
     /**
-     * Procedure for iterating throught Array `iterable` like {@link $array.each}, but use `for(...;(item= iterable[i]);i++)...`.
+     * Procedure for iterating throught Array `iterable` like {@link module:jaaJSU~$array.each}, but use `for(...;(item= iterable[i]);i++)...`.
      * @method eachDynamic
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Mixed[]} iterable An array-like object for iterating.
-     * @param {types.IterableCallback} i_function
+     * @param {module:jaaJSU~IterableCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
@@ -48,7 +48,7 @@ var $array= {
     /**
      * Function returns last element in array without editing the original.
      * @method getLast
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Mixed[]} arr Input array.
      * @returns {Mixed} Last element in `arr`
      */
@@ -56,22 +56,23 @@ var $array= {
         return arr[arr.length-1];
     },
     /**
-     * Methods around array `arr` exported by {@link $array.partition} method.
+     * Methods around array `arr` exported by {@link module:jaaJSU~$array.partition} method.
      * @typedef {Object} ArrayPartition
-     * @memberof types
+     * @memberof module:jaaJSU~$array
+     * @category virtual
      */
     /**
      * Function returns methods for splitting array by condition.
      * @method partition
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Mixed[]} arr Input array.
-     * @returns {types.ArrayPartition}
+     * @returns {module:jaaJSU~$array.ArrayPartition}
      */
     partition: function(arr){
         return {
             /**
              * @method head
-             * @memberof types.ArrayPartition
+             * @memberof module:jaaJSU~$array.ArrayPartition
              * @returns {Array} two items Array `[x, ...xs]` (first element and rest array)
              */
             head: function(){
@@ -80,7 +81,7 @@ var $array= {
             },
             /**
              * @method tail
-             * @memberof types.ArrayPartition
+             * @memberof module:jaaJSU~$array.ArrayPartition
              * @returns {Array} two items Array `[...xs, x]` (rest array and last element)
              */
             tail: function(){
@@ -90,7 +91,7 @@ var $array= {
             },
             /**
              * @method onIndex
-             * @memberof types.ArrayPartition
+             * @memberof module:jaaJSU~$array.ArrayPartition
              * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
              * @returns {Array[]} Two items Array [arr1, arr2]
              */
@@ -100,8 +101,8 @@ var $array= {
             },
             /**
              * @method byCondition
-             * @memberof types.ArrayPartition
-             * @param {types.function_filterCallback} fn In fact index of inner array (see return part).
+             * @memberof module:jaaJSU~$array.ArrayPartition
+             * @param {function_filterCallback} fn In fact index of inner array (see return part).
              * @returns {Array[]} Two items Array [arr1, arr2] based on `fn`.
              */
             byCondition: function(fn){
@@ -114,7 +115,7 @@ var $array= {
     /**
      * Function returns new array without any `item`
      * @method removeItem
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @param {Mixed[]} arr Original array
      * @param {Mixed} item Item for searching in `arr`. Make sence, if it is possible to compare with `===` operation
      * @returns {Array} New {Array} from `arr` without `item`s
@@ -131,11 +132,16 @@ var $array= {
     /**
      * Function returns random number for Array.sort function
      * @method sortRandom
-     * @memberof $array
+     * @memberof module:jaaJSU~$array
      * @returns {Number} Number in interval <-0.5,0.5>
      */
     sortRandom: function(){
         return Math.random() - 0.5;
     }
 };
+/**
+ * Exported namespace of {@link module:jaaJSU~$array}.
+ * @namespace gulp_place("namespaces.$array", "eval_out")
+ * @global
+ */
 export_as($array, gulp_place("namespaces.$array", "variable"));

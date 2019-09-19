@@ -5,24 +5,26 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
  * This NAMESPACE provides features for Objects.
  * @namespace $object
  * @typicalname gulp_place("namespaces.$object", "eval_out")
- * @global
- */
-/**
- * @namespace types
- * @memberof $object
- * @private
- * @readonly
  */
 /**
  * @function function_Object2Mixed
- * @memberof $object.types
+ * @memberof module:jaaJSU~$object
+ * @category virtual
  * @param {Object} input_object
  * @returns {Mixed}
  */
 /**
- * Similar to {@link types.IterableArrayObject}
+ * @function function_Object2Object
+ * @memberof module:jaaJSU~$object
+ * @category virtual
+ * @param {Object} input_object
+ * @returns {Object} Modified version of `input_object` (By reference!)
+ */
+/**
+ * Similar to {@link module:jaaJSU~IterableArrayObject}
  * @typedef {Object} IterableObjectObject
- * @memberof $object.types
+ * @memberof module:jaaJSU~$object
+ * @category virtual
  * @property {Mixed} item Nth value for `key` in `iterable`.
  * @property {Mixed} key Name of key
  * @property {Number} index Idicies 0...`Object.keys(iterable).length`.
@@ -31,27 +33,28 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
  */
 /**
  * @function IterableObjectCallback
- * @memberof $object.types
- * @param {$object.types.IterableObjectObject} IterableObjectObject
- * @returns {Mixed|Undefined} `share` key of {@link $object.types.IterableObjectObject}.
+ * @memberof module:jaaJSU~$object
+ * @category virtual
+ * @param {module:jaaJSU~$object.IterableObjectObject} IterableObjectObject
+ * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object.IterableObjectObject}.
  */
 var $object= {
     /**
      * Function for iterating throught Object `iterable`.
      * @method each
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {Object} iterable  An object for iterating.
-     * @param {IterableObjectCallback} i_function
+     * @param {module:jaaJSU~IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
     each: __objectEach,
     /**
-     * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
+     * Procedure for iterating throught Object `iterable` like {@link module:jaaJSU~$object.each}, but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
      * @method eachDynamic
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {Object} iterable An object for iterating.
-     * @param {IterableObjectCallback} i_function
+     * @param {module:jaaJSU~IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
@@ -59,9 +62,9 @@ var $object= {
     /**
      * Function for converting Array `arr` to Object. Uses `fun` for converting.
      * @method fromArray
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {Array} arr Array-like parameter.
-     * @param {types.function_reduceCallback} [fun=`(acc, curr, i)=> acc[""+i]= curr`] Function for converting. In fact, it is wrapper around `Array.reduce`.
+     * @param {module:jaaJSU~function_reduceCallback} [fun=`(acc, curr, i)=> acc[""+i]= curr`] Function for converting. In fact, it is wrapper around `Array.reduce`.
      * @param {Object} [default_value={}] Initial value.
      * @return {Object} Created object.
      */
@@ -69,7 +72,7 @@ var $object= {
     /**
      * Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: "gotcha" }`
      * @method hasProp
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {Object} obj **Mandatory**. Object where to search `prop`.
      * @param {String} prop **Mandatory**. Poperty to searching for.
      * @return {Boolean} True, if `obj` has property `prop`
@@ -78,7 +81,7 @@ var $object= {
     /**
      * Function for creating non-rewritable object
      * @method immutable_keys
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {Object} [obj_input={}] Initial value
      * @return {Proxy}
      * <br/>getter `Proxy.key_name` Mixed: returns key_name if defined
@@ -117,10 +120,10 @@ var $object= {
     /**
      * Wrapper around `object[methodName](...args)`.
      * @method method
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {String} methodName Key in Object `object`.
      * @param {...Mixed} args Arguments for method `methodName`
-     * @return {$object.types.function_Object2Mixed} `(target) => target[key](...args)`
+     * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key](...args)`
      * @example
      * $object.method("trim")(" Hi ");//= `Hi`
      * $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
@@ -128,7 +131,7 @@ var $object= {
     method: (methodName, ...args)=> object=> object[methodName](...args),
     /**
      * @method methodFrom
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @example
      * $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
      * $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("Hello world");
@@ -137,16 +140,16 @@ var $object= {
     /**
      * Wrapper around `object[key]`, usefull for binding.
      * @method pluck
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @param {String} key Key in Object `object`.
-     * @return {$object.types.function_Object2Mixed} `(target) => target[key]`
+     * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key]`
      * @example
      * $object.pluck("length")("Test");//= `4`
      */
     pluck: key=> object=> object[key],
     /**
      * @method pluckFrom
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @example
      * $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
      */
@@ -154,27 +157,27 @@ var $object= {
     /**
      * Wrapper around `object[setterName]= arg`
      * @method setter
-     * @memberof $object
-     * @param {String} setterName
-     *  * Key in Object `object`.
-     * @param {Mixed} arg
-     *  * Setter value
-     * @return {Function}
-     *  * `object=> (object[setterName]= arg, object)`
-     *  * @param {Object} object: target object
-     *  * @return {Object} original object reference
+     * @memberof module:jaaJSU~$object
+     * @param {String} setterName Key in Object `object`.
+     * @param {Mixed} arg Setter value
+     * @return {module:jaaJSU~$object.function_Object2Object} `object=> (object[setterName]= arg, object)`
      * @example
-     *      $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
+     * $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
      */
     setter: (setterName, arg)=> object=> (object[setterName]= arg, object),
     /**
      * @method setterFrom
-     * @memberof $object
+     * @memberof module:jaaJSU~$object
      * @example
-     *      $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
+     * $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
      */
     setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
 };
+/**
+ * Exported namespace of {@link module:jaaJSU~$object}.
+ * @namespace gulp_place("namespaces.$object", "eval_out")
+ * @global
+ */
 export_as($object, gulp_place("namespaces.$object", "variable"));
 
 function __objectEach(iterable, i_function, scope, share){

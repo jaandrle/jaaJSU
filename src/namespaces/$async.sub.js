@@ -2,24 +2,21 @@
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
  * @namespace $async
+ * @category namespaces
  * @typicalname gulp_place("namespaces.$async", "eval_out")
- * @global
- */
-/**
- * @namespace types
- * @memberof $async
- * @private
  */
 /**
  * This kind of function schould returns `Promise`.
  * @function function_Undefined2Promise
- * @memberof $async.types
+ * @memberof module:jaaJSU~$async
+ * @category virtual
  * @returns {Promise}
  */
 /**
  * This kind of function schould returns `Promise`.
  * @function function_MultipleMixed2Promise
- * @memberof $async.types
+ * @memberof module:jaaJSU~$async
+ * @category virtual
  * @param {...Mixed} Mixed Various arguments
  * @returns {Promise}
  */
@@ -28,9 +25,9 @@ var $async={
     * Procedure for iterating thorught **Promise** function array `funcs`.
     *
     * @method serialize
-    * @memberof $async
-    * @deprecated Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
-    * @param {$async.types.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
+    * @memberof module:jaaJSU~$async
+    * @deprecated Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
+    * @param {module:jaaJSU~$async.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
     * @.then {Mixed[]} Array of results from `funcs`
     * @.catch {Error} Error in `funcs[nth]`
@@ -51,8 +48,8 @@ var $async={
    /**
     * Procedure for iterating thorught **Promise** function array `funcs`.
     * @method iterate_
-    * @memberof $async
-    * @param {$async.types.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
+    * @memberof module:jaaJSU~$async
+    * @param {module:jaaJSU~$async.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
     * @.then {Mixed} Result of last function in `iterablePromises`
     * @.catch {Error} Error in `iterablePromises[nth]`
@@ -74,18 +71,18 @@ var $async={
         });
     },
     /**
-     * It is used in {@link $async.iterateMixed_}
+     * It is used in {@link module:jaaJSU~$async.iterateMixed_}
      * @property {Symbol} CANCEL
-     * @memberof $async
+     * @memberof module:jaaJSU~$async
      */
     CANCEL: Symbol("$async.CANCEL"),
     /**
      * Like `iterate_`, but also allows iterate throught non-promise functions
      * 
      * @method iterateMixed_
-     * @beta Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
-     * @memberof $async
-     * @param {...Promise|function_Undefined2Promise} tasks
+     * @beta Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
+     * @memberof module:jaaJSU~$async
+     * @param {...Promise|module:jaaJSU~$async.function_Undefined2Promise} tasks
      * @return {Promise}
      */
     iterateMixed_: function(...tasks){
@@ -109,8 +106,8 @@ var $async={
    /**
     * Procedure for iterating throught **Promise** functions (wait pattern).
     * @method sequention_
-    * @memberof $async
-    * @param {...function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
+    * @memberof module:jaaJSU~$async
+    * @param {...module:jaaJSU~$async.function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
     * @return {Promise}
     * @.then {Mixed} Result of last function in `functions`
     * @.catch {Error} Error in `functions[nth]`
@@ -123,9 +120,9 @@ var $async={
    /**
     * Procedure for iterating throught **Promise** functions (race pattern).
     * @method each_
-    * @memberof $async
+    * @memberof module:jaaJSU~$async
     * @param {...function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
-    * @return {$async.types.function_MultipleMixed2Promise}
+    * @return {module:jaaJSU~$async.function_MultipleMixed2Promise}
     * @.then {Mixed} Result of last function in `functions`
     * @.catch {Error} Error in `functions[nth]`
     * @example
@@ -140,5 +137,10 @@ var $async={
         return Promise.all(functions.map(f=>f(...input)));
     };}
 };
+/**
+ * Exported namespace of {@link module:jaaJSU~$async}.
+ * @namespace gulp_place("namespaces.$async", "eval_out")
+ * @global
+ */
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($async, gulp_place("namespaces.$async", "variable"));

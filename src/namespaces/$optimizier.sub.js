@@ -16,7 +16,7 @@ var $optimizier= {
     * @param {Number} [wait=150] How much wait for next calling
     * @param {Boolean} [immediate=undefined] First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
     * @return {Function} Debounced function `fun` (accepts same arguments)
-    * @example
+    * @example @lang text
     * graphically (wait= 4symbols)
     * I call (| symbol) fun:    .|||.|.|||..
     *              debounce:    .....|....|.

@@ -1,6 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
+ * @version 0.8.1
  */
 (function(module_name, factory) {
     'use strict';
@@ -21,24 +22,9 @@
     'use strict';
     var out= {};
     /**
-     * Just virtual key!!! This is overwiev of all internal types for better description.
-     * @namespace types
-     * @private
-     * @readonly
-     * @global
-     */
-    /**
-     * @typedef {Object} IterableArrayObject
-     * @memberof types
-     * @property {Mixed} item Nth value for `key` in `iterable`.
-     * @property {Number} key Idicies 0...`Object.keys(iterable).length`.
-     * @property {Boolean} last Is setted True, if it is the last element in array.
-     * @property {Mixed|Undefined} share shared variable - works similar to `*.reduce` method
-     */
-    /**
      * This kind of function is typically used in `Array.prototype.filter`.
      * @function function_filterCallback
-     * @memberof types
+     * @category virtual
      * @param {Mixed} i_value Nth value of array.
      * @param {Number} i Nth key of array.
      * @returns {Boolean}
@@ -46,17 +32,25 @@
     /**
      * This kind of function is typically used in `Array.prototype.reduce`.
      * @function function_reduceCallback
-     * @memberof types
+     * @category virtual
      * @param {Mixed} accumulator
      * @param {Mixed} i_value Nth value of array.
      * @param {Number} i Nth key of array.
      * @returns {Mixed} accumulator
      */
     /**
+     * @typedef {Object} IterableArrayObject
+     * @category virtual
+     * @property {Mixed} item Nth value for `key` in `iterable`.
+     * @property {Number} key Idicies 0...`iterable.length`.
+     * @property {Boolean} last Is setted True, if it is the last element in array.
+     * @property {Mixed|Undefined} share shared variable - works similar to `*.reduce` method
+     */
+    /**
      * @function IterableCallback
-     * @memberof types
-     * @param {types.IterableArrayObject} IterableArrayObject
-     * @returns {Mixed|Undefined} `share` key of {@link types.IterableArrayObject}.
+     * @category virtual
+     * @param {IterableArrayObject} IterableArrayObject
+     * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
      */
     function export_as(obj, key){ out[key]= obj; }
     function __eachInArrayLike(iterable, i_function, scope, share){
@@ -87,7 +81,7 @@
     /**
      * This NAMESPACE provides features for Arrays.
      * @namespace $array
-     * @global
+     * @category namespaces
      * @typicalname $array
      */
     var $array= {
@@ -95,7 +89,7 @@
          * Function which calculate final index for cylce looping.
          * Means from current index `i` get `s`th value in array which length is `l`.
          * @method arrayIndex
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Number} i Current index in array (typycally 0)
          * @param {Number} s Steps from `i`
          * @param {Number} l Array length
@@ -112,19 +106,19 @@
         /**
          * Procedure for iterating throught Array `iterable`.
          * @method each
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Mixed[]} iterable An array-like object for iterating.
-         * @param {types.IterableCallback} i_function
+         * @param {module:jaaJSU~IterableCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */
         each: __eachInArrayLike,
         /**
-         * Procedure for iterating throught Array `iterable` like {@link $array.each}, but use `for(...;(item= iterable[i]);i++)...`.
+         * Procedure for iterating throught Array `iterable` like {@link module:jaaJSU~$array.each}, but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Mixed[]} iterable An array-like object for iterating.
-         * @param {types.IterableCallback} i_function
+         * @param {module:jaaJSU~IterableCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */
@@ -132,7 +126,7 @@
         /**
          * Function returns last element in array without editing the original.
          * @method getLast
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Mixed[]} arr Input array.
          * @returns {Mixed} Last element in `arr`
          */
@@ -140,22 +134,23 @@
             return arr[arr.length-1];
         },
         /**
-         * Methods around array `arr` exported by {@link $array.partition} method.
+         * Methods around array `arr` exported by {@link module:jaaJSU~$array.partition} method.
          * @typedef {Object} ArrayPartition
-         * @memberof types
+         * @memberof module:jaaJSU~$array
+         * @category virtual
          */
         /**
          * Function returns methods for splitting array by condition.
          * @method partition
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Mixed[]} arr Input array.
-         * @returns {types.ArrayPartition}
+         * @returns {module:jaaJSU~$array.ArrayPartition}
          */
         partition: function(arr){
             return {
                 /**
                  * @method head
-                 * @memberof types.ArrayPartition
+                 * @memberof module:jaaJSU~$array.ArrayPartition
                  * @returns {Array} two items Array `[x, ...xs]` (first element and rest array)
                  */
                 head: function(){
@@ -164,7 +159,7 @@
                 },
                 /**
                  * @method tail
-                 * @memberof types.ArrayPartition
+                 * @memberof module:jaaJSU~$array.ArrayPartition
                  * @returns {Array} two items Array `[...xs, x]` (rest array and last element)
                  */
                 tail: function(){
@@ -174,7 +169,7 @@
                 },
                 /**
                  * @method onIndex
-                 * @memberof types.ArrayPartition
+                 * @memberof module:jaaJSU~$array.ArrayPartition
                  * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
                  * @returns {Array[]} Two items Array [arr1, arr2]
                  */
@@ -184,8 +179,8 @@
                 },
                 /**
                  * @method byCondition
-                 * @memberof types.ArrayPartition
-                 * @param {types.function_filterCallback} fn In fact index of inner array (see return part).
+                 * @memberof module:jaaJSU~$array.ArrayPartition
+                 * @param {function_filterCallback} fn In fact index of inner array (see return part).
                  * @returns {Array[]} Two items Array [arr1, arr2] based on `fn`.
                  */
                 byCondition: function(fn){
@@ -198,7 +193,7 @@
         /**
          * Function returns new array without any `item`
          * @method removeItem
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @param {Mixed[]} arr Original array
          * @param {Mixed} item Item for searching in `arr`. Make sence, if it is possible to compare with `===` operation
          * @returns {Array} New {Array} from `arr` without `item`s
@@ -215,35 +210,37 @@
         /**
          * Function returns random number for Array.sort function
          * @method sortRandom
-         * @memberof $array
+         * @memberof module:jaaJSU~$array
          * @returns {Number} Number in interval <-0.5,0.5>
          */
         sortRandom: function(){
             return Math.random() - 0.5;
         }
     };
+    /**
+     * Exported namespace of {@link module:jaaJSU~$array}.
+     * @namespace $array
+     * @global
+     */
     export_as($array, "$array");
     /**
      * This NAMESPACE provides features for async (mainly Promise) functions.
      * @namespace $async
+     * @category namespaces
      * @typicalname $async
-     * @global
-     */
-    /**
-     * @namespace types
-     * @memberof $async
-     * @private
      */
     /**
      * This kind of function schould returns `Promise`.
      * @function function_Undefined2Promise
-     * @memberof $async.types
+     * @memberof module:jaaJSU~$async
+     * @category virtual
      * @returns {Promise}
      */
     /**
      * This kind of function schould returns `Promise`.
      * @function function_MultipleMixed2Promise
-     * @memberof $async.types
+     * @memberof module:jaaJSU~$async
+     * @category virtual
      * @param {...Mixed} Mixed Various arguments
      * @returns {Promise}
      */
@@ -252,9 +249,9 @@
         * Procedure for iterating thorught **Promise** function array `funcs`.
         *
         * @method serialize
-        * @memberof $async
-        * @deprecated Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
-        * @param {$async.types.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
+        * @memberof module:jaaJSU~$async
+        * @deprecated Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
+        * @param {module:jaaJSU~$async.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
         * @return {Promise}
         * @.then {Mixed[]} Array of results from `funcs`
         * @.catch {Error} Error in `funcs[nth]`
@@ -275,8 +272,8 @@
        /**
         * Procedure for iterating thorught **Promise** function array `funcs`.
         * @method iterate_
-        * @memberof $async
-        * @param {$async.types.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
+        * @memberof module:jaaJSU~$async
+        * @param {module:jaaJSU~$async.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
         * @return {Promise}
         * @.then {Mixed} Result of last function in `iterablePromises`
         * @.catch {Error} Error in `iterablePromises[nth]`
@@ -298,18 +295,18 @@
             });
         },
         /**
-         * It is used in {@link $async.iterateMixed_}
+         * It is used in {@link module:jaaJSU~$async.iterateMixed_}
          * @property {Symbol} CANCEL
-         * @memberof $async
+         * @memberof module:jaaJSU~$async
          */
         CANCEL: Symbol("$async.CANCEL"),
         /**
          * Like `iterate_`, but also allows iterate throught non-promise functions
          * 
          * @method iterateMixed_
-         * @beta Use {@link $async.iterate_}, {@link $async.sequention_}, {@link $async.each_}.
-         * @memberof $async
-         * @param {...Promise|function_Undefined2Promise} tasks
+         * @beta Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
+         * @memberof module:jaaJSU~$async
+         * @param {...Promise|module:jaaJSU~$async.function_Undefined2Promise} tasks
          * @return {Promise}
          */
         iterateMixed_: function(...tasks){
@@ -333,8 +330,8 @@
        /**
         * Procedure for iterating throught **Promise** functions (wait pattern).
         * @method sequention_
-        * @memberof $async
-        * @param {...function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
+        * @memberof module:jaaJSU~$async
+        * @param {...module:jaaJSU~$async.function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
         * @return {Promise}
         * @.then {Mixed} Result of last function in `functions`
         * @.catch {Error} Error in `functions[nth]`
@@ -347,9 +344,9 @@
        /**
         * Procedure for iterating throught **Promise** functions (race pattern).
         * @method each_
-        * @memberof $async
+        * @memberof module:jaaJSU~$async
         * @param {...function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
-        * @return {$async.types.function_MultipleMixed2Promise}
+        * @return {module:jaaJSU~$async.function_MultipleMixed2Promise}
         * @.then {Mixed} Result of last function in `functions`
         * @.catch {Error} Error in `functions[nth]`
         * @example
@@ -364,20 +361,25 @@
             return Promise.all(functions.map(f=>f(...input)));
         };}
     };
+    /**
+     * Exported namespace of {@link module:jaaJSU~$async}.
+     * @namespace $async
+     * @global
+     */
 
     export_as($async, "$async");
 
     /**
      * This NAMESPACE provides features for DOM elemnts.
      * @namespace $dom
+     * @category namespaces
      * @typicalname $dom
-     * @global
      */
     var $dom={
         /**
          * Calls `.then` when the DOM is ready
          * @method ready_
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {...Mixed} args As params for `.then`
          * @return {Promise}
          * @.then {Mixed} See `args`
@@ -398,15 +400,16 @@
          * Key is name of "selection" function ('querySelector, ..., getElementsByClassname, ...).
          * Value is argument for selection function
          * @typedef {Object} DomPreparedSelector
-         * @memberof types
+         * @memberof module:jaaJSU~$dom
+         * @category virtual
          * @example
          * { getElementsByClassname: "class_name" }
          */
         /**
          * Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
          * @method elementReady_
-         * @memberof $dom
-         * @param {types.DomPreparedSelector} el_selector
+         * @memberof module:jaaJSU~$dom
+         * @param {module:jaaJSU~$dom.DomPreparedSelector} el_selector
          * @param {DOMElement} [parent=document] Where to search `el_selector`
          * @return {Promise}
          * @.then {NodeElement} Target elemnet based on `el_selector`
@@ -426,7 +429,7 @@
         /**
          * Procedure remove children of given element `container`.
          * @method empty
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {NodeElement} container Remove all its children
          */
         empty: function(container){
@@ -436,7 +439,7 @@
         /**
          * Procedure places `new_element` after `reference` elements
          * @method insertAfter
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {NodeElement} new_element
          * @param {NodeElement} reference
          */
@@ -448,7 +451,7 @@
        /**
         * Remove elements in given {NodeList} or {HTMLCollection}
         * @method removeElements
-        * @memberof $dom
+        * @memberof module:jaaJSU~$dom
         * @param {NodeList|HTMLCollection} els_to_delete Array(-like) object of elements
         * @param {Number} [from_index=0] Params allowing skip elements in `els_to_delete`
         * @param {Number} [to_index=els_to_delete.lenght] Params allowing skip elements in `els_to_delete`
@@ -464,7 +467,7 @@
         /**
          * Procedure replaces `el_old` element by new one (`new_el`)
          * @method replace
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {NodeElement} el_old
          * @param {NodeElement} el_new
          */
@@ -475,7 +478,7 @@
         /**
          * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
          * @method toggleAttribute
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {NodeElement} element Element target
          * @param {String} attribute_name Name of attribute
          * @param {String} attribute_a Value of attribute
@@ -490,7 +493,7 @@
         /**
          * Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
          * @method toggleDataset
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {NodeElement} element Element target
          * @param {String} data_name Name of dataset key
          * @param {String} data_a Name of dataset value
@@ -503,7 +506,7 @@
         /**
          * Procedure for iterating throught NodeList `iterable`.
          * @method each
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {Mixed[]} iterable An array-like object for iterating.
          * @param {types.IterableCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
@@ -511,9 +514,9 @@
          */
         each: __eachInArrayLike,
         /**
-         * Procedure for iterating throught NodeList `iterable` like {@link $dom.each}, but use `for(...;(item= iterable[i]);i++)...`.
+         * Procedure for iterating throught NodeList `iterable` like {@link module:jaaJSU~$dom.each}, but use `for(...;(item= iterable[i]);i++)...`.
          * @method eachDynamic
-         * @memberof $dom
+         * @memberof module:jaaJSU~$dom
          * @param {Mixed[]} iterable An array-like object for iterating.
          * @param {types.IterableCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
@@ -523,19 +526,20 @@
     };
     /* standalone= "standalone"; */
     /**
-     * In generall, all methods from {@link $dom.types.Component} don't do anything. Also during "mounting" there are some changes see method {@link $dom.types.ComponentEmpty.mount}.
+     * In generall, all methods from {@link module:jaaJSU~$dom.Component} don't do anything. Also during "mounting" there are some changes see method {@link module:jaaJSU~$dom.ComponentEmpty.mount}.
      * @typedef ComponentEmpty
-     * @memberof $dom.types
-     * @type {$dom.types.Component}
+     * @memberof module:jaaJSU~$dom
+     * @category virtual
+     * @type {module:jaaJSU~$dom.Component}
      */
     const $dom_emptyPseudoComponent= (function(){
         const share= { mount, update, destroy, isStatic };
         const component_out= { add, component, mount, update, share };
         return component_out;
         /**
-         * The same syntax as {@link $dom.types.Component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
+         * The same syntax as {@link module:jaaJSU~$dom.Component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
          * @method mount
-         * @memberof $dom.types.ComponentEmpty
+         * @memberof module:jaaJSU~$dom.ComponentEmpty
          */
         function mount(element, type= "childLast"){
             // let temp_el;
@@ -567,21 +571,15 @@
         function destroy(){ return null; }
     })();
     /**
-     * Just virtual key!!! This is overwiev of all internal types for better description.
-     * @namespace types
-     * @private
-     * @memberof $dom
-     */
-    /**
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @version 1.0.0
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
-     * @param {$dom.types.DomAssignObject} attrs The second argument for {@link $dom.assign}
+     * @param {module:jaaJSU~$dom.DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
      * @param {Object} [params= {}] Parameters
-     * @param {Function|Undefined} [params.mapUpdate=Undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link $dom.types.Component.add}
-     * @return {$dom.types.Component__Add|$dom.types.ComponentEmpty} Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!
+     * @param {Function|Undefined} [params.mapUpdate=Undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link module:jaaJSU~$dom.Component.add}
+     * @return {module:jaaJSU~$dom.Component__Add|module:jaaJSU~$dom.ComponentEmpty} Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!
      */
     $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
@@ -602,36 +600,38 @@
         const share= { mount, update, destroy, isStatic };
         const component_out= { add, addText, component, setShift, mount, update, share };
         /**
-         * Its purpose is to make easy transfering methods somewhere else (like for using in another component, see {@link $dom.types.Component.component} method).
+         * Its purpose is to make easy transfering methods somewhere else (like for using in another component, see {@link module:jaaJSU~$dom.Component.component} method).
          * @typedef share
-         * @memberof $dom.types.Component
-         * @borrows $dom.types.Component.mount as mount
-         * @borrows $dom.types.Component.update as update
+         * @memberof module:jaaJSU~$dom.Component
+         * @borrows module:jaaJSU~$dom.Component.mount as mount
+         * @borrows module:jaaJSU~$dom.Component.update as update
          * @type {Object}
          */
         /**
-         * This is minimal export of "functional class" {@link $dom.component} and its methods (if they are chainable).
+         * This is minimal export of "functional class" {@link module:jaaJSU~$dom.component} and its methods (if they are chainable).
          * @typedef Component
-         * @memberof $dom.types
+         * @memberof module:jaaJSU~$dom
+         * @category virtual
          * @type {Object}
          */
         return add(el_name, attrs);
         /**
          * This is `Component` with aditional methods
          * @typedef Component__Add
-         * @memberof $dom.types
-         * @type $dom.types.Component
+         * @memberof module:jaaJSU~$dom
+         * @category virtual
+         * @type module:jaaJSU~$dom.Component
          */
         /**
          * This add element to component
          * @method add
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @chainable
          * @param {String} el_name Name of element (for example `LI`, `P`, `A`, ...).
-         * @param {$dom.types.DomAssignObject} attrs Internally uses {@link $dom.assign}, `null`\|`undefined` is also supported (`null` is probably better for readability).
+         * @param {module:jaaJSU~$dom.DomAssignObject} attrs Internally uses {@link module:jaaJSU~$dom.assign}, `null`\|`undefined` is also supported (`null` is probably better for readability).
          * @param {Number} [shift= 0] Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.
-         * @returns {$dom.types.Component__Add}
+         * @returns {module:jaaJSU~$dom.Component__Add}
          * @example
          * const UL= document.getElementById('SOME UL');
          * const { add }= $dom.component("LI", { className: "list_item" });
@@ -665,25 +665,25 @@
                 /**
                  * Returns reference of currently added element
                  * @method getReference
-                 * @memberof $dom.types.Component__Add
+                 * @memberof module:jaaJSU~$dom.Component__Add
                  * @returns {NodeElement}
                  */
                 getReference: ()=> el,
                 /**
                  * This procedure allows to call given function `fn` during registering element.
                  * @method oninit
-                 * @memberof $dom.types.Component__Add
+                 * @memberof module:jaaJSU~$dom.Component__Add
                  * @param {Function} fn
-                 * @returns {$dom.types.Component}
+                 * @returns {module:jaaJSU~$dom.Component}
                  */
                 oninit: function(fn){ fn(el); return component_out; },
                 /**
-                 * This method allows to register function ({@link $dom.types.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link $dom.types.Component.update}).
+                 * This method allows to register function ({@link module:jaaJSU~$dom.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link module:jaaJSU~$dom.Component.update}).
                  * @method onupdate
-                 * @memberof $dom.types.Component__Add
+                 * @memberof module:jaaJSU~$dom.Component__Add
                  * @param {Object} data This allows register listener for given **keys** of Object `data`. For `data= { a: "A", b: "B" }` it means that when `a` or `b` will be changed the `onUpdateFunction` is called.
-                 * @param {$dom.types.onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
-                 * @returns {$dom.types.Component}
+                 * @param {module:jaaJSU~$dom.onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
+                 * @returns {module:jaaJSU~$dom.Component}
                  * @example
                  * const c= $dom.component("DIV", null);
                  * …
@@ -699,9 +699,10 @@
                  */
                 /**
                  * @callback onUpdateFunction
-                 * @memberof $dom.types
-                 * @param {Object} data Includes all subsribed keys from `data` see method {@link $dom.types.Component__Add.onupdate}
-                 * @returns {*|$dom.types.DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link $dom.types.Component.update} is called. This callback can be registered when element is created (see method {@link $dom.types.Component.add}) see {@link $dom.types.Component__Add}.
+                 * @memberof module:jaaJSU~$dom
+                 * @category virtual
+                 * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom.Component__Add.onupdate}
+                 * @returns {*|module:jaaJSU~$dom.DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link module:jaaJSU~$dom.Component.update} is called. This callback can be registered when element is created (see method {@link module:jaaJSU~$dom.Component.add}) see {@link module:jaaJSU~$dom.Component__Add}.
                  */
                 onupdate: function(data, onUpdateFunction){
                     if(!data) return component_out;
@@ -715,18 +716,19 @@
         /**
          * This is `Component` with aditional methods
          * @typedef Component__AddText
-         * @memberof $dom.types
+         * @memberof module:jaaJSU~$dom
+         * @category virtual
          * @type {Component}
          */
         /**
          * This add element to component
          * @method addText
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @chainable
          * @param {String} text Argument for `document.createTextNode`
-         * @param {Number} [shift= 0] see {@link $dom.types.Component.add}
-         * @returns {$dom.types.Component__AddText}
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.Component.add}
+         * @returns {module:jaaJSU~$dom.Component__AddText}
          * @example
          * const c1= $dom.component("P", { textContent: "TEXT" });
          * const c2= $dom.component("P", null);
@@ -754,9 +756,9 @@
                 /**
                  * This procedure allows to call given function `fn` during registering element.
                  * @method oninit
-                 * @memberof $dom.types.Component__AddText
+                 * @memberof module:jaaJSU~$dom.Component__AddText
                  * @param {Function} fn
-                 * @returns {$dom.types.Component}
+                 * @returns {module:jaaJSU~$dom.Component}
                  */
                 oninit: function(fn){ fn(el); return component_out; }
             }, component_out);
@@ -765,12 +767,12 @@
         /**
          * Method for including another component by usint its `share` key.
          * @method component
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @chainable
-         * @param {$dom.types.Component.share} share
-         * @param {Number} [shift= 0] see {@link $dom.types.Component.add}
-         * @return {$dom.types.Component}
+         * @param {module:jaaJSU~$dom.Component.share} share
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.Component.add}
+         * @return {module:jaaJSU~$dom.Component}
          * @example
          * function p({ textContent }){
          *      const cP= $dom.component("P", { textContent });
@@ -795,7 +797,7 @@
         /**
          * Add element to live DOM
          * @method mount
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @param {NodeElement} element Element where to places this component
          * @param {String} [type= "childLast"]
@@ -834,7 +836,7 @@
         /**
          * Method remove element form live DOM and returns null
          * @method destroy
-         * @memberof $dom.types.Component.share
+         * @memberof module:jaaJSU~$dom.Component.share
          * @public
          * @returns {Null}
          * @example
@@ -852,8 +854,8 @@
          * Updates `deep`
          * @private
          * @method recalculateDeep
-         * @memberof $dom.types.Component
-         * @param {Number} shift see {@link $dom.types.Component.add}
+         * @memberof module:jaaJSU~$dom.Component
+         * @param {Number} shift see {@link module:jaaJSU~$dom.Component.add}
          */
         function recalculateDeep(shift){
             if(!shift) deep.push(all_els_counter);
@@ -863,7 +865,7 @@
         /**
          * Returns parent element (or "fragment pseudo element")
          * @method getParentElement
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @private
          * @returns {NodeElement} Returns parent element (i. e. `DocumenFragment` if component is empty)
          */
@@ -874,11 +876,11 @@
         /**
          * Method provide way to change nesting behaviour. It can be helpful for loops
          * @method setShift
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @chainable
-         * @param {Number} [shift= 0] see {@link $dom.types.Component.add}
-         * @returns {$dom.types.Component}
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.Component.add}
+         * @returns {module:jaaJSU~$dom.Component}
          * @example
          * function testNesting(){
          *     const c= $dom.component("DIV", null);
@@ -912,7 +914,7 @@
         /**
          * Initialize internal storage
          * @method initStorage
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @private
          * @returns {Object} `{ register, registerComponent, update, unregister}`
          */
@@ -990,7 +992,7 @@
         /**
          * Method updates all registered varibles by keys `onupdates` and calls follower functions
          * @method update
-         * @memberof $dom.types.Component
+         * @memberof module:jaaJSU~$dom.Component
          * @public
          * @param {Object|Function} new_data
          * <br/>- When `$dom.component` is initialized, it is possible to register `mapUpdate`
@@ -1031,7 +1033,7 @@
         /**
          * Methods returns if it was `onupdate` used
          * @method isStatic
-         * @memberof $dom.types.Component.share
+         * @memberof module:jaaJSU~$dom.Component.share
          * @public
          * @return {Boolean} If there is some listeners `onupdate`
          */
@@ -1049,7 +1051,8 @@
      *  - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).
      *  - `href`, `src` or `class` are convereted to `element.setAttribute(key, …)`;
      * @typedef DomAssignObject
-     * @memberof $dom.types
+     * @memberof module:jaaJSU~$dom
+     * @category virtual
      * @type {Object}
      */
     /**
@@ -1057,9 +1060,9 @@
      * Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
      * It is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).
      * @method assign
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} element
-     * @param {...$dom.types.DomAssignObject} object_attributes
+     * @param {...module:jaaJSU~$dom.DomAssignObject} object_attributes
      * @example
      * const el= document.body;
      * const onclick= function(){ console.log(this.dataset.js_param); };
@@ -1125,7 +1128,7 @@
     /**
      * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
      * @method add
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @deprecated
      * @param {NodeElement} parent Wrapper (for example `<ul>`) where to cerate children elements (for example `<li>`)
      * @param $$$ {...Array}
@@ -1133,8 +1136,8 @@
      *  <br/>* Element in array is automatically nested into the previous element. `[["UL",...], ["LI",...], ["SPAN",...]]` creates `<ul><li><span></span></li></ul>`
      *  <br/>* `__NAME__` **\<String\>**: Name of element (for example `LI`, `P`, `A`, ...)
      *  <br/>* `__PARAMS__` **\<Object\>**: Parameters for elements as "innerText", "className", "dataset", ...
-     *  <br/>    * see [$dom.assign](#methods_assign)
-     *  <br/>    * There is one change with using key "$", which modify elements order and it is not parsed by [$dom.assign](#methods_assign)
+     *  <br/>    * see {@link module:jaaJSU~$dom.assign}
+     *  <br/>    * There is one change with using key "$", which modify elements order and it is not parsed by {@link module:jaaJSU~$dom.assign}
      *  <br/>        * `__PARAMS__.$`: Modify nesting behaviur (accepts index of element in `$$$`). `[["UL",...], ["LI",...], ["LI",{$:0,...}]]` creates `<ul><li></li><li></li></ul>`
      * @return {NodeElement} First created element (usualy wrapper thanks nesting)
      * @example
@@ -1183,51 +1186,63 @@
         //document.documentElement.style.paddingRight = '1px';
         //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
+    /**
+     * Exported namespace of {@link module:jaaJSU~$dom}.
+     * @namespace $dom
+     * @global
+     */
     export_as($dom, "$dom");
 
     /**
      * This NAMESPACE provides features for async (mainly Promise) functions.
      * @namespace $function
+     * @category namespaces
      * @typicalname $function
-     * @global
-     */
-    /**
-     * @namespace types
-     * @memberof $function
-     * @private
      */
     /**
      * `function(input){  }`
      * @function function_Mixed2Undefined
-     * @memberof $function.types
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @param {Mixed} input
      * @returns {Undefined}
      */
     /**
      * `function(input){ return ...; }`
      * @function function_Mixed2Mixed
-     * @memberof $function.types
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @param {Mixed} input
+     * @returns {Mixed}
+     */
+    /**
+     * `function(){ return ...; }`
+     * @function function_Undefined2Mixed
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @returns {Mixed}
      */
     /**
      * `function(...input){ return ...; }`
      * @function function_MultipleMixed2Mixed
-     * @memberof $function.types
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @param {...Mixed} input
      * @returns {Mixed}
      */
     /**
      * `function(...input){ return function(...){...}; }`
      * @function function_MultipleMixed2Function
-     * @memberof $function.types
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @param {...Mixed} input
      * @returns {Function}
      */
     /**
      * `function(...Functions){ return function(...){...}; }`
      * @function function_MultipleFunction2Function
-     * @memberof $function.types
+     * @memberof module:jaaJSU~$function
+     * @category virtual
      * @param {...Function} Functions
      * @returns {Function}
      */
@@ -1235,7 +1250,7 @@
         /**
          * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
          * @method branches
-         * @memberof $function
+         * @memberof module:jaaJSU~$function
          * @public
          * @param {types.function_reduceCallback} [reduceFun] **By default behaves like 'map'**
          * @param {Function|Mixed} [reduceInitValueCreator=()=>[]] Initial value for `acc` in `reduceFun`.
@@ -1264,11 +1279,9 @@
         /**
          * EXPERIMENT!: Function composing using `$dom.component` like syntax
          * @method component
-         * @memberof $function
-         * @param {Function} transform
-         *  * ...
-         * @returns {component}
-         *  * `{ pipe, run }`
+         * @memberof module:jaaJSU~$function
+         * @param {Function} transform ...
+         * @returns {component} `{ pipe, run }`
          */
         component: function(transform){
             let functions= []; const out= { pipe, run };
@@ -1280,13 +1293,10 @@
         /**
          * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
          * @method conditionalCall
-         * @memberof $function
-         * @param {Mixed} mixed
-         *  * If `mixed=true` the `fun` is called
-         * @param {Function} fun
-         *  * 'Refular' function as argument accepts `mixed`
-         * @return {Boolean|Mixed}
-         *  * **False** or output of `fun`
+         * @memberof module:jaaJSU~$function
+         * @param {Mixed} mixed If `mixed=true` the `fun` is called
+         * @param {module:jaaJSU~$function.function_Mixed2Mixed} fun 'Refular' function as argument accepts `mixed`
+         * @return {Boolean|Mixed} **False** or output of `fun`
          */
         conditionalCall: function(mixed,fun){
             if(!mixed) return false;
@@ -1296,9 +1306,9 @@
         /**
          * Helper for returnin constant
          * @method constant
-         * @memberof $function
+         * @memberof module:jaaJSU~$function
          * @param {Mixed} constantArg
-         * @return {Function} `()=> constantArg`
+         * @return {module:jaaJSU~$function.function_Undefined2Mixed} `()=> constantArg`
          * @example
          * $function.constant(5)(10);//= `5`
          */
@@ -1306,15 +1316,15 @@
         /**
          * Functional-like alternative for `for(...){functions[nth](..input);}`.
          * @method each
-         * @memberof $function
-         * @param {...$function.types.function_Mixed2Undefined} ...functions
-         * @return {$function.types.function_Mixed2Undefined}
+         * @memberof module:jaaJSU~$function
+         * @param {...module:jaaJSU~$function.function_Mixed2Undefined} ...functions
+         * @return {module:jaaJSU~$function.function_Mixed2Undefined}
          */
         each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
         /**
          * `id=> id`
          * @method identity
-         * @memberof $function
+         * @memberof module:jaaJSU~$function
          * @param {Mixed} id
          * @return {Mixed} `id`
          * @example
@@ -1326,7 +1336,7 @@
          * @param {Function} onTrue Test succcessful function
          * @param {Function} [onFalse= v=> v] Test fail function
          * @param {Function} [onTest= Boolean] Test function
-         * @return {...$function.types.function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
+         * @return {...module:jaaJSU~$function.function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
          * @example
          * $function.ifElse(v=> v+1)(0);//= `0`
          * $function.ifElse(v=> v+1)(1);//= `2`
@@ -1343,7 +1353,7 @@
          * EXPERIMENT!: "Bind" alternative
          * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
          * @method partial
-         * @memberof $function
+         * @memberof module:jaaJSU~$function
          * @param {Function} fn ...
          * @param {...Mixed} presetArgs ...
          * @returns {Function} ...
@@ -1354,7 +1364,7 @@
         /**
          * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
          * @method schedule
-         * @memberof $function
+         * @memberof module:jaaJSU~$function
          * @param {...Functions} functions Array of functions for iteratings
          * @param {Object} def
          * @param {Object} [def.context=window] Parameter for `*.call(context)`
@@ -1364,12 +1374,12 @@
         /**
          * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
          * @method sequention
-         * @memberof $function
-         * @param {...$function.types.function_Mixed2Mixed} functions List of functions:
+         * @memberof module:jaaJSU~$function
+         * @param {...module:jaaJSU~$function.function_Mixed2Mixed} functions List of functions:
          * <br/>`...functions[nth](__INPUT__){... return __OUTPUT__;}`
          * <br/>`__INPUT__` is `input` (for first function) or `__OUTPUT__`
          * <br/>`__OUTPUT__`! `__OUTPUT__` is used as argument for next function in `...functions`.
-         * @return {$function.types.function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
+         * @return {module:jaaJSU~$function.function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
          * @example
          * console.log($function.sequention(
          *      a=>[a+1, a-1],
@@ -1384,6 +1394,11 @@
         sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; }
     };
 
+    /**
+     * Exported namespace of {@link module:jaaJSU~$function}.
+     * @namespace $function
+     * @global
+     */
     export_as($function, "$function");
     
     
@@ -1393,91 +1408,88 @@
      * @namespace $object
      * @typicalname $object
      */
+    /**
+     * @function function_Object2Mixed
+     * @memberof module:jaaJSU~$object
+     * @category virtual
+     * @param {Object} input_object
+     * @returns {Mixed}
+     */
+    /**
+     * @function function_Object2Object
+     * @memberof module:jaaJSU~$object
+     * @category virtual
+     * @param {Object} input_object
+     * @returns {Object} Modified version of `input_object` (By reference!)
+     */
+    /**
+     * Similar to {@link module:jaaJSU~IterableArrayObject}
+     * @typedef {Object} IterableObjectObject
+     * @memberof module:jaaJSU~$object
+     * @category virtual
+     * @property {Mixed} item Nth value for `key` in `iterable`.
+     * @property {Mixed} key Name of key
+     * @property {Number} index Idicies 0...`Object.keys(iterable).length`.
+     * @property {Boolean} last Is setted True, if it is the last element in array.
+     * @property {Mixed|Undefined} share shared variable - works similar to `*.reduce` method
+     */
+    /**
+     * @function IterableObjectCallback
+     * @memberof module:jaaJSU~$object
+     * @category virtual
+     * @param {module:jaaJSU~$object.IterableObjectObject} IterableObjectObject
+     * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object.IterableObjectObject}.
+     */
     var $object= {
         /**
          * Function for iterating throught Object `iterable`.
          * @method each
-         * @memberof $object
-         * @param {Object} iterable 
-         *  * An object for iterating.
-         * @param {Function} i_function
-         *  * This procedure is called for each element in `iterable` Object.
-         *  * `i_function(o: Object)`
-         *      * `item` Mixed: Nth value for `key` in `iterable`.
-         *      * `key` String: Nth key.
-         *      * `last` Boolean: Is setted True, if it is the last element in array.
-         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
-         * @param {Object|undefined} scope
-         *  * An argument for `i_function.call(*,...)`
-         * @return {Mixed}
-         *  * `share`
+         * @memberof module:jaaJSU~$object
+         * @param {Object} iterable  An object for iterating.
+         * @param {module:jaaJSU~IterableObjectCallback} i_function
+         * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
+         * @return {Mixed} `share`
          */
         each: __objectEach,
         /**
-         * Procedure for iterating throught Object `iterable` like [each](#methods_each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
+         * Procedure for iterating throught Object `iterable` like {@link module:jaaJSU~$object.each}, but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
          * @method eachDynamic
-         * @memberof $object
-         * @param {Object} iterable
-         *  * An object for iterating.
-         * @param {Function} i_function
-         *  * This procedure is called for each element in `iterable` Object.
-         *  * `i_function(o: Object)`
-         *      * `item` Mixed: Nth value for `key` in `iterable`.
-         *      * `key` String: Nth key.
-         *      * `iterable` Object: Link to original `iterable`.
-         *      * `share` Mixed|undefined: shared variable - works similar to `*.reduce` method
-         * @param {Object|undefined} scope
-         *  * An argument for `i_function.call(*,...)`
-         * @return {Mixed}
-         *  * `share`
+         * @memberof module:jaaJSU~$object
+         * @param {Object} iterable An object for iterating.
+         * @param {module:jaaJSU~IterableObjectCallback} i_function
+         * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
+         * @return {Mixed} `share`
          */
         eachDynamic: __objectEachDynamic,
         /**
          * Function for converting Array `arr` to Object. Uses `fun` for converting.
          * @method fromArray
-         * @memberof $object
-         * @param {Array} arr 
-         *  * Array-like parameter.
-         * @param {Function} fun
-         *  * **Optional** [`fun= (acc, curr, i)=> acc[""+i]= curr`].
-         *  * Function for converting. In fact, it is wrapper around `Array.reduce`.
-         *  * `fun(acc,curr,i)`
-         *      * `acc` Object: Reference link to output Object.
-         *      * `curr` Mixed: Nth elemnt in Array `arr`.
-         *      * `i` Number: Nth index of `arr`.
-         * @param {Object} default_value
-         *  * **Optional** [`default_value={}`].
-         *  * Initial value.
-         * @return {Object}
-         *  * Created object.
+         * @memberof module:jaaJSU~$object
+         * @param {Array} arr Array-like parameter.
+         * @param {module:jaaJSU~function_reduceCallback} [fun=`(acc, curr, i)=> acc[""+i]= curr`] Function for converting. In fact, it is wrapper around `Array.reduce`.
+         * @param {Object} [default_value={}] Initial value.
+         * @return {Object} Created object.
          */
         fromArray: function(arr, fun= (acc, curr, i)=> acc[""+i]= curr, default_value= {}){return arr.reduce((acc, curr, i)=>{ fun(acc, curr, i); return acc; }, default_value);},
         /**
          * Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: "gotcha" }`
          * @method hasProp
-         * @memberof $object
-         * @param {Object} obj
-         *  * **Mandatory**
-         *  * Object where to search `prop`.
-         * @param {String} prop
-         *  * **Mandatory**
-         *  * Poperty to searching for.
-         * @return {Boolean}
-         *  * True, if `obj` has property `prop`
+         * @memberof module:jaaJSU~$object
+         * @param {Object} obj **Mandatory**. Object where to search `prop`.
+         * @param {String} prop **Mandatory**. Poperty to searching for.
+         * @return {Boolean} True, if `obj` has property `prop`
          */
         hasProp: function(obj=isMandatory("obj"), prop=isMandatory("prop")) { return Object.prototype.hasOwnProperty.call(obj, prop); },
         /**
          * Function for creating non-rewritable object
          * @method immutable_keys
-         * @memberof $object
-         * @param {Object} obj_input
-         *  * **Optional** [`obj_input={}`]
-         *  * Initial value
+         * @memberof module:jaaJSU~$object
+         * @param {Object} [obj_input={}] Initial value
          * @return {Proxy}
-         *  * getter `Proxy.key_name` Mixed: returns key_name if defined
-         *  * getter `Proxy.set(key_name, value)` Function:
-         *      * define `key_name` in object if isn't already defined (**returns True**, else **False**).
-         *  * getter `Proxy.keys` Number: Wrapper around `Object.keys(*)`
+         * <br/>getter `Proxy.key_name` Mixed: returns key_name if defined
+         * <br/>getter `Proxy.set(key_name, value)` Function:
+         * <br/>&nbsp;&nbsp;- define `key_name` in object if isn't already defined (**returns True**, else **False**).
+         * <br/>getter `Proxy.keys` Number: Wrapper around `Object.keys(*)`
          */
         immutable_keys: function(obj_input={}){
             return new Proxy(Object.keys(obj_input).reduce(function(obj,key){obj[key]= obj_input[key]; return obj;},{}),{
@@ -1510,72 +1522,64 @@
         /**
          * Wrapper around `object[methodName](...args)`.
          * @method method
-         * @memberof $object
-         * @param {String} methodName
-         *  * Key in Object `object`.
-         * @param {...Mixed} args
-         *  * Arguments for method `methodName`
-         * @return {Function}
-         *  * `(object) => object[key](...args)`
-         *  * @param {Object} target object
+         * @memberof module:jaaJSU~$object
+         * @param {String} methodName Key in Object `object`.
+         * @param {...Mixed} args Arguments for method `methodName`
+         * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key](...args)`
          * @example
-         *      $object.method("trim")(" Hi ");//= `Hi`
-         *      $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
+         * $object.method("trim")(" Hi ");//= `Hi`
+         * $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
          */
         method: (methodName, ...args)=> object=> object[methodName](...args),
         /**
          * @method methodFrom
-         * @memberof $object
+         * @memberof module:jaaJSU~$object
          * @example
-         *      $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
-         *      $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("Hello world");
+         * $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
+         * $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("Hello world");
          */
         methodFrom: object=> methodName=> (...args)=> object[methodName](...args),
         /**
          * Wrapper around `object[key]`, usefull for binding.
          * @method pluck
-         * @memberof $object
-         * @param {String} key
-         *  * Key in Object `object`.
-         * @return {Function}
-         *  * `(object) => object[key]`
-         *  * @param {Object} target object
-         *  * @returns Value in `object[key]`
+         * @memberof module:jaaJSU~$object
+         * @param {String} key Key in Object `object`.
+         * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key]`
          * @example
-         *  $object.pluck("length")("Test");//= `4`
+         * $object.pluck("length")("Test");//= `4`
          */
         pluck: key=> object=> object[key],
         /**
          * @method pluckFrom
-         * @memberof $object
+         * @memberof module:jaaJSU~$object
          * @example
-         *      $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
+         * $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
          */
         pluckFrom: object=> key=> object[key],
         /**
          * Wrapper around `object[setterName]= arg`
          * @method setter
-         * @memberof $object
-         * @param {String} setterName
-         *  * Key in Object `object`.
-         * @param {Mixed} arg
-         *  * Setter value
-         * @return {Function}
-         *  * `object=> (object[setterName]= arg, object)`
-         *  * @param {Object} object: target object
-         *  * @return {Object} original object reference
+         * @memberof module:jaaJSU~$object
+         * @param {String} setterName Key in Object `object`.
+         * @param {Mixed} arg Setter value
+         * @return {module:jaaJSU~$object.function_Object2Object} `object=> (object[setterName]= arg, object)`
          * @example
-         *      $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
+         * $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
          */
         setter: (setterName, arg)=> object=> (object[setterName]= arg, object),
         /**
          * @method setterFrom
-         * @memberof $object
+         * @memberof module:jaaJSU~$object
          * @example
-         *      $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
+         * $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
          */
         setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
     };
+    /**
+     * Exported namespace of {@link module:jaaJSU~$object}.
+     * @namespace $object
+     * @global
+     */
     export_as($object, "$object");
     
     function __objectEach(iterable, i_function, scope, share){
@@ -1660,7 +1664,7 @@
         * @param {Number} [wait=150] How much wait for next calling
         * @param {Boolean} [immediate=undefined] First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
         * @return {Function} Debounced function `fun` (accepts same arguments)
-        * @example
+        * @example @lang text
         * graphically (wait= 4symbols)
         * I call (| symbol) fun:    .|||.|.|||..
         *              debounce:    .....|....|.

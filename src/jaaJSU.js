@@ -2,6 +2,7 @@
 /* gulp *//* global gulp_place */
 /**
  * @module jaaJSU
+ * @version gulp_place("app.version", "eval_out")
  */
 (function(module_name, factory) {
     'use strict';//gulp.remove_ifCordova.line

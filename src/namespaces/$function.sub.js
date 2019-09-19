@@ -3,52 +3,53 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
  * @namespace $function
+ * @category namespaces
  * @typicalname gulp_place("namespaces.$function", "eval_out")
- * @global
- */
-/**
- * @namespace types
- * @memberof $function
- * @private
  */
 /**
  * `function(input){  }`
  * @function function_Mixed2Undefined
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @param {Mixed} input
  * @returns {Undefined}
  */
 /**
  * `function(input){ return ...; }`
  * @function function_Mixed2Mixed
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @param {Mixed} input
  * @returns {Mixed}
  */
 /**
  * `function(){ return ...; }`
  * @function function_Undefined2Mixed
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @returns {Mixed}
  */
 /**
  * `function(...input){ return ...; }`
  * @function function_MultipleMixed2Mixed
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @param {...Mixed} input
  * @returns {Mixed}
  */
 /**
  * `function(...input){ return function(...){...}; }`
  * @function function_MultipleMixed2Function
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @param {...Mixed} input
  * @returns {Function}
  */
 /**
  * `function(...Functions){ return function(...){...}; }`
  * @function function_MultipleFunction2Function
- * @memberof $function.types
+ * @memberof module:jaaJSU~$function
+ * @category virtual
  * @param {...Function} Functions
  * @returns {Function}
  */
@@ -56,7 +57,7 @@ var $function= {
     /**
      * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
      * @method branches
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @public
      * @param {types.function_reduceCallback} [reduceFun] **By default behaves like 'map'**
      * @param {Function|Mixed} [reduceInitValueCreator=()=>[]] Initial value for `acc` in `reduceFun`.
@@ -85,7 +86,7 @@ var $function= {
     /**
      * EXPERIMENT!: Function composing using `$dom.component` like syntax
      * @method component
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {Function} transform ...
      * @returns {component} `{ pipe, run }`
      */
@@ -99,9 +100,9 @@ var $function= {
     /**
      * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
      * @method conditionalCall
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {Mixed} mixed If `mixed=true` the `fun` is called
-     * @param {$function.types.function_Mixed2Mixed} fun 'Refular' function as argument accepts `mixed`
+     * @param {module:jaaJSU~$function.function_Mixed2Mixed} fun 'Refular' function as argument accepts `mixed`
      * @return {Boolean|Mixed} **False** or output of `fun`
      */
     conditionalCall: function(mixed,fun){
@@ -112,9 +113,9 @@ var $function= {
     /**
      * Helper for returnin constant
      * @method constant
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {Mixed} constantArg
-     * @return {$function.types.function_Undefined2Mixed} `()=> constantArg`
+     * @return {module:jaaJSU~$function.function_Undefined2Mixed} `()=> constantArg`
      * @example
      * $function.constant(5)(10);//= `5`
      */
@@ -122,15 +123,15 @@ var $function= {
     /**
      * Functional-like alternative for `for(...){functions[nth](..input);}`.
      * @method each
-     * @memberof $function
-     * @param {...$function.types.function_Mixed2Undefined} ...functions
-     * @return {$function.types.function_Mixed2Undefined}
+     * @memberof module:jaaJSU~$function
+     * @param {...module:jaaJSU~$function.function_Mixed2Undefined} ...functions
+     * @return {module:jaaJSU~$function.function_Mixed2Undefined}
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
     /**
      * `id=> id`
      * @method identity
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {Mixed} id
      * @return {Mixed} `id`
      * @example
@@ -142,7 +143,7 @@ var $function= {
      * @param {Function} onTrue Test succcessful function
      * @param {Function} [onFalse= v=> v] Test fail function
      * @param {Function} [onTest= Boolean] Test function
-     * @return {...$function.types.function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
+     * @return {...module:jaaJSU~$function.function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
      * @example
      * $function.ifElse(v=> v+1)(0);//= `0`
      * $function.ifElse(v=> v+1)(1);//= `2`
@@ -159,7 +160,7 @@ var $function= {
      * EXPERIMENT!: "Bind" alternative
      * vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
      * @method partial
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {Function} fn ...
      * @param {...Mixed} presetArgs ...
      * @returns {Function} ...
@@ -170,7 +171,7 @@ var $function= {
     /**
      * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
      * @method schedule
-     * @memberof $function
+     * @memberof module:jaaJSU~$function
      * @param {...Functions} functions Array of functions for iteratings
      * @param {Object} def
      * @param {Object} [def.context=window] Parameter for `*.call(context)`
@@ -180,12 +181,12 @@ var $function= {
     /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
      * @method sequention
-     * @memberof $function
-     * @param {...$function.types.function_Mixed2Mixed} functions List of functions:
+     * @memberof module:jaaJSU~$function
+     * @param {...module:jaaJSU~$function.function_Mixed2Mixed} functions List of functions:
      * <br/>`...functions[nth](__INPUT__){... return __OUTPUT__;}`
      * <br/>`__INPUT__` is `input` (for first function) or `__OUTPUT__`
      * <br/>`__OUTPUT__`! `__OUTPUT__` is used as argument for next function in `...functions`.
-     * @return {$function.types.function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
+     * @return {module:jaaJSU~$function.function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
      * @example
      * console.log($function.sequention(
      *      a=>[a+1, a-1],
@@ -200,4 +201,9 @@ var $function= {
     sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; }
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
+/**
+ * Exported namespace of {@link module:jaaJSU~$function}.
+ * @namespace gulp_place("namespaces.$function", "eval_out")
+ * @global
+ */
 export_as($function, gulp_place("namespaces.$function", "variable"));

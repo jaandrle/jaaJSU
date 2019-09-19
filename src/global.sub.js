@@ -1,16 +1,9 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /* global out */
 /**
- * Just virtual key!!! This is overwiev of all internal types for better description.
- * @namespace types
- * @private
- * @readonly
- * @global
- */
-/**
  * This kind of function is typically used in `Array.prototype.filter`.
  * @function function_filterCallback
- * @memberof types
+ * @category virtual
  * @param {Mixed} i_value Nth value of array.
  * @param {Number} i Nth key of array.
  * @returns {Boolean}
@@ -18,7 +11,7 @@
 /**
  * This kind of function is typically used in `Array.prototype.reduce`.
  * @function function_reduceCallback
- * @memberof types
+ * @category virtual
  * @param {Mixed} accumulator
  * @param {Mixed} i_value Nth value of array.
  * @param {Number} i Nth key of array.
@@ -26,7 +19,7 @@
  */
 /**
  * @typedef {Object} IterableArrayObject
- * @memberof types
+ * @category virtual
  * @property {Mixed} item Nth value for `key` in `iterable`.
  * @property {Number} key Idicies 0...`iterable.length`.
  * @property {Boolean} last Is setted True, if it is the last element in array.
@@ -34,9 +27,9 @@
  */
 /**
  * @function IterableCallback
- * @memberof types
- * @param {types.IterableArrayObject} IterableArrayObject
- * @returns {Mixed|Undefined} `share` key of {@link types.IterableArrayObject}.
+ * @category virtual
+ * @param {IterableArrayObject} IterableArrayObject
+ * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
  */
 function export_as(obj, key){ out[key]= obj; }
 function __eachInArrayLike(iterable, i_function, scope, share){

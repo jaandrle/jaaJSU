@@ -3,14 +3,14 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike
 /**
  * This NAMESPACE provides features for DOM elemnts.
  * @namespace $dom
+ * @category namespaces
  * @typicalname gulp_place("namespaces.$dom", "eval_out")
- * @global
  */
 var $dom={
     /**
      * Calls `.then` when the DOM is ready
      * @method ready_
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {...Mixed} args As params for `.then`
      * @return {Promise}
      * @.then {Mixed} See `args`
@@ -31,15 +31,16 @@ var $dom={
      * Key is name of "selection" function ('querySelector, ..., getElementsByClassname, ...).
      * Value is argument for selection function
      * @typedef {Object} DomPreparedSelector
-     * @memberof types
+     * @memberof module:jaaJSU~$dom
+     * @category virtual
      * @example
      * { getElementsByClassname: "class_name" }
      */
     /**
      * Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
      * @method elementReady_
-     * @memberof $dom
-     * @param {types.DomPreparedSelector} el_selector
+     * @memberof module:jaaJSU~$dom
+     * @param {module:jaaJSU~$dom.DomPreparedSelector} el_selector
      * @param {DOMElement} [parent=document] Where to search `el_selector`
      * @return {Promise}
      * @.then {NodeElement} Target elemnet based on `el_selector`
@@ -59,7 +60,7 @@ var $dom={
     /**
      * Procedure remove children of given element `container`.
      * @method empty
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} container Remove all its children
      */
     empty: function(container){
@@ -69,7 +70,7 @@ var $dom={
     /**
      * Procedure places `new_element` after `reference` elements
      * @method insertAfter
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} new_element
      * @param {NodeElement} reference
      */
@@ -81,7 +82,7 @@ var $dom={
    /**
     * Remove elements in given {NodeList} or {HTMLCollection}
     * @method removeElements
-    * @memberof $dom
+    * @memberof module:jaaJSU~$dom
     * @param {NodeList|HTMLCollection} els_to_delete Array(-like) object of elements
     * @param {Number} [from_index=0] Params allowing skip elements in `els_to_delete`
     * @param {Number} [to_index=els_to_delete.lenght] Params allowing skip elements in `els_to_delete`
@@ -97,7 +98,7 @@ var $dom={
     /**
      * Procedure replaces `el_old` element by new one (`new_el`)
      * @method replace
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} el_old
      * @param {NodeElement} el_new
      */
@@ -108,7 +109,7 @@ var $dom={
     /**
      * Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
      * @method toggleAttribute
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} element Element target
      * @param {String} attribute_name Name of attribute
      * @param {String} attribute_a Value of attribute
@@ -123,7 +124,7 @@ var $dom={
     /**
      * Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
      * @method toggleDataset
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {NodeElement} element Element target
      * @param {String} data_name Name of dataset key
      * @param {String} data_a Name of dataset value
@@ -136,7 +137,7 @@ var $dom={
     /**
      * Procedure for iterating throught NodeList `iterable`.
      * @method each
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {Mixed[]} iterable An array-like object for iterating.
      * @param {types.IterableCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
@@ -144,9 +145,9 @@ var $dom={
      */
     each: __eachInArrayLike,
     /**
-     * Procedure for iterating throught NodeList `iterable` like {@link $dom.each}, but use `for(...;(item= iterable[i]);i++)...`.
+     * Procedure for iterating throught NodeList `iterable` like {@link module:jaaJSU~$dom.each}, but use `for(...;(item= iterable[i]);i++)...`.
      * @method eachDynamic
-     * @memberof $dom
+     * @memberof module:jaaJSU~$dom
      * @param {Mixed[]} iterable An array-like object for iterating.
      * @param {types.IterableCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
@@ -156,4 +157,9 @@ var $dom={
 };
 gulp_place("special_functions/$dom_add_helpers_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");
+/**
+ * Exported namespace of {@link module:jaaJSU~$dom}.
+ * @namespace gulp_place("namespaces.$dom", "eval_out")
+ * @global
+ */
 export_as($dom, gulp_place("namespaces.$dom", "variable"));
