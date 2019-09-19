@@ -217,7 +217,7 @@
         }
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$array}.
+     * Exported name of {@link module:jaaJSU~$array} namespace.
      * @namespace $array
      * @global
      */
@@ -360,7 +360,7 @@
         };}
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$async}.
+     * Exported name of {@link module:jaaJSU~$async} namespace.
      * @namespace $async
      * @global
      */
@@ -572,6 +572,7 @@
      * @method component
      * @memberof module:jaaJSU~$dom
      * @version 1.0.0
+     * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
      * @param {module:jaaJSU~$dom.DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
      * @param {Object} [params= {}] Parameters
@@ -1183,7 +1184,7 @@
         //setTimeout(()=>{document.documentElement.style.paddingRight = '';}, 0);
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$dom}.
+     * Exported name of {@link module:jaaJSU~$dom} namespace.
      * @namespace $dom
      * @global
      */
@@ -1390,7 +1391,7 @@
     };
 
     /**
-     * Exported namespace of {@link module:jaaJSU~$function}.
+     * Exported name of {@link module:jaaJSU~$function} namespace.
      * @namespace $function
      * @global
      */
@@ -1571,7 +1572,7 @@
         setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$object}.
+     * Exported name of {@link module:jaaJSU~$object} namespace.
      * @namespace $object
      * @global
      */
@@ -1834,7 +1835,7 @@
         clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`clearIdleValue`: Argument `idle_value` is not `IdleValue`!")) idle_value.cancel(); }
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$optimizier}.
+     * Exported name of {@link module:jaaJSU~$optimizier} namespace.
      * @namespace $optimiziers
      * @global
      */
@@ -2100,7 +2101,7 @@
         }
     };
     /**
-     * Exported namespace of {@link module:jaaJSU~$string}.
+     * Exported name of {@link module:jaaJSU~$string} namespace.
      * @namespace $string
      * @global
      */
@@ -3360,7 +3361,7 @@
     
 
     /**
-     * Exported namespace of {@link module:jaaJSU~$time}.
+     * Exported name of {@link module:jaaJSU~$time} namespace.
      * @namespace $time
      * @global
      */

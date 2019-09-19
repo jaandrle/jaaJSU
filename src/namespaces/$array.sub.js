@@ -139,7 +139,7 @@ var $array= {
     }
 };
 /**
- * Exported namespace of {@link module:jaaJSU~$array}.
+ * Exported name of {@link module:jaaJSU~$array} namespace.
  * @namespace gulp_place("namespaces.$array", "eval_out")
  * @global
  */

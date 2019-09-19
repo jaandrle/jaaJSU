@@ -191,7 +191,7 @@ var $optimizier= {
     clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`clearIdleValue`: Argument `idle_value` is not `IdleValue`!")) idle_value.cancel(); }
 };
 /**
- * Exported namespace of {@link module:jaaJSU~$optimizier}.
+ * Exported name of {@link module:jaaJSU~$optimizier} namespace.
  * @namespace gulp_place("namespaces.$optimizier", "eval_out")
  * @global
  */

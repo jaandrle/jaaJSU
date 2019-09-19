@@ -201,7 +201,7 @@ var $function= {
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**
- * Exported namespace of {@link module:jaaJSU~$function}.
+ * Exported name of {@link module:jaaJSU~$function} namespace.
  * @namespace gulp_place("namespaces.$function", "eval_out")
  * @global
  */

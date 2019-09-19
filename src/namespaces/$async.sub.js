@@ -137,7 +137,7 @@ var $async={
     };}
 };
 /**
- * Exported namespace of {@link module:jaaJSU~$async}.
+ * Exported name of {@link module:jaaJSU~$async} namespace.
  * @namespace gulp_place("namespaces.$async", "eval_out")
  * @global
  */

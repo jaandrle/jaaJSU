@@ -157,7 +157,7 @@ var $dom={
 gulp_place("special_functions/$dom_add_helpers_${app.standalone}.sub.js");
 gulp_place("special_functions/$dom_forceRedraw_${app.standalone}.sub.js");
 /**
- * Exported namespace of {@link module:jaaJSU~$dom}.
+ * Exported name of {@link module:jaaJSU~$dom} namespace.
  * @namespace gulp_place("namespaces.$dom", "eval_out")
  * @global
  */

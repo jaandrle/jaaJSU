@@ -174,7 +174,7 @@ var $object= {
     setterFrom: object=> setterName=> arg=> (object[setterName]= arg, object)
 };
 /**
- * Exported namespace of {@link module:jaaJSU~$object}.
+ * Exported name of {@link module:jaaJSU~$object} namespace.
  * @namespace gulp_place("namespaces.$object", "eval_out")
  * @global
  */

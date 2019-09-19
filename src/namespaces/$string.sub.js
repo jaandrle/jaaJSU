@@ -259,7 +259,7 @@ var $string= {
     }
 };
 /**
- * Exported namespace of {@link module:jaaJSU~$string}.
+ * Exported name of {@link module:jaaJSU~$string} namespace.
  * @namespace gulp_place("namespaces.$string", "eval_out")
  * @global
  */
