@@ -38,7 +38,7 @@
   "bugs": {
     "url": "https://github.com/jaandrle/jaaJSU/issues"
   },
-  "homepage": "https://github.com/jaandrle/jaaJSU#readme",
+  "homepage": "https://github.com/jaandrle/jaaJSU",
   "dependencies": {
     "gulp": ">3.9.1",
     "gulp-concat": "2.6.1",

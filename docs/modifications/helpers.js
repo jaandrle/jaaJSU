@@ -3,6 +3,6 @@
 module.exports= {
     pathHelper: function(path){
         const folder_part= path.split("jaaJSU"+"\\")[1];
-        return "https://github.com/jaandrle/jaaJSU#readme"+"/blob/master/"+folder_part+"/";
+        return "https://github.com/jaandrle/jaaJSU"+"/blob/master/"+folder_part+"/";
     }
 };
