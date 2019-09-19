@@ -4,6 +4,7 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**
  * This NAMESPACE provides features for Objects.
  * @namespace $object
+ * @category namespaces
  * @typicalname gulp_place("namespaces.$object", "eval_out")
  */
 /**
