@@ -1626,13 +1626,12 @@
      * This NAMESPACE provides features for optimizations.
      * @namespace $optimizier
      * @typicalname $optimiziers
-     * @global
      */
     var $optimizier= {
        /**
         * Prevent multiple calling (typically for "onresize" events) - use google for more detail
         * @method debounce
-        * @memberof $optimizier
+        * @memberof module:jaaJSU~$optimizier
         * @param {Function} func Function for debounce
         * @param {Number} [wait=150] How much wait for next calling
         * @param {Boolean} [immediate=undefined] First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle*
@@ -1663,9 +1662,9 @@
             };
         },
        /**
-        * Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`
+        * Very similar to {@link module:jaaJSU~$optimizier.debounce}, but uses `requestAnimationFrame`
         * @method trottle
-        * @memberof $optimizier
+        * @memberof module:jaaJSU~$optimizier
         * @param {Function} func
         * @param {Number} [cycles_leap=1] similar to `wait` - how many times calls `requestAnimationFrame`
         * @return {Function} Trottled function `fun`
@@ -1693,7 +1692,7 @@
        /**
         * Calls `.then` when `fn` returns **true**
         * @method poll_
-        * @memberof $optimizier
+        * @memberof module:jaaJSU~$optimizier
         * @param {Function} fn Conditional function
         * @param {Number} [timeout=2000] Timeout limit for requesting `fn` (ms)
         * @param {Number} [interval=100] Interval for calling `fn` (ms)
@@ -1724,15 +1723,13 @@
        /**
         * Prevent multiple calling of `fn`
         * @method once
-        * @memberof $optimizier
-        * @param {Function} fn
-        *  * Function which must be called only onetime
-        * @param {Object} context
-        *  * Typically `window`
+        * @memberof module:jaaJSU~$optimizier
+        * @param {Function} fn Function which must be called only onetime
+        * @param {Object} context Typically `window`
         * @example
-        *     console_log= $optimizier.once(()=>console.log("hi"));
-        *     console_log();//=hi
-        *     console_log();//nothing
+        * console_log= $optimizier.once(()=>console.log("hi"));
+        * console_log();//=hi
+        * console_log();//nothing
         */
         once: function(fn, context) { 
             var result;
@@ -1747,21 +1744,19 @@
         /**
          * Combination of `setTimeout`->`requestAnimationFrame`
          * @method timeoutAnimationFrame
-         * @memberof $optimizier
-         * @param {Function} f
-         *  * Function to call later (`delay`+next animation frame)
-         * @param {Number} [delay=150]
-         *  * When call `f` (ms)
+         * @memberof module:jaaJSU~$optimizier
+         * @param {Function} f Function to call later (`delay`+next animation frame)
+         * @param {Number} [delay=150] When call `f` (ms)
          */
         timeoutAnimationFrame: function(f, delay= 150){setTimeout(requestAnimationFrame.bind(null, f),delay);},
         /**
          * Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
          * @method requestAnimationFrame_
-         * @memberof $optimizier
+         * @memberof module:jaaJSU~$optimizier
          * @returns {Promise}
          * @example
-         *      $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
-         *      Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
+         * $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
+         * Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
          */
         requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
         /**
@@ -1771,57 +1766,56 @@
          *  1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
          *  2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
          * @method setTimeout_
-         * @memberof $optimizier
-         * @param {Number} [timeout= 0]
-         *  - Optional parameter to sets the time delay in milliseconds
-         *  - `delay` argument for `setTimeout` — see **Links (2)**
+         * @memberof module:jaaJSU~$optimizier
+         * @param {Number} [timeout=0]
+         * <br/>- Optional parameter to sets the time delay in milliseconds
+         * <br/>- `delay` argument for `setTimeout` — see **Links (2)**
          * @returns {Function}
-         *  - **(…params)=> \<Promise\>**
-         *  - where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**
+         * <br/>- **(…params)=> \<Promise\>**
+         * <br/>- where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**
          * @example
-         *          $optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
-         *          Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
+         * $optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
+         * Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
          */
         setTimeout_: function(timeout= 0){ return (...params)=> new Promise(function(resolve){ setTimeout(resolve, timeout, ...params); }); },
         /**
-         * This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [`getIdleValue`](#methods_getIdleValue).
+         * This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use {@link module:jaaJSU~getIdleValue}.
          * 
          * This is infact *idle-until-urgent* evaluation pattern.
          * 
          * Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
          * @method setIdleValue
-         * @memberof $optimizier
-         * @param {Function} initFunction
-         *  - this function is called to get value
-         * @returns {IdleValue}
-         *  - argument for [`getIdleValue`](#methods_getIdleValue) or [`cancelIdleValue`](#methods_cancelIdleValue).
+         * @memberof module:jaaJSU~$optimizier
+         * @param {Function} initFunction this function is called to get value
+         * @returns {IdleValue} argument for {@link module:jaaJSU~getIdleValue} or {@link module:jaaJSU~cancelIdleValue}.
          * @example
-         *      const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
-         *      // …
-         *      console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
+         * const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
+         * // …
+         * console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
          */
         setIdleValue: function(initFunction){ return new IdleValue(initFunction, "`setIdleValue`: `initFunction` argument must be a function!"); },
         /**
          * Returns result of **\<IdleValue\>**.
          * @method getIdleValue
-         * @memberof $optimizier
-         * @param {IdleValue} idle_value
-         *  - Output of [`setIdleValue`](#methods_setIdleValue)
-         * @returns {Mixed}
-         *  - Output of `initFunction` — see [`setIdleValue`](#methods_setIdleValue)
+         * @memberof module:jaaJSU~$optimizier
+         * @param {IdleValue} idle_value Output of {@link module:jaaJSU~setIdleValue}
+         * @returns {Mixed} Output of `initFunction` — see {@link module:jaaJSU~setIdleValue}
          */
         getIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`getIdleValue`: Argument `idle_value` is not `IdleValue`!")) return idle_value.value(); },
         /**
-         * Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)
+         * Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see {@link module:jaaJSU~setIdleValue}
          * @method clearIdleValue
-         * @memberof $optimizier
-         * @param {IdleValue} idle_value
-         *  - Output of [`setIdleValue`](#methods_setIdleValue)
-         * @returns {Mixed|Undefined}
-         *  - returns current value or `undefined` if `initFunction` wasn't called — see see [`setIdleValue`](#methods_setIdleValue)
+         * @memberof module:jaaJSU~$optimizier
+         * @param {IdleValue} idle_value Output of {@link module:jaaJSU~setIdleValue}
+         * @returns {Mixed|Undefined} returns current value or `undefined` if `initFunction` wasn't called — see see {@link module:jaaJSU~setIdleValue}
          */
         clearIdleValue: function(idle_value){ if(IdleValue.throwErrorIfNotIdleValue(idle_value, "`clearIdleValue`: Argument `idle_value` is not `IdleValue`!")) idle_value.cancel(); }
     };
+    /**
+     * Exported namespace of {@link module:jaaJSU~$optimizier}.
+     * @namespace $optimiziers
+     * @global
+     */
 
     export_as($optimizier, "$optimiziers");
     /**

@@ -23,8 +23,8 @@
 <dt><a href="#$object">$object</a> : <code>object</code></dt>
 <dd><p>Exported namespace of <a href="#module_jaaJSU..$object">$object</a>.</p>
 </dd>
-<dt><a href="#$optimizier">$optimizier</a> : <code>object</code></dt>
-<dd><p>This NAMESPACE provides features for optimizations.</p>
+<dt><a href="#$optimiziers">$optimiziers</a> : <code>object</code></dt>
+<dd><p>Exported namespace of <a href="#module_jaaJSU..$optimizier">$optimizier</a>.</p>
 </dd>
 <dt><a href="#$time">$time</a> : <code>object</code></dt>
 <dd><p>Exported namespace of <a href="#module_jaaJSU..$time">$time</a>.</p>
@@ -37,6 +37,17 @@
 **Version**: 0.8.1  
 
 * [jaaJSU](#module_jaaJSU)
+    * [~$optimizier](#module_jaaJSU..$optimizier) : <code>object</code>
+        * [.debounce(func, [wait], [immediate])](#module_jaaJSU..$optimizier.debounce) ⇒ <code>function</code>
+        * [.trottle(func, [cycles_leap])](#module_jaaJSU..$optimizier.trottle) ⇒ <code>function</code>
+        * [.poll_(fn, [timeout], [interval])](#module_jaaJSU..$optimizier.poll_) ⇒ <code>Promise</code>
+        * [.once(fn, context)](#module_jaaJSU..$optimizier.once)
+        * [.timeoutAnimationFrame(f, [delay])](#module_jaaJSU..$optimizier.timeoutAnimationFrame)
+        * [.requestAnimationFrame_()](#module_jaaJSU..$optimizier.requestAnimationFrame_) ⇒ <code>Promise</code>
+        * [.setTimeout_([timeout])](#module_jaaJSU..$optimizier.setTimeout_) ⇒ <code>function</code>
+        * [.setIdleValue(initFunction)](#module_jaaJSU..$optimizier.setIdleValue) ⇒ <code>IdleValue</code>
+        * [.getIdleValue(idle_value)](#module_jaaJSU..$optimizier.getIdleValue) ⇒ <code>Mixed</code>
+        * [.clearIdleValue(idle_value)](#module_jaaJSU..$optimizier.clearIdleValue) ⇒ <code>Mixed</code> \| <code>Undefined</code>
     * [~$string](#module_jaaJSU..$string) : <code>object</code>
     * _namespaces_
         * [~$array](#module_jaaJSU..$array) : <code>object</code>
@@ -189,12 +200,226 @@
 
 * * *
 
+<a name="module_jaaJSU..$optimizier"></a>
+
+### jaaJSU~$optimizier : <code>object</code>
+This NAMESPACE provides features for optimizations.
+
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$optimizier" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1653" title="jaaJSU.js:1653"><small>(defined@1653)</small></a>  
+
+* [~$optimizier](#module_jaaJSU..$optimizier) : <code>object</code>
+    * [.debounce(func, [wait], [immediate])](#module_jaaJSU..$optimizier.debounce) ⇒ <code>function</code>
+    * [.trottle(func, [cycles_leap])](#module_jaaJSU..$optimizier.trottle) ⇒ <code>function</code>
+    * [.poll_(fn, [timeout], [interval])](#module_jaaJSU..$optimizier.poll_) ⇒ <code>Promise</code>
+    * [.once(fn, context)](#module_jaaJSU..$optimizier.once)
+    * [.timeoutAnimationFrame(f, [delay])](#module_jaaJSU..$optimizier.timeoutAnimationFrame)
+    * [.requestAnimationFrame_()](#module_jaaJSU..$optimizier.requestAnimationFrame_) ⇒ <code>Promise</code>
+    * [.setTimeout_([timeout])](#module_jaaJSU..$optimizier.setTimeout_) ⇒ <code>function</code>
+    * [.setIdleValue(initFunction)](#module_jaaJSU..$optimizier.setIdleValue) ⇒ <code>IdleValue</code>
+    * [.getIdleValue(idle_value)](#module_jaaJSU..$optimizier.getIdleValue) ⇒ <code>Mixed</code>
+    * [.clearIdleValue(idle_value)](#module_jaaJSU..$optimizier.clearIdleValue) ⇒ <code>Mixed</code> \| <code>Undefined</code>
+
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.debounce"></a>
+
+#### $optimiziers.debounce(func, [wait], [immediate]) ⇒ <code>function</code>
+Prevent multiple calling (typically for "onresize" events) - use google for more detail
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.debounce" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1659" title="jaaJSU.js:1659"><small>(defined@1659)</small></a>  
+**Returns**: <code>function</code> - Debounced function `fun` (accepts same arguments)  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| func | <code>function</code> |  | Function for debounce |
+| [wait] | <code>Number</code> | <code>150</code> | How much wait for next calling |
+| [immediate] | <code>Boolean</code> |  | First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle* |
+
+**Example**  
+```text
+graphically (wait= 4symbols)
+I call (| symbol) fun:    .|||.|.|||..
+             debounce:    .....|....|.
+              trottle:    .|.....|....
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.trottle"></a>
+
+#### $optimiziers.trottle(func, [cycles_leap]) ⇒ <code>function</code>
+Very similar to [debounce](#module_jaaJSU..$optimizier.debounce), but uses `requestAnimationFrame`
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.trottle" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1692" title="jaaJSU.js:1692"><small>(defined@1692)</small></a>  
+**Returns**: <code>function</code> - Trottled function `fun`  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| func | <code>function</code> |  |  |
+| [cycles_leap] | <code>Number</code> | <code>1</code> | similar to `wait` - how many times calls `requestAnimationFrame` |
+
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.poll_"></a>
+
+#### $optimiziers.poll\_(fn, [timeout], [interval]) ⇒ <code>Promise</code>
+Calls `.then` when `fn` returns **true**
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.poll_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1720" title="jaaJSU.js:1720"><small>(defined@1720)</small></a>  
+**.then**: <code>Mixed</code> result of `fn`  
+**.catch**: <code>Error</code> If timeout  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| fn | <code>function</code> |  | Conditional function |
+| [timeout] | <code>Number</code> | <code>2000</code> | Timeout limit for requesting `fn` (ms) |
+| [interval] | <code>Number</code> | <code>100</code> | Interval for calling `fn` (ms) |
+
+**Example**  
+```js
+poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.once"></a>
+
+#### $optimiziers.once(fn, context)
+Prevent multiple calling of `fn`
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.once" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1751" title="jaaJSU.js:1751"><small>(defined@1751)</small></a>  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| fn | <code>function</code> | Function which must be called only onetime |
+| context | <code>Object</code> | Typically `window` |
+
+**Example**  
+```js
+console_log= $optimizier.once(()=>console.log("hi"));
+console_log();//=hi
+console_log();//nothing
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.timeoutAnimationFrame"></a>
+
+#### $optimiziers.timeoutAnimationFrame(f, [delay])
+Combination of `setTimeout`->`requestAnimationFrame`
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.timeoutAnimationFrame" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1772" title="jaaJSU.js:1772"><small>(defined@1772)</small></a>  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| f | <code>function</code> |  | Function to call later (`delay`+next animation frame) |
+| [delay] | <code>Number</code> | <code>150</code> | When call `f` (ms) |
+
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.requestAnimationFrame_"></a>
+
+#### $optimiziers.requestAnimationFrame\_() ⇒ <code>Promise</code>
+Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.requestAnimationFrame_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1780" title="jaaJSU.js:1780"><small>(defined@1780)</small></a>  
+**Example**  
+```js
+$optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
+Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.setTimeout_"></a>
+
+#### $optimiziers.setTimeout\_([timeout]) ⇒ <code>function</code>
+Promise wrapper around `setTimeout`.
+
+Links:
+ 1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
+ 2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setTimeout_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1790" title="jaaJSU.js:1790"><small>(defined@1790)</small></a>  
+**Returns**: <code>function</code> - <br/>- **(…params)=> \<Promise\>**
+<br/>- where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**  
+
+| Param | Type | Default | Description |
+| --- | --- | --- | --- |
+| [timeout] | <code>Number</code> | <code>0</code> | <br/>- Optional parameter to sets the time delay in milliseconds <br/>- `delay` argument for `setTimeout` — see **Links (2)** |
+
+**Example**  
+```js
+$optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
+Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.setIdleValue"></a>
+
+#### $optimiziers.setIdleValue(initFunction) ⇒ <code>IdleValue</code>
+This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [module:jaaJSU~getIdleValue](module:jaaJSU~getIdleValue).
+
+This is infact *idle-until-urgent* evaluation pattern.
+
+Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1809" title="jaaJSU.js:1809"><small>(defined@1809)</small></a>  
+**Returns**: <code>IdleValue</code> - argument for [module:jaaJSU~getIdleValue](module:jaaJSU~getIdleValue) or [module:jaaJSU~cancelIdleValue](module:jaaJSU~cancelIdleValue).  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| initFunction | <code>function</code> | this function is called to get value |
+
+**Example**  
+```js
+const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
+// …
+console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
+```
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.getIdleValue"></a>
+
+#### $optimiziers.getIdleValue(idle_value) ⇒ <code>Mixed</code>
+Returns result of **\<IdleValue\>**.
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.getIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1825" title="jaaJSU.js:1825"><small>(defined@1825)</small></a>  
+**Returns**: <code>Mixed</code> - Output of `initFunction` — see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| idle_value | <code>IdleValue</code> | Output of [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue) |
+
+
+* * *
+
+<a name="module_jaaJSU..$optimizier.clearIdleValue"></a>
+
+#### $optimiziers.clearIdleValue(idle_value) ⇒ <code>Mixed</code> \| <code>Undefined</code>
+Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)
+
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.clearIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1833" title="jaaJSU.js:1833"><small>(defined@1833)</small></a>  
+**Returns**: <code>Mixed</code> \| <code>Undefined</code> - returns current value or `undefined` if `initFunction` wasn't called — see see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)  
+
+| Param | Type | Description |
+| --- | --- | --- |
+| idle_value | <code>IdleValue</code> | Output of [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue) |
+
+
+* * *
+
 <a name="module_jaaJSU..$string"></a>
 
 ### jaaJSU~$string : <code>object</code>
 This NAMESPACE provides features for strings.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1855" title="jaaJSU.js:1855"><small>(defined@1855)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1849" title="jaaJSU.js:1849"><small>(defined@1849)</small></a>  
 
 * * *
 
@@ -1985,7 +2210,7 @@ Similar to [IterableArrayObject](#module_jaaJSU..IterableArrayObject)
 ### jaaJSU~$time : <code>object</code>
 This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2137" title="jaaJSU.js:2137"><small>(defined@2137)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2131" title="jaaJSU.js:2131"><small>(defined@2131)</small></a>  
 **Category**: namespaces  
 
 * [~$time](#module_jaaJSU..$time) : <code>object</code>
@@ -2039,7 +2264,7 @@ This NAMESPACE provides features for date/time. Mainly, there are utilities usin
 #### $time.\_
 Alias for `undefined` which can be used to trigger default value of argument.
 
-**Kind**: static property of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time._" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3355" title="jaaJSU.js:3355"><small>(defined@3355)</small></a>  
+**Kind**: static property of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time._" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3349" title="jaaJSU.js:3349"><small>(defined@3349)</small></a>  
 **Access**: public  
 **Properties**
 
@@ -2059,7 +2284,7 @@ test($time._)==="A"; function test(a= "A"){ return a; }
 #### $time.format\_objects : <code>object</code> ℗
 Internal object holding predefined formating arguments for [toLocaleString](#module_jaaJSU..$time.toLocaleString).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_objects" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2145" title="jaaJSU.js:2145"><small>(defined@2145)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_objects" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2139" title="jaaJSU.js:2139"><small>(defined@2139)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2084,7 +2309,7 @@ format_objects.time==={ hour: "2-digit", minute: "2-digit" }
 #### $time.format\_arrays : <code>object</code> ℗
 Internal object holding predefined formating arguments for [getFormatObject](#module_jaaJSU..$time.getFormatObject).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_arrays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2169" title="jaaJSU.js:2169"><small>(defined@2169)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_arrays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2163" title="jaaJSU.js:2163"><small>(defined@2163)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2105,7 +2330,7 @@ format_arrays.YYYYMMDD=== [ ["year", "numeric"], [ "text", "-" ], ["month", "2-d
 <a name="module_jaaJSU..$time.Date"></a>
 
 #### $time.Date : <code>object</code>
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3363" title="jaaJSU.js:3363"><small>(defined@3363)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3357" title="jaaJSU.js:3357"><small>(defined@3357)</small></a>  
 **Read only**: true  
 
 * [.Date](#module_jaaJSU..$time.Date) : <code>object</code>
@@ -2122,7 +2347,7 @@ format_arrays.YYYYMMDD=== [ ["year", "numeric"], [ "text", "-" ], ["month", "2-d
 ##### Date.addDays(days_num) ⇒ [<code>function\_Date2Date</code>](#module_jaaJSU..$time.function_Date2Date)
 This modify given **Date** instance (add days).
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addDays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3160" title="jaaJSU.js:3160"><small>(defined@3160)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addDays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3154" title="jaaJSU.js:3154"><small>(defined@3154)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2137,7 +2362,7 @@ This modify given **Date** instance (add days).
 ##### Date.addMonths(months_num) ⇒ [<code>function\_Date2Date</code>](#module_jaaJSU..$time.function_Date2Date)
 This modify given **Date** instance (add months).
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addMonths" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3171" title="jaaJSU.js:3171"><small>(defined@3171)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addMonths" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3165" title="jaaJSU.js:3165"><small>(defined@3165)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2150,7 +2375,7 @@ This modify given **Date** instance (add months).
 <a name="module_jaaJSU..$time.Date.getWeekDay"></a>
 
 ##### Date.getWeekDay([type], [toLocaleStringOptions]) ⇒ [<code>function\_Date2Number</code>](#module_jaaJSU..$time.function_Date2Number)
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekDay" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3182" title="jaaJSU.js:3182"><small>(defined@3182)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekDay" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3176" title="jaaJSU.js:3176"><small>(defined@3176)</small></a>  
 **Returns**: [<code>function\_Date2Number</code>](#module_jaaJSU..$time.function_Date2Number) - If `type="numeric"`, it returns **0 (Su) - 6 (Sa)**, else it returns **name of week day**  
 **Access**: public  
 
@@ -2167,7 +2392,7 @@ This modify given **Date** instance (add months).
 ##### Date.getWeekNumber(date_instance) ⇒ <code>Number</code>
 This return ISO number of week.
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekNumber" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3193" title="jaaJSU.js:3193"><small>(defined@3193)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekNumber" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3187" title="jaaJSU.js:3187"><small>(defined@3187)</small></a>  
 **Returns**: <code>Number</code> - In fact, it calculates no. of thursdays from this week to the first one (January 4 is always in week 1.)  
 **Access**: public  
 
@@ -2183,7 +2408,7 @@ This return ISO number of week.
 #### $time.formats : <code>object</code>
 Public name of [format_arrays](#module_jaaJSU..$time.format_arrays).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.formats" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3376" title="jaaJSU.js:3376"><small>(defined@3376)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.formats" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3370" title="jaaJSU.js:3370"><small>(defined@3370)</small></a>  
 **Read only**: true  
 
 * * *
@@ -2193,7 +2418,7 @@ Public name of [format_arrays](#module_jaaJSU..$time.format_arrays).
 #### $time.ordinal\_numbers ℗
 Internal helper array for [getOrdinalSuffix](#module_jaaJSU..$time.getOrdinalSuffix).
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ordinal_numbers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2197" title="jaaJSU.js:2197"><small>(defined@2197)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ordinal_numbers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2191" title="jaaJSU.js:2191"><small>(defined@2191)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2212,7 +2437,7 @@ This array stores all time zones names (eg. 'Europe/Andorra') supported by `{ ti
 
 Original from [stackoverflow.com/a/54500197](https://stackoverflow.com/a/54500197).
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_zones" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2236" title="jaaJSU.js:2236"><small>(defined@2236)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_zones" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2230" title="jaaJSU.js:2230"><small>(defined@2230)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2235,7 +2460,7 @@ Next example is `ary_ianna_time_offsets["-01:00"]` is equal to **238** which is 
 
 **IMPORTANT NOTE:** BST, EET, WET hasn't been validated! … idea is to behave the same way like CET
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_offsets" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2596" title="jaaJSU.js:2596"><small>(defined@2596)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_offsets" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2590" title="jaaJSU.js:2590"><small>(defined@2590)</small></a>  
 **Access**: private  
 **Properties**
 
@@ -2251,7 +2476,7 @@ Next example is `ary_ianna_time_offsets["-01:00"]` is equal to **238** which is 
 #### $time.isDateString(date_string) ⇒ <code>Boolean</code> ℗
 Very simple test for 'YYYY-MM-DD' pattern. Returns `true` if `date_string` includes **`-`**.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isDateString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2199" title="jaaJSU.js:2199"><small>(defined@2199)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isDateString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2193" title="jaaJSU.js:2193"><small>(defined@2193)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2271,7 +2496,7 @@ isDateString("06/05/2019");//= false !!!!
 #### $time.isTimeString(date_string) ⇒ <code>Boolean</code> ℗
 Very simple test for 'T...' pattern. Returns `true` if `date_string` includes **`T`**.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isTimeString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2211" title="jaaJSU.js:2211"><small>(defined@2211)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isTimeString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2205" title="jaaJSU.js:2205"><small>(defined@2205)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2292,7 +2517,7 @@ isTimeString("Twrong");//= true !!!!
 #### $time.fromDate(date_instance) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from instance of `Date`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2640" title="jaaJSU.js:2640"><small>(defined@2640)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2634" title="jaaJSU.js:2634"><small>(defined@2634)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2307,7 +2532,7 @@ Function generates `DateArray` from instance of `Date`.
 #### $time.fromDateArguments(...args) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from arguments to initialize `Date`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDateArguments" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2651" title="jaaJSU.js:2651"><small>(defined@2651)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDateArguments" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2645" title="jaaJSU.js:2645"><small>(defined@2645)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2324,7 +2549,7 @@ Function generates `DateArray` from current date and time.
 
 **Warning:** Internally uses `toISOString` method so result is always converted to "+00:00": `p($time.fromNow, $time.setTimeZone("+02:00"), $time.toString())()` (`p` is some pipe function) — this returns "2019-07-10T16:48:43+02:00" instead of "2019-07-10T18:48:43+02:00" (current time) … the flow is "2019-07-10T18:48:43+02:00"-`fromNow`->"2019-07-10T16:48:43Z"-`setTimeZone`->"2019-07-10T16:48:43+02:00".
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromNow" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2662" title="jaaJSU.js:2662"><small>(defined@2662)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromNow" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2656" title="jaaJSU.js:2656"><small>(defined@2656)</small></a>  
 **Access**: public  
 
 * * *
@@ -2334,7 +2559,7 @@ Function generates `DateArray` from current date and time.
 #### $time.fromString([timestamp_string], [timezone]) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from passed string.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2674" title="jaaJSU.js:2674"><small>(defined@2674)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2668" title="jaaJSU.js:2668"><small>(defined@2668)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -2350,7 +2575,7 @@ Function generates `DateArray` from passed string.
 #### $time.toDateArray(timestamp_string) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray) ℗
 Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like string.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2706" title="jaaJSU.js:2706"><small>(defined@2706)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2700" title="jaaJSU.js:2700"><small>(defined@2700)</small></a>  
 **Access**: private  
 
 | Param | Type | Description |
@@ -2365,7 +2590,7 @@ Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like s
 #### $time.toStringFromObject(format, params_obj) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String) ℗
 Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toStringFromObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2779" title="jaaJSU.js:2779"><small>(defined@2779)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toStringFromObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2773" title="jaaJSU.js:2773"><small>(defined@2773)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2385,7 +2610,7 @@ $time.toStringFromObject([ ["day", "2-digit"], [ "text", "/" ], ["month", "2-dig
 #### $time.getFormatObject(format_string) ⇒ [<code>Array.&lt;ArrayOfOperation&gt;</code>](#module_jaaJSU..$time.ArrayOfOperation) ℗
 Generates multidimensional array for formatting (eg. "YYYY"=> `[ [ "year", "numeric" ] ]`).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getFormatObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2826" title="jaaJSU.js:2826"><small>(defined@2826)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getFormatObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2820" title="jaaJSU.js:2820"><small>(defined@2820)</small></a>  
 **Access**: private  
 
 | Param | Type | Description |
@@ -2400,7 +2625,7 @@ Generates multidimensional array for formatting (eg. "YYYY"=> `[ [ "year", "nume
 #### $time.toDate(date_array) ⇒ <code>Date</code>
 Function initializes `Date` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2961" title="jaaJSU.js:2961"><small>(defined@2961)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2955" title="jaaJSU.js:2955"><small>(defined@2955)</small></a>  
 **Access**: public  
 
 | Param | Type |
@@ -2415,7 +2640,7 @@ Function initializes `Date` from `DateArray`.
 #### $time.toLocaleString([format_object_name], [toLocaleStringOptions]) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String)
 It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2976" title="jaaJSU.js:2976"><small>(defined@2976)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2970" title="jaaJSU.js:2970"><small>(defined@2970)</small></a>  
 **Returns**: [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String) - returns result of [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString);  
 **Access**: public  
 
@@ -2430,7 +2655,7 @@ It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozill
 <a name="module_jaaJSU..$time.function_DateArray2String"></a>
 
 #### $time.function\_DateArray2String(date_array) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2String" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3028" title="jaaJSU.js:3028"><small>(defined@3028)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2String" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3022" title="jaaJSU.js:3022"><small>(defined@3022)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -2444,7 +2669,7 @@ It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozill
 #### $time.toString([format], [toLocaleStringOptions]) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String)
 Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3034" title="jaaJSU.js:3034"><small>(defined@3034)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3028" title="jaaJSU.js:3028"><small>(defined@3028)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -2463,7 +2688,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 <a name="module_jaaJSU..$time.getTimeZone"></a>
 
 #### $time.getTimeZone(date, parameters) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3065" title="jaaJSU.js:3065"><small>(defined@3065)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3059" title="jaaJSU.js:3059"><small>(defined@3059)</small></a>  
 **Returns**: <code>String</code> - Timezone name/identificator (with offset)  
 
 | Param | Type | Default | Description |
@@ -2480,7 +2705,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 <a name="module_jaaJSU..$time.getCurrentTimeZone"></a>
 
 #### $time.getCurrentTimeZone(parameters) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getCurrentTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3087" title="jaaJSU.js:3087"><small>(defined@3087)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getCurrentTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3081" title="jaaJSU.js:3081"><small>(defined@3081)</small></a>  
 **Returns**: <code>String</code> - Timezone name/identificator (with offset) for current timezone  
 
 | Param | Type | Default | Description |
@@ -2498,7 +2723,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 #### $time.modify(mod_obj) ⇒ [<code>function\_DateArray2DateArray</code>](#module_jaaJSU..$time.function_DateArray2DateArray)
 Curried method, first invocation sets operations (i. e. `{ addDay: 1 }`) and returns `function_DateArray2DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modify" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3219" title="jaaJSU.js:3219"><small>(defined@3219)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modify" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3213" title="jaaJSU.js:3213"><small>(defined@3213)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2515,7 +2740,7 @@ Helper method for invoking "add*" operations in [`modify`](#methods_modify).
 
 In general `d.set...(d.get...+${value})` (where `d` is instance of `Date`).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modifyAdditions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3249" title="jaaJSU.js:3249"><small>(defined@3249)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modifyAdditions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3243" title="jaaJSU.js:3243"><small>(defined@3243)</small></a>  
 **Returns**: <code>Date</code> - returns `dateObject`  
 **Access**: private  
 
@@ -2533,7 +2758,7 @@ In general `d.set...(d.get...+${value})` (where `d` is instance of `Date`).
 #### $time.double(time) ⇒ <code>String</code>
 Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.double" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3270" title="jaaJSU.js:3270"><small>(defined@3270)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.double" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3264" title="jaaJSU.js:3264"><small>(defined@3264)</small></a>  
 **Returns**: <code>String</code> - * 00, 01, 02, ..., 09, 10, ..., 100, ...  
 **Access**: public  
 
@@ -2549,7 +2774,7 @@ Function adds leading zero to the `time`. [It can be replaced in future: see `pa
 #### $time.daysInMonth(month, [year]) ⇒ <code>Number</code>
 Returns number of days in given month (and year)
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.daysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3283" title="jaaJSU.js:3283"><small>(defined@3283)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.daysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3277" title="jaaJSU.js:3277"><small>(defined@3277)</small></a>  
 **Returns**: <code>Number</code> - total of days  
 **Access**: public  
 
@@ -2566,7 +2791,7 @@ Returns number of days in given month (and year)
 #### $time.getDaysInMonth([date_array]) ⇒ <code>Number</code>
 Returns number of days in given month
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDaysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3295" title="jaaJSU.js:3295"><small>(defined@3295)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDaysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3289" title="jaaJSU.js:3289"><small>(defined@3289)</small></a>  
 **Returns**: <code>Number</code> - total of days  
 **Access**: public  
 
@@ -2580,7 +2805,7 @@ Returns number of days in given month
 <a name="module_jaaJSU..$time.getMonthName"></a>
 
 #### $time.getMonthName(n, [l]) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getMonthName" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3307" title="jaaJSU.js:3307"><small>(defined@3307)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getMonthName" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3301" title="jaaJSU.js:3301"><small>(defined@3301)</small></a>  
 **Returns**: <code>String</code> - English month name  
 **Access**: public  
 
@@ -2602,7 +2827,7 @@ console.log($time.getMonthName(24, 4));//"Dece"
 #### $time.getOrdinalSuffix(n) ⇒ <code>String</code>
 See [ordinal_numbers](#module_jaaJSU..$time.ordinal_numbers).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getOrdinalSuffix" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3329" title="jaaJSU.js:3329"><small>(defined@3329)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getOrdinalSuffix" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3323" title="jaaJSU.js:3323"><small>(defined@3323)</small></a>  
 **Returns**: <code>String</code> - `n`+English suffix  
 **Access**: public  
 
@@ -2620,7 +2845,7 @@ console.log($time.getOrdinalSuffix(1));//"1st"
 <a name="module_jaaJSU..$time.function_Date2Date"></a>
 
 #### $time.function\_Date2Date(date_instance) ⇒ <code>Date</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3146" title="jaaJSU.js:3146"><small>(defined@3146)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3140" title="jaaJSU.js:3140"><small>(defined@3140)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -2633,7 +2858,7 @@ console.log($time.getOrdinalSuffix(1));//"1st"
 <a name="module_jaaJSU..$time.function_Date2Number"></a>
 
 #### $time.function\_Date2Number(date_instance) ⇒ <code>Number</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Number" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3153" title="jaaJSU.js:3153"><small>(defined@3153)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Number" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3147" title="jaaJSU.js:3147"><small>(defined@3147)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -2646,7 +2871,7 @@ console.log($time.getOrdinalSuffix(1));//"1st"
 <a name="module_jaaJSU..$time.function_DateArray2DateArray"></a>
 
 #### $time.function\_DateArray2DateArray(date_array) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3211" title="jaaJSU.js:3211"><small>(defined@3211)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3205" title="jaaJSU.js:3205"><small>(defined@3205)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -2661,7 +2886,7 @@ console.log($time.getOrdinalSuffix(1));//"1st"
 #### $time.DateArray : <code>Array</code>
 This is in fact output of [toDateArray](#module_jaaJSU..$time.toDateArray).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2697" title="jaaJSU.js:2697"><small>(defined@2697)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2691" title="jaaJSU.js:2691"><small>(defined@2691)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -2679,7 +2904,7 @@ This is in fact output of [toDateArray](#module_jaaJSU..$time.toDateArray).
 #### $time.toLocaleStringOptions : <code>Object</code>
 It is in fact argument for `options` in [`Date.prototype.toLocaleString` Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString#Parameters).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleStringOptions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2770" title="jaaJSU.js:2770"><small>(defined@2770)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleStringOptions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2764" title="jaaJSU.js:2764"><small>(defined@2764)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -2699,7 +2924,7 @@ This holds information about how show one piece of String output typically for [
 
 Predefined values can be found at [format_arrays](#module_jaaJSU..$time.format_arrays).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ArrayOfOperation" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2814" title="jaaJSU.js:2814"><small>(defined@2814)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ArrayOfOperation" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2808" title="jaaJSU.js:2808"><small>(defined@2808)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -2836,217 +3061,12 @@ Exported namespace of [$object](#module_jaaJSU..$object).
 
 * * *
 
-<a name="$optimizier"></a>
+<a name="$optimiziers"></a>
 
-## $optimizier : <code>object</code>
-This NAMESPACE provides features for optimizations.
+## $optimiziers : <code>object</code>
+Exported namespace of [$optimizier](#module_jaaJSU..$optimizier).
 
-**Kind**: global namespace <a name="$optimizier" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1653" title="jaaJSU.js:1653"><small>(defined@1653)</small></a>  
-
-* [$optimizier](#$optimizier) : <code>object</code>
-    * [.debounce(func, [wait], [immediate])](#$optimizier.debounce) ⇒ <code>function</code>
-    * [.trottle(func, [cycles_leap])](#$optimizier.trottle) ⇒ <code>function</code>
-    * [.poll_(fn, [timeout], [interval])](#$optimizier.poll_) ⇒ <code>Promise</code>
-    * [.once(fn, context)](#$optimizier.once)
-    * [.timeoutAnimationFrame(f, [delay])](#$optimizier.timeoutAnimationFrame)
-    * [.requestAnimationFrame_()](#$optimizier.requestAnimationFrame_) ⇒ <code>Promise</code>
-    * [.setTimeout_([timeout])](#$optimizier.setTimeout_) ⇒ <code>function</code>
-    * [.setIdleValue(initFunction)](#$optimizier.setIdleValue) ⇒ <code>IdleValue</code>
-    * [.getIdleValue(idle_value)](#$optimizier.getIdleValue) ⇒ <code>Mixed</code>
-    * [.clearIdleValue(idle_value)](#$optimizier.clearIdleValue) ⇒ <code>Mixed</code> \| <code>Undefined</code>
-
-
-* * *
-
-<a name="$optimizier.debounce"></a>
-
-### $optimiziers.debounce(func, [wait], [immediate]) ⇒ <code>function</code>
-Prevent multiple calling (typically for "onresize" events) - use google for more detail
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.debounce" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1660" title="jaaJSU.js:1660"><small>(defined@1660)</small></a>  
-**Returns**: <code>function</code> - Debounced function `fun` (accepts same arguments)  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| func | <code>function</code> |  | Function for debounce |
-| [wait] | <code>Number</code> | <code>150</code> | How much wait for next calling |
-| [immediate] | <code>Boolean</code> |  | First time wait since `wait` (**false**), or call immediate and after wait (**true**) - infact switch *debounce/trottle* |
-
-**Example**  
-```text
-graphically (wait= 4symbols)
-I call (| symbol) fun:    .|||.|.|||..
-             debounce:    .....|....|.
-              trottle:    .|.....|....
-```
-
-* * *
-
-<a name="$optimizier.trottle"></a>
-
-### $optimiziers.trottle(func, [cycles_leap]) ⇒ <code>function</code>
-Very similar to [debounce](#methods_debounce), but uses `requestAnimationFrame`
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.trottle" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1693" title="jaaJSU.js:1693"><small>(defined@1693)</small></a>  
-**Returns**: <code>function</code> - Trottled function `fun`  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| func | <code>function</code> |  |  |
-| [cycles_leap] | <code>Number</code> | <code>1</code> | similar to `wait` - how many times calls `requestAnimationFrame` |
-
-
-* * *
-
-<a name="$optimizier.poll_"></a>
-
-### $optimiziers.poll\_(fn, [timeout], [interval]) ⇒ <code>Promise</code>
-Calls `.then` when `fn` returns **true**
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.poll_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1721" title="jaaJSU.js:1721"><small>(defined@1721)</small></a>  
-**.then**: <code>Mixed</code> result of `fn`  
-**.catch**: <code>Error</code> If timeout  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| fn | <code>function</code> |  | Conditional function |
-| [timeout] | <code>Number</code> | <code>2000</code> | Timeout limit for requesting `fn` (ms) |
-| [interval] | <code>Number</code> | <code>100</code> | Interval for calling `fn` (ms) |
-
-**Example**  
-```js
-poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error);
-```
-
-* * *
-
-<a name="$optimizier.once"></a>
-
-### $optimiziers.once(fn, context)
-Prevent multiple calling of `fn`
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.once" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1752" title="jaaJSU.js:1752"><small>(defined@1752)</small></a>  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| fn | <code>function</code> | * Function which must be called only onetime |
-| context | <code>Object</code> | * Typically `window` |
-
-**Example**  
-```js
-console_log= $optimizier.once(()=>console.log("hi"));
-    console_log();//=hi
-    console_log();//nothing
-```
-
-* * *
-
-<a name="$optimizier.timeoutAnimationFrame"></a>
-
-### $optimiziers.timeoutAnimationFrame(f, [delay])
-Combination of `setTimeout`->`requestAnimationFrame`
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.timeoutAnimationFrame" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1775" title="jaaJSU.js:1775"><small>(defined@1775)</small></a>  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| f | <code>function</code> |  | * Function to call later (`delay`+next animation frame) |
-| [delay] | <code>Number</code> | <code>150</code> | * When call `f` (ms) |
-
-
-* * *
-
-<a name="$optimizier.requestAnimationFrame_"></a>
-
-### $optimiziers.requestAnimationFrame\_() ⇒ <code>Promise</code>
-Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.requestAnimationFrame_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1785" title="jaaJSU.js:1785"><small>(defined@1785)</small></a>  
-**Example**  
-```js
-$optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
-     Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
-```
-
-* * *
-
-<a name="$optimizier.setTimeout_"></a>
-
-### $optimiziers.setTimeout\_([timeout]) ⇒ <code>function</code>
-Promise wrapper around `setTimeout`.
-
-Links:
- 1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
- 2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.setTimeout_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1795" title="jaaJSU.js:1795"><small>(defined@1795)</small></a>  
-**Returns**: <code>function</code> - - **(…params)=> \<Promise\>**
- - where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**  
-
-| Param | Type | Default | Description |
-| --- | --- | --- | --- |
-| [timeout] | <code>Number</code> | <code>0</code> | - Optional parameter to sets the time delay in milliseconds  - `delay` argument for `setTimeout` — see **Links (2)** |
-
-**Example**  
-```js
-$optimizier.setTimeout_(30)("Hi").then(console.log); //-> "Hi" "after 30ms"
-         Promise.resolve("Hi").then($optimiziers.setTimeout_()).then(console.log); //-> "Hi" "after 0ms"
-```
-
-* * *
-
-<a name="$optimizier.setIdleValue"></a>
-
-### $optimiziers.setIdleValue(initFunction) ⇒ <code>IdleValue</code>
-This function creates **\<IdleValue\>**. It is value which is not actually used immediately during assignment but it’s needed later in code. For getting value use [`getIdleValue`](#methods_getIdleValue).
-
-This is infact *idle-until-urgent* evaluation pattern.
-
-Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.setIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1814" title="jaaJSU.js:1814"><small>(defined@1814)</small></a>  
-**Returns**: <code>IdleValue</code> - - argument for [`getIdleValue`](#methods_getIdleValue) or [`cancelIdleValue`](#methods_cancelIdleValue).  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| initFunction | <code>function</code> | - this function is called to get value |
-
-**Example**  
-```js
-const formatter_idled= $optimizier.setIdleValue(()=> new Intl.DateTimeFormat('en-US', { timeZone: 'America/Los_Angeles' }));
-     // …
-     console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
-```
-
-* * *
-
-<a name="$optimizier.getIdleValue"></a>
-
-### $optimiziers.getIdleValue(idle_value) ⇒ <code>Mixed</code>
-Returns result of **\<IdleValue\>**.
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.getIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1832" title="jaaJSU.js:1832"><small>(defined@1832)</small></a>  
-**Returns**: <code>Mixed</code> - - Output of `initFunction` — see [`setIdleValue`](#methods_setIdleValue)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| idle_value | <code>IdleValue</code> | - Output of [`setIdleValue`](#methods_setIdleValue) |
-
-
-* * *
-
-<a name="$optimizier.clearIdleValue"></a>
-
-### $optimiziers.clearIdleValue(idle_value) ⇒ <code>Mixed</code> \| <code>Undefined</code>
-Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`setIdleValue`](#methods_setIdleValue)
-
-**Kind**: static method of [<code>$optimizier</code>](#$optimizier) <a name="$optimizier.clearIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1842" title="jaaJSU.js:1842"><small>(defined@1842)</small></a>  
-**Returns**: <code>Mixed</code> \| <code>Undefined</code> - - returns current value or `undefined` if `initFunction` wasn't called — see see [`setIdleValue`](#methods_setIdleValue)  
-
-| Param | Type | Description |
-| --- | --- | --- |
-| idle_value | <code>IdleValue</code> | - Output of [`setIdleValue`](#methods_setIdleValue) |
-
+**Kind**: global namespace <a name="$optimiziers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1842" title="jaaJSU.js:1842"><small>(defined@1842)</small></a>  
 
 * * *
 
@@ -3055,7 +3075,7 @@ Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [`
 ## $time : <code>object</code>
 Exported namespace of [$time](#module_jaaJSU..$time).
 
-**Kind**: global namespace <a name="$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3390" title="jaaJSU.js:3390"><small>(defined@3390)</small></a>  
+**Kind**: global namespace <a name="$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3384" title="jaaJSU.js:3384"><small>(defined@3384)</small></a>  
 
 * * *
 
