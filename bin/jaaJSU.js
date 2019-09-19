@@ -24,7 +24,7 @@
     /**
      * This kind of function is typically used in `Array.prototype.filter`.
      * @function function_filterCallback
-     * @category virtual
+     * @category types description
      * @param {Mixed} i_value Nth value of array.
      * @param {Number} i Nth key of array.
      * @returns {Boolean}
@@ -32,7 +32,7 @@
     /**
      * This kind of function is typically used in `Array.prototype.reduce`.
      * @function function_reduceCallback
-     * @category virtual
+     * @category types description
      * @param {Mixed} accumulator
      * @param {Mixed} i_value Nth value of array.
      * @param {Number} i Nth key of array.
@@ -40,7 +40,7 @@
      */
     /**
      * @typedef {Object} IterableArrayObject
-     * @category virtual
+     * @category types description
      * @property {Mixed} item Nth value for `key` in `iterable`.
      * @property {Number} key Idicies 0...`iterable.length`.
      * @property {Boolean} last Is setted True, if it is the last element in array.
@@ -48,7 +48,7 @@
      */
     /**
      * @function IterableCallback
-     * @category virtual
+     * @category types description
      * @param {module:jaaJSU~IterableArrayObject} IterableArrayObject
      * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
      */
@@ -134,22 +134,23 @@
         },
         /**
          * Methods around array `arr` exported by {@link module:jaaJSU~$array.partition} method.
-         * @typedef {Object} ArrayPartition
+         * @typedef {Object} instance_partition
          * @memberof module:jaaJSU~$array
-         * @category virtual
+         * @inner
+         * @category types descriptions
          */
         /**
          * Function returns methods for splitting array by condition.
          * @method partition
          * @memberof module:jaaJSU~$array
          * @param {Mixed[]} arr Input array.
-         * @returns {module:jaaJSU~$array.ArrayPartition}
+         * @returns {module:jaaJSU~$array~instance_partition}
          */
         partition: function(arr){
             return {
                 /**
                  * @method head
-                 * @memberof module:jaaJSU~$array.ArrayPartition
+                 * @memberof module:jaaJSU~$array~instance_partition
                  * @returns {Array} two items Array `[x, ...xs]` (first element and rest array)
                  */
                 head: function(){
@@ -158,7 +159,7 @@
                 },
                 /**
                  * @method tail
-                 * @memberof module:jaaJSU~$array.ArrayPartition
+                 * @memberof module:jaaJSU~$array~instance_partition
                  * @returns {Array} two items Array `[...xs, x]` (rest array and last element)
                  */
                 tail: function(){
@@ -168,7 +169,7 @@
                 },
                 /**
                  * @method onIndex
-                 * @memberof module:jaaJSU~$array.ArrayPartition
+                 * @memberof module:jaaJSU~$array~instance_partition
                  * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
                  * @returns {Array[]} Two items Array [arr1, arr2]
                  */
@@ -178,7 +179,7 @@
                 },
                 /**
                  * @method byCondition
-                 * @memberof module:jaaJSU~$array.ArrayPartition
+                 * @memberof module:jaaJSU~$array~instance_partition
                  * @param {function_filterCallback} fn In fact index of inner array (see return part).
                  * @returns {Array[]} Two items Array [arr1, arr2] based on `fn`.
                  */
@@ -231,14 +232,16 @@
      * This kind of function schould returns `Promise`.
      * @function function_Undefined2Promise
      * @memberof module:jaaJSU~$async
-     * @category virtual
+     * @inner
+     * @category types descriptions
      * @returns {Promise}
      */
     /**
      * This kind of function schould returns `Promise`.
      * @function function_MultipleMixed2Promise
      * @memberof module:jaaJSU~$async
-     * @category virtual
+     * @inner
+     * @category types descriptions
      * @param {...Mixed} Mixed Various arguments
      * @returns {Promise}
      */
@@ -249,7 +252,7 @@
         * @method serialize
         * @memberof module:jaaJSU~$async
         * @deprecated Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
-        * @param {module:jaaJSU~$async.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
+        * @param {module:jaaJSU~$async~function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
         * @return {Promise}
         * @.then {Mixed[]} Array of results from `funcs`
         * @.catch {Error} Error in `funcs[nth]`
@@ -271,7 +274,7 @@
         * Procedure for iterating thorught **Promise** function array `funcs`.
         * @method iterate_
         * @memberof module:jaaJSU~$async
-        * @param {module:jaaJSU~$async.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
+        * @param {module:jaaJSU~$async~function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
         * @return {Promise}
         * @.then {Mixed} Result of last function in `iterablePromises`
         * @.catch {Error} Error in `iterablePromises[nth]`
@@ -304,7 +307,7 @@
          * @method iterateMixed_
          * @beta Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
          * @memberof module:jaaJSU~$async
-         * @param {...Promise|module:jaaJSU~$async.function_Undefined2Promise} tasks
+         * @param {...Promise|module:jaaJSU~$async~function_Undefined2Promise} tasks
          * @return {Promise}
          */
         iterateMixed_: function(...tasks){
@@ -329,7 +332,7 @@
         * Procedure for iterating throught **Promise** functions (wait pattern).
         * @method sequention_
         * @memberof module:jaaJSU~$async
-        * @param {...module:jaaJSU~$async.function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
+        * @param {...module:jaaJSU~$async~function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
         * @return {Promise}
         * @.then {Mixed} Result of last function in `functions`
         * @.catch {Error} Error in `functions[nth]`
@@ -343,8 +346,8 @@
         * Procedure for iterating throught **Promise** functions (race pattern).
         * @method each_
         * @memberof module:jaaJSU~$async
-        * @param {...function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
-        * @return {module:jaaJSU~$async.function_MultipleMixed2Promise}
+        * @param {...module:jaaJSU~$async~function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
+        * @return {module:jaaJSU~$async~function_MultipleMixed2Promise}
         * @.then {Mixed} Result of last function in `functions`
         * @.catch {Error} Error in `functions[nth]`
         * @example
@@ -523,20 +526,21 @@
     };
     /* standalone= "standalone"; */
     /**
-     * In generall, all methods from {@link module:jaaJSU~$dom.instance_component} don't do anything. Also during "mounting" there are some changes see method {@link module:jaaJSU~$dom.instance_componentEmpty.mount}.
+     * In generall, all methods from {@link module:jaaJSU~$dom~instance_component} don't do anything. Also during "mounting" there are some changes see method {@link module:jaaJSU~$dom~instance_componentEmpty.mount}.
      * @typedef instance_componentEmpty
      * @memberof module:jaaJSU~$dom
-     * @category virtual
-     * @type {module:jaaJSU~$dom.instance_component}
+     * @category types descriptions
+     * @inner
+     * @type {module:jaaJSU~$dom~instance_component}
      */
     const $dom_emptyPseudoComponent= (function(){
         const share= { mount, update, destroy, isStatic };
         const component_out= { add, component, mount, update, share };
         return component_out;
         /**
-         * The same syntax as {@link module:jaaJSU~$dom.instance_component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
+         * The same syntax as {@link module:jaaJSU~$dom~instance_component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
          * @method mount
-         * @memberof module:jaaJSU~$dom.instance_componentEmpty
+         * @memberof module:jaaJSU~$dom~instance_componentEmpty
          */
         function mount(element, type= "childLast"){
             // let temp_el;
@@ -574,10 +578,10 @@
      * @version 1.0.0
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
-     * @param {module:jaaJSU~$dom.DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
+     * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
      * @param {Object} [params= {}] Parameters
-     * @param {Function|Undefined} [params.mapUpdate=Undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link module:jaaJSU~$dom.instance_component.add}
-     * @return {module:jaaJSU~$dom.instance_componentAdd|module:jaaJSU~$dom.instance_componentEmpty} Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!
+     * @param {Function|Undefined} [params.mapUpdate=Undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link module:jaaJSU~$dom~instance_component.add}
+     * @return {module:jaaJSU~$dom~instance_componentAdd|module:jaaJSU~$dom~instance_componentEmpty} Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!
      */
     $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
@@ -598,18 +602,19 @@
         const share= { mount, update, destroy, isStatic };
         const component_out= { add, addText, component, setShift, mount, update, share };
         /**
-         * Its purpose is to make easy transfering methods somewhere else (like for using in another component, see {@link module:jaaJSU~$dom.instance_component.component} method).
+         * Its purpose is to make easy transfering methods somewhere else (like for using in another component, see {@link module:jaaJSU~$dom~instance_component.component} method).
          * @typedef share
-         * @memberof module:jaaJSU~$dom.instance_component
-         * @borrows module:jaaJSU~$dom.instance_component.mount as mount
-         * @borrows module:jaaJSU~$dom.instance_component.update as update
+         * @memberof module:jaaJSU~$dom~instance_component
+         * @borrows module:jaaJSU~$dom~instance_component.mount as mount
+         * @borrows module:jaaJSU~$dom~instance_component.update as update
          * @type {Object}
          */
         /**
          * This is minimal export of "functional class" {@link module:jaaJSU~$dom.component} and its methods (if they are chainable).
          * @typedef instance_component
          * @memberof module:jaaJSU~$dom
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @type {Object}
          */
         return add(el_name, attrs);
@@ -617,19 +622,20 @@
          * This is `Component` with aditional methods
          * @typedef instance_componentAdd
          * @memberof module:jaaJSU~$dom
-         * @category virtual
-         * @type module:jaaJSU~$dom.instance_component
+         * @category types descriptions
+         * @inner
+         * @type module:jaaJSU~$dom~instance_component
          */
         /**
          * This add element to component
          * @method add
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @chainable
          * @param {String} el_name Name of element (for example `LI`, `P`, `A`, ...).
-         * @param {module:jaaJSU~$dom.DomAssignObject} attrs Internally uses {@link module:jaaJSU~$dom.assign}, `null`\|`undefined` is also supported (`null` is probably better for readability).
+         * @param {module:jaaJSU~$dom~DomAssignObject} attrs Internally uses {@link module:jaaJSU~$dom.assign}, `null`\|`undefined` is also supported (`null` is probably better for readability).
          * @param {Number} [shift= 0] Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.
-         * @returns {module:jaaJSU~$dom.instance_componentAdd}
+         * @returns {module:jaaJSU~$dom~instance_componentAdd}
          * @example
          * const UL= document.getElementById('SOME UL');
          * const { add }= $dom.component("LI", { className: "list_item" });
@@ -663,25 +669,25 @@
                 /**
                  * Returns reference of currently added element
                  * @method getReference
-                 * @memberof module:jaaJSU~$dom.instance_componentAdd
+                 * @memberof module:jaaJSU~$dom~instance_componentAdd
                  * @returns {NodeElement}
                  */
                 getReference: ()=> el,
                 /**
                  * This procedure allows to call given function `fn` during registering element.
                  * @method oninit
-                 * @memberof module:jaaJSU~$dom.instance_componentAdd
+                 * @memberof module:jaaJSU~$dom~instance_componentAdd
                  * @param {Function} fn
-                 * @returns {module:jaaJSU~$dom.instance_component}
+                 * @returns {module:jaaJSU~$dom~instance_component}
                  */
                 oninit: function(fn){ fn(el); return component_out; },
                 /**
-                 * This method allows to register function ({@link module:jaaJSU~$dom.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link module:jaaJSU~$dom.instance_component.update}).
+                 * This method allows to register function ({@link module:jaaJSU~$dom.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link module:jaaJSU~$dom~instance_component.update}).
                  * @method onupdate
-                 * @memberof module:jaaJSU~$dom.instance_componentAdd
+                 * @memberof module:jaaJSU~$dom~instance_componentAdd
                  * @param {Object} data This allows register listener for given **keys** of Object `data`. For `data= { a: "A", b: "B" }` it means that when `a` or `b` will be changed the `onUpdateFunction` is called.
-                 * @param {module:jaaJSU~$dom.onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
-                 * @returns {module:jaaJSU~$dom.instance_component}
+                 * @param {module:jaaJSU~$dom~onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
+                 * @returns {module:jaaJSU~$dom~instance_component}
                  * @example
                  * const c= $dom.component("DIV", null);
                  * …
@@ -698,9 +704,10 @@
                 /**
                  * @callback onUpdateFunction
                  * @memberof module:jaaJSU~$dom
-                 * @category virtual
-                 * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom.instance_componentAdd.onupdate}
-                 * @returns {*|module:jaaJSU~$dom.DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link module:jaaJSU~$dom.instance_component.update} is called. This callback can be registered when element is created (see method {@link module:jaaJSU~$dom.instance_component.add}) see {@link module:jaaJSU~$dom.instance_componentAdd}.
+                 * @category types descriptions
+                 * @inner
+                 * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom~instance_componentAdd.onupdate}
+                 * @returns {*|module:jaaJSU~$dom~DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link module:jaaJSU~$dom~instance_component.update} is called. This callback can be registered when element is created (see method {@link module:jaaJSU~$dom~instance_component.add}) see {@link module:jaaJSU~$dom~instance_componentAdd}.
                  */
                 onupdate: function(data, onUpdateFunction){
                     if(!data) return component_out;
@@ -715,18 +722,19 @@
          * This is `Component` with aditional methods
          * @typedef instance_componentAddText
          * @memberof module:jaaJSU~$dom
-         * @category virtual
-         * @type {Component}
+         * @category types descriptions
+         * @inner
+         * @type {module:jaaJSU~$dom~instance_component}
          */
         /**
          * This add element to component
          * @method addText
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @chainable
          * @param {String} text Argument for `document.createTextNode`
-         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.instance_component.add}
-         * @returns {module:jaaJSU~$dom.instance_componentAddText}
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom~instance_component.add}
+         * @returns {module:jaaJSU~$dom~instance_componentAddText}
          * @example
          * const c1= $dom.component("P", { textContent: "TEXT" });
          * const c2= $dom.component("P", null);
@@ -754,9 +762,9 @@
                 /**
                  * This procedure allows to call given function `fn` during registering element.
                  * @method oninit
-                 * @memberof module:jaaJSU~$dom.instance_componentAddText
+                 * @memberof module:jaaJSU~$dom~instance_componentAddText
                  * @param {Function} fn
-                 * @returns {module:jaaJSU~$dom.instance_component}
+                 * @returns {module:jaaJSU~$dom~instance_component}
                  */
                 oninit: function(fn){ fn(el); return component_out; }
             }, component_out);
@@ -765,12 +773,12 @@
         /**
          * Method for including another component by usint its `share` key.
          * @method component
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @chainable
-         * @param {module:jaaJSU~$dom.instance_component.share} share
-         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.instance_component.add}
-         * @return {module:jaaJSU~$dom.instance_component}
+         * @param {module:jaaJSU~$dom~instance_component.share} share
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom~instance_component.add}
+         * @return {module:jaaJSU~$dom~instance_component}
          * @example
          * function p({ textContent }){
          *      const cP= $dom.component("P", { textContent });
@@ -795,7 +803,7 @@
         /**
          * Add element to live DOM
          * @method mount
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @param {NodeElement} element Element where to places this component
          * @param {String} [type= "childLast"]
@@ -834,7 +842,7 @@
         /**
          * Method remove element form live DOM and returns null
          * @method destroy
-         * @memberof module:jaaJSU~$dom.instance_component.share
+         * @memberof module:jaaJSU~$dom~instance_component.share
          * @public
          * @returns {Null}
          * @example
@@ -852,8 +860,8 @@
          * Updates `deep`
          * @private
          * @method recalculateDeep
-         * @memberof module:jaaJSU~$dom.instance_component
-         * @param {Number} shift see {@link module:jaaJSU~$dom.instance_component.add}
+         * @memberof module:jaaJSU~$dom~instance_component
+         * @param {Number} shift see {@link module:jaaJSU~$dom~instance_component.add}
          */
         function recalculateDeep(shift){
             if(!shift) deep.push(all_els_counter);
@@ -863,7 +871,7 @@
         /**
          * Returns parent element (or "fragment pseudo element")
          * @method getParentElement
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @private
          * @returns {NodeElement} Returns parent element (i. e. `DocumenFragment` if component is empty)
          */
@@ -874,11 +882,11 @@
         /**
          * Method provide way to change nesting behaviour. It can be helpful for loops
          * @method setShift
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @chainable
-         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom.instance_component.add}
-         * @returns {module:jaaJSU~$dom.instance_component}
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom~instance_component.add}
+         * @returns {module:jaaJSU~$dom~instance_component}
          * @example
          * function testNesting(){
          *     const c= $dom.component("DIV", null);
@@ -912,7 +920,7 @@
         /**
          * Initialize internal storage
          * @method initStorage
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @private
          * @returns {Object} `{ register, registerComponent, update, unregister}`
          */
@@ -990,7 +998,7 @@
         /**
          * Method updates all registered varibles by keys `onupdates` and calls follower functions
          * @method update
-         * @memberof module:jaaJSU~$dom.instance_component
+         * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @param {Object|Function} new_data
          * <br/>- When `$dom.component` is initialized, it is possible to register `mapUpdate`
@@ -1031,7 +1039,7 @@
         /**
          * Methods returns if it was `onupdate` used
          * @method isStatic
-         * @memberof module:jaaJSU~$dom.instance_component.share
+         * @memberof module:jaaJSU~$dom~instance_component.share
          * @public
          * @return {Boolean} If there is some listeners `onupdate`
          */
@@ -1050,7 +1058,8 @@
      *  - `href`, `src` or `class` are convereted to `element.setAttribute(key, …)`;
      * @typedef DomAssignObject
      * @memberof module:jaaJSU~$dom
-     * @category virtual
+     * @category types descriptions
+     * @inner
      * @type {Object}
      */
     /**
@@ -1060,7 +1069,7 @@
      * @method assign
      * @memberof module:jaaJSU~$dom
      * @param {NodeElement} element
-     * @param {...module:jaaJSU~$dom.DomAssignObject} object_attributes
+     * @param {...module:jaaJSU~$dom~DomAssignObject} object_attributes
      * @example <caption>#1: All together</caption>
      * const el= document.body;
      * const onclick= function(){ console.log(this.dataset.js_param); };
@@ -1199,7 +1208,8 @@
      * `function(input){  }`
      * @function function_Mixed2Undefined
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {Mixed} input
      * @returns {Undefined}
      */
@@ -1207,7 +1217,8 @@
      * `function(input){ return ...; }`
      * @function function_Mixed2Mixed
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {Mixed} input
      * @returns {Mixed}
      */
@@ -1215,14 +1226,16 @@
      * `function(){ return ...; }`
      * @function function_Undefined2Mixed
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @returns {Mixed}
      */
     /**
      * `function(...input){ return ...; }`
      * @function function_MultipleMixed2Mixed
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {...Mixed} input
      * @returns {Mixed}
      */
@@ -1230,7 +1243,8 @@
      * `function(...input){ return function(...){...}; }`
      * @function function_MultipleMixed2Function
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {...Mixed} input
      * @returns {Function}
      */
@@ -1238,7 +1252,8 @@
      * `function(...Functions){ return function(...){...}; }`
      * @function function_MultipleFunction2Function
      * @memberof module:jaaJSU~$function
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {...Function} Functions
      * @returns {Function}
      */
@@ -1248,7 +1263,7 @@
          * @method branches
          * @memberof module:jaaJSU~$function
          * @public
-         * @param {types.function_reduceCallback} [reduceFun] **By default behaves like 'map'**
+         * @param {module:jaaJSU~function_reduceCallback} [reduceFun] **By default behaves like 'map'**
          * @param {Function|Mixed} [reduceInitValueCreator=()=>[]] Initial value for `acc` in `reduceFun`.
          * <br/>- **if** not functions, the same behaviour is used as in case of `*.reduce(...)`
          * <br/>- **else** the result of function is used (because of *call-by-reference* in case of **Array**s, **Object**s, …).
@@ -1291,7 +1306,7 @@
          * @method conditionalCall
          * @memberof module:jaaJSU~$function
          * @param {Mixed} mixed If `mixed=true` the `fun` is called
-         * @param {module:jaaJSU~$function.function_Mixed2Mixed} fun 'Refular' function as argument accepts `mixed`
+         * @param {module:jaaJSU~$function~function_Mixed2Mixed} fun 'Refular' function as argument accepts `mixed`
          * @return {Boolean|Mixed} **False** or output of `fun`
          */
         conditionalCall: function(mixed,fun){
@@ -1304,7 +1319,7 @@
          * @method constant
          * @memberof module:jaaJSU~$function
          * @param {Mixed} constantArg
-         * @return {module:jaaJSU~$function.function_Undefined2Mixed} `()=> constantArg`
+         * @return {module:jaaJSU~$function~function_Undefined2Mixed} `()=> constantArg`
          * @example
          * $function.constant(5)(10);//= `5`
          */
@@ -1313,8 +1328,8 @@
          * Functional-like alternative for `for(...){functions[nth](..input);}`.
          * @method each
          * @memberof module:jaaJSU~$function
-         * @param {...module:jaaJSU~$function.function_Mixed2Undefined} ...functions
-         * @return {module:jaaJSU~$function.function_Mixed2Undefined}
+         * @param {...module:jaaJSU~$function~function_Mixed2Undefined} ...functions
+         * @return {module:jaaJSU~$function~function_Mixed2Undefined}
          */
         each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
         /**
@@ -1332,7 +1347,7 @@
          * @param {Function} onTrue Test succcessful function
          * @param {Function} [onFalse= v=> v] Test fail function
          * @param {Function} [onTest= Boolean] Test function
-         * @return {...module:jaaJSU~$function.function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
+         * @return {...module:jaaJSU~$function~function_MultipleMixed2Mixed} `(...val)=> onTest(...val) ? onTrue(...val) : (typeof onFalse==="function") ? onFalse(...val) : undefined`
          * @example
          * $function.ifElse(v=> v+1)(0);//= `0`
          * $function.ifElse(v=> v+1)(1);//= `2`
@@ -1368,14 +1383,14 @@
          */
         schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
         /**
-         * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
+         * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to {@link module:jaaJSU~$function.each}. But, as arguments for current function is used output frome previous function.
          * @method sequention
          * @memberof module:jaaJSU~$function
-         * @param {...module:jaaJSU~$function.function_Mixed2Mixed} functions List of functions:
+         * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions List of functions:
          * <br/>`...functions[nth](__INPUT__){... return __OUTPUT__;}`
          * <br/>`__INPUT__` is `input` (for first function) or `__OUTPUT__`
          * <br/>`__OUTPUT__`! `__OUTPUT__` is used as argument for next function in `...functions`.
-         * @return {module:jaaJSU~$function.function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
+         * @return {module:jaaJSU~$function~function_Mixed2Mixed} For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.
          * @example
          * console.log($function.sequention(
          *      a=>[a+1, a-1],
@@ -1407,14 +1422,16 @@
     /**
      * @function function_Object2Mixed
      * @memberof module:jaaJSU~$object
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {Object} input_object
      * @returns {Mixed}
      */
     /**
      * @function function_Object2Object
      * @memberof module:jaaJSU~$object
-     * @category virtual
+     * @inner
+     * @category types description
      * @param {Object} input_object
      * @returns {Object} Modified version of `input_object` (By reference!)
      */
@@ -1422,7 +1439,8 @@
      * Similar to {@link module:jaaJSU~IterableArrayObject}
      * @typedef {Object} IterableObjectObject
      * @memberof module:jaaJSU~$object
-     * @category virtual
+     * @inner
+     * @category types description
      * @property {Mixed} item Nth value for `key` in `iterable`.
      * @property {Mixed} key Name of key
      * @property {Number} index Idicies 0...`Object.keys(iterable).length`.
@@ -1432,9 +1450,10 @@
     /**
      * @function IterableObjectCallback
      * @memberof module:jaaJSU~$object
-     * @category virtual
-     * @param {module:jaaJSU~$object.IterableObjectObject} IterableObjectObject
-     * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object.IterableObjectObject}.
+     * @inner
+     * @category types description
+     * @param {module:jaaJSU~$object~IterableObjectObject} IterableObjectObject
+     * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object~IterableObjectObject}.
      */
     var $object= {
         /**
@@ -1442,7 +1461,7 @@
          * @method each
          * @memberof module:jaaJSU~$object
          * @param {Object} iterable  An object for iterating.
-         * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
+         * @param {module:jaaJSU~$object~IterableObjectCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */
@@ -1452,7 +1471,7 @@
          * @method eachDynamic
          * @memberof module:jaaJSU~$object
          * @param {Object} iterable An object for iterating.
-         * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
+         * @param {module:jaaJSU~$object~IterableObjectCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */
@@ -1521,7 +1540,7 @@
          * @memberof module:jaaJSU~$object
          * @param {String} methodName Key in Object `object`.
          * @param {...Mixed} args Arguments for method `methodName`
-         * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key](...args)`
+         * @return {module:jaaJSU~$object~function_Object2Mixed} `(target) => target[key](...args)`
          * @example
          * $object.method("trim")(" Hi ");//= `Hi`
          * $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
@@ -1540,7 +1559,7 @@
          * @method pluck
          * @memberof module:jaaJSU~$object
          * @param {String} key Key in Object `object`.
-         * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key]`
+         * @return {module:jaaJSU~$object~function_Object2Mixed} `(target) => target[key]`
          * @example
          * $object.pluck("length")("Test");//= `4`
          */
@@ -1558,7 +1577,7 @@
          * @memberof module:jaaJSU~$object
          * @param {String} setterName Key in Object `object`.
          * @param {Mixed} arg Setter value
-         * @return {module:jaaJSU~$object.function_Object2Object} `object=> (object[setterName]= arg, object)`
+         * @return {module:jaaJSU~$object~function_Object2Object} `object=> (object[setterName]= arg, object)`
          * @example
          * $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
          */
@@ -2147,9 +2166,9 @@
              * @namespace format_arrays
              * @private
              * @readonly
-             * @property {module:jaaJSU~$time.ArrayOfOperation[]} SQL_DATE Generate format of **"YYYY-MM-DD"**
-             * @property {module:jaaJSU~$time.ArrayOfOperation[]} SQL Generate format of **"YYYY-MM-DD HH:mm:ss"**
-             * @property {module:jaaJSU~$time.ArrayOfOperation[]} SQL_TIME Generate format of **"HH:mm:ss"**
+             * @property {module:jaaJSU~$time~ArrayOfOperation[]} SQL_DATE Generate format of **"YYYY-MM-DD"**
+             * @property {module:jaaJSU~$time~ArrayOfOperation[]} SQL Generate format of **"YYYY-MM-DD HH:mm:ss"**
+             * @property {module:jaaJSU~$time~ArrayOfOperation[]} SQL_TIME Generate format of **"HH:mm:ss"**
              * @memberof module:jaaJSU~$time
              * @example
              * format_arrays.YYYYMMDD=== [ ["year", "numeric"], [ "text", "-" ], ["month", "2-digit"], [ "text", "-" ], ["day", "2-digit"] ]
@@ -2619,7 +2638,7 @@
          * @memberof module:jaaJSU~$time
          * @public
          * @param {Date} date_instance instance of `Date` class
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         function fromDate(date_instance){
             return toDateArray(date_instance.toISOString());
@@ -2630,7 +2649,7 @@
          * @memberof module:jaaJSU~$time
          * @public
          * @param {...Mixed} args parameters for initialize `Date` class
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         function fromDateArguments(...args){
             return toDateArray((args.filter(d=> typeof d!=="undefined").length ? new Date(...args) : new Date()).toISOString());
@@ -2642,7 +2661,7 @@
          * @method fromNow
          * @memberof module:jaaJSU~$time
          * @public
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         function fromNow(){
             return toDateArray((new Date()).toISOString());
@@ -2654,7 +2673,7 @@
          * @public
          * @param {String} [timestamp_string] If `undefined` returns result of {@link module:jaaJSU~$time.fromNow}, else it is used {@link module:jaaJSU~$time.toDateArray} for parsing.
          * @param {String} [timezone= internal_zone] Default timezone — uses if is not setted in `timestamp_string`
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         function fromString(timestamp_string, timezone= internal_zone){
             if(!timestamp_string) return fromNow();
@@ -2674,7 +2693,8 @@
          * This is in fact output of {@link module:jaaJSU~$time.toDateArray}.
          * @typedef {Array} DateArray
          * @memberof module:jaaJSU~$time
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @property {String} [date=""] is always in form of "YYYY-MM-DD" or ""
          * @property {String} [time=""] is always in form of "HH:mm:SS" or "HH:mm:00" or ""
          * @property {String} [time_zone=""] is always in form of "[+-]\d\d:\d\d" or "CET" or ""
@@ -2687,7 +2707,7 @@
          * @param {String} timestamp_string
          *  <br/>- Supported forms are combinations of date ("YYYY-MM-DD", "DD/MM/YYYY"), time ("HH:mm:ss", "HH:mm") and timezone ("CET", "+01:00", "-02:00", ...)
          *  <br/>- Typically: "2019-06-02 12:35:45 +01:00", "2019-06-02T12:35:45+01:00", "12:35:45+01:00 2019-06-02", ...
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         function toDateArray(timestamp_string){
             let /* these hold outputs */
@@ -2747,7 +2767,8 @@
          * It is in fact argument for `options` in [`Date.prototype.toLocaleString` Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString#Parameters).
          * @typedef {Object} toLocaleStringOptions
          * @memberof module:jaaJSU~$time
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @property {String} [locale=internal_locale] In which language/national format generate final string
          * @property {String} [timeZone=internal_zone] Time zone name from [`ary_ianna_time_zones`](#props_ary_ianna_time_zones).
          * @property {Boolean} [declension=true] Needed for some languages — for example in Czech: "10. července" (`declension=true`), or "10. červenec" (`declension=false`)
@@ -2757,9 +2778,9 @@
          * @method toStringFromObject
          * @memberof module:jaaJSU~$time
          * @private
-         * @param {module:jaaJSU~$time.ArrayOfOperation[]} format
-         * @param {module:jaaJSU~$time.toLocaleStringOptions} params_obj
-         * @returns {module:jaaJSU~$time.function_DateArray2String}
+         * @param {module:jaaJSU~$time~ArrayOfOperation[]} format
+         * @param {module:jaaJSU~$time~toLocaleStringOptions} params_obj
+         * @returns {module:jaaJSU~$time~function_DateArray2String}
          * @example
          * $time.toStringFromObject([ ["day", "2-digit"], [ "text", "/" ], ["month", "2-digit"], [ "text", "/" ], ["year", "numeric"] ],{ locale: "en-GB" })($time.fromNow());//= "05/06/2019"
          */
@@ -2793,7 +2814,8 @@
          * Predefined values can be found at {@link module:jaaJSU~$time.format_arrays}.
          * @typedef {Array} ArrayOfOperation
          * @memberof module:jaaJSU~$time
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @property {String} operation In fact names of keys in [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) (i. e. "weekday", "month") or "text".
          * @property {String} argument In fact value of given key in [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString) (i. e. "2-digit", "numeric").
          * @property {String} params Some additional information/modifications like "two_letters", "ordinal_number", ….
@@ -2813,7 +2835,7 @@
          * <br/>- "mm", "m",
          * <br/>- "SS", "S",
          * <br/>- "W", "Wo"
-         * @returns {module:jaaJSU~$time.ArrayOfOperation[]}
+         * @returns {module:jaaJSU~$time~ArrayOfOperation[]}
          */
         function getFormatObject(format_string= ""){
             let out= [], out_last_index, letter;
@@ -2939,7 +2961,7 @@
          * @method toDate
          * @memberof module:jaaJSU~$time
          * @public
-         * @param {module:jaaJSU~$time.DateArray} date_array
+         * @param {module:jaaJSU~$time~DateArray} date_array
          * @returns {Date}
          */
         function toDate([ date, time, zone ]= []){
@@ -2955,8 +2977,8 @@
          * @memberof module:jaaJSU~$time
          * @public
          * @param {String} [format_object_name="date_time"] name of predefined time/date combinations see {@link module:jaaJSU~$time.format_objects}.
-         * @param {module:jaaJSU~$time.toLocaleStringOptions} [toLocaleStringOptions]
-         * @returns {module:jaaJSU~$time.function_DateArray2String} returns result of [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString);
+         * @param {module:jaaJSU~$time~toLocaleStringOptions} [toLocaleStringOptions]
+         * @returns {module:jaaJSU~$time~function_DateArray2String} returns result of [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString);
          */
         function toLocaleString(format_object_name= "date_time", { locale= internal_locale, timeZone= internal_zone }= {}){
             return date_array=> toDate(date_array).toLocaleString(locale, generateTimeZoneFormatObject(timeZone, format_objects[format_object_name]));
@@ -3004,7 +3026,9 @@
         /**
          * @function function_DateArray2String
          * @memberof module:jaaJSU~$time
-         * @param {module:jaaJSU~$time.DateArray} date_array
+         * @category types descriptions
+         * @inner
+         * @param {module:jaaJSU~$time~DateArray} date_array
          * @returns {String}
          */
         /**
@@ -3012,11 +3036,11 @@
          * @method toString
          * @memberof module:jaaJSU~$time
          * @public
-         * @param {String|module:jaaJSU~$time.ArrayOfOperation[]} [format=$time.formats.SQL]
+         * @param {String|module:jaaJSU~$time~ArrayOfOperation[]} [format=$time.formats.SQL]
          * <br/>- Placeholder for replace/generate final string (eg. "MM"===two digits month) — see {@link module:jaaJSU~$time.getFormatObject}.
          * <br/>- Or lists of predefined formats — see {@link module:jaaJSU~$time.formats}.
-         * @param {module:jaaJSU~$time.toLocaleStringOptions} [toLocaleStringOptions]
-         * @returns {module:jaaJSU~$time.function_DateArray2String}
+         * @param {module:jaaJSU~$time~toLocaleStringOptions} [toLocaleStringOptions]
+         * @returns {module:jaaJSU~$time~function_DateArray2String}
          * @example
          * $time.toString("DD/MM/YYYY HH:mm:SS",{ locale: "en-GB" })($time.fromNow());//= "05/06/2019 09:32:20"
          * $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
@@ -3041,7 +3065,7 @@
         /**
          * @method getTimeZone
          * @memberof module:jaaJSU~$time
-         * @param {module:jaaJSU~$time.DateArray} date
+         * @param {module:jaaJSU~$time~DateArray} date
          * @param {Object} parameters
          * @param {String} [parameters.locale=internal_locale]
          * @param {String} [parameters.description="long"] The representation of the time zone name. Possible values are:
@@ -3122,14 +3146,16 @@
         /**
          * @function function_Date2Date
          * @memberof module:jaaJSU~$time
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @param {Date} date_instance
          * @returns {Date}
          */
         /**
          * @function function_Date2Number
          * @memberof module:jaaJSU~$time
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @param {Date} date_instance
          * @returns {Number}
          */
@@ -3139,7 +3165,7 @@
          * @memberof module:jaaJSU~$time.Date
          * @public
          * @param {Number} days_num How many days to add to `date_instance`
-         * @returns {module:jaaJSU~$time.function_Date2Date}
+         * @returns {module:jaaJSU~$time~function_Date2Date}
          * */
         function addDays(days_num){
             return date_instance=> (date_instance.setDate(date_instance.getDate()+days_num), date_instance);
@@ -3150,7 +3176,7 @@
          * @memberof module:jaaJSU~$time.Date
          * @public
          * @param {Number} months_num How many months to add to `date_instance`
-         * @returns {module:jaaJSU~$time.function_Date2Date}
+         * @returns {module:jaaJSU~$time~function_Date2Date}
          * */
         function addMonths(months_num){
             return date_instance=> (date_instance.setMonth(date_instance.getMonth()+months_num), date_instance);
@@ -3159,9 +3185,9 @@
          * @method getWeekDay
          * @memberof module:jaaJSU~$time.Date
          * @public
-         * @param {String} [type="numeric"] Show week numebr by default or se `weekday` in **MDN** see {@link module:jaaJSU~$time.toLocaleStringOptions}
-         * @param {module:jaaJSU~$time.toLocaleStringOptions} [toLocaleStringOptions] Key `declension` is redutant for this function
-         * @returns {module:jaaJSU~$time.function_Date2Number} If `type="numeric"`, it returns **0 (Su) - 6 (Sa)**, else it returns **name of week day**
+         * @param {String} [type="numeric"] Show week numebr by default or se `weekday` in **MDN** see {@link module:jaaJSU~$time~toLocaleStringOptions}
+         * @param {module:jaaJSU~$time~toLocaleStringOptions} [toLocaleStringOptions] Key `declension` is redutant for this function
+         * @returns {module:jaaJSU~$time~function_Date2Number} If `type="numeric"`, it returns **0 (Su) - 6 (Sa)**, else it returns **name of week day**
          * */
         function getWeekDay(type= "numeric", { locale= internal_locale, timeZone= internal_zone }= {}){
             return type==="numeric" ? date_instance=> date_instance.getDay() : date_instance=> date_instance.toLocaleString(locale, timeZone ? { timeZone, weekday: type } : { timeZone, weekday: type });
@@ -3187,9 +3213,10 @@
         /**
          * @function function_DateArray2DateArray
          * @memberof module:jaaJSU~$time
-         * @category virtual
-         * @param {module:jaaJSU~$time.DateArray} date_array
-         * @returns {module:jaaJSU~$time.DateArray}
+         * @category types descriptions
+         * @inner
+         * @param {module:jaaJSU~$time~DateArray} date_array
+         * @returns {module:jaaJSU~$time~DateArray}
          */
         
         /**
@@ -3206,7 +3233,7 @@
          * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- for "setDate" there is alias "setDay"
          * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- for "addDate" there is alias "addDays"
          * <br/>- Some operations: **"\*Date"** (or **"setDay"**, **"addDays"**), **"\*Month"**, **"\*FullYear"**, **"\*Hours"**, **"\*Minutes"**, **"\*Seconds"**
-         * @returns {module:jaaJSU~$time.function_DateArray2DateArray}
+         * @returns {module:jaaJSU~$time~function_DateArray2DateArray}
          */
         function modify(mod_obj){
             const operations= Object.keys(mod_obj);
@@ -3273,7 +3300,7 @@
          * @method getDaysInMonth
          * @memberof module:jaaJSU~$time
          * @public
-         * @param {module:jaaJSU~$time.types.DateArray} [date_array=">>current year<<"]
+         * @param {module:jaaJSU~$time.types~DateArray} [date_array=">>current year<<"]
          * @returns {Number} total of days
          */
         function getDaysInMonth([ date= fromNow()[0] ]= []){

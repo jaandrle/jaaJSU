@@ -9,14 +9,16 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**
  * @function function_Object2Mixed
  * @memberof module:jaaJSU~$object
- * @category virtual
+ * @inner
+ * @category types description
  * @param {Object} input_object
  * @returns {Mixed}
  */
 /**
  * @function function_Object2Object
  * @memberof module:jaaJSU~$object
- * @category virtual
+ * @inner
+ * @category types description
  * @param {Object} input_object
  * @returns {Object} Modified version of `input_object` (By reference!)
  */
@@ -24,7 +26,8 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
  * Similar to {@link module:jaaJSU~IterableArrayObject}
  * @typedef {Object} IterableObjectObject
  * @memberof module:jaaJSU~$object
- * @category virtual
+ * @inner
+ * @category types description
  * @property {Mixed} item Nth value for `key` in `iterable`.
  * @property {Mixed} key Name of key
  * @property {Number} index Idicies 0...`Object.keys(iterable).length`.
@@ -34,9 +37,10 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**
  * @function IterableObjectCallback
  * @memberof module:jaaJSU~$object
- * @category virtual
- * @param {module:jaaJSU~$object.IterableObjectObject} IterableObjectObject
- * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object.IterableObjectObject}.
+ * @inner
+ * @category types description
+ * @param {module:jaaJSU~$object~IterableObjectObject} IterableObjectObject
+ * @returns {Mixed|Undefined} `share` key of {@link module:jaaJSU~$object~IterableObjectObject}.
  */
 var $object= {
     /**
@@ -44,7 +48,7 @@ var $object= {
      * @method each
      * @memberof module:jaaJSU~$object
      * @param {Object} iterable  An object for iterating.
-     * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
+     * @param {module:jaaJSU~$object~IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
@@ -54,7 +58,7 @@ var $object= {
      * @method eachDynamic
      * @memberof module:jaaJSU~$object
      * @param {Object} iterable An object for iterating.
-     * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
+     * @param {module:jaaJSU~$object~IterableObjectCallback} i_function
      * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
      * @return {Mixed} `share`
      */
@@ -123,7 +127,7 @@ var $object= {
      * @memberof module:jaaJSU~$object
      * @param {String} methodName Key in Object `object`.
      * @param {...Mixed} args Arguments for method `methodName`
-     * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key](...args)`
+     * @return {module:jaaJSU~$object~function_Object2Mixed} `(target) => target[key](...args)`
      * @example
      * $object.method("trim")(" Hi ");//= `Hi`
      * $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
@@ -142,7 +146,7 @@ var $object= {
      * @method pluck
      * @memberof module:jaaJSU~$object
      * @param {String} key Key in Object `object`.
-     * @return {module:jaaJSU~$object.function_Object2Mixed} `(target) => target[key]`
+     * @return {module:jaaJSU~$object~function_Object2Mixed} `(target) => target[key]`
      * @example
      * $object.pluck("length")("Test");//= `4`
      */
@@ -160,7 +164,7 @@ var $object= {
      * @memberof module:jaaJSU~$object
      * @param {String} setterName Key in Object `object`.
      * @param {Mixed} arg Setter value
-     * @return {module:jaaJSU~$object.function_Object2Object} `object=> (object[setterName]= arg, object)`
+     * @return {module:jaaJSU~$object~function_Object2Object} `object=> (object[setterName]= arg, object)`
      * @example
      * $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });//= `{ test_key: "test_value", other_key: "other_value" }`
      */

@@ -8,14 +8,16 @@
  * This kind of function schould returns `Promise`.
  * @function function_Undefined2Promise
  * @memberof module:jaaJSU~$async
- * @category virtual
+ * @inner
+ * @category types descriptions
  * @returns {Promise}
  */
 /**
  * This kind of function schould returns `Promise`.
  * @function function_MultipleMixed2Promise
  * @memberof module:jaaJSU~$async
- * @category virtual
+ * @inner
+ * @category types descriptions
  * @param {...Mixed} Mixed Various arguments
  * @returns {Promise}
  */
@@ -26,7 +28,7 @@ var $async={
     * @method serialize
     * @memberof module:jaaJSU~$async
     * @deprecated Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
-    * @param {module:jaaJSU~$async.function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
+    * @param {module:jaaJSU~$async~function_Undefined2Promise[]} funcs Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
     * @.then {Mixed[]} Array of results from `funcs`
     * @.catch {Error} Error in `funcs[nth]`
@@ -48,7 +50,7 @@ var $async={
     * Procedure for iterating thorught **Promise** function array `funcs`.
     * @method iterate_
     * @memberof module:jaaJSU~$async
-    * @param {module:jaaJSU~$async.function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
+    * @param {module:jaaJSU~$async~function_Undefined2Promise[]} iterablePromises Array of functions for iterating (the next always waiting fro previous Promise).
     * @return {Promise}
     * @.then {Mixed} Result of last function in `iterablePromises`
     * @.catch {Error} Error in `iterablePromises[nth]`
@@ -81,7 +83,7 @@ var $async={
      * @method iterateMixed_
      * @beta Use {@link module:jaaJSU~$async.iterate_}, {@link module:jaaJSU~$async.sequention_}, {@link module:jaaJSU~$async.each_}.
      * @memberof module:jaaJSU~$async
-     * @param {...Promise|module:jaaJSU~$async.function_Undefined2Promise} tasks
+     * @param {...Promise|module:jaaJSU~$async~function_Undefined2Promise} tasks
      * @return {Promise}
      */
     iterateMixed_: function(...tasks){
@@ -106,7 +108,7 @@ var $async={
     * Procedure for iterating throught **Promise** functions (wait pattern).
     * @method sequention_
     * @memberof module:jaaJSU~$async
-    * @param {...module:jaaJSU~$async.function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
+    * @param {...module:jaaJSU~$async~function_Undefined2Promise} functions Functions for iterating (the next always waiting fro previous).
     * @return {Promise}
     * @.then {Mixed} Result of last function in `functions`
     * @.catch {Error} Error in `functions[nth]`
@@ -120,8 +122,8 @@ var $async={
     * Procedure for iterating throught **Promise** functions (race pattern).
     * @method each_
     * @memberof module:jaaJSU~$async
-    * @param {...function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
-    * @return {module:jaaJSU~$async.function_MultipleMixed2Promise}
+    * @param {...module:jaaJSU~$async~function_MultipleMixed2Promise} functions Promises for iterating (race pattern).
+    * @return {module:jaaJSU~$async~function_MultipleMixed2Promise}
     * @.then {Mixed} Result of last function in `functions`
     * @.catch {Error} Error in `functions[nth]`
     * @example

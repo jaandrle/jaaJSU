@@ -56,22 +56,23 @@ var $array= {
     },
     /**
      * Methods around array `arr` exported by {@link module:jaaJSU~$array.partition} method.
-     * @typedef {Object} ArrayPartition
+     * @typedef {Object} instance_partition
      * @memberof module:jaaJSU~$array
-     * @category virtual
+     * @inner
+     * @category types descriptions
      */
     /**
      * Function returns methods for splitting array by condition.
      * @method partition
      * @memberof module:jaaJSU~$array
      * @param {Mixed[]} arr Input array.
-     * @returns {module:jaaJSU~$array.ArrayPartition}
+     * @returns {module:jaaJSU~$array~instance_partition}
      */
     partition: function(arr){
         return {
             /**
              * @method head
-             * @memberof module:jaaJSU~$array.ArrayPartition
+             * @memberof module:jaaJSU~$array~instance_partition
              * @returns {Array} two items Array `[x, ...xs]` (first element and rest array)
              */
             head: function(){
@@ -80,7 +81,7 @@ var $array= {
             },
             /**
              * @method tail
-             * @memberof module:jaaJSU~$array.ArrayPartition
+             * @memberof module:jaaJSU~$array~instance_partition
              * @returns {Array} two items Array `[...xs, x]` (rest array and last element)
              */
             tail: function(){
@@ -90,7 +91,7 @@ var $array= {
             },
             /**
              * @method onIndex
-             * @memberof module:jaaJSU~$array.ArrayPartition
+             * @memberof module:jaaJSU~$array~instance_partition
              * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
              * @returns {Array[]} Two items Array [arr1, arr2]
              */
@@ -100,7 +101,7 @@ var $array= {
             },
             /**
              * @method byCondition
-             * @memberof module:jaaJSU~$array.ArrayPartition
+             * @memberof module:jaaJSU~$array~instance_partition
              * @param {function_filterCallback} fn In fact index of inner array (see return part).
              * @returns {Array[]} Two items Array [arr1, arr2] based on `fn`.
              */

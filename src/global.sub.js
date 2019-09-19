@@ -3,7 +3,7 @@
 /**
  * This kind of function is typically used in `Array.prototype.filter`.
  * @function function_filterCallback
- * @category virtual
+ * @category types description
  * @param {Mixed} i_value Nth value of array.
  * @param {Number} i Nth key of array.
  * @returns {Boolean}
@@ -11,7 +11,7 @@
 /**
  * This kind of function is typically used in `Array.prototype.reduce`.
  * @function function_reduceCallback
- * @category virtual
+ * @category types description
  * @param {Mixed} accumulator
  * @param {Mixed} i_value Nth value of array.
  * @param {Number} i Nth key of array.
@@ -19,7 +19,7 @@
  */
 /**
  * @typedef {Object} IterableArrayObject
- * @category virtual
+ * @category types description
  * @property {Mixed} item Nth value for `key` in `iterable`.
  * @property {Number} key Idicies 0...`iterable.length`.
  * @property {Boolean} last Is setted True, if it is the last element in array.
@@ -27,7 +27,7 @@
  */
 /**
  * @function IterableCallback
- * @category virtual
+ * @category types description
  * @param {module:jaaJSU~IterableArrayObject} IterableArrayObject
  * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
  */
