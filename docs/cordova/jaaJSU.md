@@ -223,7 +223,7 @@
 ### jaaJSU~$array : <code>object</code>
 This NAMESPACE provides features for Arrays.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$array" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L61" title="jaaJSU.js:61"><small>(defined@61)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$array" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L61" title="jaaJSU.js:61"><small>(defined@61)</small></a>  
 **Category**: namespaces  
 
 * [~$array](#module_jaaJSU..$array) : <code>object</code>
@@ -250,7 +250,7 @@ This NAMESPACE provides features for Arrays.
 Function which calculate final index for cylce looping.
 Means from current index `i` get `s`th value in array which length is `l`.
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.arrayIndex" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L67" title="jaaJSU.js:67"><small>(defined@67)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.arrayIndex" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L67" title="jaaJSU.js:67"><small>(defined@67)</small></a>  
 **Returns**: <code>Number</code> - Index in array  
 
 | Param | Type | Description |
@@ -274,7 +274,7 @@ console.log(a[0]===a[$array.arrayIndex(0,2,a.length)]);
 #### $array.each(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Procedure for iterating throught Array `iterable`.
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L85" title="jaaJSU.js:85"><small>(defined@85)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L85" title="jaaJSU.js:85"><small>(defined@85)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -291,7 +291,7 @@ Procedure for iterating throught Array `iterable`.
 #### $array.eachDynamic(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Procedure for iterating throught Array `iterable` like [each](#module_jaaJSU..$array.each), but use `for(...;(item= iterable[i]);i++)...`.
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L95" title="jaaJSU.js:95"><small>(defined@95)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L95" title="jaaJSU.js:95"><small>(defined@95)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -308,7 +308,7 @@ Procedure for iterating throught Array `iterable` like [each](#module_jaaJSU..$a
 #### $array.getLast(arr) ⇒ <code>Mixed</code>
 Function returns last element in array without editing the original.
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.getLast" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L105" title="jaaJSU.js:105"><small>(defined@105)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.getLast" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L105" title="jaaJSU.js:105"><small>(defined@105)</small></a>  
 **Returns**: <code>Mixed</code> - Last element in `arr`  
 
 | Param | Type | Description |
@@ -323,7 +323,7 @@ Function returns last element in array without editing the original.
 #### $array.partition(arr) ⇒ [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition)
 Function returns methods for splitting array by condition.
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.partition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L121" title="jaaJSU.js:121"><small>(defined@121)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.partition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L121" title="jaaJSU.js:121"><small>(defined@121)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -337,7 +337,7 @@ Function returns methods for splitting array by condition.
 #### $array.removeItem(arr, item) ⇒ <code>Array</code>
 Function returns new array without any `item`
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.removeItem" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L172" title="jaaJSU.js:172"><small>(defined@172)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.removeItem" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L172" title="jaaJSU.js:172"><small>(defined@172)</small></a>  
 **Returns**: <code>Array</code> - New {Array} from `arr` without `item`s  
 
 | Param | Type | Description |
@@ -353,7 +353,7 @@ Function returns new array without any `item`
 #### $array.sortRandom() ⇒ <code>Number</code>
 Function returns random number for Array.sort function
 
-**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.sortRandom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L189" title="jaaJSU.js:189"><small>(defined@189)</small></a>  
+**Kind**: static method of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.sortRandom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L189" title="jaaJSU.js:189"><small>(defined@189)</small></a>  
 **Returns**: <code>Number</code> - Number in interval <-0.5,0.5>  
 
 * * *
@@ -363,7 +363,7 @@ Function returns random number for Array.sort function
 #### $array.ArrayPartition : <code>Object</code>
 Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partition) method.
 
-**Kind**: static typedef of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.ArrayPartition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L115" title="jaaJSU.js:115"><small>(defined@115)</small></a>  
+**Kind**: static typedef of [<code>$array</code>](#module_jaaJSU..$array) <a name="module_jaaJSU..$array.ArrayPartition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L115" title="jaaJSU.js:115"><small>(defined@115)</small></a>  
 **Category**: virtual  
 
 * [.ArrayPartition](#module_jaaJSU..$array.ArrayPartition) : <code>Object</code>
@@ -378,7 +378,7 @@ Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partit
 <a name="module_jaaJSU..$array.ArrayPartition.head"></a>
 
 ##### ArrayPartition.head() ⇒ <code>Array</code>
-**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.head" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L130" title="jaaJSU.js:130"><small>(defined@130)</small></a>  
+**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.head" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L130" title="jaaJSU.js:130"><small>(defined@130)</small></a>  
 **Returns**: <code>Array</code> - two items Array `[x, ...xs]` (first element and rest array)  
 
 * * *
@@ -386,7 +386,7 @@ Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partit
 <a name="module_jaaJSU..$array.ArrayPartition.tail"></a>
 
 ##### ArrayPartition.tail() ⇒ <code>Array</code>
-**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.tail" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L139" title="jaaJSU.js:139"><small>(defined@139)</small></a>  
+**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.tail" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L139" title="jaaJSU.js:139"><small>(defined@139)</small></a>  
 **Returns**: <code>Array</code> - two items Array `[...xs, x]` (rest array and last element)  
 
 * * *
@@ -394,7 +394,7 @@ Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partit
 <a name="module_jaaJSU..$array.ArrayPartition.onIndex"></a>
 
 ##### ArrayPartition.onIndex(index) ⇒ <code>Array.&lt;Array&gt;</code>
-**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.onIndex" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L149" title="jaaJSU.js:149"><small>(defined@149)</small></a>  
+**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.onIndex" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L149" title="jaaJSU.js:149"><small>(defined@149)</small></a>  
 **Returns**: <code>Array.&lt;Array&gt;</code> - Two items Array [arr1, arr2]  
 
 | Param | Type | Description |
@@ -407,7 +407,7 @@ Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partit
 <a name="module_jaaJSU..$array.ArrayPartition.byCondition"></a>
 
 ##### ArrayPartition.byCondition(fn) ⇒ <code>Array.&lt;Array&gt;</code>
-**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.byCondition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L159" title="jaaJSU.js:159"><small>(defined@159)</small></a>  
+**Kind**: static method of [<code>ArrayPartition</code>](#module_jaaJSU..$array.ArrayPartition) <a name="module_jaaJSU..$array.ArrayPartition.byCondition" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L159" title="jaaJSU.js:159"><small>(defined@159)</small></a>  
 **Returns**: <code>Array.&lt;Array&gt;</code> - Two items Array [arr1, arr2] based on `fn`.  
 
 | Param | Type | Description |
@@ -422,7 +422,7 @@ Methods around array `arr` exported by [partition](#module_jaaJSU..$array.partit
 ### jaaJSU~$async : <code>object</code>
 This NAMESPACE provides features for async (mainly Promise) functions.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$async" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L205" title="jaaJSU.js:205"><small>(defined@205)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$async" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L205" title="jaaJSU.js:205"><small>(defined@205)</small></a>  
 **Category**: namespaces  
 
 * [~$async](#module_jaaJSU..$async) : <code>object</code>
@@ -444,7 +444,7 @@ This NAMESPACE provides features for async (mainly Promise) functions.
 #### $async.CANCEL
 It is used in [iterateMixed_](#module_jaaJSU..$async.iterateMixed_)
 
-**Kind**: static property of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.CANCEL" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L280" title="jaaJSU.js:280"><small>(defined@280)</small></a>  
+**Kind**: static property of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.CANCEL" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L280" title="jaaJSU.js:280"><small>(defined@280)</small></a>  
 **Properties**
 
 | Name | Type |
@@ -461,7 +461,7 @@ It is used in [iterateMixed_](#module_jaaJSU..$async.iterateMixed_)
 
 Procedure for iterating thorught **Promise** function array `funcs`.
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.serialize" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L226" title="jaaJSU.js:226"><small>(defined@226)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.serialize" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L226" title="jaaJSU.js:226"><small>(defined@226)</small></a>  
 **.then**: <code>Mixed[]</code> Array of results from `funcs`  
 **.catch**: <code>Error</code> Error in `funcs[nth]`  
 
@@ -486,7 +486,7 @@ $async.serialize(timeouts).then(console.log).catch(console.error);
 #### $async.iterate\_(iterablePromises) ⇒ <code>Promise</code>
 Procedure for iterating thorught **Promise** function array `funcs`.
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.iterate_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L250" title="jaaJSU.js:250"><small>(defined@250)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.iterate_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L250" title="jaaJSU.js:250"><small>(defined@250)</small></a>  
 **.then**: <code>Mixed</code> Result of last function in `iterablePromises`  
 **.catch**: <code>Error</code> Error in `iterablePromises[nth]`  
 
@@ -511,7 +511,7 @@ $async.serialize(timeouts).then(console.log).catch(console.error);
 #### $async.iterateMixed\_(tasks) ⇒ <code>Promise</code>
 Like `iterate_`, but also allows iterate throught non-promise functions
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.iterateMixed_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L281" title="jaaJSU.js:281"><small>(defined@281)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.iterateMixed_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L281" title="jaaJSU.js:281"><small>(defined@281)</small></a>  
 **Beta**: Use [iterate_](#module_jaaJSU..$async.iterate_), [sequention_](#module_jaaJSU..$async.sequention_), [each_](#module_jaaJSU..$async.each_).  
 
 | Param | Type |
@@ -526,7 +526,7 @@ Like `iterate_`, but also allows iterate throught non-promise functions
 #### $async.sequention\_(...functions) ⇒ <code>Promise</code>
 Procedure for iterating throught **Promise** functions (wait pattern).
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.sequention_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L308" title="jaaJSU.js:308"><small>(defined@308)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.sequention_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L308" title="jaaJSU.js:308"><small>(defined@308)</small></a>  
 **.then**: <code>Mixed</code> Result of last function in `functions`  
 **.catch**: <code>Error</code> Error in `functions[nth]`  
 
@@ -542,7 +542,7 @@ Procedure for iterating throught **Promise** functions (wait pattern).
 #### $async.each\_(...functions) ⇒ [<code>function\_MultipleMixed2Promise</code>](#module_jaaJSU..$async.function_MultipleMixed2Promise)
 Procedure for iterating throught **Promise** functions (race pattern).
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.each_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L322" title="jaaJSU.js:322"><small>(defined@322)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.each_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L322" title="jaaJSU.js:322"><small>(defined@322)</small></a>  
 **.then**: <code>Mixed</code> Result of last function in `functions`  
 **.catch**: <code>Error</code> Error in `functions[nth]`  
 
@@ -567,7 +567,7 @@ $async.each_(...timeouts)().then(console.log).catch(console.error);
 #### $async.function\_Undefined2Promise() ⇒ <code>Promise</code>
 This kind of function schould returns `Promise`.
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.function_Undefined2Promise" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L210" title="jaaJSU.js:210"><small>(defined@210)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.function_Undefined2Promise" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L210" title="jaaJSU.js:210"><small>(defined@210)</small></a>  
 **Category**: virtual  
 
 * * *
@@ -577,7 +577,7 @@ This kind of function schould returns `Promise`.
 #### $async.function\_MultipleMixed2Promise(...Mixed) ⇒ <code>Promise</code>
 This kind of function schould returns `Promise`.
 
-**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.function_MultipleMixed2Promise" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L217" title="jaaJSU.js:217"><small>(defined@217)</small></a>  
+**Kind**: static method of [<code>$async</code>](#module_jaaJSU..$async) <a name="module_jaaJSU..$async.function_MultipleMixed2Promise" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L217" title="jaaJSU.js:217"><small>(defined@217)</small></a>  
 **Category**: virtual  
 
 | Param | Type | Description |
@@ -592,7 +592,7 @@ This kind of function schould returns `Promise`.
 ### jaaJSU~$dom : <code>object</code>
 This NAMESPACE provides features for DOM elemnts.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$dom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L350" title="jaaJSU.js:350"><small>(defined@350)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$dom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L350" title="jaaJSU.js:350"><small>(defined@350)</small></a>  
 **Category**: namespaces  
 
 * [~$dom](#module_jaaJSU..$dom) : <code>object</code>
@@ -646,7 +646,7 @@ This NAMESPACE provides features for DOM elemnts.
 #### $dom.ready\_(...args) ⇒ <code>Promise</code>
 Calls `.then` when the DOM is ready
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.ready_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L356" title="jaaJSU.js:356"><small>(defined@356)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.ready_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L356" title="jaaJSU.js:356"><small>(defined@356)</small></a>  
 **.then**: <code>Mixed</code> See `args`  
 
 | Param | Type | Description |
@@ -661,7 +661,7 @@ Calls `.then` when the DOM is ready
 #### $dom.elementReady\_(el_selector, [parent]) ⇒ <code>Promise</code>
 Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.elementReady_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L385" title="jaaJSU.js:385"><small>(defined@385)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.elementReady_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L385" title="jaaJSU.js:385"><small>(defined@385)</small></a>  
 **.then**: <code>NodeElement</code> Target elemnet based on `el_selector`  
 
 | Param | Type | Default | Description |
@@ -677,7 +677,7 @@ Calls `.then` when the DOM element is available/reday (uses `requestAnimationFra
 #### $dom.empty(container)
 Procedure remove children of given element `container`.
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.empty" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L406" title="jaaJSU.js:406"><small>(defined@406)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.empty" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L406" title="jaaJSU.js:406"><small>(defined@406)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -691,7 +691,7 @@ Procedure remove children of given element `container`.
 #### $dom.insertAfter(new_element, reference)
 Procedure places `new_element` after `reference` elements
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.insertAfter" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L416" title="jaaJSU.js:416"><small>(defined@416)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.insertAfter" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L416" title="jaaJSU.js:416"><small>(defined@416)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -706,7 +706,7 @@ Procedure places `new_element` after `reference` elements
 #### $dom.removeElements(els_to_delete, [from_index], [to_index])
 Remove elements in given {NodeList} or {HTMLCollection}
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.removeElements" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L428" title="jaaJSU.js:428"><small>(defined@428)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.removeElements" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L428" title="jaaJSU.js:428"><small>(defined@428)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -722,7 +722,7 @@ Remove elements in given {NodeList} or {HTMLCollection}
 #### $dom.replace(el_old, el_new)
 Procedure replaces `el_old` element by new one (`new_el`)
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.replace" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L444" title="jaaJSU.js:444"><small>(defined@444)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.replace" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L444" title="jaaJSU.js:444"><small>(defined@444)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -737,7 +737,7 @@ Procedure replaces `el_old` element by new one (`new_el`)
 #### $dom.toggleAttribute(element, attribute_name, attribute_a, attribute_b) ⇒ <code>String</code>
 Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_name) === attribute_a ? attribute_b : attribute_a)`
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.toggleAttribute" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L455" title="jaaJSU.js:455"><small>(defined@455)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.toggleAttribute" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L455" title="jaaJSU.js:455"><small>(defined@455)</small></a>  
 **Returns**: <code>String</code> - `attribute_a` or `attribute_b`  
 
 | Param | Type | Description |
@@ -755,7 +755,7 @@ Alias for `element.setAttribute(attribute_name, element.getAttribute(attribute_n
 #### $dom.toggleDataset(element, data_name, data_a, data_b) ⇒ <code>String</code>
 Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? data_b : data_a`
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.toggleDataset" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L470" title="jaaJSU.js:470"><small>(defined@470)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.toggleDataset" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L470" title="jaaJSU.js:470"><small>(defined@470)</small></a>  
 **Returns**: <code>String</code> - `data_a` or `data_b`  
 
 | Param | Type | Description |
@@ -773,7 +773,7 @@ Alias for `element.dataset[data_name]= element.dataset[data_name] === data_a ? d
 #### $dom.each(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Procedure for iterating throught NodeList `iterable`.
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L483" title="jaaJSU.js:483"><small>(defined@483)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L483" title="jaaJSU.js:483"><small>(defined@483)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -790,7 +790,7 @@ Procedure for iterating throught NodeList `iterable`.
 #### $dom.eachDynamic(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Procedure for iterating throught NodeList `iterable` like [each](#module_jaaJSU..$dom.each), but use `for(...;(item= iterable[i]);i++)...`.
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L493" title="jaaJSU.js:493"><small>(defined@493)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L493" title="jaaJSU.js:493"><small>(defined@493)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -807,7 +807,7 @@ Procedure for iterating throught NodeList `iterable` like [each](#module_jaaJSU.
 #### $dom.component([el_name], attrs, [params]) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty)
 This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L551" title="jaaJSU.js:551"><small>(defined@551)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L551" title="jaaJSU.js:551"><small>(defined@551)</small></a>  
 **Returns**: [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) \| [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty) - Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!  
 **Version**: 1.0.0  
 
@@ -828,7 +828,7 @@ Procedure for merging object into the element properties.
 Very simple example: `$dom.assign(document.body, { className: "test" });` is equivalent to `document.body.className= "test";`.
 It is not deep copy in general, but it supports `style`, `style_vars` and `dataset` objects (see below).
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.assign_cordova" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1041" title="jaaJSU.js:1041"><small>(defined@1041)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.assign_cordova" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1041" title="jaaJSU.js:1041"><small>(defined@1041)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -878,7 +878,7 @@ $dom.assign(IMG_ELEMENT, { src: "image.png" });//=> <img src="image.png" …
 
 See [add](#module_jaaJSU..$dom.add)
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.add" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1115" title="jaaJSU.js:1115"><small>(defined@1115)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.add" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1115" title="jaaJSU.js:1115"><small>(defined@1115)</small></a>  
 **Returns**: <code>NodeElement</code> - First created element (usualy wrapper thanks nesting)  
 
 | Param | Type | Description |
@@ -895,7 +895,7 @@ See [add](#module_jaaJSU..$dom.add)
 #### $dom.forceRedraw([element], [platform])
 Redraw element using cheat `*.offsetHeight`
 
-**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.forceRedraw" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1143" title="jaaJSU.js:1143"><small>(defined@1143)</small></a>  
+**Kind**: static method of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.forceRedraw" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1143" title="jaaJSU.js:1143"><small>(defined@1143)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -911,7 +911,7 @@ Redraw element using cheat `*.offsetHeight`
 Key is name of "selection" function ('querySelector, ..., getElementsByClassname, ...).
 Value is argument for selection function
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.DomPreparedSelector" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L376" title="jaaJSU.js:376"><small>(defined@376)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.DomPreparedSelector" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L376" title="jaaJSU.js:376"><small>(defined@376)</small></a>  
 **Category**: virtual  
 **Example**  
 ```js
@@ -925,7 +925,7 @@ Value is argument for selection function
 #### $dom.instance\_componentEmpty : [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 In generall, all methods from [instance_component](#module_jaaJSU..$dom.instance_component) don't do anything. Also during "mounting" there are some changes see method [mount](#module_jaaJSU..$dom.instance_componentEmpty.mount).
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentEmpty" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L506" title="jaaJSU.js:506"><small>(defined@506)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentEmpty" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L506" title="jaaJSU.js:506"><small>(defined@506)</small></a>  
 **Category**: virtual  
 
 * * *
@@ -935,7 +935,7 @@ In generall, all methods from [instance_component](#module_jaaJSU..$dom.instance
 ##### instance_componentEmpty.mount()
 The same syntax as [mount](#module_jaaJSU..$dom.instance_component.mount). But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
 
-**Kind**: static method of [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty) <a name="module_jaaJSU..$dom.instance_componentEmpty.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L517" title="jaaJSU.js:517"><small>(defined@517)</small></a>  
+**Kind**: static method of [<code>instance\_componentEmpty</code>](#module_jaaJSU..$dom.instance_componentEmpty) <a name="module_jaaJSU..$dom.instance_componentEmpty.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L517" title="jaaJSU.js:517"><small>(defined@517)</small></a>  
 
 * * *
 
@@ -944,7 +944,7 @@ The same syntax as [mount](#module_jaaJSU..$dom.instance_component.mount). But o
 #### $dom.instance\_component : <code>Object</code>
 This is minimal export of "functional class" [component](#module_jaaJSU..$dom.component) and its methods (if they are chainable).
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L588" title="jaaJSU.js:588"><small>(defined@588)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L588" title="jaaJSU.js:588"><small>(defined@588)</small></a>  
 **Category**: virtual  
 
 * [.instance_component](#module_jaaJSU..$dom.instance_component) : <code>Object</code>
@@ -971,7 +971,7 @@ This is minimal export of "functional class" [component](#module_jaaJSU..$dom.co
 ##### instance_component.add(el_name, attrs, [shift]) ⇒ [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd)
 This add element to component
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.add" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L603" title="jaaJSU.js:603"><small>(defined@603)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.add" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L603" title="jaaJSU.js:603"><small>(defined@603)</small></a>  
 **Chainable**  
 **Access**: public  
 
@@ -1010,7 +1010,7 @@ add("DIV", { textContent: "Child of div.deep1", className: "deep2 nextone" }, -2
 ##### instance_component.addText(text, [shift]) ⇒ [<code>instance\_componentAddText</code>](#module_jaaJSU..$dom.instance_componentAddText)
 This add element to component
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.addText" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L701" title="jaaJSU.js:701"><small>(defined@701)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.addText" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L701" title="jaaJSU.js:701"><small>(defined@701)</small></a>  
 **Chainable**  
 **Access**: public  
 
@@ -1048,7 +1048,7 @@ function testTextLi({ href= "https://www.seznam.cz" }= {}){
 ##### instance_component.component(share, [shift]) ⇒ [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 Method for including another component by usint its `share` key.
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L745" title="jaaJSU.js:745"><small>(defined@745)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L745" title="jaaJSU.js:745"><small>(defined@745)</small></a>  
 **Chainable**  
 **Access**: public  
 
@@ -1076,7 +1076,7 @@ c.mount(document.body, "replaceContent");
 ##### instance_component.mount(element, call_parseHTML, [type])
 Add element to live DOM
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L775" title="jaaJSU.js:775"><small>(defined@775)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L775" title="jaaJSU.js:775"><small>(defined@775)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -1093,7 +1093,7 @@ Add element to live DOM
 ##### instance_component.recalculateDeep(shift) ℗
 Updates `deep`
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.recalculateDeep" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L836" title="jaaJSU.js:836"><small>(defined@836)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.recalculateDeep" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L836" title="jaaJSU.js:836"><small>(defined@836)</small></a>  
 **Access**: private  
 
 | Param | Type | Description |
@@ -1108,7 +1108,7 @@ Updates `deep`
 ##### instance_component.getParentElement() ⇒ <code>NodeElement</code> ℗
 Returns parent element (or "fragment pseudo element")
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.getParentElement" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L848" title="jaaJSU.js:848"><small>(defined@848)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.getParentElement" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L848" title="jaaJSU.js:848"><small>(defined@848)</small></a>  
 **Returns**: <code>NodeElement</code> - Returns parent element (i. e. `DocumenFragment` if component is empty)  
 **Access**: private  
 
@@ -1119,7 +1119,7 @@ Returns parent element (or "fragment pseudo element")
 ##### instance_component.setShift([shift]) ⇒ [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 Method provide way to change nesting behaviour. It can be helpful for loops
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.setShift" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L859" title="jaaJSU.js:859"><small>(defined@859)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.setShift" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L859" title="jaaJSU.js:859"><small>(defined@859)</small></a>  
 **Chainable**  
 **Access**: public  
 
@@ -1161,7 +1161,7 @@ function testNesting(){
 ##### instance_component.initStorage() ⇒ <code>Object</code> ℗
 Initialize internal storage
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.initStorage" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L897" title="jaaJSU.js:897"><small>(defined@897)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.initStorage" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L897" title="jaaJSU.js:897"><small>(defined@897)</small></a>  
 **Returns**: <code>Object</code> - `{ register, registerComponent, update, unregister}`  
 **Access**: private  
 
@@ -1172,7 +1172,7 @@ Initialize internal storage
 ##### instance_component.update(new_data) ⇒ <code>Boolean</code>
 Method updates all registered varibles by keys `onupdates` and calls follower functions
 
-**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.update" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L975" title="jaaJSU.js:975"><small>(defined@975)</small></a>  
+**Kind**: static method of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.update" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L975" title="jaaJSU.js:975"><small>(defined@975)</small></a>  
 **Returns**: <code>Boolean</code> - If success `1`, else `0`.  
 **Access**: public  
 
@@ -1219,7 +1219,7 @@ c.update(({ a })=> { a: ++a });
 ##### instance_component.share : <code>Object</code>
 Its purpose is to make easy transfering methods somewhere else (like for using in another component, see [component](#module_jaaJSU..$dom.instance_component.component) method).
 
-**Kind**: static typedef of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.share" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L580" title="jaaJSU.js:580"><small>(defined@580)</small></a>  
+**Kind**: static typedef of [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component) <a name="module_jaaJSU..$dom.instance_component.share" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L580" title="jaaJSU.js:580"><small>(defined@580)</small></a>  
 
 * [.share](#module_jaaJSU..$dom.instance_component.share) : <code>Object</code>
     * [.destroy()](#module_jaaJSU..$dom.instance_component.share.destroy) ⇒ <code>Null</code>
@@ -1235,7 +1235,7 @@ Its purpose is to make easy transfering methods somewhere else (like for using i
 ###### share.destroy() ⇒ <code>Null</code>
 Method remove element form live DOM and returns null
 
-**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.destroy" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L819" title="jaaJSU.js:819"><small>(defined@819)</small></a>  
+**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.destroy" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L819" title="jaaJSU.js:819"><small>(defined@819)</small></a>  
 **Access**: public  
 **Example**  
 ```js
@@ -1252,7 +1252,7 @@ c= c.share.destroy();
 ###### share.isStatic() ⇒ <code>Boolean</code>
 Methods returns if it was `onupdate` used
 
-**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.isStatic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1016" title="jaaJSU.js:1016"><small>(defined@1016)</small></a>  
+**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.isStatic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1016" title="jaaJSU.js:1016"><small>(defined@1016)</small></a>  
 **Returns**: <code>Boolean</code> - If there is some listeners `onupdate`  
 **Access**: public  
 
@@ -1263,7 +1263,7 @@ Methods returns if it was `onupdate` used
 ###### share.mount(element, call_parseHTML, [type])
 Add element to live DOM
 
-**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L775" title="jaaJSU.js:775"><small>(defined@775)</small></a>  
+**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.mount" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L775" title="jaaJSU.js:775"><small>(defined@775)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -1280,7 +1280,7 @@ Add element to live DOM
 ###### share.update(new_data) ⇒ <code>Boolean</code>
 Method updates all registered varibles by keys `onupdates` and calls follower functions
 
-**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.update" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L975" title="jaaJSU.js:975"><small>(defined@975)</small></a>  
+**Kind**: static method of [<code>share</code>](#module_jaaJSU..$dom.instance_component.share) <a name="module_jaaJSU..$dom.instance_component.share.update" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L975" title="jaaJSU.js:975"><small>(defined@975)</small></a>  
 **Returns**: <code>Boolean</code> - If success `1`, else `0`.  
 **Access**: public  
 
@@ -1327,7 +1327,7 @@ c.update(({ a })=> { a: ++a });
 #### $dom.instance\_componentAdd : [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 This is `Component` with aditional methods
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentAdd" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L596" title="jaaJSU.js:596"><small>(defined@596)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentAdd" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L596" title="jaaJSU.js:596"><small>(defined@596)</small></a>  
 **Category**: virtual  
 
 * [.instance_componentAdd](#module_jaaJSU..$dom.instance_componentAdd) : [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
@@ -1343,7 +1343,7 @@ This is `Component` with aditional methods
 ##### instance_componentAdd.getReference() ⇒ <code>NodeElement</code>
 Returns reference of currently added element
 
-**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.getReference" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L643" title="jaaJSU.js:643"><small>(defined@643)</small></a>  
+**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.getReference" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L643" title="jaaJSU.js:643"><small>(defined@643)</small></a>  
 
 * * *
 
@@ -1352,7 +1352,7 @@ Returns reference of currently added element
 ##### instance_componentAdd.oninit(fn) ⇒ [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 This procedure allows to call given function `fn` during registering element.
 
-**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.oninit" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L650" title="jaaJSU.js:650"><small>(defined@650)</small></a>  
+**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.oninit" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L650" title="jaaJSU.js:650"><small>(defined@650)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -1366,7 +1366,7 @@ This procedure allows to call given function `fn` during registering element.
 ##### instance_componentAdd.onupdate(data, onUpdateFunction) ⇒ [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 This method allows to register function ([onUpdateFunction](#module_jaaJSU..$dom.onUpdateFunction)) which shoul be invoke when given **keys** in `data` will be changed (see [update](#module_jaaJSU..$dom.instance_component.update)).
 
-**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.onupdate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L658" title="jaaJSU.js:658"><small>(defined@658)</small></a>  
+**Kind**: static method of [<code>instance\_componentAdd</code>](#module_jaaJSU..$dom.instance_componentAdd) <a name="module_jaaJSU..$dom.instance_componentAdd.onupdate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L658" title="jaaJSU.js:658"><small>(defined@658)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -1395,7 +1395,7 @@ c.update({ B: "B" });//=> <p>AB</p>
 <a name="module_jaaJSU..$dom.onUpdateFunction"></a>
 
 #### $dom.onUpdateFunction ⇒ <code>\*</code> \| [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject)
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.onUpdateFunction" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L678" title="jaaJSU.js:678"><small>(defined@678)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.onUpdateFunction" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L678" title="jaaJSU.js:678"><small>(defined@678)</small></a>  
 **Returns**: <code>\*</code> \| [<code>DomAssignObject</code>](#module_jaaJSU..$dom.DomAssignObject) - Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method [update](#module_jaaJSU..$dom.instance_component.update) is called. This callback can be registered when element is created (see method [add](#module_jaaJSU..$dom.instance_component.add)) see [instance_componentAdd](#module_jaaJSU..$dom.instance_componentAdd).  
 **Category**: virtual  
 
@@ -1411,7 +1411,7 @@ c.update({ B: "B" });//=> <p>AB</p>
 #### $dom.instance\_componentAddText : <code>Component</code>
 This is `Component` with aditional methods
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentAddText" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L694" title="jaaJSU.js:694"><small>(defined@694)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.instance_componentAddText" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L694" title="jaaJSU.js:694"><small>(defined@694)</small></a>  
 **Category**: virtual  
 
 * * *
@@ -1421,7 +1421,7 @@ This is `Component` with aditional methods
 ##### instance_componentAddText.oninit(fn) ⇒ [<code>instance\_component</code>](#module_jaaJSU..$dom.instance_component)
 This procedure allows to call given function `fn` during registering element.
 
-**Kind**: static method of [<code>instance\_componentAddText</code>](#module_jaaJSU..$dom.instance_componentAddText) <a name="module_jaaJSU..$dom.instance_componentAddText.oninit" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L734" title="jaaJSU.js:734"><small>(defined@734)</small></a>  
+**Kind**: static method of [<code>instance\_componentAddText</code>](#module_jaaJSU..$dom.instance_componentAddText) <a name="module_jaaJSU..$dom.instance_componentAddText.oninit" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L734" title="jaaJSU.js:734"><small>(defined@734)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -1441,7 +1441,7 @@ Object shall holds **NodeElement** properties like `className`, `textContent`, �
  - *Speed optimalization*: It is recommended to use `textContent` (instead of `innerText`) and `$dom.add` or `$dom.component` (instead of `innerHTML`).
  - `href`, `src` or `class` are convereted to `element.setAttribute(key, …)`;
 
-**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.DomAssignObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1028" title="jaaJSU.js:1028"><small>(defined@1028)</small></a>  
+**Kind**: static typedef of [<code>$dom</code>](#module_jaaJSU..$dom) <a name="module_jaaJSU..$dom.DomAssignObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1028" title="jaaJSU.js:1028"><small>(defined@1028)</small></a>  
 **Category**: virtual  
 
 * * *
@@ -1451,7 +1451,7 @@ Object shall holds **NodeElement** properties like `className`, `textContent`, �
 ### jaaJSU~$function : <code>object</code>
 This NAMESPACE provides features for async (mainly Promise) functions.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1165" title="jaaJSU.js:1165"><small>(defined@1165)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1165" title="jaaJSU.js:1165"><small>(defined@1165)</small></a>  
 **Category**: namespaces  
 
 * [~$function](#module_jaaJSU..$function) : <code>object</code>
@@ -1480,7 +1480,7 @@ This NAMESPACE provides features for async (mainly Promise) functions.
 #### $function.branches([reduceFun], [reduceInitValueCreator]) ⇒ <code>function</code>
 Provide **input →⇶ …functions ⇛ reduction → output** functionality.
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.branches" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1218" title="jaaJSU.js:1218"><small>(defined@1218)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.branches" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1218" title="jaaJSU.js:1218"><small>(defined@1218)</small></a>  
 **Returns**: <code>function</code> - - `...functions`**&lt;…Function&gt;** `=>` **&lt;Function&gt;**
      - `...inputs`**&lt;…Mixed&gt;** `=>` **&lt;Mixed&gt;**
      - result of `reduceFun`  
@@ -1508,7 +1508,7 @@ testFunction({ a: "B", b: "A" });//= false
 #### $function.component(transform) ⇒ <code>component</code>
 EXPERIMENT!: Function composing using `$dom.component` like syntax
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1247" title="jaaJSU.js:1247"><small>(defined@1247)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.component" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1247" title="jaaJSU.js:1247"><small>(defined@1247)</small></a>  
 **Returns**: <code>component</code> - `{ pipe, run }`  
 
 | Param | Type | Description |
@@ -1523,7 +1523,7 @@ EXPERIMENT!: Function composing using `$dom.component` like syntax
 #### $function.conditionalCall(mixed, fun) ⇒ <code>Boolean</code> \| <code>Mixed</code>
 Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.conditionalCall" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1261" title="jaaJSU.js:1261"><small>(defined@1261)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.conditionalCall" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1261" title="jaaJSU.js:1261"><small>(defined@1261)</small></a>  
 **Returns**: <code>Boolean</code> \| <code>Mixed</code> - **False** or output of `fun`  
 
 | Param | Type | Description |
@@ -1539,7 +1539,7 @@ Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
 #### $function.constant(constantArg) ⇒ [<code>function\_Undefined2Mixed</code>](#module_jaaJSU..$function.function_Undefined2Mixed)
 Helper for returnin constant
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.constant" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1274" title="jaaJSU.js:1274"><small>(defined@1274)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.constant" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1274" title="jaaJSU.js:1274"><small>(defined@1274)</small></a>  
 **Returns**: [<code>function\_Undefined2Mixed</code>](#module_jaaJSU..$function.function_Undefined2Mixed) - `()=> constantArg`  
 
 | Param | Type |
@@ -1558,7 +1558,7 @@ $function.constant(5)(10);//= `5`
 #### $function.each() ⇒ [<code>function\_Mixed2Undefined</code>](#module_jaaJSU..$function.function_Mixed2Undefined)
 Functional-like alternative for `for(...){functions[nth](..input);}`.
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1284" title="jaaJSU.js:1284"><small>(defined@1284)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1284" title="jaaJSU.js:1284"><small>(defined@1284)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -1572,7 +1572,7 @@ Functional-like alternative for `for(...){functions[nth](..input);}`.
 #### $function.identity(id) ⇒ <code>Mixed</code>
 `id=> id`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.identity" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1292" title="jaaJSU.js:1292"><small>(defined@1292)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.identity" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1292" title="jaaJSU.js:1292"><small>(defined@1292)</small></a>  
 **Returns**: <code>Mixed</code> - `id`  
 
 | Param | Type |
@@ -1592,7 +1592,7 @@ $function.identity(10);//= `10`
 EXPERIMENT!: "Bind" alternative
 vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you define partial fn or `partial`= when you call it)
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.partial" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1320" title="jaaJSU.js:1320"><small>(defined@1320)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.partial" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1320" title="jaaJSU.js:1320"><small>(defined@1320)</small></a>  
 **Returns**: <code>function</code> - ...  
 
 | Param | Type | Description |
@@ -1608,7 +1608,7 @@ vs *.bind(?,...) - it depends if/when you prefer to set `this` (`bind`= when you
 #### $function.schedule(...functions, def)
 Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.schedule" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1332" title="jaaJSU.js:1332"><small>(defined@1332)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.schedule" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1332" title="jaaJSU.js:1332"><small>(defined@1332)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -1625,7 +1625,7 @@ Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeout
 #### $function.sequention(...functions) ⇒ [<code>function\_Mixed2Mixed</code>](#module_jaaJSU..$function.function_Mixed2Mixed)
 Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to [each](#methods_each). But, as arguments for current function is used output frome previous function.
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.sequention" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1342" title="jaaJSU.js:1342"><small>(defined@1342)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.sequention" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1342" title="jaaJSU.js:1342"><small>(defined@1342)</small></a>  
 **Returns**: [<code>function\_Mixed2Mixed</code>](#module_jaaJSU..$function.function_Mixed2Mixed) - For given `input` calls all functions in `...functions` (use `input` as arguments for first function). Returns output of last `functions`.  
 
 | Param | Type | Description |
@@ -1652,7 +1652,7 @@ console.log($function.sequention(
 #### $function.function\_Mixed2Undefined(input) ⇒ <code>Undefined</code>
 `function(input){  }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Mixed2Undefined" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1170" title="jaaJSU.js:1170"><small>(defined@1170)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Mixed2Undefined" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1170" title="jaaJSU.js:1170"><small>(defined@1170)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1667,7 +1667,7 @@ console.log($function.sequention(
 #### $function.function\_Mixed2Mixed(input) ⇒ <code>Mixed</code>
 `function(input){ return ...; }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Mixed2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1178" title="jaaJSU.js:1178"><small>(defined@1178)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Mixed2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1178" title="jaaJSU.js:1178"><small>(defined@1178)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1682,7 +1682,7 @@ console.log($function.sequention(
 #### $function.function\_Undefined2Mixed() ⇒ <code>Mixed</code>
 `function(){ return ...; }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Undefined2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1186" title="jaaJSU.js:1186"><small>(defined@1186)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_Undefined2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1186" title="jaaJSU.js:1186"><small>(defined@1186)</small></a>  
 **Category**: virtual  
 
 * * *
@@ -1692,7 +1692,7 @@ console.log($function.sequention(
 #### $function.function\_MultipleMixed2Mixed(...input) ⇒ <code>Mixed</code>
 `function(...input){ return ...; }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleMixed2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1193" title="jaaJSU.js:1193"><small>(defined@1193)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleMixed2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1193" title="jaaJSU.js:1193"><small>(defined@1193)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1707,7 +1707,7 @@ console.log($function.sequention(
 #### $function.function\_MultipleMixed2Function(...input) ⇒ <code>function</code>
 `function(...input){ return function(...){...}; }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleMixed2Function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1201" title="jaaJSU.js:1201"><small>(defined@1201)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleMixed2Function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1201" title="jaaJSU.js:1201"><small>(defined@1201)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1722,7 +1722,7 @@ console.log($function.sequention(
 #### $function.function\_MultipleFunction2Function(...Functions) ⇒ <code>function</code>
 `function(...Functions){ return function(...){...}; }`
 
-**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleFunction2Function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1209" title="jaaJSU.js:1209"><small>(defined@1209)</small></a>  
+**Kind**: static method of [<code>$function</code>](#module_jaaJSU..$function) <a name="module_jaaJSU..$function.function_MultipleFunction2Function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1209" title="jaaJSU.js:1209"><small>(defined@1209)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1737,7 +1737,7 @@ console.log($function.sequention(
 ### jaaJSU~$object : <code>object</code>
 This NAMESPACE provides features for Objects.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1374" title="jaaJSU.js:1374"><small>(defined@1374)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1374" title="jaaJSU.js:1374"><small>(defined@1374)</small></a>  
 **Category**: namespaces  
 
 * [~$object](#module_jaaJSU..$object) : <code>object</code>
@@ -1766,7 +1766,7 @@ This NAMESPACE provides features for Objects.
 #### $object.each(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Function for iterating throught Object `iterable`.
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1412" title="jaaJSU.js:1412"><small>(defined@1412)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.each" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1412" title="jaaJSU.js:1412"><small>(defined@1412)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -1783,7 +1783,7 @@ Function for iterating throught Object `iterable`.
 #### $object.eachDynamic(iterable, i_function, scope) ⇒ <code>Mixed</code>
 Procedure for iterating throught Object `iterable` like [each](#module_jaaJSU..$object.each), but use `for(... in ...)...if(Object.prototype.hasOwnProperty...`.
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1422" title="jaaJSU.js:1422"><small>(defined@1422)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.eachDynamic" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1422" title="jaaJSU.js:1422"><small>(defined@1422)</small></a>  
 **Returns**: <code>Mixed</code> - `share`  
 
 | Param | Type | Description |
@@ -1800,7 +1800,7 @@ Procedure for iterating throught Object `iterable` like [each](#module_jaaJSU..$
 #### $object.fromArray(arr, [fun], [default_value]) ⇒ <code>Object</code>
 Function for converting Array `arr` to Object. Uses `fun` for converting.
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.fromArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1432" title="jaaJSU.js:1432"><small>(defined@1432)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.fromArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1432" title="jaaJSU.js:1432"><small>(defined@1432)</small></a>  
 **Returns**: <code>Object</code> - Created object.  
 
 | Param | Type | Default | Description |
@@ -1817,7 +1817,7 @@ Function for converting Array `arr` to Object. Uses `fun` for converting.
 #### $object.hasProp(obj, prop) ⇒ <code>Boolean</code>
 Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because you can sets `var obj= { hasOwnProperty: "gotcha" }`
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.hasProp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1442" title="jaaJSU.js:1442"><small>(defined@1442)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.hasProp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1442" title="jaaJSU.js:1442"><small>(defined@1442)</small></a>  
 **Returns**: <code>Boolean</code> - True, if `obj` has property `prop`  
 
 | Param | Type | Description |
@@ -1833,7 +1833,7 @@ Wrapper around `Object.prototype.hasOwnProperty`. It is more trustable, because 
 #### $object.immutable\_keys([obj_input]) ⇒ <code>Proxy</code>
 Function for creating non-rewritable object
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.immutable_keys" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1451" title="jaaJSU.js:1451"><small>(defined@1451)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.immutable_keys" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1451" title="jaaJSU.js:1451"><small>(defined@1451)</small></a>  
 **Returns**: <code>Proxy</code> - <br/>getter `Proxy.key_name` Mixed: returns key_name if defined
 <br/>getter `Proxy.set(key_name, value)` Function:
 <br/>&nbsp;&nbsp;- define `key_name` in object if isn't already defined (**returns True**, else **False**).
@@ -1851,7 +1851,7 @@ Function for creating non-rewritable object
 #### $object.method(methodName, ...args) ⇒ [<code>function\_Object2Mixed</code>](#module_jaaJSU..$object.function_Object2Mixed)
 Wrapper around `object[methodName](...args)`.
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.method" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1490" title="jaaJSU.js:1490"><small>(defined@1490)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.method" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1490" title="jaaJSU.js:1490"><small>(defined@1490)</small></a>  
 **Returns**: [<code>function\_Object2Mixed</code>](#module_jaaJSU..$object.function_Object2Mixed) - `(target) => target[key](...args)`  
 
 | Param | Type | Description |
@@ -1870,7 +1870,7 @@ $object.method("split", " ")("Hello world");//= `[ "Hello", "world" ]`
 <a name="module_jaaJSU..$object.methodFrom"></a>
 
 #### $object.methodFrom()
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.methodFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1502" title="jaaJSU.js:1502"><small>(defined@1502)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.methodFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1502" title="jaaJSU.js:1502"><small>(defined@1502)</small></a>  
 **Example**  
 ```js
 $object.methodFrom(" Hi ")("trim")()====$object.method("trim")(" Hi ");
@@ -1884,7 +1884,7 @@ $object.methodFrom("Hello world")("split")(" ")===$object.method("split", " ")("
 #### $object.pluck(key) ⇒ [<code>function\_Object2Mixed</code>](#module_jaaJSU..$object.function_Object2Mixed)
 Wrapper around `object[key]`, usefull for binding.
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.pluck" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1510" title="jaaJSU.js:1510"><small>(defined@1510)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.pluck" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1510" title="jaaJSU.js:1510"><small>(defined@1510)</small></a>  
 **Returns**: [<code>function\_Object2Mixed</code>](#module_jaaJSU..$object.function_Object2Mixed) - `(target) => target[key]`  
 
 | Param | Type | Description |
@@ -1901,7 +1901,7 @@ $object.pluck("length")("Test");//= `4`
 <a name="module_jaaJSU..$object.pluckFrom"></a>
 
 #### $object.pluckFrom()
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.pluckFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1520" title="jaaJSU.js:1520"><small>(defined@1520)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.pluckFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1520" title="jaaJSU.js:1520"><small>(defined@1520)</small></a>  
 **Example**  
 ```js
 $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
@@ -1914,7 +1914,7 @@ $object.pluckFrom("Test")("length")===$object.pluck("length")("Test");
 #### $object.setter(setterName, arg) ⇒ [<code>function\_Object2Object</code>](#module_jaaJSU..$object.function_Object2Object)
 Wrapper around `object[setterName]= arg`
 
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.setter" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1527" title="jaaJSU.js:1527"><small>(defined@1527)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.setter" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1527" title="jaaJSU.js:1527"><small>(defined@1527)</small></a>  
 **Returns**: [<code>function\_Object2Object</code>](#module_jaaJSU..$object.function_Object2Object) - `object=> (object[setterName]= arg, object)`  
 
 | Param | Type | Description |
@@ -1932,7 +1932,7 @@ $object.setter("test_key", "test_value")({ test_key: "test_init_value", other_ke
 <a name="module_jaaJSU..$object.setterFrom"></a>
 
 #### $object.setterFrom()
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.setterFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1538" title="jaaJSU.js:1538"><small>(defined@1538)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.setterFrom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1538" title="jaaJSU.js:1538"><small>(defined@1538)</small></a>  
 **Example**  
 ```js
 $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("test_key")("test_value")===$object.setter("test_key", "test_value")({ test_key: "test_init_value", other_key: "other_value" });
@@ -1943,7 +1943,7 @@ $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("t
 <a name="module_jaaJSU..$object.function_Object2Mixed"></a>
 
 #### $object.function\_Object2Mixed(input_object) ⇒ <code>Mixed</code>
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.function_Object2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1379" title="jaaJSU.js:1379"><small>(defined@1379)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.function_Object2Mixed" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1379" title="jaaJSU.js:1379"><small>(defined@1379)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -1956,7 +1956,7 @@ $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("t
 <a name="module_jaaJSU..$object.function_Object2Object"></a>
 
 #### $object.function\_Object2Object(input_object) ⇒ <code>Object</code>
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.function_Object2Object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1386" title="jaaJSU.js:1386"><small>(defined@1386)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.function_Object2Object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1386" title="jaaJSU.js:1386"><small>(defined@1386)</small></a>  
 **Returns**: <code>Object</code> - Modified version of `input_object` (By reference!)  
 **Category**: virtual  
 
@@ -1970,7 +1970,7 @@ $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("t
 <a name="module_jaaJSU..$object.IterableObjectCallback"></a>
 
 #### $object.IterableObjectCallback(IterableObjectObject) ⇒ <code>Mixed</code> \| <code>Undefined</code>
-**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.IterableObjectCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1404" title="jaaJSU.js:1404"><small>(defined@1404)</small></a>  
+**Kind**: static method of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.IterableObjectCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1404" title="jaaJSU.js:1404"><small>(defined@1404)</small></a>  
 **Returns**: <code>Mixed</code> \| <code>Undefined</code> - `share` key of [IterableObjectObject](#module_jaaJSU..$object.IterableObjectObject).  
 **Category**: virtual  
 
@@ -1986,7 +1986,7 @@ $object.setterFrom({ test_key: "test_init_value", other_key: "other_value" })("t
 #### $object.IterableObjectObject : <code>Object</code>
 Similar to [IterableArrayObject](#module_jaaJSU..IterableArrayObject)
 
-**Kind**: static typedef of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.IterableObjectObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1393" title="jaaJSU.js:1393"><small>(defined@1393)</small></a>  
+**Kind**: static typedef of [<code>$object</code>](#module_jaaJSU..$object) <a name="module_jaaJSU..$object.IterableObjectObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1393" title="jaaJSU.js:1393"><small>(defined@1393)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -2006,7 +2006,7 @@ Similar to [IterableArrayObject](#module_jaaJSU..IterableArrayObject)
 ### jaaJSU~$optimizier : <code>object</code>
 This NAMESPACE provides features for optimizations.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$optimizier" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1620" title="jaaJSU.js:1620"><small>(defined@1620)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$optimizier" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1620" title="jaaJSU.js:1620"><small>(defined@1620)</small></a>  
 **Category**: namespaces  
 
 * [~$optimizier](#module_jaaJSU..$optimizier) : <code>object</code>
@@ -2029,7 +2029,7 @@ This NAMESPACE provides features for optimizations.
 #### $optimizier.debounce(func, [wait], [immediate]) ⇒ <code>function</code>
 Prevent multiple calling (typically for "onresize" events) - use google for more detail
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.debounce" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1626" title="jaaJSU.js:1626"><small>(defined@1626)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.debounce" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1626" title="jaaJSU.js:1626"><small>(defined@1626)</small></a>  
 **Returns**: <code>function</code> - Debounced function `fun` (accepts same arguments)  
 
 | Param | Type | Default | Description |
@@ -2053,7 +2053,7 @@ I call (| symbol) fun:    .|||.|.|||..
 #### $optimizier.trottle(func, [cycles_leap]) ⇒ <code>function</code>
 Very similar to [debounce](#module_jaaJSU..$optimizier.debounce), but uses `requestAnimationFrame`
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.trottle" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1659" title="jaaJSU.js:1659"><small>(defined@1659)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.trottle" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1659" title="jaaJSU.js:1659"><small>(defined@1659)</small></a>  
 **Returns**: <code>function</code> - Trottled function `fun`  
 
 | Param | Type | Default | Description |
@@ -2069,7 +2069,7 @@ Very similar to [debounce](#module_jaaJSU..$optimizier.debounce), but uses `requ
 #### $optimizier.poll\_(fn, [timeout], [interval]) ⇒ <code>Promise</code>
 Calls `.then` when `fn` returns **true**
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.poll_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1687" title="jaaJSU.js:1687"><small>(defined@1687)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.poll_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1687" title="jaaJSU.js:1687"><small>(defined@1687)</small></a>  
 **.then**: <code>Mixed</code> result of `fn`  
 **.catch**: <code>Error</code> If timeout  
 
@@ -2091,7 +2091,7 @@ poll_(()=>document.readyState!=='loading').then(console.log).catch(console.error
 #### $optimizier.once(fn, context)
 Prevent multiple calling of `fn`
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.once" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1718" title="jaaJSU.js:1718"><small>(defined@1718)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.once" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1718" title="jaaJSU.js:1718"><small>(defined@1718)</small></a>  
 
 | Param | Type | Description |
 | --- | --- | --- |
@@ -2112,7 +2112,7 @@ console_log();//nothing
 #### $optimizier.timeoutAnimationFrame(f, [delay])
 Combination of `setTimeout`->`requestAnimationFrame`
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.timeoutAnimationFrame" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1739" title="jaaJSU.js:1739"><small>(defined@1739)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.timeoutAnimationFrame" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1739" title="jaaJSU.js:1739"><small>(defined@1739)</small></a>  
 
 | Param | Type | Default | Description |
 | --- | --- | --- | --- |
@@ -2127,7 +2127,7 @@ Combination of `setTimeout`->`requestAnimationFrame`
 #### $optimizier.requestAnimationFrame\_() ⇒ <code>Promise</code>
 Promise wrapper around [`requestAnimationFrame`](https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame)
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.requestAnimationFrame_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1747" title="jaaJSU.js:1747"><small>(defined@1747)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.requestAnimationFrame_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1747" title="jaaJSU.js:1747"><small>(defined@1747)</small></a>  
 **Example**  
 ```js
 $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
@@ -2145,7 +2145,7 @@ Links:
  1) [`setTimeout`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout)
  2) [`setTimeout Arguments`](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout#Arguments)
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setTimeout_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1757" title="jaaJSU.js:1757"><small>(defined@1757)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setTimeout_" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1757" title="jaaJSU.js:1757"><small>(defined@1757)</small></a>  
 **Returns**: <code>function</code> - <br/>- **(…params)=> \<Promise\>**
 <br/>- where `params` are `arg1, ..., argN` arguments for `setTimeout` — see **Links (2)**  
 
@@ -2170,7 +2170,7 @@ This is infact *idle-until-urgent* evaluation pattern.
 
 Internally uses `requestIdleCallback` (`cancelIdleCallback`), or `setTimeout` (`clearTimeout`) as shim/ponyfill.
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1776" title="jaaJSU.js:1776"><small>(defined@1776)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.setIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1776" title="jaaJSU.js:1776"><small>(defined@1776)</small></a>  
 **Returns**: <code>IdleValue</code> - argument for [module:jaaJSU~getIdleValue](module:jaaJSU~getIdleValue) or [module:jaaJSU~cancelIdleValue](module:jaaJSU~cancelIdleValue).  
 
 | Param | Type | Description |
@@ -2191,7 +2191,7 @@ console.log($optimizier.getIdleValue(formatter_idled).format(new Date()));
 #### $optimizier.getIdleValue(idle_value) ⇒ <code>Mixed</code>
 Returns result of **\<IdleValue\>**.
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.getIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1792" title="jaaJSU.js:1792"><small>(defined@1792)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.getIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1792" title="jaaJSU.js:1792"><small>(defined@1792)</small></a>  
 **Returns**: <code>Mixed</code> - Output of `initFunction` — see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)  
 
 | Param | Type | Description |
@@ -2206,7 +2206,7 @@ Returns result of **\<IdleValue\>**.
 #### $optimizier.clearIdleValue(idle_value) ⇒ <code>Mixed</code> \| <code>Undefined</code>
 Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)
 
-**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.clearIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1800" title="jaaJSU.js:1800"><small>(defined@1800)</small></a>  
+**Kind**: static method of [<code>$optimizier</code>](#module_jaaJSU..$optimizier) <a name="module_jaaJSU..$optimizier.clearIdleValue" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1800" title="jaaJSU.js:1800"><small>(defined@1800)</small></a>  
 **Returns**: <code>Mixed</code> \| <code>Undefined</code> - returns current value or `undefined` if `initFunction` wasn't called — see see [module:jaaJSU~setIdleValue](module:jaaJSU~setIdleValue)  
 
 | Param | Type | Description |
@@ -2221,7 +2221,7 @@ Stops **\<IdleValue\>** evaluating. Infact calls `cancelIdleCallback` — see [m
 ### jaaJSU~$string : <code>object</code>
 This NAMESPACE provides features for strings.
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1816" title="jaaJSU.js:1816"><small>(defined@1816)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1816" title="jaaJSU.js:1816"><small>(defined@1816)</small></a>  
 **Category**: namespaces  
 
 * [~$string](#module_jaaJSU..$string) : <code>object</code>
@@ -2246,7 +2246,7 @@ This NAMESPACE provides features for strings.
 #### $string.clearSpaces(str) ⇒ <code>String</code>
 Clear spaces (`\s+`) in `str`
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.clearSpaces" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1822" title="jaaJSU.js:1822"><small>(defined@1822)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.clearSpaces" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1822" title="jaaJSU.js:1822"><small>(defined@1822)</small></a>  
 **Returns**: <code>String</code> - Cleaned `str`  
 
 | Param | Type |
@@ -2259,7 +2259,7 @@ Clear spaces (`\s+`) in `str`
 <a name="module_jaaJSU..$string.countChars"></a>
 
 #### $string.countChars(str) ⇒ <code>Number</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.countChars" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1833" title="jaaJSU.js:1833"><small>(defined@1833)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.countChars" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1833" title="jaaJSU.js:1833"><small>(defined@1833)</small></a>  
 **Returns**: <code>Number</code> - Number of chars in `str`  
 
 | Param | Type |
@@ -2272,7 +2272,7 @@ Clear spaces (`\s+`) in `str`
 <a name="module_jaaJSU..$string.generateUnique"></a>
 
 #### $string.generateUnique() ⇒ <code>String</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.generateUnique" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1850" title="jaaJSU.js:1850"><small>(defined@1850)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.generateUnique" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1850" title="jaaJSU.js:1850"><small>(defined@1850)</small></a>  
 **Returns**: <code>String</code> - An unique string  
 
 * * *
@@ -2282,7 +2282,7 @@ Clear spaces (`\s+`) in `str`
 #### $string.getSubstring(str, len, [start]) ⇒ <code>String</code>
 Wrapper around `*.substring(*,*)`
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.getSubstring" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1858" title="jaaJSU.js:1858"><small>(defined@1858)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.getSubstring" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1858" title="jaaJSU.js:1858"><small>(defined@1858)</small></a>  
 **Returns**: <code>String</code> - Substring of `str`  
 
 | Param | Type | Default | Description |
@@ -2297,7 +2297,7 @@ Wrapper around `*.substring(*,*)`
 <a name="module_jaaJSU..$string.letterInc"></a>
 
 #### $string.letterInc(str, [inc], [pos]) ⇒ <code>String</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.letterInc" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1872" title="jaaJSU.js:1872"><small>(defined@1872)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.letterInc" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1872" title="jaaJSU.js:1872"><small>(defined@1872)</small></a>  
 **Returns**: <code>String</code> - New string with "highter" letter on position `pos`  
 
 | Param | Type | Default | Description |
@@ -2321,7 +2321,7 @@ console.log($string.letterInc("Hg", 2, 1));//="Hi"
 #### $string.escapeHTML(str) ⇒ <code>String</code>
 Escapes "<", ">", "&", '"', "'"
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.escapeHTML" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1903" title="jaaJSU.js:1903"><small>(defined@1903)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.escapeHTML" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1903" title="jaaJSU.js:1903"><small>(defined@1903)</small></a>  
 **Returns**: <code>String</code> - Escaped text  
 
 | Param | Type |
@@ -2336,7 +2336,7 @@ Escapes "<", ">", "&", '"', "'"
 #### $string.clearHTML(str) ⇒ <code>String</code>
 Clear tags from `str`
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.clearHTML" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1914" title="jaaJSU.js:1914"><small>(defined@1914)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.clearHTML" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1914" title="jaaJSU.js:1914"><small>(defined@1914)</small></a>  
 **Returns**: <code>String</code> - Text without HTML tags  
 
 | Param | Type |
@@ -2349,7 +2349,7 @@ Clear tags from `str`
 <a name="module_jaaJSU..$string.containsRepeatingChars"></a>
 
 #### $string.containsRepeatingChars(str, [quantity]) ⇒ <code>Boolean</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.containsRepeatingChars" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1926" title="jaaJSU.js:1926"><small>(defined@1926)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.containsRepeatingChars" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1926" title="jaaJSU.js:1926"><small>(defined@1926)</small></a>  
 
 | Param | Type | Default |
 | --- | --- | --- |
@@ -2368,7 +2368,7 @@ console.log($string.containsRepeatingChars("AAAbcd", 3));//=false
 <a name="module_jaaJSU..$string.containsSequential"></a>
 
 #### $string.containsSequential(str, [quantity]) ⇒ <code>Boolean</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.containsSequential" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1943" title="jaaJSU.js:1943"><small>(defined@1943)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.containsSequential" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1943" title="jaaJSU.js:1943"><small>(defined@1943)</small></a>  
 
 | Param | Type | Default |
 | --- | --- | --- |
@@ -2387,7 +2387,7 @@ console.log($string.containsSequential("ABCdd", 3));//=false
 <a name="module_jaaJSU..$string.isEmail"></a>
 
 #### $string.isEmail(email_candidate) ⇒ <code>Boolean</code>
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.isEmail" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1985" title="jaaJSU.js:1985"><small>(defined@1985)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.isEmail" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1985" title="jaaJSU.js:1985"><small>(defined@1985)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -2401,7 +2401,7 @@ console.log($string.containsSequential("ABCdd", 3));//=false
 #### $string.isFilled(str) ⇒ <code>String</code> \| <code>Boolean</code>
 Wrapper around `*.trim()`
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.isFilled" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1996" title="jaaJSU.js:1996"><small>(defined@1996)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.isFilled" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1996" title="jaaJSU.js:1996"><small>(defined@1996)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -2415,7 +2415,7 @@ Wrapper around `*.trim()`
 #### $string.template(str) ⇒ <code>Object</code>
 Alternative to ` ```text with ${variable}``` ` (like `sprintf()`)
 
-**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.template" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2007" title="jaaJSU.js:2007"><small>(defined@2007)</small></a>  
+**Kind**: static method of [<code>$string</code>](#module_jaaJSU..$string) <a name="module_jaaJSU..$string.template" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2007" title="jaaJSU.js:2007"><small>(defined@2007)</small></a>  
 **Returns**: <code>Object</code> - `{execute, partial, isSubstituted}`
 <br/>- String **execute** ( [ `params_obj` ={}] )
 <br/>&nbsp;&nbsp;- [ `params_obj` ={}] {Object}
@@ -2460,7 +2460,7 @@ console.log(test2.isSubstituted());//=true
 ### jaaJSU~$time : <code>object</code>
 This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
 
-**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2082" title="jaaJSU.js:2082"><small>(defined@2082)</small></a>  
+**Kind**: inner namespace of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2082" title="jaaJSU.js:2082"><small>(defined@2082)</small></a>  
 **Category**: namespaces  
 
 * [~$time](#module_jaaJSU..$time) : <code>object</code>
@@ -2516,7 +2516,7 @@ This NAMESPACE provides features for date/time. Mainly, there are utilities usin
 #### $time.\_
 Alias for `undefined` which can be used to trigger default value of argument.
 
-**Kind**: static property of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time._" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3300" title="jaaJSU.js:3300"><small>(defined@3300)</small></a>  
+**Kind**: static property of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time._" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3300" title="jaaJSU.js:3300"><small>(defined@3300)</small></a>  
 **Access**: public  
 **Properties**
 
@@ -2536,7 +2536,7 @@ test($time._)==="A"; function test(a= "A"){ return a; }
 #### $time.format\_objects : <code>object</code> ℗
 Internal object holding predefined formating arguments for [toLocaleString](#module_jaaJSU..$time.toLocaleString).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_objects" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2090" title="jaaJSU.js:2090"><small>(defined@2090)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_objects" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2090" title="jaaJSU.js:2090"><small>(defined@2090)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2561,7 +2561,7 @@ format_objects.time==={ hour: "2-digit", minute: "2-digit" }
 #### $time.format\_arrays : <code>object</code> ℗
 Internal object holding predefined formating arguments for [getFormatObject](#module_jaaJSU..$time.getFormatObject).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_arrays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2114" title="jaaJSU.js:2114"><small>(defined@2114)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.format_arrays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2114" title="jaaJSU.js:2114"><small>(defined@2114)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2582,7 +2582,7 @@ format_arrays.YYYYMMDD=== [ ["year", "numeric"], [ "text", "-" ], ["month", "2-d
 <a name="module_jaaJSU..$time.Date"></a>
 
 #### $time.Date : <code>object</code>
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3308" title="jaaJSU.js:3308"><small>(defined@3308)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3308" title="jaaJSU.js:3308"><small>(defined@3308)</small></a>  
 **Read only**: true  
 
 * [.Date](#module_jaaJSU..$time.Date) : <code>object</code>
@@ -2599,7 +2599,7 @@ format_arrays.YYYYMMDD=== [ ["year", "numeric"], [ "text", "-" ], ["month", "2-d
 ##### Date.addDays(days_num) ⇒ [<code>function\_Date2Date</code>](#module_jaaJSU..$time.function_Date2Date)
 This modify given **Date** instance (add days).
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addDays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3105" title="jaaJSU.js:3105"><small>(defined@3105)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addDays" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3105" title="jaaJSU.js:3105"><small>(defined@3105)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2614,7 +2614,7 @@ This modify given **Date** instance (add days).
 ##### Date.addMonths(months_num) ⇒ [<code>function\_Date2Date</code>](#module_jaaJSU..$time.function_Date2Date)
 This modify given **Date** instance (add months).
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addMonths" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3116" title="jaaJSU.js:3116"><small>(defined@3116)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.addMonths" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3116" title="jaaJSU.js:3116"><small>(defined@3116)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2627,7 +2627,7 @@ This modify given **Date** instance (add months).
 <a name="module_jaaJSU..$time.Date.getWeekDay"></a>
 
 ##### Date.getWeekDay([type], [toLocaleStringOptions]) ⇒ [<code>function\_Date2Number</code>](#module_jaaJSU..$time.function_Date2Number)
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekDay" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3127" title="jaaJSU.js:3127"><small>(defined@3127)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekDay" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3127" title="jaaJSU.js:3127"><small>(defined@3127)</small></a>  
 **Returns**: [<code>function\_Date2Number</code>](#module_jaaJSU..$time.function_Date2Number) - If `type="numeric"`, it returns **0 (Su) - 6 (Sa)**, else it returns **name of week day**  
 **Access**: public  
 
@@ -2644,7 +2644,7 @@ This modify given **Date** instance (add months).
 ##### Date.getWeekNumber(date_instance) ⇒ <code>Number</code>
 This return ISO number of week.
 
-**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekNumber" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3138" title="jaaJSU.js:3138"><small>(defined@3138)</small></a>  
+**Kind**: static method of [<code>Date</code>](#module_jaaJSU..$time.Date) <a name="module_jaaJSU..$time.Date.getWeekNumber" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3138" title="jaaJSU.js:3138"><small>(defined@3138)</small></a>  
 **Returns**: <code>Number</code> - In fact, it calculates no. of thursdays from this week to the first one (January 4 is always in week 1.)  
 **Access**: public  
 
@@ -2660,7 +2660,7 @@ This return ISO number of week.
 #### $time.formats : <code>object</code>
 Public name of [format_arrays](#module_jaaJSU..$time.format_arrays).
 
-**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.formats" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3321" title="jaaJSU.js:3321"><small>(defined@3321)</small></a>  
+**Kind**: static namespace of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.formats" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3321" title="jaaJSU.js:3321"><small>(defined@3321)</small></a>  
 **Read only**: true  
 
 * * *
@@ -2670,7 +2670,7 @@ Public name of [format_arrays](#module_jaaJSU..$time.format_arrays).
 #### $time.ordinal\_numbers ℗
 Internal helper array for [getOrdinalSuffix](#module_jaaJSU..$time.getOrdinalSuffix).
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ordinal_numbers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2142" title="jaaJSU.js:2142"><small>(defined@2142)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ordinal_numbers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2142" title="jaaJSU.js:2142"><small>(defined@2142)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2689,7 +2689,7 @@ This array stores all time zones names (eg. 'Europe/Andorra') supported by `{ ti
 
 Original from [stackoverflow.com/a/54500197](https://stackoverflow.com/a/54500197).
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_zones" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2181" title="jaaJSU.js:2181"><small>(defined@2181)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_zones" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2181" title="jaaJSU.js:2181"><small>(defined@2181)</small></a>  
 **Access**: private  
 **Read only**: true  
 **Properties**
@@ -2712,7 +2712,7 @@ Next example is `ary_ianna_time_offsets["-01:00"]` is equal to **238** which is 
 
 **IMPORTANT NOTE:** BST, EET, WET hasn't been validated! … idea is to behave the same way like CET
 
-**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_offsets" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2541" title="jaaJSU.js:2541"><small>(defined@2541)</small></a>  
+**Kind**: static constant of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ary_ianna_time_offsets" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2541" title="jaaJSU.js:2541"><small>(defined@2541)</small></a>  
 **Access**: private  
 **Properties**
 
@@ -2728,7 +2728,7 @@ Next example is `ary_ianna_time_offsets["-01:00"]` is equal to **238** which is 
 #### $time.isDateString(date_string) ⇒ <code>Boolean</code> ℗
 Very simple test for 'YYYY-MM-DD' pattern. Returns `true` if `date_string` includes **`-`**.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isDateString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2144" title="jaaJSU.js:2144"><small>(defined@2144)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isDateString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2144" title="jaaJSU.js:2144"><small>(defined@2144)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2748,7 +2748,7 @@ isDateString("06/05/2019");//= false !!!!
 #### $time.isTimeString(date_string) ⇒ <code>Boolean</code> ℗
 Very simple test for 'T...' pattern. Returns `true` if `date_string` includes **`T`**.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isTimeString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2156" title="jaaJSU.js:2156"><small>(defined@2156)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.isTimeString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2156" title="jaaJSU.js:2156"><small>(defined@2156)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2769,7 +2769,7 @@ isTimeString("Twrong");//= true !!!!
 #### $time.fromDate(date_instance) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from instance of `Date`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2585" title="jaaJSU.js:2585"><small>(defined@2585)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2585" title="jaaJSU.js:2585"><small>(defined@2585)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2784,7 +2784,7 @@ Function generates `DateArray` from instance of `Date`.
 #### $time.fromDateArguments(...args) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from arguments to initialize `Date`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDateArguments" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2596" title="jaaJSU.js:2596"><small>(defined@2596)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromDateArguments" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2596" title="jaaJSU.js:2596"><small>(defined@2596)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2801,7 +2801,7 @@ Function generates `DateArray` from current date and time.
 
 **Warning:** Internally uses `toISOString` method so result is always converted to "+00:00": `p($time.fromNow, $time.setTimeZone("+02:00"), $time.toString())()` (`p` is some pipe function) — this returns "2019-07-10T16:48:43+02:00" instead of "2019-07-10T18:48:43+02:00" (current time) … the flow is "2019-07-10T18:48:43+02:00"-`fromNow`->"2019-07-10T16:48:43Z"-`setTimeZone`->"2019-07-10T16:48:43+02:00".
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromNow" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2607" title="jaaJSU.js:2607"><small>(defined@2607)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromNow" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2607" title="jaaJSU.js:2607"><small>(defined@2607)</small></a>  
 **Access**: public  
 
 * * *
@@ -2811,7 +2811,7 @@ Function generates `DateArray` from current date and time.
 #### $time.fromString([timestamp_string], [timezone]) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
 Function generates `DateArray` from passed string.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2619" title="jaaJSU.js:2619"><small>(defined@2619)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.fromString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2619" title="jaaJSU.js:2619"><small>(defined@2619)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -2827,7 +2827,7 @@ Function generates `DateArray` from passed string.
 #### $time.toDateArray(timestamp_string) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray) ℗
 Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like string.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2651" title="jaaJSU.js:2651"><small>(defined@2651)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2651" title="jaaJSU.js:2651"><small>(defined@2651)</small></a>  
 **Access**: private  
 
 | Param | Type | Description |
@@ -2842,7 +2842,7 @@ Function generates array in a form `[ date, time, time_zone ]` from 'ISO' like s
 #### $time.toStringFromObject(format, params_obj) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String) ℗
 Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toStringFromObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2724" title="jaaJSU.js:2724"><small>(defined@2724)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toStringFromObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2724" title="jaaJSU.js:2724"><small>(defined@2724)</small></a>  
 **Access**: private  
 
 | Param | Type |
@@ -2862,7 +2862,7 @@ $time.toStringFromObject([ ["day", "2-digit"], [ "text", "/" ], ["month", "2-dig
 #### $time.getFormatObject(format_string) ⇒ [<code>Array.&lt;ArrayOfOperation&gt;</code>](#module_jaaJSU..$time.ArrayOfOperation) ℗
 Generates multidimensional array for formatting (eg. "YYYY"=> `[ [ "year", "numeric" ] ]`).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getFormatObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2771" title="jaaJSU.js:2771"><small>(defined@2771)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getFormatObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2771" title="jaaJSU.js:2771"><small>(defined@2771)</small></a>  
 **Access**: private  
 
 | Param | Type | Description |
@@ -2877,7 +2877,7 @@ Generates multidimensional array for formatting (eg. "YYYY"=> `[ [ "year", "nume
 #### $time.toDate(date_array) ⇒ <code>Date</code>
 Function initializes `Date` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2906" title="jaaJSU.js:2906"><small>(defined@2906)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toDate" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2906" title="jaaJSU.js:2906"><small>(defined@2906)</small></a>  
 **Access**: public  
 
 | Param | Type |
@@ -2892,7 +2892,7 @@ Function initializes `Date` from `DateArray`.
 #### $time.toLocaleString([format_object_name], [toLocaleStringOptions]) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String)
 It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2921" title="jaaJSU.js:2921"><small>(defined@2921)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2921" title="jaaJSU.js:2921"><small>(defined@2921)</small></a>  
 **Returns**: [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String) - returns result of [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString);  
 **Access**: public  
 
@@ -2907,7 +2907,7 @@ It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozill
 <a name="module_jaaJSU..$time.function_DateArray2String"></a>
 
 #### $time.function\_DateArray2String(date_array) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2String" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2973" title="jaaJSU.js:2973"><small>(defined@2973)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2String" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2973" title="jaaJSU.js:2973"><small>(defined@2973)</small></a>  
 
 | Param | Type |
 | --- | --- |
@@ -2921,7 +2921,7 @@ It is wrapper arround [`Date.prototype.toLocaleString`](https://developer.mozill
 #### $time.toString([format], [toLocaleStringOptions]) ⇒ [<code>function\_DateArray2String</code>](#module_jaaJSU..$time.function_DateArray2String)
 Function generates text based on `format`, `locale` and `timeZone` from `DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2979" title="jaaJSU.js:2979"><small>(defined@2979)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toString" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2979" title="jaaJSU.js:2979"><small>(defined@2979)</small></a>  
 **Access**: public  
 
 | Param | Type | Default | Description |
@@ -2940,7 +2940,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 <a name="module_jaaJSU..$time.getTimeZone"></a>
 
 #### $time.getTimeZone(date, parameters) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3010" title="jaaJSU.js:3010"><small>(defined@3010)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3010" title="jaaJSU.js:3010"><small>(defined@3010)</small></a>  
 **Returns**: <code>String</code> - Timezone name/identificator (with offset)  
 
 | Param | Type | Default | Description |
@@ -2957,7 +2957,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 <a name="module_jaaJSU..$time.getCurrentTimeZone"></a>
 
 #### $time.getCurrentTimeZone(parameters) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getCurrentTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3032" title="jaaJSU.js:3032"><small>(defined@3032)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getCurrentTimeZone" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3032" title="jaaJSU.js:3032"><small>(defined@3032)</small></a>  
 **Returns**: <code>String</code> - Timezone name/identificator (with offset) for current timezone  
 
 | Param | Type | Default | Description |
@@ -2975,7 +2975,7 @@ $time.toString($time.formats.SQL)($time.fromNow());//= "2019-06-05 09:32:20"
 #### $time.modify(mod_obj) ⇒ [<code>function\_DateArray2DateArray</code>](#module_jaaJSU..$time.function_DateArray2DateArray)
 Curried method, first invocation sets operations (i. e. `{ addDay: 1 }`) and returns `function_DateArray2DateArray`.
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modify" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3164" title="jaaJSU.js:3164"><small>(defined@3164)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modify" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3164" title="jaaJSU.js:3164"><small>(defined@3164)</small></a>  
 **Access**: public  
 
 | Param | Type | Description |
@@ -2992,7 +2992,7 @@ Helper method for invoking "add*" operations in [`modify`](#methods_modify).
 
 In general `d.set...(d.get...+${value})` (where `d` is instance of `Date`).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modifyAdditions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3194" title="jaaJSU.js:3194"><small>(defined@3194)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.modifyAdditions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3194" title="jaaJSU.js:3194"><small>(defined@3194)</small></a>  
 **Returns**: <code>Date</code> - returns `dateObject`  
 **Access**: private  
 
@@ -3010,7 +3010,7 @@ In general `d.set...(d.get...+${value})` (where `d` is instance of `Date`).
 #### $time.double(time) ⇒ <code>String</code>
 Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.double" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3215" title="jaaJSU.js:3215"><small>(defined@3215)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.double" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3215" title="jaaJSU.js:3215"><small>(defined@3215)</small></a>  
 **Returns**: <code>String</code> - * 00, 01, 02, ..., 09, 10, ..., 100, ...  
 **Access**: public  
 
@@ -3026,7 +3026,7 @@ Function adds leading zero to the `time`. [It can be replaced in future: see `pa
 #### $time.daysInMonth(month, [year]) ⇒ <code>Number</code>
 Returns number of days in given month (and year)
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.daysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3228" title="jaaJSU.js:3228"><small>(defined@3228)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.daysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3228" title="jaaJSU.js:3228"><small>(defined@3228)</small></a>  
 **Returns**: <code>Number</code> - total of days  
 **Access**: public  
 
@@ -3043,7 +3043,7 @@ Returns number of days in given month (and year)
 #### $time.getDaysInMonth([date_array]) ⇒ <code>Number</code>
 Returns number of days in given month
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDaysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3240" title="jaaJSU.js:3240"><small>(defined@3240)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDaysInMonth" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3240" title="jaaJSU.js:3240"><small>(defined@3240)</small></a>  
 **Returns**: <code>Number</code> - total of days  
 **Access**: public  
 
@@ -3057,7 +3057,7 @@ Returns number of days in given month
 <a name="module_jaaJSU..$time.getMonthName"></a>
 
 #### $time.getMonthName(n, [l]) ⇒ <code>String</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getMonthName" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3252" title="jaaJSU.js:3252"><small>(defined@3252)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getMonthName" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3252" title="jaaJSU.js:3252"><small>(defined@3252)</small></a>  
 **Returns**: <code>String</code> - English month name  
 **Access**: public  
 
@@ -3079,7 +3079,7 @@ console.log($time.getMonthName(24, 4));//"Dece"
 #### $time.getOrdinalSuffix(n) ⇒ <code>String</code>
 See [ordinal_numbers](#module_jaaJSU..$time.ordinal_numbers).
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getOrdinalSuffix" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3274" title="jaaJSU.js:3274"><small>(defined@3274)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getOrdinalSuffix" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3274" title="jaaJSU.js:3274"><small>(defined@3274)</small></a>  
 **Returns**: <code>String</code> - `n`+English suffix  
 **Access**: public  
 
@@ -3099,7 +3099,7 @@ console.log($time.getOrdinalSuffix(1));//"1st"
 #### $time.getTimeStamp([time]) ⇒ <code>String</code>
 Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS".
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeStamp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3332" title="jaaJSU.js:3332"><small>(defined@3332)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getTimeStamp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3332" title="jaaJSU.js:3332"><small>(defined@3332)</small></a>  
 **Returns**: <code>String</code> - Timestamp  
 **Access**: public  
 
@@ -3115,7 +3115,7 @@ Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS".
 #### $time.getDateStamp([time]) ⇒ <code>String</code>
 Function returns timestamp in the form of "YYYY-MM-DD".
 
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDateStamp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3341" title="jaaJSU.js:3341"><small>(defined@3341)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.getDateStamp" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3341" title="jaaJSU.js:3341"><small>(defined@3341)</small></a>  
 **Returns**: <code>String</code> - Datestamp  
 **Access**: public  
 
@@ -3129,7 +3129,7 @@ Function returns timestamp in the form of "YYYY-MM-DD".
 <a name="module_jaaJSU..$time.function_Date2Date"></a>
 
 #### $time.function\_Date2Date(date_instance) ⇒ <code>Date</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3091" title="jaaJSU.js:3091"><small>(defined@3091)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Date" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3091" title="jaaJSU.js:3091"><small>(defined@3091)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -3142,7 +3142,7 @@ Function returns timestamp in the form of "YYYY-MM-DD".
 <a name="module_jaaJSU..$time.function_Date2Number"></a>
 
 #### $time.function\_Date2Number(date_instance) ⇒ <code>Number</code>
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Number" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3098" title="jaaJSU.js:3098"><small>(defined@3098)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_Date2Number" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3098" title="jaaJSU.js:3098"><small>(defined@3098)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -3155,7 +3155,7 @@ Function returns timestamp in the form of "YYYY-MM-DD".
 <a name="module_jaaJSU..$time.function_DateArray2DateArray"></a>
 
 #### $time.function\_DateArray2DateArray(date_array) ⇒ [<code>DateArray</code>](#module_jaaJSU..$time.DateArray)
-**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3156" title="jaaJSU.js:3156"><small>(defined@3156)</small></a>  
+**Kind**: static method of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.function_DateArray2DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3156" title="jaaJSU.js:3156"><small>(defined@3156)</small></a>  
 **Category**: virtual  
 
 | Param | Type |
@@ -3170,7 +3170,7 @@ Function returns timestamp in the form of "YYYY-MM-DD".
 #### $time.DateArray : <code>Array</code>
 This is in fact output of [toDateArray](#module_jaaJSU..$time.toDateArray).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2642" title="jaaJSU.js:2642"><small>(defined@2642)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.DateArray" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2642" title="jaaJSU.js:2642"><small>(defined@2642)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -3188,7 +3188,7 @@ This is in fact output of [toDateArray](#module_jaaJSU..$time.toDateArray).
 #### $time.toLocaleStringOptions : <code>Object</code>
 It is in fact argument for `options` in [`Date.prototype.toLocaleString` Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString#Parameters).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleStringOptions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2715" title="jaaJSU.js:2715"><small>(defined@2715)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.toLocaleStringOptions" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2715" title="jaaJSU.js:2715"><small>(defined@2715)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -3208,7 +3208,7 @@ This holds information about how show one piece of String output typically for [
 
 Predefined values can be found at [format_arrays](#module_jaaJSU..$time.format_arrays).
 
-**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ArrayOfOperation" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2759" title="jaaJSU.js:2759"><small>(defined@2759)</small></a>  
+**Kind**: static typedef of [<code>$time</code>](#module_jaaJSU..$time) <a name="module_jaaJSU..$time.ArrayOfOperation" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2759" title="jaaJSU.js:2759"><small>(defined@2759)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -3226,7 +3226,7 @@ Predefined values can be found at [format_arrays](#module_jaaJSU..$time.format_a
 ### jaaJSU~function\_filterCallback(i_value, i) ⇒ <code>Boolean</code>
 This kind of function is typically used in `Array.prototype.filter`.
 
-**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..function_filterCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L12" title="jaaJSU.js:12"><small>(defined@12)</small></a>  
+**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..function_filterCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L12" title="jaaJSU.js:12"><small>(defined@12)</small></a>  
 **Category**: virtual  
 
 | Param | Type | Description |
@@ -3242,7 +3242,7 @@ This kind of function is typically used in `Array.prototype.filter`.
 ### jaaJSU~function\_reduceCallback(accumulator, i_value, i) ⇒ <code>Mixed</code>
 This kind of function is typically used in `Array.prototype.reduce`.
 
-**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..function_reduceCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L20" title="jaaJSU.js:20"><small>(defined@20)</small></a>  
+**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..function_reduceCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L20" title="jaaJSU.js:20"><small>(defined@20)</small></a>  
 **Returns**: <code>Mixed</code> - accumulator  
 **Category**: virtual  
 
@@ -3258,7 +3258,7 @@ This kind of function is typically used in `Array.prototype.reduce`.
 <a name="module_jaaJSU..IterableCallback"></a>
 
 ### jaaJSU~IterableCallback(IterableArrayObject) ⇒ <code>Mixed</code> \| <code>Undefined</code>
-**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..IterableCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L37" title="jaaJSU.js:37"><small>(defined@37)</small></a>  
+**Kind**: inner method of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..IterableCallback" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L37" title="jaaJSU.js:37"><small>(defined@37)</small></a>  
 **Returns**: <code>Mixed</code> \| <code>Undefined</code> - `share` key of [IterableArrayObject](IterableArrayObject).  
 **Category**: virtual  
 
@@ -3272,7 +3272,7 @@ This kind of function is typically used in `Array.prototype.reduce`.
 <a name="module_jaaJSU..IterableArrayObject"></a>
 
 ### jaaJSU~IterableArrayObject : <code>Object</code>
-**Kind**: inner typedef of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..IterableArrayObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L29" title="jaaJSU.js:29"><small>(defined@29)</small></a>  
+**Kind**: inner typedef of [<code>jaaJSU</code>](#module_jaaJSU) <a name="module_jaaJSU..IterableArrayObject" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L29" title="jaaJSU.js:29"><small>(defined@29)</small></a>  
 **Category**: virtual  
 **Properties**
 
@@ -3291,7 +3291,7 @@ This kind of function is typically used in `Array.prototype.reduce`.
 ## $array : <code>object</code>
 Exported namespace of [$array](#module_jaaJSU..$array).
 
-**Kind**: global namespace <a name="$array" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L199" title="jaaJSU.js:199"><small>(defined@199)</small></a>  
+**Kind**: global namespace <a name="$array" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L199" title="jaaJSU.js:199"><small>(defined@199)</small></a>  
 
 * * *
 
@@ -3300,7 +3300,7 @@ Exported namespace of [$array](#module_jaaJSU..$array).
 ## $async : <code>object</code>
 Exported namespace of [$async](#module_jaaJSU..$async).
 
-**Kind**: global namespace <a name="$async" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L342" title="jaaJSU.js:342"><small>(defined@342)</small></a>  
+**Kind**: global namespace <a name="$async" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L342" title="jaaJSU.js:342"><small>(defined@342)</small></a>  
 
 * * *
 
@@ -3309,7 +3309,7 @@ Exported namespace of [$async](#module_jaaJSU..$async).
 ## $dom : <code>object</code>
 Exported namespace of [$dom](#module_jaaJSU..$dom).
 
-**Kind**: global namespace <a name="$dom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1158" title="jaaJSU.js:1158"><small>(defined@1158)</small></a>  
+**Kind**: global namespace <a name="$dom" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1158" title="jaaJSU.js:1158"><small>(defined@1158)</small></a>  
 
 * * *
 
@@ -3318,7 +3318,7 @@ Exported namespace of [$dom](#module_jaaJSU..$dom).
 ## $function : <code>object</code>
 Exported namespace of [$function](#module_jaaJSU..$function).
 
-**Kind**: global namespace <a name="$function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1365" title="jaaJSU.js:1365"><small>(defined@1365)</small></a>  
+**Kind**: global namespace <a name="$function" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1365" title="jaaJSU.js:1365"><small>(defined@1365)</small></a>  
 
 * * *
 
@@ -3327,7 +3327,7 @@ Exported namespace of [$function](#module_jaaJSU..$function).
 ## $object : <code>object</code>
 Exported namespace of [$object](#module_jaaJSU..$object).
 
-**Kind**: global namespace <a name="$object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1546" title="jaaJSU.js:1546"><small>(defined@1546)</small></a>  
+**Kind**: global namespace <a name="$object" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1546" title="jaaJSU.js:1546"><small>(defined@1546)</small></a>  
 
 * * *
 
@@ -3336,7 +3336,7 @@ Exported namespace of [$object](#module_jaaJSU..$object).
 ## $optimiziers : <code>object</code>
 Exported namespace of [$optimizier](#module_jaaJSU..$optimizier).
 
-**Kind**: global namespace <a name="$optimiziers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L1809" title="jaaJSU.js:1809"><small>(defined@1809)</small></a>  
+**Kind**: global namespace <a name="$optimiziers" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L1809" title="jaaJSU.js:1809"><small>(defined@1809)</small></a>  
 
 * * *
 
@@ -3345,7 +3345,7 @@ Exported namespace of [$optimizier](#module_jaaJSU..$optimizier).
 ## $string : <code>object</code>
 Exported namespace of [$string](#module_jaaJSU..$string).
 
-**Kind**: global namespace <a name="$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L2075" title="jaaJSU.js:2075"><small>(defined@2075)</small></a>  
+**Kind**: global namespace <a name="$string" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L2075" title="jaaJSU.js:2075"><small>(defined@2075)</small></a>  
 
 * * *
 
@@ -3354,7 +3354,7 @@ Exported namespace of [$string](#module_jaaJSU..$string).
 ## $time : <code>object</code>
 Exported namespace of [$time](#module_jaaJSU..$time).
 
-**Kind**: global namespace <a name="$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/undefined/jaaJSU.js#L3352" title="jaaJSU.js:3352"><small>(defined@3352)</small></a>  
+**Kind**: global namespace <a name="$time" href="https://github.com/jaandrle/jaaJSU#readme/blob/master/bin\cordova/jaaJSU.js#L3352" title="jaaJSU.js:3352"><small>(defined@3352)</small></a>  
 
 * * *
 
