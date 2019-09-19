@@ -870,7 +870,7 @@ $dom.assign(IMG_ELEMENT, { src: "image.png" });//=> <img src="image.png" …
 <a name="module_jaaJSU..$dom.add"></a>
 
 #### ~~$dom.add(parent, ...$$$) ⇒ <code>NodeElement</code>~~
-***Deprecated:*** true
+***Deprecated:*** Please use [component](#module_jaaJSU..$dom.component)
 
 >Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
 

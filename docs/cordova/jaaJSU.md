@@ -872,7 +872,7 @@ $dom.assign(IMG_ELEMENT, { src: "image.png" });//=> <img src="image.png" …
 <a name="module_jaaJSU..$dom.add"></a>
 
 #### ~~$dom.add(parent, ...$$$, [call_parseHTML]) ⇒ <code>NodeElement</code>~~
-***Deprecated:*** true
+***Deprecated:*** Please use [component](#module_jaaJSU..$dom.component)
 
 >See [add](#module_jaaJSU..$dom.add)
 
