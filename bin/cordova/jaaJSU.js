@@ -2080,11 +2080,16 @@
 
     export_as($string, "$string");
     /**
+     * @module jaaJSU
+     */
+    /**
      * This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
      * @namespace $time
+     * @version 0.6.0
+     * @see {@link https://github.com/jaandrle/dollar_time}
      * @category namespaces
      */
-    const $time= (function init(){/* version: "0.6.0" */
+    const $time= (function init(){
         const /* internal store */
             format_objects= (({ time, date, seconds })=>({
             /**
@@ -3329,6 +3334,7 @@
             formats: format_arrays
         };
     })();
+    
     /**
      * Function returns timestamp in the form of "YYYY-MM-DD HH:MM:SS".
      * @method getTimeStamp

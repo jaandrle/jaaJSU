@@ -2,7 +2,6 @@
 module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     let namespaces= {$string: "$string", $dom: "$dom", $async: "$async", $optimizier: "$optimizier", $time: "$time", $array: "$array", $object: "$object", $function: "$function"};
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
-    const new_line= ()=>"\n";
     return function(cb){
         /* jshint -W061 */const gulp_place= require("./gulp_place.js")({
             gulp_replace: $g.replace,
