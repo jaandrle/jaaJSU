@@ -4,7 +4,6 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike
  * This NAMESPACE provides features for Arrays.
  * @namespace $array
  * @category namespaces
- * @typicalname gulp_place("namespaces.$array", "eval_out")
  */
 var $array= {
     /**

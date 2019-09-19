@@ -2,16 +2,15 @@
 /**
  * This NAMESPACE provides features for strings.
  * @namespace $string
- * @typicalname gulp_place("namespaces.$string", "eval_out")
+ * @category namespaces
  */
 var $string= {
     /**
      * Clear spaces (`\s+`) in `str`
      * @method clearSpaces
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
-     * @return {String}
-     *  * Cleaned `str`
+     * @return {String} Cleaned `str`
      */
     clearSpaces: function(str) {
         if(typeof str !== "string") return false;
@@ -19,10 +18,9 @@ var $string= {
     },
     /**
      * @method countChars
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
-     * @return {Number}
-     *  * Number of chars in `str`
+     * @return {Number} Number of chars in `str`
      */
     countChars: function(str){
         if(typeof str !== "string") return false;
@@ -37,9 +35,8 @@ var $string= {
     },
     /**
      * @method generateUnique
-     * @memberof $string
-     * @return {String}
-     *  * An unique string
+     * @memberof module:jaaJSU~$string
+     * @return {String} An unique string
      */
     generateUnique(){
         return (new Date()).getTime()+"_"+(performance.now().toString(36)+Math.random().toString(36)).replace(/\./g, (""+Math.random()).charAt(0)).substr(0, 10);
@@ -47,44 +44,29 @@ var $string= {
     /**
      * Wrapper around `*.substring(*,*)`
      * @method getSubstring
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
-     * @param {Number} len
-     *  * How many chars
+     * @param {Number} len How many chars
      * @param {Number} [start=0]
-     * @return {String}
-     *  * Substring of `str`
+     * @return {String} Substring of `str`
      */
     getSubstring: function(str, len, start= 0) {
         if(start < 0) start= 0;
         if (str.length > len+start) {str = str.substring(start, len);}
         return str;
     },
-    /* 
-    * FCE pro "pricitani" pismen ve stringu
-    * ...vraci nasledujici pismenko, resp. pismenko posunute o inc
-    * parametry:
-    *  tS str= [a-zA-Z] alespon na pozici pos
-    *  tN inc ~1= cislo posunu - i zaporne
-    *  tN pos ~posledni pismenko= index pozice
-    * vraci:
-    *  tS string bud puvodni, nebo "posunuty"
-    *  */
    /**
     * @method letterInc
-    * @memberof $string
-    * @param {String} str
-    *  * [a-zA-z] at least on position `pos`
-    * @param {Number} [inc=1]
-    *  * `inc=0` is convert to `inc=1`
+    * @memberof module:jaaJSU~$string
+    * @param {String} str `[a-zA-z]` at least on position `pos`
+    * @param {Number} [inc=1] `inc=0` is convert to `inc=1`
     * @param {Number} [pos=str.length-1]
-    * @return {String}
-    *  * New string with "highter" letter on position `pos`
+    * @return {String} New string with "highter" letter on position `pos`
     * @example
-    *     console.log($string.letterInc("125"));//="126"
-    *     console.log($string.letterInc("125a"));//="125b"
-    *     console.log($string.letterInc("HH"));//="HI"
-    *     console.log($string.letterInc("Hg", 2, 1));//="Hi"
+    * console.log($string.letterInc("125"));//="126"
+    * console.log($string.letterInc("125a"));//="125b"
+    * console.log($string.letterInc("HH"));//="HI"
+    * console.log($string.letterInc("Hg", 2, 1));//="Hi"
     */
     letterInc: function(str, inc, pos){
         if(typeof pos === "undefined") pos= str.length-1;
@@ -107,10 +89,9 @@ var $string= {
     /**
      * Escapes "<", ">", "&", '"', "'"
      * @method escapeHTML
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
-     * @return {String}
-     *  * Escaped text
+     * @return {String} Escaped text
      */
     escapeHTML: function(str){
         var replacements= {"<": "&lt;", ">": "&gt;","&": "&amp;", "\"": "&quot;"};
@@ -119,10 +100,9 @@ var $string= {
     /**
      * Clear tags from `str`
      * @method clearHTML
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
-     * @return {String}
-     *  * Text without HTML tags
+     * @return {String} Text without HTML tags
      */
     clearHTML: function(str){
         var div= document.createElement('div');
@@ -131,14 +111,14 @@ var $string= {
     },
    /**
     * @method containsRepeatingChars
-    * @memberof $string
+    * @memberof module:jaaJSU~$string
     * @param {String} str
     * @param {Number} [quantity=2]
     * @return {Boolean}
     * @example
-    *     console.log($string.containsRepeatingChars("AAbcd"));//=false
-    *     console.log($string.containsRepeatingChars("AAAbcd"));//=true
-    *     console.log($string.containsRepeatingChars("AAAbcd", 3));//=false
+    * console.log($string.containsRepeatingChars("AAbcd"));//=false
+    * console.log($string.containsRepeatingChars("AAAbcd"));//=true
+    * console.log($string.containsRepeatingChars("AAAbcd", 3));//=false
     */
     containsRepeatingChars: function(str, quantity= 2){
         if(typeof str !== "string") return false;
@@ -148,14 +128,14 @@ var $string= {
     },
    /**
     * @method containsSequential
-    * @memberof $string
+    * @memberof module:jaaJSU~$string
     * @param {String} str
     * @param {Number} [quantity=2]
     * @return {Boolean}
     * @example
-    *     console.log($string.containsSequential("ABccc"));//=false
-    *     console.log($string.containsSequential("ABCdd"));//=true
-    *     console.log($string.containsSequential("ABCdd", 3));//=false
+    * console.log($string.containsSequential("ABccc"));//=false
+    * console.log($string.containsSequential("ABCdd"));//=true
+    * console.log($string.containsSequential("ABCdd", 3));//=false
     */
     containsSequential: function(str, quantity){
         if(typeof str !== "string") return false;
@@ -190,7 +170,7 @@ var $string= {
     },
     /**
      * @method isEmail
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} email_candidate
      * @return {Boolean}
      */
@@ -202,7 +182,7 @@ var $string= {
     /**
      * Wrapper around `*.trim()`
      * @method isFilled
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
      * @return {String|Boolean}
      */
@@ -213,39 +193,38 @@ var $string= {
     /**
      * Alternative to ` ```text with ${variable}``` ` (like `sprintf()`)
      * @method template
-     * @memberof $string
+     * @memberof module:jaaJSU~$string
      * @param {String} str
      *  * Text which contains `${0}, ${var}, ...`
-     * @return {Object}
-     *  * `{execute, partial, isSubstituted}`
-     *      * String **execute** ( [ `params_obj` ={}] )
-     *          * [ `params_obj` ={}] {Object}
-     *              * Keys corresponding to `${0}, ${var}, ...` in `str`
-     *          * **Returns:** String
-     *              * New string with replaced vars
-     *      * String **partial** ( [ `params_obj` ={}] )
-     *          * Replace inside `str`
-     *          * [ `params_obj` ={}] {Object}
-     *              * Keys corresponding to `${0}, ${var}, ...` in `str`
-     *          * **Returns:** String
-     *              * `str` with replaced vars
-     *      * Boolean **isSubstituted** ()
-     *          * **Returns:** Boolean
-     *              * If `str` contains `${0}, ${var}, ...`
+     * @return {Object} `{execute, partial, isSubstituted}`
+     * <br/>- String **execute** ( [ `params_obj` ={}] )
+     * <br/>&nbsp;&nbsp;- [ `params_obj` ={}] {Object}
+     * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- Keys corresponding to `${0}, ${var}, ...` in `str`
+     * <br/>&nbsp;&nbsp;- **Returns:** String
+     * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- New string with replaced vars
+     * <br/>- String **partial** ( [ `params_obj` ={}] )
+     * <br/>&nbsp;&nbsp;- Replace inside `str`
+     * <br/>&nbsp;&nbsp;- [ `params_obj` ={}] {Object}
+     * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- Keys corresponding to `${0}, ${var}, ...` in `str`
+     * <br/>&nbsp;&nbsp;- **Returns:** String
+     * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- `str` with replaced vars
+     * <br/>- Boolean **isSubstituted** ()
+     * <br/>&nbsp;&nbsp;- **Returns:** Boolean
+     * <br/>&nbsp;&nbsp;&nbsp;&nbsp;- If `str` contains `${0}, ${var}, ...`
      * @example
-     *     const test1= $string.template("${0}, ${1}, ${2}");
-     *     console.log(test1.partial(["A"]));//="A, ${1}, ${2}"
-     *     console.log(test1.execute(["B", "C", "D"]));//="A, C, D"
-     *     console.log(test1.isSubstituted());//=false
-     *     console.log(test1.partial(["_", "B", "C"]));//="A, B, C"
-     *     console.log(test1.isSubstituted());//=true
+     * const test1= $string.template("${0}, ${1}, ${2}");
+     * console.log(test1.partial(["A"]));//="A, ${1}, ${2}"
+     * console.log(test1.execute(["B", "C", "D"]));//="A, C, D"
+     * console.log(test1.isSubstituted());//=false
+     * console.log(test1.partial(["_", "B", "C"]));//="A, B, C"
+     * console.log(test1.isSubstituted());//=true
      * 
-     *     const test2= $string.template("${test0}, ${test1}, ${test2}");
-     *     console.log(test2.partial({test0: "A"}));//="A, ${test1}, ${test2}"
-     *     console.log(test2.execute({test0: "B", test1: "C", test2: "D"}));//="A, C, D"
-     *     console.log(test2.isSubstituted());//=false
-     *     console.log(test2.partial({test0: "_", test1: "B", test2: "C"}));//="A, B, C"
-     *     console.log(test2.isSubstituted());//=true
+     * const test2= $string.template("${test0}, ${test1}, ${test2}");
+     * console.log(test2.partial({test0: "A"}));//="A, ${test1}, ${test2}"
+     * console.log(test2.execute({test0: "B", test1: "C", test2: "D"}));//="A, C, D"
+     * console.log(test2.isSubstituted());//=false
+     * console.log(test2.partial({test0: "_", test1: "B", test2: "C"}));//="A, B, C"
+     * console.log(test2.isSubstituted());//=true
      */
     template: function(str, keysFun= Object.keys){
         if(typeof str !== "string") throw Error("Type of 'str' is not string!");
@@ -279,5 +258,10 @@ var $string= {
         return ([ firstLetter.toUpperCase(), ...rest ]).join("");
     }
 };
+/**
+ * Exported namespace of {@link module:jaaJSU~$string}.
+ * @namespace gulp_place("namespaces.$string", "eval_out")
+ * @global
+ */
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 export_as($string, gulp_place("namespaces.$string", "variable"));

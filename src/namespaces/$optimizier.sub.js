@@ -4,7 +4,7 @@ gulp_place("classes/IdleValue.sub.js", "file_once"); /* global IdleValue */
 /**
  * This NAMESPACE provides features for optimizations.
  * @namespace $optimizier
- * @typicalname gulp_place("namespaces.$optimizier", "eval_out")
+ * @category namespaces
  */
 var $optimizier= {
    /**

@@ -3,7 +3,6 @@
  * This NAMESPACE provides features for async (mainly Promise) functions.
  * @namespace $async
  * @category namespaces
- * @typicalname gulp_place("namespaces.$async", "eval_out")
  */
 /**
  * This kind of function schould returns `Promise`.

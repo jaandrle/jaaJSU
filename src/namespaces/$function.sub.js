@@ -4,7 +4,6 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
  * This NAMESPACE provides features for async (mainly Promise) functions.
  * @namespace $function
  * @category namespaces
- * @typicalname gulp_place("namespaces.$function", "eval_out")
  */
 /**
  * `function(input){  }`

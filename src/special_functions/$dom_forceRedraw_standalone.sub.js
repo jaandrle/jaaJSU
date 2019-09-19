@@ -3,7 +3,7 @@
 /**
  * Redraw element using cheat `*.offsetHeight`
  * @method forceRedraw
- * @memberof $dom
+ * @memberof module:jaaJSU~$dom
  * @param {NodeElement} [element=document.body] Element for redraw
  */
 $dom.forceRedraw= function(element= document.body){

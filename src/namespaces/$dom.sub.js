@@ -4,7 +4,6 @@ gulp_place("global.sub.js", "file_once");/* global gulp_place, __eachInArrayLike
  * This NAMESPACE provides features for DOM elemnts.
  * @namespace $dom
  * @category namespaces
- * @typicalname gulp_place("namespaces.$dom", "eval_out")
  */
 var $dom={
     /**
