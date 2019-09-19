@@ -28,7 +28,7 @@
 /**
  * @function IterableCallback
  * @category virtual
- * @param {IterableArrayObject} IterableArrayObject
+ * @param {module:jaaJSU~IterableArrayObject} IterableArrayObject
  * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
  */
 function export_as(obj, key){ out[key]= obj; }

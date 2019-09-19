@@ -37,7 +37,7 @@
     /**
      * @function IterableCallback
      * @category virtual
-     * @param {IterableArrayObject} IterableArrayObject
+     * @param {module:jaaJSU~IterableArrayObject} IterableArrayObject
      * @returns {Mixed|Undefined} `share` key of {@link IterableArrayObject}.
      */
     function export_as(obj, key){ out[key]= obj; }
@@ -1414,7 +1414,7 @@
          * @method each
          * @memberof module:jaaJSU~$object
          * @param {Object} iterable  An object for iterating.
-         * @param {module:jaaJSU~IterableObjectCallback} i_function
+         * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */
@@ -1424,7 +1424,7 @@
          * @method eachDynamic
          * @memberof module:jaaJSU~$object
          * @param {Object} iterable An object for iterating.
-         * @param {module:jaaJSU~IterableObjectCallback} i_function
+         * @param {module:jaaJSU~$object.IterableObjectCallback} i_function
          * @param {Object|undefined} scope An argument for `i_function.call(*,...)`
          * @return {Mixed} `share`
          */

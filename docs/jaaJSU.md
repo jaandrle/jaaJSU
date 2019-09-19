@@ -1782,7 +1782,7 @@ console.log($function.sequention(
 | Param | Type | Description |
 | --- | --- | --- |
 | iterable | <code>Object</code> | An object for iterating. |
-| i_function | <code>module:jaaJSU~IterableObjectCallback</code> |  |
+| i_function | [<code>IterableObjectCallback</code>](#module_jaaJSU..$object.IterableObjectCallback) |  |
 | scope | <code>Object</code> \| <code>undefined</code> | An argument for `i_function.call(*,...)` |
 
 
@@ -1799,7 +1799,7 @@ console.log($function.sequention(
 | Param | Type | Description |
 | --- | --- | --- |
 | iterable | <code>Object</code> | An object for iterating. |
-| i_function | <code>module:jaaJSU~IterableObjectCallback</code> |  |
+| i_function | [<code>IterableObjectCallback</code>](#module_jaaJSU..$object.IterableObjectCallback) |  |
 | scope | <code>Object</code> \| <code>undefined</code> | An argument for `i_function.call(*,...)` |
 
 
@@ -3242,7 +3242,7 @@ Predefined values can be found at [format_arrays](#module_jaaJSU..$time.format_a
 
 | Param | Type |
 | --- | --- |
-| IterableArrayObject | <code>IterableArrayObject</code> | 
+| IterableArrayObject | [<code>IterableArrayObject</code>](#module_jaaJSU..IterableArrayObject) | 
 
 
 * * *
