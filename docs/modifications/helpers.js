@@ -2,7 +2,7 @@
 /* global gulp_place */
 module.exports= {
     pathHelper: function(path){
-        const folder_part= path.split("undefined"+"\\")[1];
+        const folder_part= path.split("jaaJSU"+"\\")[1];
         return "https://github.com/jaandrle/jaaJSU#readme"+"/blob/master/"+folder_part+"/";
     }
 };

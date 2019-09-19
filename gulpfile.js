@@ -7,7 +7,7 @@ const config= (function(){
               $run= require($gulp_folder+'gulp-crossplatform')(),
               {fullName, version, build, src_folder, bin_folder, doc_folder, sequence, namespaces_rename, dependencies, homepage}= JSON.parse($o_default.fs.readFileSync('./package.json')),
               {$g,$o}= mapDependencies(dependencies, $o_default);
-        const app= {name: fullName, version, build, src_folder, bin_folder, doc_folder, sequence, namespaces_rename, homepage};
+        const app= {name: fullName, folderName: fullName, version, build, src_folder, bin_folder, doc_folder, sequence, namespaces_rename, homepage};
         return {gulp, $gulp_folder, $run, $g, $o, app, error: error()};
 })();
 /* /CONFIG/ */
