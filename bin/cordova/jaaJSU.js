@@ -1587,6 +1587,7 @@
         ];
         function now(){ return +(new Date());}
     })(typeof requestIdleCallback === 'function');
+ 
     class IdleValue {
         constructor(init, msg= "IdleValue: `init` argument for class constructor must be a function!"){
             if(typeof init!=="function") throw new TypeError(msg);
