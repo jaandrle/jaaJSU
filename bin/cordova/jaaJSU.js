@@ -381,7 +381,8 @@
          * Value is argument for selection function
          * @typedef {Object} DomPreparedSelector
          * @memberof module:jaaJSU~$dom
-         * @category virtual
+         * @category types descriptions
+         * @inner
          * @example
          * { getElementsByClassname: "class_name" }
          */
@@ -389,7 +390,7 @@
          * Calls `.then` when the DOM element is available/reday (uses `requestAnimationFrame`)
          * @method elementReady_
          * @memberof module:jaaJSU~$dom
-         * @param {module:jaaJSU~$dom.DomPreparedSelector} el_selector
+         * @param {module:jaaJSU~$dom~DomPreparedSelector} el_selector
          * @param {DOMElement} [parent=document] Where to search `el_selector`
          * @return {Promise}
          * @.then {NodeElement} Target elemnet based on `el_selector`
