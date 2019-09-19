@@ -4,7 +4,12 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
     if(app.namespaces_rename) Object.keys(app.namespaces_rename).forEach(key=> namespaces[key]= app.namespaces_rename[key]);
     const new_line= ()=>"\n";
     return function(cb){
-        /* jshint -W061 */const gulp_place= require("./gulp_place.js")({gulp_replace: $g.replace, fs: $o.fs, variable_eval: (str)=> eval(str)});/* jshint +W061 */
+        /* jshint -W061 */const gulp_place= require("./gulp_place.js")({
+            gulp_replace: $g.replace,
+            fs: $o.fs,
+            variable_eval: (str)=> eval(str),
+            filesCleaner: require("./gulp_cleanJSHINT.js")
+        });/* jshint +W061 */
         let cmd;
         cmd= $o.spawn("node", ['node_modules/jshint/bin/jshint', app.src_folder], {});
         cmd.stdout.on('data', function(data){ error.addText(data.toString()+"\n"); });
@@ -14,6 +19,7 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             if(!code){
                 main_stream= gulp.src([app.src_folder+"*.js", '!'+app.src_folder+'*.sub.js'])
                     .pipe(gulp_place({folder: "src/", string_wrapper: '"'}))
+                    .pipe($g.replace(/[^\n]*\/\/gulp\.remove\.line\r?\n?/g, ""))
                     .pipe($g.replace(/\/\* gulp \*\/\/\* global gulp_place \*\/\r?\n/g,""))
                     .pipe($g.replace(/([^\n]*)\/\/gulp\.remove_ifCordova\.line(\r?\n?)/g, (full, pre, after)=>app.standalone==="cordova" ? "" : pre+after));
     
