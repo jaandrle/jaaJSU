@@ -1,7 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
- * @version 0.8.1
+ * @version 0.8.2
  */
 (function(module_name, factory) {
     'use strict';
@@ -16,7 +16,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.1";
+        window[module_name+"_version"]= "0.8.2";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -2039,7 +2039,7 @@
          */
         isEmail: function(email_candidate){
             /*_@_*/ let e= email_candidate.split("@"); if(e.length!==2) return false;
-            /*_@_._*/ e= [e[0], ...e[1].split(".")]; if(e.length!==3) return false;
+            /*_@_._*/ e= [e[0], ...e[1].split(".")]; if(e.length<3) return false;
             const _e= !/(#|\?|!|\\|\/|\||\.\.)/i.test(e[0]); return _e && e.reduce((r,o)=>r&&o.length>1&&!/\s/.test(o), _e);
         },
         /**
