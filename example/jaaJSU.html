@@ -10,7 +10,15 @@
 
 <script src="../bin/jaaJSU.js"></script>
 <script>
+    const isThennable = value =>
+        value && value.then && (typeof value.then === 'function');
+    const awaitAll = promises =>
+        Promise.all(promises.map(p => isThennable(p) ? p : Promise.resolve(p)));
+    const awaitAny = promises =>
+        Promise.race(promises);
     
+    const timeout = num=>
+        new Promise(function(resolve, reject){ setTimeout( num%2 ? resolve : reject, num, num ); });
 </script>
 </body>
 </html>

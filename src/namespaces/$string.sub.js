@@ -109,6 +109,22 @@ var $string= {
         div.innerHTML= str;
         return div.textContent;
     },
+    /**
+     * Curried function for joining text: `text_right=> text_left=> text_left+text_right`
+     * @method concatLeft
+     * @memberof module:jaaJSU~$string
+     * @param {String} text_right
+     * @return {Function} Function for adding text to `text_right`
+     */
+    concatLeft: function(text_right){ return function(text_left){ return String(text_left)+text_right; }; },
+    /**
+     * Curried function for joining text: `text_left=> text_right=> text_left+text_right`
+     * @method concatLeft
+     * @memberof module:jaaJSU~$string
+     * @param {String} text_left
+     * @return {Function} Function for adding text to `text_left`
+     */
+    concatRight: function(text_left){ return function(text_right){ return String(text_left)+text_right; }; },
    /**
     * @method containsRepeatingChars
     * @memberof module:jaaJSU~$string

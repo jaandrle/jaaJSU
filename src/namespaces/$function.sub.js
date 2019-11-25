@@ -89,6 +89,14 @@ var $function= {
         };
     },
     /**
+     * Curried function `...args=> fun=> fun(...args)`
+     * @method call
+     * @memberof module:jaaJSU~$function
+     * @param  {...any} args Arguments for curried output function
+     * @return {Function}
+     */
+    call: function(...args){ return function(fun){ return fun(...args); }; },
+    /**
      * EXPERIMENT!: Function composing using `$dom.component` like syntax
      * @method component
      * @memberof module:jaaJSU~$function
@@ -133,6 +141,20 @@ var $function= {
      * @return {module:jaaJSU~$function~function_Mixed2Undefined}
      */
     each: function(...functions){ return function(input){ for(let i=0, i_length= functions.length; i<i_length; i++){ functions[i](input); } }; },
+    /**
+     * @method exception
+     * @memberof module:jaaJSU~$function
+     * @param {Mixed} _throw What to throw.
+     * @throws {Mixed} `_throw`
+     */
+    exception: function(_throw){ throw _throw; },
+    /**
+     * @method exceptionError
+     * @memberof module:jaaJSU~$function
+     * @param {String} message What message to throw as Error.
+     * @throws {Error} Error with message `message`.
+     */
+    exceptionError: function(message){ throw new Error(message); },
     /**
      * `id=> id`
      * @method identity
@@ -184,6 +206,14 @@ var $function= {
      */
     schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
     /**
+     * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`.
+     * @method spread
+     * @memberof module:jaaJSU~$function
+     * @param {Function} fun
+     * @returns {Function}
+     */
+    spread: function(fun){ return function(args= []){ return fun(...args); }; },
+    /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to {@link module:jaaJSU~$function.each}. But, as arguments for current function is used output frome previous function.
      * @method sequention
      * @memberof module:jaaJSU~$function
@@ -203,7 +233,51 @@ var $function= {
      *      a=>a+2
      *  )(5));//= [8]
      */
-    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; }
+    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
+    /**
+     * Helper function for {@link module:jaaJSU~$function.sequentionTry}.
+     * @method sequentionCatch
+     * @memberof module:jaaJSU~$function
+     * @param {Function} fun
+     * @returns {Function}
+     */
+    sequentionCatch: function(fun= $function.identity){
+        return function __sequentionCatchInner__(input){ return fun(input); };
+    },
+    /**
+     * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
+     * @method sequention
+     * @memberof module:jaaJSU~$function
+     * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
+     * @return {module:jaaJSU~$function~function_Mixed2Mixed}
+     * @example
+     * const fun= $function.sequentionTry(
+     *      $function.ifElse($function.exception, undefined, a=> a>8),
+     *      a=> a+1,
+     *      $function.sequentionCatch(a=> a%9-1),
+     *      a=> a+1
+     * );
+     * console.log([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ].map(fun));
+     * //> Array(13) [2,3,4,5,6,7,8,9,10,0,1,2,3]
+     */
+    sequentionTry: function(...functions){
+        const i_length= functions.length;
+        return function(input){
+            let current= input, err= false;
+            for(let i= 0, is_catch; i<i_length; i++){
+                is_catch= functions[i].name==="__sequentionCatchInner__";
+                if(err&&is_catch){
+                    try{ current= functions[i](current); err= false; }
+                    catch(e){ current= e; }
+                } else if(!err&&!is_catch) {
+                    try{ current= functions[i](current); }
+                    catch(e){ current= e; err= true; }
+                }
+            }
+            if(err) throw current;
+            return current;
+        };
+    }
 };
 gulp_place("global.sub.js", "file_once");/* global gulp_place, export_as */
 /**

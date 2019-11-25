@@ -1,6 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
+ * @todo https://github.com/Sullux/fp-light/blob/master/lib/async/async.js
  * @namespace $async
  * @category namespaces
  */
