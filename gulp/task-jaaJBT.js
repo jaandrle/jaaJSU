@@ -2,6 +2,7 @@
 module.exports= function({ app, $gulp_folder, gulp, error, $g, $o, $run }){
     const jaaJBT_start= {
         config: {
+            version: "1.1.0",
             root_url: "https://raw.githubusercontent.com/jaandrle/jaaJSU/master/"
         },
         scripts: {}
@@ -12,6 +13,6 @@ module.exports= function({ app, $gulp_folder, gulp, error, $g, $o, $run }){
             src: app.bin_folder+"jaaJSU.js",
             target_path: "app_js_src_path"
         };
-        $o.fs.writeFile("jaaJBT.json", JSON.stringify(jaaJBT_start, null, "    "), cb);
+        $o.fs.writeFile("jaaJBT.json", JSON.stringify(jaaJBT_start), cb);
     };
 };
