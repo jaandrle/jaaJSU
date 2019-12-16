@@ -1,63 +1,63 @@
 {
-  "__SECTION_GULP": "",
-  "fullName": "jaaJSU",
-  "version": "0.8.3",
-  "build": "0001",
-  "src_folder": "src/",
-  "bin_folder": "bin/",
-  "doc_folder": "docs/",
-  "__Comment__namespaces_rename": "This settings allow to rename namespaces",
-  "namespaces_rename": {
-    "$optimizier": "$optimiziers"
-  },
-  "__Comment__sequence": "exclamation mark (!) on the start of task name means to escape it",
-  "sequence": [
-    "javascript",
-    "jaaJBT",
-    "doc"
-  ],
-  "__SECTION_NPM": "",
-  "name": "jaajsu",
-  "description": "JavaScript Utils",
-  "main": "gulpfile.js",
-  "bin": {
-    "jaajsu": "jaaJSU-min.js"
-  },
-  "directories": {
-    "example": "example",
-    "bin": "bin"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jaandrle/jaaJSU.git"
-  },
-  "author": "Jan Andrle <andrle.jan@centrum.cz>",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jaandrle/jaaJSU/issues"
-  },
-  "homepage": "https://github.com/jaandrle/jaaJSU",
-  "dependencies": {
-    "gulp": ">3.9.1",
-    "gulp-concat": "2.6.1",
-    "gulp-javascript-obfuscator": "1.1.5",
-    "gulp-minify": "3.1.0",
-    "gulp-rename": "1.4.0",
-    "gulp-replace": "1.0.0",
-    "gulp-sourcemaps": "2.6.4",
-    "gulp-util": "3.0.8",
-    "jshint": "~2.9.6"
-  },
-  "devDependencies": {
-    "jsdoc-to-markdown": "^5.0.1"
-  },
-  "__SECTION__JSHINT": "",
-  "jshintConfig": {
-    "esversion": 6,
-    "browser": "true",
-    "undef": "true"
-  }
+    "__SECTION_GULP": "",
+    "fullName": "jaaJSU",
+    "version": "0.8.4",
+    "build": "0001",
+    "src_folder": "src/",
+    "bin_folder": "bin/",
+    "doc_folder": "docs/",
+    "__Comment__namespaces_rename": "This settings allow to rename namespaces",
+    "namespaces_rename": {
+        "$optimizier": "$optimiziers"
+    },
+    "__Comment__sequence": "exclamation mark (!) on the start of task name means to escape it",
+    "sequence": [
+        "javascript",
+        "jaaJBT",
+        "doc"
+    ],
+    "__SECTION_NPM": "",
+    "name": "jaajsu",
+    "description": "JavaScript Utils",
+    "main": "gulpfile.js",
+    "bin": {
+        "jaajsu": "jaaJSU-min.js"
+    },
+    "directories": {
+        "example": "example",
+        "bin": "bin"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/jaandrle/jaaJSU.git"
+    },
+    "author": "Jan Andrle <andrle.jan@centrum.cz>",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/jaandrle/jaaJSU/issues"
+    },
+    "homepage": "https://github.com/jaandrle/jaaJSU",
+    "dependencies": {
+        "gulp": ">3.9.1",
+        "gulp-concat": "2.6.1",
+        "gulp-javascript-obfuscator": "1.1.5",
+        "gulp-minify": "3.1.0",
+        "gulp-rename": "1.4.0",
+        "gulp-replace": "1.0.0",
+        "gulp-sourcemaps": "2.6.4",
+        "gulp-util": "3.0.8",
+        "jshint": "~2.9.6"
+    },
+    "devDependencies": {
+        "jsdoc-to-markdown": "^5.0.1"
+    },
+    "__SECTION__JSHINT": "",
+    "jshintConfig": {
+        "esversion": 6,
+        "browser": "true",
+        "undef": "true"
+    }
 }
