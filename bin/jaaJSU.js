@@ -1,7 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
- * @version 0.8.4
+ * @version 0.8.5
  */
 (function(module_name, factory) {
     'use strict';
@@ -16,7 +16,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.4";
+        window[module_name+"_version"]= "0.8.5";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -536,8 +536,8 @@
      * @type {module:jaaJSU~$dom~instance_component}
      */
     const $dom_emptyPseudoComponent= (function(){
-        const share= { mount, update, destroy, isStatic };
-        const component_out= { add, component, mount, update, share };
+        const share= { mount, update, destroy, ondestroy, isStatic };
+        let component_out= { add, component, mount, update, ondestroy, share };
         return component_out;
         /**
          * The same syntax as {@link module:jaaJSU~$dom~instance_component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
@@ -571,13 +571,14 @@
         function component(){ return component_out; }
         function update(){ return true; }
         function isStatic(){ return true; }
-        function destroy(){ return null; }
+        function ondestroy(){ return true; }
+        function destroy(){ component_out= null; return null; }
     })();
     /**
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
      * @memberof module:jaaJSU~$dom
-     * @version 1.0.1
+     * @version 1.0.3
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
      * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
@@ -589,6 +590,8 @@
         if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
         let /* holds `initStorage()` if `onupdate` was registered */
             internal_storage= null,
+            on_destroy_funs= null,
+            /* on first mount */
             on_mount_funs= null;
         const /* 'drawer' (container) for component elements */
             fragment= document.createDocumentFragment();
@@ -602,8 +605,8 @@
                 - see `shift` in `add`
             */
             deep= [];
-        const share= { mount, update, destroy, isStatic };
-        let component_out= { add, addText, component, setShift, mount, update, share };
+        const share= { mount, update, destroy, ondestroy, isStatic };
+        let component_out= { add, addText, component, setShift, mount, update, ondestroy, share };
         let add_out_methods= {
             /**
              * Returns reference of currently added element
@@ -653,6 +656,8 @@
              * It can for example solve problem setting default value for `select` (`option`s elements not exist when the `select` itself is declared!).
              * 
              * As alternative for some cases, you can use `active` label for `option`s instead.
+             * 
+             * For now, only first mount!
              * @method onmount
              * @memberof module:jaaJSU~$dom~instance_componentAdd
              * @param {Function} onMountFunction
@@ -910,7 +915,10 @@
                 observer.disconnect();
             }));
             observer.observe(container.parentNode, { childList: true, subtree: true, attributes: false, characterData: false });
-            if(on_mount_funs) on_mount_funs.forEach((onMountFunction, el)=> $dom.assign(el, onMountFunction.call(el, element, type)));
+            if(on_mount_funs){
+                on_mount_funs.forEach((onMountFunction, el)=> $dom.assign(el, onMountFunction.call(el, element, type)));
+                on_mount_funs= null;
+            }
             return container;
         }
         
@@ -927,6 +935,10 @@
          * //=> c===null AND <body></body>
          */
         function destroy(){
+            if(on_destroy_funs){
+                on_destroy_funs.forEach(onDestroyFunction=> onDestroyFunction.call(container));
+                on_destroy_funs= null;
+            }
             if(container) {
                 container.remove();
                 container= null;
@@ -935,8 +947,20 @@
             if(internal_storage) internal_storage= null;
             if(component_out) component_out= null;
             if(add_out_methods) add_out_methods= null;
-            if(on_mount_funs) on_mount_funs= null;
             return null;
+        }
+        
+        /**
+         * This provide ability to register function which should be called when the component will be destroyed.
+         * @method ondestroy
+         * @memberof module:jaaJSU~$dom~instance_component
+         * @public
+         * @param {Function} onDestroyFunction Function will be called when the component will be destroyed.
+         */
+        function ondestroy(onDestroyFunction){
+            if(!on_destroy_funs) on_destroy_funs= new Set();
+            on_destroy_funs.add(onDestroyFunction);
+            return component_out;
         }
         
         /**
@@ -1147,6 +1171,7 @@
      * @type {Array}
      * @param {String} 0 Name of method in {@link module:jaaJSU~$dom~instance_componentAdd}.
      * @param {Array} 1 In fact arguments for `on*` methods in {@link module:jaaJSU~$dom~instance_componentAdd}.
+     * @category types descriptions
      * @inner
      */
     /**
