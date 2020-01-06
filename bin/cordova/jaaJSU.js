@@ -1,12 +1,12 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
- * @version 0.8.5
+ * @version 0.8.4
  */
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.8.5";
+    window[module_name+"_version"]= "0.8.4";
 })("jaaJSU", function(window, document){
     var out= {};
     /**

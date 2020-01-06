@@ -37,7 +37,7 @@
 <a name="module_jaaJSU"></a>
 
 ## jaaJSU
-**Version**: 0.8.5  
+**Version**: 0.8.4  
 
 * [jaaJSU](#module_jaaJSU)
     * _namespaces_
