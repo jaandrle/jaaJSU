@@ -23,7 +23,7 @@ module.exports= function(config){
                 config.app.standalone= "cordova";
                 config.app.bin_folder+= "cordova/";
                 config.app.doc_folder+= "cordova/";
-                gulp.series(...sequence)(cb);
+                gulp.series(...sequence.filter(task=> task!=="examples"))(cb);
             });
         });
     };

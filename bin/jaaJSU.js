@@ -1,7 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
- * @version 0.8.3
+ * @version 0.8.4
  */
 (function(module_name, factory) {
     'use strict';
@@ -16,7 +16,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.3";
+        window[module_name+"_version"]= "0.8.4";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -536,8 +536,8 @@
      * @type {module:jaaJSU~$dom~instance_component}
      */
     const $dom_emptyPseudoComponent= (function(){
-        const share= { mount, update, destroy, isStatic };
-        const component_out= { add, component, mount, update, share };
+        const share= { mount, update, destroy, ondestroy, isStatic };
+        let component_out= { add, component, mount, update, ondestroy, share };
         return component_out;
         /**
          * The same syntax as {@link module:jaaJSU~$dom~instance_component.mount}. But only "replace"/"replaceContent" types makes sence (deleting/replacing by "empty space").
@@ -571,13 +571,14 @@
         function component(){ return component_out; }
         function update(){ return true; }
         function isStatic(){ return true; }
-        function destroy(){ return null; }
+        function ondestroy(){ return true; }
+        function destroy(){ component_out= null; return null; }
     })();
     /**
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
      * @memberof module:jaaJSU~$dom
-     * @version 1.0.0
+     * @version 1.0.3
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
      * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
@@ -588,7 +589,10 @@
     $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
         let /* holds `initStorage()` if `onupdate` was registered */
-            internal_storage= null;
+            internal_storage= null,
+            on_destroy_funs= null,
+            /* on first mount */
+            on_mount_funs= null;
         const /* 'drawer' (container) for component elements */
             fragment= document.createDocumentFragment();
         let /* main parent (wrapper), container for children elements */
@@ -601,8 +605,118 @@
                 - see `shift` in `add`
             */
             deep= [];
-        const share= { mount, update, destroy, isStatic };
-        const component_out= { add, addText, component, setShift, mount, update, share };
+        const share= { mount, update, destroy, ondestroy, isStatic };
+        let component_out= { add, addText, component, setShift, mount, update, ondestroy, share };
+        let add_out_methods= {
+            /**
+             * Returns reference of currently added element
+             * @method getReference
+             * @memberof module:jaaJSU~$dom~instance_componentAdd
+             * @returns {NodeElement}
+             */
+            getReference: function(add_out, el){ return el; },
+            /**
+             * Method for batch registering `on*` methods for current element.
+             * @method on
+             * @memberof module:jaaJSU~$dom~instance_componentAdd
+             * @param  {...module:jaaJSU~$dom~component_listener} listeners
+             * @returns {module:jaaJSU~$dom~instance_componentAdd}
+             * @example
+             * const select_component= select();
+             * select_component.mount(parent);
+             * // default ⇣
+             * select_component.update({ value: "no_default_1" });
+             * // no_default_1 ⇣
+             * 
+             * function select(init= { value: "default" }){
+             *     const default_value= $dom.componentListener("mount", ()=> init);
+             *     const update_value= $dom.componentListener("update", init, ({ value })=> ({ value }));
+             *     
+             *     const c= $dom.component("SELECT", null).on( default_value, update_value );
+             *         c.add("OPTION", { value: "no_default_1", textContent: "no_default_1" });
+             *         c.add("OPTION", { value: "default", textContent: "default" }, -1);
+             *     return share;
+             * }
+             */
+            on: function(add_out, el, ...listeners){
+                listeners.forEach(([ event_name, args ])=> add_out[event_name].apply(this, args));
+                return add_out;
+            },
+            /**
+             * This procedure allows to call given function `fn` during registering element.
+             * @method oninit
+             * @memberof module:jaaJSU~$dom~instance_componentAdd
+             * @param {Function} fn
+             * @returns {module:jaaJSU~$dom~instance_componentAdd}
+             */
+            oninit: function(add_out, el, fn){ fn(el); return add_out; },
+            /**
+             * This procedure allows to call given function `onMountFunction` during mounting component.
+             * 
+             * It can for example solve problem setting default value for `select` (`option`s elements not exist when the `select` itself is declared!).
+             * 
+             * As alternative for some cases, you can use `active` label for `option`s instead.
+             * 
+             * For now, only first mount!
+             * @method onmount
+             * @memberof module:jaaJSU~$dom~instance_componentAdd
+             * @param {Function} onMountFunction
+             * @returns {module:jaaJSU~$dom~instance_componentAdd}
+             * @example
+             * const select_component= select({ value: "default" });
+             * select_component.mount(parent);
+             * // default ⇣
+             * 
+             * function select(init){
+             *     const c= $dom.component("SELECT", null)
+             *      .onmount(()=> init);
+             *         c.add("OPTION", { value: "no_default_1", textContent: "no_default_1" });
+             *         c.add("OPTION", { value: "no_default_2", textContent: "no_default_2" }, -1);
+             *         c.add("OPTION", { value: "no_default_3", textContent: "no_default_3" }, -1);
+             *         c.add("OPTION", { value: "default", textContent: "default" }, -1);
+             *     return c.share;
+             * }
+             */
+            onmount: function(add_out, el, onMountFunction){
+                if(!on_mount_funs) on_mount_funs= new Map();
+                on_mount_funs.set(el, onMountFunction);
+                return add_out;
+            },
+            /**
+             * This method allows to register function ({@link module:jaaJSU~$dom.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link module:jaaJSU~$dom~instance_component.update}).
+             * @method onupdate
+             * @memberof module:jaaJSU~$dom~instance_componentAdd
+             * @param {Object} data This allows register listener for given **keys** of Object `data`. For `data= { a: "A", b: "B" }` it means that when `a` or `b` will be changed the `onUpdateFunction` is called.
+             * @param {module:jaaJSU~$dom~onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
+             * @returns {module:jaaJSU~$dom~instance_componentAdd}
+             * @example
+             * const c= $dom.component("DIV", null);
+             * …
+             * c.add("P", null).onupdate({ key: "This is init value" }, ({ key })=> ({ textContent: key }));//=> <p>This is init value</p>
+             * …
+             * c.update({ key: "Value changed" });//=> <p>Value changed</p>
+             * @example
+             * const c= $dom.component("DIV", null);
+             * …
+             * c.add("P", null).onupdate({ A: "A", B: "b" }, ({ A, B })=> ({ textContent: A+B }));//=> <p>Ab</p>
+             * …
+             * c.update({ B: "B" });//=> <p>AB</p>
+             */
+            /**
+             * @callback onUpdateFunction
+             * @memberof module:jaaJSU~$dom
+             * @category types descriptions
+             * @inner
+             * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom~instance_componentAdd.onupdate}
+             * @returns {*|module:jaaJSU~$dom~DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link module:jaaJSU~$dom~instance_component.update} is called. This callback can be registered when element is created (see method {@link module:jaaJSU~$dom~instance_component.add}) see {@link module:jaaJSU~$dom~instance_componentAdd}.
+             */
+            onupdate: function(add_out, el, data, onUpdateFunction){
+                if(!data) return add_out;
+                if(!internal_storage) internal_storage= initStorage();
+                $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
+                return add_out;
+            }
+        };
         /**
          * Its purpose is to make easy transfering methods somewhere else (like for using in another component, see {@link module:jaaJSU~$dom~instance_component.component} method).
          * @typedef share
@@ -667,57 +781,14 @@
             let el= els[all_els_counter];
             all_els_counter+= 1;
             $dom.assign(el, attrs);
-            return Object.assign({
-                /**
-                 * Returns reference of currently added element
-                 * @method getReference
-                 * @memberof module:jaaJSU~$dom~instance_componentAdd
-                 * @returns {NodeElement}
-                 */
-                getReference: ()=> el,
-                /**
-                 * This procedure allows to call given function `fn` during registering element.
-                 * @method oninit
-                 * @memberof module:jaaJSU~$dom~instance_componentAdd
-                 * @param {Function} fn
-                 * @returns {module:jaaJSU~$dom~instance_component}
-                 */
-                oninit: function(fn){ fn(el); return component_out; },
-                /**
-                 * This method allows to register function ({@link module:jaaJSU~$dom.onUpdateFunction}) which shoul be invoke when given **keys** in `data` will be changed (see {@link module:jaaJSU~$dom~instance_component.update}).
-                 * @method onupdate
-                 * @memberof module:jaaJSU~$dom~instance_componentAdd
-                 * @param {Object} data This allows register listener for given **keys** of Object `data`. For `data= { a: "A", b: "B" }` it means that when `a` or `b` will be changed the `onUpdateFunction` is called.
-                 * @param {module:jaaJSU~$dom~onUpdateFunction} onUpdateFunction This register function, which should be called when any key od `data` will be changed in future. It is also called during creating element.
-                 * @returns {module:jaaJSU~$dom~instance_component}
-                 * @example
-                 * const c= $dom.component("DIV", null);
-                 * …
-                 * c.add("P", null).onupdate({ key: "This is init value" }, ({ key })=> ({ textContent: key }));//=> <p>This is init value</p>
-                 * …
-                 * c.update({ key: "Value changed" });//=> <p>Value changed</p>
-                 * @example
-                 * const c= $dom.component("DIV", null);
-                 * …
-                 * c.add("P", null).onupdate({ A: "A", B: "b" }, ({ A, B })=> ({ textContent: A+B }));//=> <p>Ab</p>
-                 * …
-                 * c.update({ B: "B" });//=> <p>AB</p>
-                 */
-                /**
-                 * @callback onUpdateFunction
-                 * @memberof module:jaaJSU~$dom
-                 * @category types descriptions
-                 * @inner
-                 * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom~instance_componentAdd.onupdate}
-                 * @returns {*|module:jaaJSU~$dom~DomAssignObject} Primary should use `DomAssignObject`, but in generall this can do anything what make sence when method {@link module:jaaJSU~$dom~instance_component.update} is called. This callback can be registered when element is created (see method {@link module:jaaJSU~$dom~instance_component.add}) see {@link module:jaaJSU~$dom~instance_componentAdd}.
-                 */
-                onupdate: function(data, onUpdateFunction){
-                    if(!data) return component_out;
-                    if(!internal_storage) internal_storage= initStorage();
-                    $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
-                    return component_out;
-                }
-            }, component_out);
+            const add_out= Object.assign({}, component_out);
+            
+            add_out.getReference= add_out_methods.getReference.bind(null, add_out, el);
+            add_out.on= add_out_methods.on.bind(null, add_out, el);
+            add_out.oninit= add_out_methods.oninit.bind(null, add_out, el);
+            add_out.onmount= add_out_methods.onmount.bind(null, add_out, el);
+            add_out.onupdate= add_out_methods.onupdate.bind(null, add_out, el);
+            return add_out;
         }
         
         /**
@@ -838,6 +909,16 @@
                     else element.appendChild(fragment);
                     break;
             }
+            const observer= new MutationObserver(mutations=> mutations.forEach(function(record){
+                if(!record.removedNodes||Array.prototype.indexOf.call(record.removedNodes, container)===-1) return false;
+                destroy();
+                observer.disconnect();
+            }));
+            observer.observe(container.parentNode, { childList: true, subtree: true, attributes: false, characterData: false });
+            if(on_mount_funs){
+                on_mount_funs.forEach((onMountFunction, el)=> $dom.assign(el, onMountFunction.call(el, element, type)));
+                on_mount_funs= null;
+            }
             return container;
         }
         
@@ -854,8 +935,32 @@
          * //=> c===null AND <body></body>
          */
         function destroy(){
-            container.remove();
+            if(on_destroy_funs){
+                on_destroy_funs.forEach(onDestroyFunction=> onDestroyFunction.call(container));
+            }
+            if(container) {
+                container.remove();
+                els= [];
+            }
+            on_destroy_funs= undefined;
+            container= undefined;
+            internal_storage= undefined;
+            component_out= undefined;
+            add_out_methods= undefined;
             return null;
+        }
+        
+        /**
+         * This provide ability to register function which should be called when the component will be destroyed.
+         * @method ondestroy
+         * @memberof module:jaaJSU~$dom~instance_component
+         * @public
+         * @param {Function} onDestroyFunction Function will be called when the component will be destroyed.
+         */
+        function ondestroy(onDestroyFunction){
+            if(!on_destroy_funs) on_destroy_funs= new Set();
+            on_destroy_funs.add(onDestroyFunction);
+            return component_out;
         }
         
         /**
@@ -933,18 +1038,17 @@
                 functions= new Map(),
                 listeners= new Map();
             let 
-                els_counter= 0;
+                counter= 0;
             return {
                 register: function(el, init_data, fun){
                     Object.assign(data, init_data);
-                    const el_id= els_counter++; els.set(el_id,el);
+                    const ids= registerToMap(els, el)+"_"+registerToMap(functions, fun);
                     const init_data_keys= Object.keys(init_data);
                     for(let i=0, i_key, i_length= init_data_keys.length; i<i_length; i++){
                         i_key= init_data_keys[i];
-                        if(!listeners.has(i_key)) listeners.set(i_key, [ el_id ]);
-                        else listeners.set(i_key, [ ...listeners.get(i_key), el_id ]);
+                        if(!listeners.has(i_key)) listeners.set(i_key, [ ids ]);
+                        else listeners.get(i_key).push(ids);
                     }
-                    functions.set(el_id, fun);
                     return fun.call(el, init_data) || {};
                 },
                 registerComponent: function(update){
@@ -972,11 +1076,12 @@
                     for(let i=0, i_length= els_for_redraw.length; i<i_length; i++){ processChanges(els_for_redraw[i]); }
                     return true;
                     
-                    function processChanges(el_id){
-                        const new_attrs= functions.get(el_id).call(els.get(el_id), data) || {};
+                    function processChanges(ids){
+                        const [ el_id, fun_id ]= ids.split("_").map(Number);
                         const el= els.get(el_id);
-                        if(el.parentNode===null) return unregister(el_id, new_data_keys);
-                        else $dom.assign(el, new_attrs);
+                        const new_data= functions.get(fun_id).call(el, data) || {};
+                        if(el.parentNode===null) return unregister(el_id, fun_id, new_data_keys);
+                        $dom.assign(el, new_data);
                     }
                 },
                 getData: function(){
@@ -984,16 +1089,25 @@
                 },
                 unregister
             };
-            function unregister(el_id, data_keys){
-                functions.delete(el_id);
+            function unregister(el_id, fun_id, data_keys){
+                let funcs_counter= 0;
                 els.delete(el_id);
-                for(let i=0, i_key, listener, i_length= data_keys.length; i<i_length; i++){
-                    i_key= data_keys[i];
-                    listener= listeners.get(i_key);
-                    if(listener.length===1) listeners.delete(i_key);
-                    else listeners.set(i_key, listener.filter(el_idFilter));
-                }
-                function el_idFilter(v){ return v!==el_id; }
+                listeners.forEach(function(listeners_arr, i_key){
+                    if(data_keys.indexOf(i_key)===-1) return listeners_arr.forEach(function(ids){ if(Number(ids.split("_")[1])===fun_id){ funcs_counter+= 1; } });
+                    
+                    if(listeners_arr.length===1) listeners.delete(i_key);
+                    else listeners.set(i_key, listeners_arr.filter(el_idFilter));
+                });
+                if(!funcs_counter) functions.delete(fun_id);
+                function el_idFilter(ids){ return Number(ids.split("_")[0])!==el_id; }
+            }
+            function registerToMap(store, current){
+                let current_index= -1;
+                store.forEach(function(v, i){ if(current_index===-1&&v===current) current_index= i; });
+                if(current_index!==-1) return current_index;
+                current_index= counter++;
+                store.set(current_index, current);
+                return current_index;
             }
         }
         
@@ -1051,7 +1165,32 @@
         
     };
     /**
+     * This is in fact argument for {@link module:jaaJSU~$dom~instance_componentAdd.on}.
+     * @typedef component_listener
+     * @memberof module:jaaJSU~$dom
+     * @type {Array}
+     * @param {String} 0 Name of method in {@link module:jaaJSU~$dom~instance_componentAdd}.
+     * @param {Array} 1 In fact arguments for `on*` methods in {@link module:jaaJSU~$dom~instance_componentAdd}.
+     * @category types descriptions
+     * @inner
+     */
+    /**
+     * This provide more DRY way to register events listeners for {@link module:jaaJSU~$dom.component} such as `onupdate`, `oninit`, ….
+     * @method componentListener
+     * @memberof module:jaaJSU~$dom
+     * @param {String} event_name Name of event (prefered way is to use without `on*` like native `addEventListener`)
+     * @param {...Mixed} args See {@link module:jaaJSU~$dom~component_listener}[1].
+     * @returns {module:jaaJSU~$dom~component_listener}
+     */
+    $dom.componentListener= function(event_name, ...args){
+        const supported= [ "oninit", "onmount", "onupdate" ];
+        const event_name_id= supported.indexOf((/^on/g.test(event_name) ? "" : "on")+event_name);
+        if(event_name_id===-1) throw new Error(`Unsupported event name '${event_name}'!`);
+        return Object.freeze([ supported[event_name_id], args ]);
+    };
+    /**
      * Object shall holds **NodeElement** properties like `className`, `textContent`, …. This is primary argument for {@link module:jaaJSU~$dom.assign}. There are some notes and changes:
+     *  - In most cases, you can use native propertie such as [MDN WEB/API/Element](https://developer.mozilla.org/en-US/docs/Web/API/Element).
      *  - For `dataset` can be used also `Object` notation: `$dom.assign(document.getElementById("ID"), { dataset: { test: "TEST" } }); //<p id="ID" data-test="TEST"></p>`.
      *  - The same notation can be used for **CSS variables** (the key is called `style_vars`).
      *  - **IMPORTANT CHANGE**: Key `style` also supports **text**, so `$dom.assign(el, { style: "color: red;" });` and `$dom.assign(el, { style: { color: "red" } })` is equivalent to `el.setAttribute("style", "color: red;");`
@@ -1072,6 +1211,7 @@
      * @memberof module:jaaJSU~$dom
      * @param {NodeElement} element
      * @param {...module:jaaJSU~$dom~DomAssignObject} object_attributes
+     * @returns {NodeElement} Givven `element` (follows similar behaviour in `Object.assign`)
      * @example <caption>#1: All together</caption>
      * const el= document.body;
      * const onclick= function(){ console.log(this.dataset.js_param); };
@@ -1131,6 +1271,7 @@
                     break;
             }
         }
+        return element;
     };
     
     /**
