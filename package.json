@@ -14,7 +14,8 @@
     "sequence": [
         "javascript",
         "jaaJBT",
-        "doc"
+        "doc",
+        "examples"
     ],
     "__SECTION_NPM": "",
     "name": "jaajsu",
