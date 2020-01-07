@@ -6,8 +6,8 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
         variable_eval: (str)=> eval(str)
     });/* jshint +W061 */
     const 
-        to_folder= "examples/",
-        from_folder= "examples/src/";
+        to_folder= "docs/",
+        from_folder= "docs/examples/";
     let links_paragraphs_buffer= [];
     return function(cb){
         gulp.src([from_folder+"*.html", '!'+from_folder+'*.sub.html'])
@@ -25,7 +25,7 @@ module.exports= function({app, $gulp_folder, gulp, error, $g, $o, $run}){
             return links_paragraphs_buffer.shift();
         }
         const line= String((t=> t&&t.length+1||1)(file_text.substring(0, chars).match(/\r?\n/g)));
-        const link= `https://github.com/jaandrle/jaaJSU/blob/master/examples/index.html#L`+line;
+        const link= `https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L`+line;
         links_paragraphs_buffer.push(`<p class="notes"><a href="${link}" target="_blank">View with highliting (link to source of this file)</a></p>`);
         return match;
     }
