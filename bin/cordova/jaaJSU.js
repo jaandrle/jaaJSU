@@ -1,12 +1,12 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 /**
  * @module jaaJSU
- * @version 0.8.4
+ * @version 0.8.5
  */
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.8.4";
+    window[module_name+"_version"]= "0.8.5";
 })("jaaJSU", function(window, document){
     var out= {};
     /**
@@ -559,7 +559,7 @@
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
      * @memberof module:jaaJSU~$dom
-     * @version 1.0.3
+     * @version 1.0.5
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
      * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
@@ -569,11 +569,12 @@
      */
     $dom.component= function(el_name, attrs, { mapUpdate }={}){
         if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
-        let /* holds `initStorage()` if `onupdate` was registered */
+        let /* holds `initStorage()` if `onupdate` was registered and other component related listeners */
             internal_storage= null,
             on_destroy_funs= null,
             /* on first mount */
-            on_mount_funs= null;
+            on_mount_funs= null,
+            observer= null;
         const /* 'drawer' (container) for component elements */
             fragment= document.createDocumentFragment();
         let /* main parent (wrapper), container for children elements */
@@ -587,7 +588,7 @@
             */
             deep= [];
         const share= { mount, update, destroy, ondestroy, isStatic };
-        let component_out= { add, addText, component, setShift, mount, update, ondestroy, share };
+        let component_out= { add, addText, component, dynamicComponent, setShift, mount, update, ondestroy, share };
         let add_out_methods= {
             /**
              * Returns reference of currently added element
@@ -855,6 +856,46 @@
         }
         
         /**
+         * Method for including another component by using `generator` function, which can change final `component` based on updated data `data`.
+         * @method dynamicComponent
+         * @memberof module:jaaJSU~$dom~instance_component
+         * @public
+         * @chainable
+         * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom~instance_componentAdd.onupdate}
+         * @param {module:jaaJSU~$dom~componentGenerator} generator Function for registering components based on updates of `data`.
+         * @param {Number} [shift= 0] see {@link module:jaaJSU~$dom~instance_component.add}
+         * @return {module:jaaJSU~$dom~instance_component}
+         */
+        function dynamicComponent(data, generator, shift= 0){
+            recalculateDeep(shift);
+            const parent= getParentElement();
+            let current_value= null, current_component= null, current_element= null;
+            function mount(component_share, call_parseHTML){
+                current_component= component_share;
+                if(current_element){
+                    current_element= current_component.mount(current_element, call_parseHTML, "replace");
+                } else {
+                    current_element= current_component.mount(parent, call_parseHTML);
+                }
+            }
+            return add_out_methods.onupdate(component_out, parent, data, function(data){
+                /**
+                 * This is function for registering component for {@link module:jaaJSU~$dom~instance_component.dynamicComponent}.
+                 * @callback componentGenerator
+                 * @memberof module:jaaJSU~$dom
+                 * @category types descriptions
+                 * @inner
+                 * @param {Function} mount Function which consumes {@link module:jaaJSU~$dom~instance_component.share}.
+                 * @param {Null|module:jaaJSU~$dom~instance_component.share} current_component Previously registered component
+                 * @param {Object} data Includes all subsribed keys from `data` see method {@link module:jaaJSU~$dom~instance_componentAdd.onupdate}
+                 * @param {Null|Mixed} current_value Shared value across multiple calling
+                 * @returns {Mixed} current_value 
+                 */
+                current_value= generator.call(parent, mount, current_component, data, current_value);
+            });
+        }
+        
+        /**
          * Add element to live DOM
          * @method mount
          * @memberof module:jaaJSU~$dom~instance_component
@@ -871,41 +912,45 @@
          *  <br/>- `after` places component after `element` (uses `$dom.insertAfter`)
          */
         function mount(element, call_parseHTML, type= "childLast"){
+            if(observer) observer.disconnect();
+            const component_el= !fragment.firstChild&&container ? container : fragment;
+            let parent_node;
             switch ( type ) {
                 case "replace":
-                    $dom.replace(element, fragment);
-                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
+                    parent_node= element.parentNode;
+                    $dom.replace(element, component_el);
                     break;
                 case "replaceContent":
                     $dom.empty(element);
-                    element.appendChild(fragment);
-                    if(call_parseHTML) parseHTML(element.querySelectorAll(c_CMD));
+                    element.appendChild(component_el);
+                    parent_node= element;
                     break;
                 case "before":
-                    element.parentNode.insertBefore(fragment, element);
-                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
+                    parent_node= element.parentNode;
+                    parent_node.insertBefore(component_el, element);
                     break;
                 case "after":
-                    $dom.insertAfter(fragment, element);
-                    if(call_parseHTML) parseHTML(element.parentNode.querySelectorAll(c_CMD));
+                    $dom.insertAfter(component_el, element);
+                    parent_node= element.parentNode;
                     break;
                 default:
-                    if(type==="childFirst" && element.childNodes.length) element.insertBefore(fragment, element.childNodes[0]);
-                    else element.appendChild(fragment);
-                    if(call_parseHTML) parseHTML(element.querySelectorAll(c_CMD));
+                    if(type==="childFirst" && element.childNodes.length) element.insertBefore(component_el, element.childNodes[0]);
+                    else element.appendChild(component_el);
+                    parent_node= element;
                     break;
             }
-            const observer= new MutationObserver(mutations=> mutations.forEach(function(record){
+            observer= new MutationObserver(mutations=> mutations.forEach(function(record){
                 if(!record.removedNodes||Array.prototype.indexOf.call(record.removedNodes, container)===-1) return false;
                 destroy();
-                observer.disconnect();
             }));
-            observer.observe(container.parentNode, { childList: true, subtree: true, attributes: false, characterData: false });
+            observer.observe(parent_node, { childList: true, subtree: true, attributes: false, characterData: false });
             if(on_mount_funs){
-                on_mount_funs.forEach((onMountFunction, el)=> $dom.assign(el, onMountFunction.call(el, element, call_parseHTML, type)));
-                on_mount_funs= null;
+                on_mount_funs.forEach(onMountFunctionCall);
+                on_mount_funs= undefined;
             }
+            if(call_parseHTML) parseHTML(parent_node.querySelectorAll(c_CMD));
             return container;
+            function onMountFunctionCall(onMountFunction, el){ return $dom.assign(el, onMountFunction.call(el, element, call_parseHTML, type)); }
         }
         
         /**
@@ -928,6 +973,8 @@
                 container.remove();
                 els= [];
             }
+            if(observer) observer.disconnect();
+            observer= undefined;
             on_destroy_funs= undefined;
             container= undefined;
             internal_storage= undefined;
