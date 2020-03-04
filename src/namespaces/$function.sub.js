@@ -293,7 +293,7 @@ var $function= {
     },
     /**
      * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
-     * @method sequention
+     * @method sequentionTry
      * @memberof module:jaaJSU~$function
      * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
      * @return {module:jaaJSU~$function~function_Mixed2Mixed}
