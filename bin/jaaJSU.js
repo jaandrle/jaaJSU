@@ -1459,6 +1459,16 @@
          * @param {function} fun 
          * @param  {...number} indicies Indicies of arguments
          * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * const log_nochange= $function.arguments(console.log);
+         * log_nochange(...args); //= ...args
+         * 
+         * const log_filter= $function.arguments(console.log, 1, 2, 3);
+         * log_filter(...args); //= "B", "C", "D"
+         * 
+         * const log_rearrange= $function.arguments(coneole.log, 3, 2, 1, 0);
+         * log_rearrange(...args); //= "D", "C", "B", "A"
          */
         arguments: function(fun, ...indicies){
             if(!indicies.length) return function(...args){ return fun.apply(this, args); };
@@ -1553,6 +1563,14 @@
          * @param {function} fun 
          * @param  {...any} spliced Arguments for `*.splice`
          * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * 
+         * const simple= $functiom.gather(console.log);
+         * simple(...args); //= args
+         * 
+         * const withSplice= $function.gather(console.log, 1, 2, "Z");
+         * withSplice(...args); //= args.splice(1, 2, "Z")
          */
         gather: function(fun, ...spliced){
             if(!spliced.length) return function(...args){ return fun.call(this, args); };
@@ -1622,6 +1640,14 @@
          * @param {Function} fun
          * @param  {...any} spliced Arguments for `*.splice`
          * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * 
+         * const simple= $functiom.spread(console.log);
+         * simple(args); //= ...args
+         * 
+         * const withSplice= $function.spread(console.log, 1, 2, "Z");
+         * withSplice(args); //= ...args.splice(1, 2, "Z")
          */
         spread: function(fun, ...spliced){
             if(!spliced.length) return function(args= []){ return fun.apply(this, args); };
