@@ -3,7 +3,7 @@ module.exports= function({ app, $gulp_folder, gulp, error, $g, $o, $run }){
     const jaaJBT_start= {
         config: {
             version: "1.1.0",
-            root_url: "https://raw.githubusercontent.com/jaandrle/jaaJSU/master/"
+            root_url: "https://raw.githubusercontent.com/jaandrle/jaaJSU/v0.9/"
         },
         scripts: {}
     };
