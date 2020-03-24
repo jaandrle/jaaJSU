@@ -60,6 +60,28 @@ gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier *
  */
 var $function= {
     /**
+     * Rearrange arguments base on indicies {@link module:jaaJSU~$function.spread}.
+     * @method arguments
+     * @memberof module:jaaJSU~$function
+     * @param {function} fun 
+     * @param  {...number} indicies Indicies of arguments
+     * @returns {function} `args`=>`fun` returns
+     * @example
+     * const args= [ "A", "B", "C", "D" ];
+     * const log_nochange= $function.arguments(console.log);
+     * log_nochange(...args); //= ...args
+     * 
+     * const log_filter= $function.arguments(console.log, 1, 2, 3);
+     * log_filter(...args); //= "B", "C", "D"
+     * 
+     * const log_rearrange= $function.arguments(coneole.log, 3, 2, 1, 0);
+     * log_rearrange(...args); //= "D", "C", "B", "A"
+     */
+    arguments: function(fun, ...indicies){
+        if(!indicies.length) return function(...args){ return fun.apply(this, args); };
+        return function(...args){ return fun.apply(this, indicies.map(v=> args[v])); };
+    },
+    /**
      * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
      * @method branches
      * @memberof module:jaaJSU~$function
@@ -95,21 +117,7 @@ var $function= {
      * @param  {...any} args Arguments for curried output function
      * @return {Function}
      */
-    call: function(...args){ return function(fun){ return fun(...args); }; },
-    /**
-     * EXPERIMENT!: Function composing using `$dom.component` like syntax
-     * @method component
-     * @memberof module:jaaJSU~$function
-     * @param {Function} transform ...
-     * @returns {component} `{ pipe, run }`
-     */
-    component: function(transform){
-        let functions= []; const out= { pipe, run };
-        return out;
-
-        function pipe(f){ functions.push(f); return out; }
-        function run(data){ return functions.reduce((prev,curr)=>curr(prev), typeof transform==="function" ? transform(data) : data);}
-    },
+    call: function(...args){ return function(fun){ return fun.call(this, ...args); }; },
     /**
      * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
      * @method conditionalCall
@@ -155,6 +163,26 @@ var $function= {
      * @throws {Error} Error with message `message`.
      */
     exceptionError: function(message){ throw new Error(message); },
+    /**
+     * Opposite operation to {@link module:jaaJSU~$function.spread}.
+     * @method gather
+     * @memberof module:jaaJSU~$function
+     * @param {function} fun 
+     * @param  {...any} spliced Arguments for `*.splice`
+     * @returns {function} `args`=>`fun` returns
+     * @example
+     * const args= [ "A", "B", "C", "D" ];
+     * 
+     * const simple= $functiom.gather(console.log);
+     * simple(...args); //= args
+     * 
+     * const withSplice= $function.gather(console.log, 1, 2, "Z");
+     * withSplice(...args); //= args.splice(1, 2, "Z")
+     */
+    gather: function(fun, ...spliced){
+        if(!spliced.length) return function(...args){ return fun.call(this, args); };
+        return function(...args){ args.splice(...spliced); return fun.call(this, args); };
+    },
     /**
      * `id=> id`
      * @method identity
@@ -206,13 +234,32 @@ var $function= {
      */
     schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
     /**
-     * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`.
+     * Return current `this`.
+     * @method self
+     * @memberof module:jaaJSU~$function
+     * @returns {Mixed}
+     */
+    self: function(){ return this; },
+    /**
+     * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`. Vs `$object.method("apply", this)` is in specification of `this`.
      * @method spread
      * @memberof module:jaaJSU~$function
      * @param {Function} fun
-     * @returns {Function}
+     * @param  {...any} spliced Arguments for `*.splice`
+     * @returns {function} `args`=>`fun` returns
+     * @example
+     * const args= [ "A", "B", "C", "D" ];
+     * 
+     * const simple= $functiom.spread(console.log);
+     * simple(args); //= ...args
+     * 
+     * const withSplice= $function.spread(console.log, 1, 2, "Z");
+     * withSplice(args); //= ...args.splice(1, 2, "Z")
      */
-    spread: function(fun){ return function(args= []){ return fun(...args); }; },
+    spread: function(fun, ...spliced){
+        if(!spliced.length) return function(args= []){ return fun.apply(this, args); };
+        return function(args= []){ args.splice(...spliced); return fun.apply(this, args); };
+    },
     /**
      * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to {@link module:jaaJSU~$function.each}. But, as arguments for current function is used output frome previous function.
      * @method sequention
@@ -233,7 +280,7 @@ var $function= {
      *      a=>a+2
      *  )(5));//= [8]
      */
-    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
+    sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i].call(this, current); } return current; }; },
     /**
      * Helper function for {@link module:jaaJSU~$function.sequentionTry}.
      * @method sequentionCatch
@@ -246,7 +293,7 @@ var $function= {
     },
     /**
      * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
-     * @method sequention
+     * @method sequentionTry
      * @memberof module:jaaJSU~$function
      * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
      * @return {module:jaaJSU~$function~function_Mixed2Mixed}

@@ -1,7 +1,7 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxcomplexity: 19, maxparams: 8, maxdepth: 4, latedef: false */
 /**
  * @module jaaJSU
- * @version 0.8.5
+ * @version 0.9.0
  */
 (function(module_name, factory) {
     'use strict';
@@ -16,7 +16,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "0.8.5";
+        window[module_name+"_version"]= "0.9.0";
     }
 })("jaaJSU", function(window, document){
     'use strict';
@@ -578,16 +578,26 @@
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
      * @memberof module:jaaJSU~$dom
-     * @version 1.0.5
+     * @version 1.1.0
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
-     * @param {String} [el_name="EMPTY"] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated.
+     * @param {string} [el_name= EMPTY] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated. See {@link module:jaaJSU~$dom~instance_component.add}.
      * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
      * @param {Object} [params= {}] Parameters
-     * @param {Function|Undefined} [params.mapUpdate=Undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link module:jaaJSU~$dom~instance_component.add}
+     * @param {Function} [params.mapUpdate=undefined] This function (if defined) remap `update(DATA)` to varibales used in keys `attrs.onupdate` … see method {@link module:jaaJSU~$dom~instance_component.add}
+     * @param {string|undefined} [params.namespace_group=undefined] This parameter provides ability to defined elements for diferent [`namespaceURI`s](https://developer.mozilla.org/en-US/docs/Web/API/Element/namespaceURI). Use "__SVG__" for "http://www.w3.org/2000/svg" (full list [Important Namespace URIs](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElementNS#Important_Namespace_URIs)).
      * @return {module:jaaJSU~$dom~instance_componentAdd|module:jaaJSU~$dom~instance_componentEmpty} Returns `ComponentEmpty` when `el_name` is **"EMPTY"**!
      */
-    $dom.component= function(el_name, attrs, { mapUpdate }={}){
-        if(typeof el_name==="undefined" || el_name.toUpperCase()==="EMPTY") return $dom_emptyPseudoComponent;
+    $dom.component= function(el_name, attrs, { mapUpdate, namespace_group }={}){
+        if(!el_name||el_name==="EMPTY"||el_name==="empty") return $dom_emptyPseudoComponent;
+        if(el_name==="svg") namespace_group= "SVG";
+        let assign, createElement;
+        if(namespace_group==="SVG"){
+            assign= $dom.assignNS.bind(null, "SVG");
+            createElement= document.createElementNS.bind(document, "http://www.w3.org/2000/svg");
+        } else {
+            assign= $dom.assign;
+            createElement= document.createElement.bind(document);
+        }
         let /* holds `initStorage()` if `onupdate` was registered and other component related listeners */
             internal_storage= null,
             on_destroy_funs= null,
@@ -714,7 +724,7 @@
             onupdate: function(add_out, el, data, onUpdateFunction){
                 if(!data) return add_out;
                 if(!internal_storage) internal_storage= initStorage();
-                $dom.assign(el, internal_storage.register(el, data, onUpdateFunction));
+                assign(el, internal_storage.register(el, data, onUpdateFunction));
                 return add_out;
             }
         };
@@ -749,7 +759,7 @@
          * @memberof module:jaaJSU~$dom~instance_component
          * @public
          * @chainable
-         * @param {String} el_name Name of element (for example `LI`, `P`, `A`, ...).
+         * @param {String} el_name Name of element (for example `LI`, `P`, `A`, ...). For [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) you can use lowercase/uppercase convention (e. g. 'p', 'P', 'div', 'DIV'), for [SVG](https://developer.mozilla.org/en-US/docs/Web/SVG/Element) use exact form (e. g. 'svg', 'polyline', 'clipPath')!
          * @param {module:jaaJSU~$dom~DomAssignObject} attrs Internally uses {@link module:jaaJSU~$dom.assign}, `null`\|`undefined` is also supported (`null` is probably better for readability).
          * @param {Number} [shift= 0] Modify nesting behaviour. By default (`shift= 0`), new element is child of previus element. Every `-1` means moving to the upper level against current one - see example.
          * @returns {module:jaaJSU~$dom~instance_componentAdd}
@@ -776,12 +786,12 @@
         function add(el_name, attrs, shift= 0){
             recalculateDeep(shift);
             attrs= attrs || {};
-            const prepare_el= document.createElement(el_name);
+            const prepare_el= createElement(el_name);
             if(!all_els_counter) container= els[0]= fragment.appendChild(prepare_el);
             else els[all_els_counter]= getParentElement().appendChild(prepare_el);
             let el= els[all_els_counter];
             all_els_counter+= 1;
-            $dom.assign(el, attrs);
+            assign(el, attrs);
             const add_out= Object.assign({}, component_out);
             
             add_out.getReference= add_out_methods.getReference.bind(null, add_out, el);
@@ -968,7 +978,7 @@
                 on_mount_funs= undefined;
             }
             return container;
-            function onMountFunctionCall(onMountFunction, el){ return $dom.assign(el, onMountFunction.call(el, element, type)); }
+            function onMountFunctionCall(onMountFunction, el){ return assign(el, onMountFunction.call(el, element, type)); }
         }
         
         /**
@@ -994,6 +1004,8 @@
             if(observer) observer.disconnect();
             observer= undefined;
             on_destroy_funs= undefined;
+            assign= undefined;
+            createElement= undefined;
             container= undefined;
             internal_storage= undefined;
             component_out= undefined;
@@ -1132,7 +1144,7 @@
                         const el= els.get(el_id);
                         const new_data= functions.get(fun_id).call(el, data) || {};
                         if(el.parentNode===null) return unregister(el_id, fun_id, new_data_keys);
-                        $dom.assign(el, new_data);
+                        assign(el, new_data);
                     }
                 },
                 getData: function(){
@@ -1324,6 +1336,56 @@
         }
         return element;
     };
+    /**
+     * Procedure for merging object into the element properties (see `html` version {@link module:jaaJSU~$dom.assign}).
+     * @method assignNS
+     * @memberof module:jaaJSU~$dom
+     * @param {string} namespace_group Group representation of [`namespace`](https://developer.mozilla.org/en-US/docs/Web/API/Element/setAttributeNS), use "__SVG__" for setting attributes for `svg`s.
+     * @param {NodeElement} element
+     * @param {...module:jaaJSU~$dom~DomAssignObject} object_attributes
+     * @returns {NodeElement} Givven `element` (follows similar behaviour in `Object.assign`)
+     */
+    $dom.assignNS= function(namespace, element, ...objects_attributes){
+        const on_keys_regexp= /^on[a-z]+/;
+        const object_attributes= Object.assign({}, ...objects_attributes);
+        const object_attributes_keys= Object.keys(object_attributes);
+        for(let i=0, key, attr, i_length= object_attributes_keys.length; i<i_length; i++){
+            key= object_attributes_keys[i];
+            attr= object_attributes[key];
+            if(typeof attr==="undefined"){ if(element.hasAttributeNS(null, key)){ element.removeAttributeNS(null, key); } continue; }
+            switch(key){
+                case "textContent" || "innerText":
+                    element.appendChild(document.createTextNode(attr));
+                    break;
+                case "style":
+                    if(typeof attr==="string") element.setAttributeNS(null, "style", attr);
+                    else for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.style.setProperty(k_key, attr[k_key]); }
+                    break;
+                case "style_vars":
+                    for(let k=0, k_key, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){ k_key= k_keys[k]; element.style.setProperty(k_key, attr[k_key]); }
+                    break;
+                case "className":
+                    element.setAttributeNS(null, "class", attr);
+                    break;
+                case "classList":
+                    if(!element[key].toggle) break;
+                    for(let k=0, k_key, k_attr, k_keys= Object.keys(attr), k_length= k_keys.length; k<k_length; k++){
+                        k_key= k_keys[k]; k_attr= attr[k_key];
+                        if(k_attr===-1) element.classList.toggle(k_key);
+                        else element.classList.toggle(k_key, Boolean(k_attr));
+                    }
+                    break;
+                case "xlink:href":
+                    element.setAttributeNS("http://www.w3.org/1999/xlink", "xlink:href", attr);
+                    break;
+                default:
+                    if(on_keys_regexp.test(key)) element[key]= attr;
+                    else element.setAttributeNS(null, key, attr);
+                    break;
+            }
+        }
+        return element;
+    };
     
     /**
      * Procedure for adding elements into the `parent` (in background use `createDocumentFragment`, `createElement`, `appendChild`)
@@ -1453,6 +1515,28 @@
      */
     var $function= {
         /**
+         * Rearrange arguments base on indicies {@link module:jaaJSU~$function.spread}.
+         * @method arguments
+         * @memberof module:jaaJSU~$function
+         * @param {function} fun 
+         * @param  {...number} indicies Indicies of arguments
+         * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * const log_nochange= $function.arguments(console.log);
+         * log_nochange(...args); //= ...args
+         * 
+         * const log_filter= $function.arguments(console.log, 1, 2, 3);
+         * log_filter(...args); //= "B", "C", "D"
+         * 
+         * const log_rearrange= $function.arguments(coneole.log, 3, 2, 1, 0);
+         * log_rearrange(...args); //= "D", "C", "B", "A"
+         */
+        arguments: function(fun, ...indicies){
+            if(!indicies.length) return function(...args){ return fun.apply(this, args); };
+            return function(...args){ return fun.apply(this, indicies.map(v=> args[v])); };
+        },
+        /**
          * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
          * @method branches
          * @memberof module:jaaJSU~$function
@@ -1488,21 +1572,7 @@
          * @param  {...any} args Arguments for curried output function
          * @return {Function}
          */
-        call: function(...args){ return function(fun){ return fun(...args); }; },
-        /**
-         * EXPERIMENT!: Function composing using `$dom.component` like syntax
-         * @method component
-         * @memberof module:jaaJSU~$function
-         * @param {Function} transform ...
-         * @returns {component} `{ pipe, run }`
-         */
-        component: function(transform){
-            let functions= []; const out= { pipe, run };
-            return out;
-    
-            function pipe(f){ functions.push(f); return out; }
-            function run(data){ return functions.reduce((prev,curr)=>curr(prev), typeof transform==="function" ? transform(data) : data);}
-        },
+        call: function(...args){ return function(fun){ return fun.call(this, ...args); }; },
         /**
          * Shorthand for `const mixed= ...; if(mixed) fun(mixed);`
          * @method conditionalCall
@@ -1548,6 +1618,26 @@
          * @throws {Error} Error with message `message`.
          */
         exceptionError: function(message){ throw new Error(message); },
+        /**
+         * Opposite operation to {@link module:jaaJSU~$function.spread}.
+         * @method gather
+         * @memberof module:jaaJSU~$function
+         * @param {function} fun 
+         * @param  {...any} spliced Arguments for `*.splice`
+         * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * 
+         * const simple= $functiom.gather(console.log);
+         * simple(...args); //= args
+         * 
+         * const withSplice= $function.gather(console.log, 1, 2, "Z");
+         * withSplice(...args); //= args.splice(1, 2, "Z")
+         */
+        gather: function(fun, ...spliced){
+            if(!spliced.length) return function(...args){ return fun.call(this, args); };
+            return function(...args){ args.splice(...spliced); return fun.call(this, args); };
+        },
         /**
          * `id=> id`
          * @method identity
@@ -1599,13 +1689,32 @@
          */
         schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
         /**
-         * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`.
+         * Return current `this`.
+         * @method self
+         * @memberof module:jaaJSU~$function
+         * @returns {Mixed}
+         */
+        self: function(){ return this; },
+        /**
+         * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`. Vs `$object.method("apply", this)` is in specification of `this`.
          * @method spread
          * @memberof module:jaaJSU~$function
          * @param {Function} fun
-         * @returns {Function}
+         * @param  {...any} spliced Arguments for `*.splice`
+         * @returns {function} `args`=>`fun` returns
+         * @example
+         * const args= [ "A", "B", "C", "D" ];
+         * 
+         * const simple= $functiom.spread(console.log);
+         * simple(args); //= ...args
+         * 
+         * const withSplice= $function.spread(console.log, 1, 2, "Z");
+         * withSplice(args); //= ...args.splice(1, 2, "Z")
          */
-        spread: function(fun){ return function(args= []){ return fun(...args); }; },
+        spread: function(fun, ...spliced){
+            if(!spliced.length) return function(args= []){ return fun.apply(this, args); };
+            return function(args= []){ args.splice(...spliced); return fun.apply(this, args); };
+        },
         /**
          * Procedure for creating functional flow (sequention *function1->function2->...*). Particually similar to {@link module:jaaJSU~$function.each}. But, as arguments for current function is used output frome previous function.
          * @method sequention
@@ -1626,7 +1735,7 @@
          *      a=>a+2
          *  )(5));//= [8]
          */
-        sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i](current); } return current; }; },
+        sequention: function(...functions){return function(input){let current= input; for(let i=0, i_length= functions.length; i<i_length; i++){ current= functions[i].call(this, current); } return current; }; },
         /**
          * Helper function for {@link module:jaaJSU~$function.sequentionTry}.
          * @method sequentionCatch
@@ -1639,7 +1748,7 @@
         },
         /**
          * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
-         * @method sequention
+         * @method sequentionTry
          * @memberof module:jaaJSU~$function
          * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
          * @return {module:jaaJSU~$function~function_Mixed2Mixed}
