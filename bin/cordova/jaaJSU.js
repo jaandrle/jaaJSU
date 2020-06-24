@@ -1,12 +1,12 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxcomplexity: 19, maxparams: 8, maxdepth: 4, latedef: false */
 /**
  * @module jaaJSU
- * @version 0.9.1
+ * @version 1.0.0
  */
 (function(module_name, factory) {
     let window_export= factory(window, document);
     Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-    window[module_name+"_version"]= "0.9.1";
+    window[module_name+"_version"]= "1.0.0";
 })("jaaJSU", function(window, document){
     var out= {};
     /**
@@ -150,12 +150,11 @@
                 /**
                  * @method onIndex
                  * @memberof module:jaaJSU~$array~instance_partition
-                 * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
+                 * @param {Number} index Position (in fact for `*.slice(0, index)` – for head part – `*.slice(index)` – for tail part) where to split array.
                  * @returns {Array[]} Two items Array [arr1, arr2]
                  */
                 onIndex: function(index){
-                    let local_arr= [...arr];
-                    return [local_arr.splice(0,index), local_arr];
+                    return [arr.slice(0,index), arr.slice(index)];
                 },
                 /**
                  * @method byCondition
@@ -559,7 +558,7 @@
      * This 'functional class' is syntax sugar around [`DocumentFragment`](https://developer.mozilla.org/en-US/docs/Web/API/DocumentFragment) for creating DOM components and their adding to live DOM in performance friendly way.
      * @method component
      * @memberof module:jaaJSU~$dom
-     * @version 1.1.1
+     * @version 1.1.2
      * @see {@link https://github.com/jaandrle/dollar_dom_component}
      * @param {string} [el_name= EMPTY] Name of element (for example `LI`, `P`, `A`, …). This is parent element of component. By default the "empty" element is generated. See {@link module:jaaJSU~$dom~instance_component.add}.
      * @param {module:jaaJSU~$dom~DomAssignObject} attrs The second argument for {@link module:jaaJSU~$dom.assign}
@@ -631,7 +630,7 @@
              * }
              */
             on: function(add_out, el, ...listeners){
-                listeners.forEach(([ event_name, args ])=> add_out[event_name].apply(this, args));
+                listeners.forEach(([ event_name, args ]= [])=> event_name && add_out[event_name].apply(this, args));
                 return add_out;
             },
             /**
@@ -1433,6 +1432,10 @@
      */
     export_as($dom, "$dom");
 
+    class __sequentionCatch__{
+        constructor(callback){ this.callback= callback; }
+        call(context, input){ return this.callback.call(context, input); }
+    }
     /**
      * This NAMESPACE provides features for async (mainly Promise) functions.
      * @namespace $function
@@ -1513,6 +1516,18 @@
         arguments: function(fun, ...indicies){
             if(!indicies.length) return function(...args){ return fun.apply(this, args); };
             return function(...args){ return fun.apply(this, indicies.map(v=> args[v])); };
+        },
+        /**
+         * Utility similary to `bind` method allows to prefille function with arguments in reverse order.
+         * @method bindRight
+         * @memberof module:jaaJSU~$function
+         * @param {function} fn ...
+         * @param {Mixed} context Binding `this`
+         * @param {...Mixed} currentArgs ...
+         * @returns {function} ...
+         */
+        bindRight: function(fun, context, ...currentArgs){
+            return function partiallyApplied(...laterArgs){ return fun.call(context, ...laterArgs, ...currentArgs); };
         },
         /**
          * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
@@ -1650,12 +1665,30 @@
          * @method partial
          * @memberof module:jaaJSU~$function
          * @param {Function} fn ...
-         * @param {...Mixed} presetArgs ...
+         * @param {...Mixed} currentArgs ...
          * @returns {Function} ...
          */
-        partial: function(fn, ...presetArgs){
-            return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
+        partial: function(fn, ...currentArgs){
+            return function partiallyApplied(...laterArgs){ return fn.call(this, ...currentArgs, ...laterArgs); };
         },
+        /**
+         * See {@link module:jaaJSU~$function.bindRight} and {@link module:jaaJSU~$function.partial}.
+         * @method partialRight
+         * @memberof module:jaaJSU~$function
+         * @param {function} fn ...
+         * @param {...mixed} currentArgs ...
+         * @returns {function} ...
+         */
+        partialRight: function(fn, ...currentArgs){
+            return function partiallyApplied(...laterArgs){ return fn.call(this, ...laterArgs, ...currentArgs); };
+        },
+        /**
+         * Return current `this`.
+         * @method self
+         * @memberof module:jaaJSU~$function
+         * @returns {Mixed}
+         */
+        self: function(){ return this; },
         /**
          * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
          * @method schedule
@@ -1667,12 +1700,13 @@
          */
         schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
         /**
-         * Return current `this`.
-         * @method self
+         * Also known as 'tap function'. It allows to call function without breaking sequention (e.g. {@link module:jaaJSU~$function.sequention}).
+         * @method schedule
          * @memberof module:jaaJSU~$function
-         * @returns {Mixed}
+         * @param {function} callback
+         * @returns {function} `input=> input`
          */
-        self: function(){ return this; },
+        sideEffect: function(callback){ return function(input){ callback.call(this, input); return input; }; },
         /**
          * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`. Vs `$object.method("apply", this)` is in specification of `this`.
          * @method spread
@@ -1722,10 +1756,12 @@
          * @returns {Function}
          */
         sequentionCatch: function(fun= $function.identity){
-            return function __sequentionCatchInner__(input){ return fun(input); };
+            return new __sequentionCatch__(fun);
         },
         /**
          * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
+         * 
+         * It is naive implementation: loop which skips regular/catch function based on error has appeared.
          * @method sequentionTry
          * @memberof module:jaaJSU~$function
          * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
@@ -1745,12 +1781,12 @@
             return function(input){
                 let current= input, err= false;
                 for(let i= 0, is_catch; i<i_length; i++){
-                    is_catch= functions[i].name==="__sequentionCatchInner__";
+                    is_catch= functions[i] instanceof __sequentionCatch__;
                     if(err&&is_catch){
-                        try{ current= functions[i](current); err= false; }
+                        try{ current= functions[i].call(this, current); err= false; }
                         catch(e){ current= e; }
                     } else if(!err&&!is_catch) {
-                        try{ current= functions[i](current); }
+                        try{ current= functions[i].call(this, current); }
                         catch(e){ current= e; err= true; }
                     }
                 }
@@ -2501,7 +2537,7 @@
     /**
      * This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
      * @namespace $time
-     * @version 0.6.0
+     * @version 0.7.0
      * @see {@link https://github.com/jaandrle/dollar_time}
      * @category namespaces
      */
@@ -3103,7 +3139,7 @@
                     } else {
                         timestamp_string= timestamp_string.substr(1);
                     }
-                } else if(/[ ,\._]/.test(letter)||/T\d/.test(letter)){
+                } else if(/[ ,\._]/.test(letter)||!timestamp_string.substring(0, 2).search(/T\d/)){
                     timestamp_string= timestamp_string.substr(1);
                 } else if(!timestamp_string.search(/[\+\-]\d\d:\d\d/)){
                     acc= timestamp_string.substr(0, 6);
@@ -3332,14 +3368,17 @@
          * @method toDate
          * @memberof module:jaaJSU~$time
          * @public
-         * @param {module:jaaJSU~$time~DateArray} date_array
+         * @param {module:jaaJSU~$time~DateArray} [date_array] Defaults to 'now' (or use current `date`/`time`/`zone` if not filled).
          * @returns {Date}
          */
-        function toDate([ date, time, zone ]= []){
+        function toDate(date_array){
+            if(!date_array||!Array.isArray(date_array)) return new Date();
+            
+            let [ date, time, zone ]= date_array;
             if(!date) date= fromNow()[0];
             if(!time) time= "T00:00:00";
             if(!zone) zone= getTimeZoneOffsetString(date);
-            if(zone==="CET") zone= getCETOffset([ date, time ]);
+            if(zone==="CET"||zone==="CEST") zone= getCETOffset([ date, time ]);
             return new Date(date+time+zone);
         }
         /**
