@@ -92,12 +92,11 @@ var $array= {
             /**
              * @method onIndex
              * @memberof module:jaaJSU~$array~instance_partition
-             * @param {Number} index Position (in fact for `*.splice(0, index)`) where to split array.
+             * @param {Number} index Position (in fact for `*.slice(0, index)` – for head part – `*.slice(index)` – for tail part) where to split array.
              * @returns {Array[]} Two items Array [arr1, arr2]
              */
             onIndex: function(index){
-                let local_arr= [...arr];
-                return [local_arr.splice(0,index), local_arr];
+                return [arr.slice(0,index), arr.slice(index)];
             },
             /**
              * @method byCondition

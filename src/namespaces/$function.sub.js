@@ -86,6 +86,18 @@ var $function= {
         return function(...args){ return fun.apply(this, indicies.map(v=> args[v])); };
     },
     /**
+     * Utility similary to `bind` method allows to prefille function with arguments in reverse order.
+     * @method bindRight
+     * @memberof module:jaaJSU~$function
+     * @param {function} fn ...
+     * @param {Mixed} context Binding `this`
+     * @param {...Mixed} currentArgs ...
+     * @returns {function} ...
+     */
+    bindRight: function(fun, context, ...currentArgs){
+        return function partiallyApplied(...laterArgs){ return fun.call(context, ...laterArgs, ...currentArgs); };
+    },
+    /**
      * Provide **input →⇶ …functions ⇛ reduction → output** functionality.
      * @method branches
      * @memberof module:jaaJSU~$function
@@ -221,12 +233,30 @@ var $function= {
      * @method partial
      * @memberof module:jaaJSU~$function
      * @param {Function} fn ...
-     * @param {...Mixed} presetArgs ...
+     * @param {...Mixed} currentArgs ...
      * @returns {Function} ...
      */
-    partial: function(fn, ...presetArgs){
-        return function partiallyApplied(...laterArgs){ return fn.call(this, ...presetArgs, ...laterArgs); };
+    partial: function(fn, ...currentArgs){
+        return function partiallyApplied(...laterArgs){ return fn.call(this, ...currentArgs, ...laterArgs); };
     },
+    /**
+     * See {@link module:jaaJSU~$function.bindRight} and {@link module:jaaJSU~$function.partial}.
+     * @method partialRight
+     * @memberof module:jaaJSU~$function
+     * @param {function} fn ...
+     * @param {...mixed} currentArgs ...
+     * @returns {function} ...
+     */
+    partialRight: function(fn, ...currentArgs){
+        return function partiallyApplied(...laterArgs){ return fn.call(this, ...laterArgs, ...currentArgs); };
+    },
+    /**
+     * Return current `this`.
+     * @method self
+     * @memberof module:jaaJSU~$function
+     * @returns {Mixed}
+     */
+    self: function(){ return this; },
     /**
      * Optimized iterator for heavy functions in `functions`. Uses [$optimizier.timeoutAnimationFrame](./$optimizier.{namespace}.html#methods_timeoutAnimationFrame)
      * @method schedule
@@ -238,12 +268,13 @@ var $function= {
      */
     schedule: function(functions, {context= window, delay= 150}= {}){ $optimizier.timeoutAnimationFrame(function loop(){ let process= functions.shift(); process.call(context); if(functions.length > 0) $optimizier.timeoutAnimationFrame(loop, delay); }, delay); },
     /**
-     * Return current `this`.
-     * @method self
+     * Also known as 'tap function'. It allows to call function without breaking sequention (e.g. {@link module:jaaJSU~$function.sequention}).
+     * @method schedule
      * @memberof module:jaaJSU~$function
-     * @returns {Mixed}
+     * @param {function} callback
+     * @returns {function} `input=> input`
      */
-    self: function(){ return this; },
+    sideEffect: function(callback){ return function(input){ callback.call(this, input); return input; }; },
     /**
      * Created curried function from `fun`: `fun=> (args=[])=> fun(...args)`. Vs `$object.method("apply", this)` is in specification of `this`.
      * @method spread
