@@ -1,5 +1,9 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
 gulp_place("namespaces/$optimizier.sub.js", "file_once");/* global $optimizier */
+class __sequentionCatch__{
+    constructor(callback){ this.callback= callback; }
+    call(context, input){ return this.callback.call(context, input); }
+}
 /**
  * This NAMESPACE provides features for async (mainly Promise) functions.
  * @namespace $function
@@ -289,10 +293,12 @@ var $function= {
      * @returns {Function}
      */
     sequentionCatch: function(fun= $function.identity){
-        return function __sequentionCatchInner__(input){ return fun(input); };
+        return new __sequentionCatch__(fun);
     },
     /**
      * Extended version of {@link module:jaaJSU~$function.sequention}. As function in `functions` can be used {@link module:jaaJSU~$function.sequentionCatch} with the same logic as in `Promise`s (`….then(…).catch(…).then(…)`).
+     * 
+     * It is naive implementation: loop which skips regular/catch function based on error has appeared.
      * @method sequentionTry
      * @memberof module:jaaJSU~$function
      * @param {...module:jaaJSU~$function~function_Mixed2Mixed} functions
@@ -312,12 +318,12 @@ var $function= {
         return function(input){
             let current= input, err= false;
             for(let i= 0, is_catch; i<i_length; i++){
-                is_catch= functions[i].name==="__sequentionCatchInner__";
+                is_catch= functions[i] instanceof __sequentionCatch__;
                 if(err&&is_catch){
-                    try{ current= functions[i](current); err= false; }
+                    try{ current= functions[i].call(this, current); err= false; }
                     catch(e){ current= e; }
                 } else if(!err&&!is_catch) {
-                    try{ current= functions[i](current); }
+                    try{ current= functions[i].call(this, current); }
                     catch(e){ current= e; err= true; }
                 }
             }
