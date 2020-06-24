@@ -1,0 +1,31 @@
+gulp_place("app._BUILD_.example_el= toELID(app._BUILD_.example_el_id++)", "eval");
+gulp_place("app._BUILD_.example_onkeyup= toKeyUp(app._BUILD_.example_el)", "eval");
+<p> <code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequentionTry">.sequentionTry</a></code> and <code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequentionCatch">.sequentionCatch</a></code> </p>
+<div class="output" id="gulp_place('app._BUILD_.example_el', 'variable')"></div>
+<script onkeyup="gulp_place('app._BUILD_.example_onkeyup', 'variable')" contenteditable="">
+(function(logOut){
+    //EXAMPLE START
+
+    /* flow similar to `Promise`, see 1 (without first error) and 2 */
+    const fun= $function.sequentionTry(
+        /* 1 2 */ $function.ifElse($function.exception, $function.identity, a=> a>8),
+        /* 1   */ a=> a+1,
+        /* 1   */ $function.identity,
+        /* 1   */ $function.identity,
+        /*   2 */ $function.sequentionCatch(a=> a%9-1),
+        /* 1 2 */ a=> a+1,
+        /*     */ $function.sequentionCatch($function.constant("ignored (no error since last `sequentionCatch`)")),
+        /* 1 2 */ $function.exception,
+        /*     */ $function.constant("ignored"),
+        /*     */ $function.constant("ignored"),
+        /*     */ $function.constant("ignored"),
+        /*     */ $function.constant("ignored"),
+        /*     */ $function.constant("ignored"),
+        /* 1 2 */ $function.sequentionCatch($function.identity),
+    );
+    logOut([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ].map(fun));
+
+    //EXAMPLE END
+})(logOut.bind(null, "gulp_place('app._BUILD_.example_el', 'variable')"));
+</script>
+<!-- example source links -->

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <title>jaaJSU — Examples</title>
-    <script type="text/javascript" src="jaaJSU-min.js?v=0.9.1"></script>
+    <script type="text/javascript" src="jaaJSU-min.js?v=1.0.0"></script>
     <style>
         body{
             color: #eeeeee;
@@ -200,6 +200,7 @@
                 logOut(p.head());
                 logOut(p.tail());
                 logOut(p.onIndex(2));
+                logOut(p.onIndex(-2));
                 logOut(p.byCondition(item=> item==="B"));
             
                 //EXAMPLE END
@@ -221,7 +222,7 @@
                 //EXAMPLE END
             })(logOut.bind(null, "example_element_006"));
             </script>
-            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L215" target="_blank">View with highliting (link to source of this file)</a></p>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L216" target="_blank">View with highliting (link to source of this file)</a></p>
 
             
             <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$array.sortRandom">.sortRandom</a></code></p>
@@ -236,7 +237,380 @@
                 //EXAMPLE END
             })(logOut.bind(null, "example_element_007"));
             </script>
-            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L231" target="_blank">View with highliting (link to source of this file)</a></p>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L232" target="_blank">View with highliting (link to source of this file)</a></p>
+        </details>
+
+        <h2>$function</h2>
+        <details open="">
+        <summary>Notes</summary>
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function">$function</a></code></p>
+        </details>
+        <details>
+        <summary>Examples</summary>
+            
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.arguments">.arguments</a></code></p>
+            <div class="output" id="example_element_008"></div>
+            <script onkeyup="onKeyup(this, 'example_element_008')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const args= [ "A", "B", "C", "D" ];
+            
+                logOut("No changes: ");
+                $function.arguments(logOut)(...args);
+                
+                logOut("Filter+reorder: ");
+                $function.arguments(logOut, 2, 1)(...args);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_008"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L256" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.bindRight">.bindRight</a></code></p>
+            <div class="output" id="example_element_009"></div>
+            <script onkeyup="onKeyup(this, 'example_element_009')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.bindRight(logOut, null, "A")("B");
+                $function.bindRight(function(){ logOut(this); }, "`This` example", "A").call("B");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_009"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L276" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.branches">.branches</a></code></p>
+            <div class="output" id="example_element_010"></div>
+            <script onkeyup="onKeyup(this, 'example_element_010')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const testFunction= $function.branches((acc, curr)=> acc&&curr, true)(
+                    ({ a })=> a==="A",
+                    ({ b })=> b==="B"
+                );
+                logOut(testFunction({ a: "A", b: "B" }));
+                logOut(testFunction({ a: "B", b: "A" }));
+            
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_010"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L291" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.call">.call</a></code></p>
+            <div class="output" id="example_element_011"></div>
+            <script onkeyup="onKeyup(this, 'example_element_011')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.call("A", "B")(logOut);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_011"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L311" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.conditionalCall">.conditionalCall</a></code></p>
+            <div class="output" id="example_element_012"></div>
+            <script onkeyup="onKeyup(this, 'example_element_012')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.conditionalCall("A", logOut);
+                $function.conditionalCall(false, logOut) || logOut("False");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_012"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L325" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.constant">.constant</a></code></p>
+            <div class="output" id="example_element_013"></div>
+            <script onkeyup="onKeyup(this, 'example_element_013')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                logOut([ "A", 10, { a: "A" } ].map($function.constant).map(f=> f("ignored")));
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_013"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L340" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.each">.each</a></code></p>
+            <div class="output" id="example_element_014"></div>
+            <script onkeyup="onKeyup(this, 'example_element_014')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.each(
+                    logOut.bind(null, "a: "),
+                    logOut.bind(null, "b: ")
+                )([ "A", 10, { a: "A" } ]);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_014"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L354" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.exception">.exception</a></code></p>
+            <div class="output" id="example_element_015"></div>
+            <script onkeyup="onKeyup(this, 'example_element_015')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                try{
+                    $function.exception("Exception: mixed value possible");
+                } catch (e){
+                    logOut(e);
+                }
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_015"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L371" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.exceptionError">.exceptionError</a></code></p>
+            <div class="output" id="example_element_016"></div>
+            <script onkeyup="onKeyup(this, 'example_element_016')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                try{
+                    $function.exceptionError("Exception Error: mixed value possible");
+                } catch (e){
+                    logOut("e instanceof Error: "+(e instanceof Error), e.message);
+                }
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_016"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L389" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.gather">.gather</a></code></p>
+            <div class="output" id="example_element_017"></div>
+            <script onkeyup="onKeyup(this, 'example_element_017')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const args= [ "A", "B", "C", "D" ];
+            
+                const simple= $function.gather(logOut);
+                simple(...args);
+            
+                const withSplice= $function.gather(logOut, 1, 2, "Z");
+                withSplice(...args);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_017"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L407" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.identity">.identity</a></code></p>
+            <div class="output" id="example_element_018"></div>
+            <script onkeyup="onKeyup(this, 'example_element_018')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                logOut([ "A", 10, { a: "A" } ].map($function.identity));
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_018"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L427" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.partial">.partial</a></code></p>
+            <div class="output" id="example_element_019"></div>
+            <script onkeyup="onKeyup(this, 'example_element_019')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const log= function(...args){ logOut(this, args); };
+                $function.partial(log, "A", "B").call("T", "C", "D");
+                logOut("VS regular `bind`");
+                log.bind("null", "A", "B").call("T", "C", "D");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_019"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L441" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.partialRight">.partialRight</a></code></p>
+            <div class="output" id="example_element_020"></div>
+            <script onkeyup="onKeyup(this, 'example_element_020')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const log= function(...args){ logOut(this, args); };
+                $function.partialRight(log, "A", "B").call("T", "C", "D");
+                logOut("VS regular `bind`");
+                log.bind("null", "A", "B").call("T", "C", "D");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_020"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L458" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.schedule">.schedule</a></code></p>
+            <div class="output" id="example_element_021"></div>
+            <script onkeyup="onKeyup(this, 'example_element_021')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.schedule([
+                    function(){ logOut(this===window, "Scheduled function 1"); }
+                ]);
+                $function.schedule([
+                    function(){ logOut(this, "Scheduled function 2"); },
+                    function(){ logOut(this, "Scheduled function 3"); }
+                ], { context: "C", delay: 5000 });
+                logOut("Defaults to `setTimeout` with 150ms delay");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_021"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L475" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.self">.self</a></code></p>
+            <div class="output" id="example_element_022"></div>
+            <script onkeyup="onKeyup(this, 'example_element_022')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                logOut($function.self()===$function);
+                $function.sequention(
+                    $function.self,
+                    logOut
+                ).call("T", "A");
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_022"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L496" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.spread">.spread</a></code></p>
+            <div class="output" id="example_element_023"></div>
+            <script onkeyup="onKeyup(this, 'example_element_023')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const args= [ "A", "B", "C", "D" ];
+            
+                const simple= $function.spread(logOut);
+                simple(args);
+                
+                logOut(" -- -- --");
+            
+                const withSplice= $function.spread(logOut, 1, 2, "Z");
+                withSplice(args);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_023"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L514" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequention">.sequention</a></code></p>
+            <div class="output" id="example_element_024"></div>
+            <script onkeyup="onKeyup(this, 'example_element_024')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                $function.sequention(
+                    a=> a+1,
+                    a=> a*5,
+                    logOut
+                )(9);
+            
+                $function.sequention(
+                    $function.self,
+                    a=> a+1,
+                    $function.identity,
+                    $function.ifElse(
+                        $function.identity, //if TRUE
+                        a=> a-1, // ELSE
+                        a=> a===10 //TEST
+                    ),
+                    a=> a*5,
+                    logOut,
+                    $function.constant({ value: -5 }),
+                    $object.pluck("value"),
+                    logOut
+                ).call(9, 10, /* all others ignored */ 100);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_024"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L536" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p> <code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequentionTry">.sequentionTry</a></code> and <code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequentionCatch">.sequentionCatch</a></code> </p>
+            <div class="output" id="example_element_025"></div>
+            <script onkeyup="onKeyup(this, 'example_element_025')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                /* flow similar to `Promise`, see 1 (without first error) and 2 */
+                const fun= $function.sequentionTry(
+                    /* 1 2 */ $function.ifElse($function.exception, $function.identity, a=> a>8),
+                    /* 1   */ a=> a+1,
+                    /* 1   */ $function.identity,
+                    /* 1   */ $function.identity,
+                    /*   2 */ $function.sequentionCatch(a=> a%9-1),
+                    /* 1 2 */ a=> a+1,
+                    /*     */ $function.sequentionCatch($function.constant("ignored (no error since last `sequentionCatch`)")),
+                    /* 1 2 */ $function.exception,
+                    /*     */ $function.constant("ignored"),
+                    /*     */ $function.constant("ignored"),
+                    /*     */ $function.constant("ignored"),
+                    /*     */ $function.constant("ignored"),
+                    /*     */ $function.constant("ignored"),
+                    /* 1 2 */ $function.sequentionCatch($function.identity),
+                );
+                logOut([ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12 ].map(fun));
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_025"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L570" target="_blank">View with highliting (link to source of this file)</a></p>
+
+            
+            <p> <code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sideEffect">.sideEffect</a></code> </p>
+            <div class="output" id="example_element_026"></div>
+            <script onkeyup="onKeyup(this, 'example_element_026')" contenteditable="">
+            (function(logOut){
+                //EXAMPLE START
+            
+                const addOne= a=> a+1;
+                $function.sequention(
+                    $function.sideEffect(logOut),
+                    addOne,
+                    logOut
+                )(5);
+            
+                //EXAMPLE END
+            })(logOut.bind(null, "example_element_026"));
+            </script>
+            <p class="notes"><a href="https://github.com/jaandrle/jaaJSU/blob/master/docs/examples.html#L601" target="_blank">View with highliting (link to source of this file)</a></p>
         </details>
 
 

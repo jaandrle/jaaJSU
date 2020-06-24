@@ -1,17 +1,12 @@
 gulp_place("app._BUILD_.example_el= toELID(app._BUILD_.example_el_id++)", "eval");
 gulp_place("app._BUILD_.example_onkeyup= toKeyUp(app._BUILD_.example_el)", "eval");
-<p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$array.partition">.partition</a></code></p>
+<p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.constant">.constant</a></code></p>
 <div class="output" id="gulp_place('app._BUILD_.example_el', 'variable')"></div>
 <script onkeyup="gulp_place('app._BUILD_.example_onkeyup', 'variable')" contenteditable="">
 (function(logOut){
     //EXAMPLE START
 
-    const p= $array.partition([ "A", "B", "C", "D" ]);
-    logOut(p.head());
-    logOut(p.tail());
-    logOut(p.onIndex(2));
-    logOut(p.onIndex(-2));
-    logOut(p.byCondition(item=> item==="B"));
+    logOut([ "A", 10, { a: "A" } ].map($function.constant).map(f=> f("ignored")));
 
     //EXAMPLE END
 })(logOut.bind(null, "gulp_place('app._BUILD_.example_el', 'variable')"));

@@ -1,0 +1,34 @@
+gulp_place("app._BUILD_.example_el= toELID(app._BUILD_.example_el_id++)", "eval");
+gulp_place("app._BUILD_.example_onkeyup= toKeyUp(app._BUILD_.example_el)", "eval");
+<p><code><a href="../docs/jaaJSU.md#module_jaaJSU..$function.sequention">.sequention</a></code></p>
+<div class="output" id="gulp_place('app._BUILD_.example_el', 'variable')"></div>
+<script onkeyup="gulp_place('app._BUILD_.example_onkeyup', 'variable')" contenteditable="">
+(function(logOut){
+    //EXAMPLE START
+
+    $function.sequention(
+        a=> a+1,
+        a=> a*5,
+        logOut
+    )(9);
+
+    $function.sequention(
+        $function.self,
+        a=> a+1,
+        $function.identity,
+        $function.ifElse(
+            $function.identity, //if TRUE
+            a=> a-1, // ELSE
+            a=> a===10 //TEST
+        ),
+        a=> a*5,
+        logOut,
+        $function.constant({ value: -5 }),
+        $object.pluck("value"),
+        logOut
+    ).call(9, 10, /* all others ignored */ 100);
+
+    //EXAMPLE END
+})(logOut.bind(null, "gulp_place('app._BUILD_.example_el', 'variable')"));
+</script>
+<!-- example source links -->
