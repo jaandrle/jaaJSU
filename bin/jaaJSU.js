@@ -1,7 +1,7 @@
 /* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxcomplexity: 19, maxparams: 8, maxdepth: 4, latedef: false */
 /**
  * @module jaaJSU
- * @version 1.0.0
+ * @version 1.1.0
  */
 (function(module_name, factory) {
     'use strict';
@@ -16,7 +16,7 @@
     } else {
         window_export= factory(window, document);
         Object.keys(window_export).forEach(key=> window[key]= window_export[key]);
-        window[module_name+"_version"]= "1.0.0";
+        window[module_name+"_version"]= "1.1.0";
     }
 })("jaaJSU", function(window, document){
     'use strict';
