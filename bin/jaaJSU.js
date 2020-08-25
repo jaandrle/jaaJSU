@@ -1,11 +1,11 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxcomplexity: 19, maxparams: 8, maxdepth: 4, latedef: false */
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxcomplexity: 20, maxparams: 8, maxdepth: 4, latedef: false */
 /**
  * @module jaaJSU
  * @version 1.1.0
  */
 (function(module_name, factory) {
     'use strict';
-    /* global define, factory, module, module_name, gulp_place *///gulp.keep.line
+    /* global define, factory, module, module_name *///gulp.keep.line
     let window_export;
     if (typeof define === 'function' && define.amd) {
         define([], function(){
@@ -2589,7 +2589,6 @@
     export_as($string, "$string");
     
     const $time= (function $time_iief(){
-        "use strict";
         /**
          * This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
          * @namespace $time
