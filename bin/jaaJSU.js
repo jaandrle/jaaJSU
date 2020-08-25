@@ -2245,7 +2245,7 @@
          * $optimizier.requestAnimationFrame_().then(()=> console.log("Hi")); //-> "Hi"
          * Promise.resolve().then($optimiziers.requestAnimationFrame_).then(()=> console.log("Hi")); //-> "Hi"
          */
-        requestAnimationFrame_: function(){ return new Promise(function(resolve){ requestAnimationFrame(resolve); }); },
+        requestAnimationFrame_: function(input){ return new Promise(function(resolve){ requestAnimationFrame(resolve.bind(this, input)); }); },
         /**
          * Promise wrapper around `setTimeout`.
          * 
