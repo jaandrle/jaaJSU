@@ -1,12 +1,14 @@
-/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true */
-/**
- * This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
- * @namespace $time
- * @version 0.7.0
- * @see {@link https://github.com/jaandrle/dollar_time}
- * @category namespaces
- */
-const $time= (function init(){
+/* jshint esversion: 6,-W097, -W040, browser: true, expr: true, undef: true, maxparams: 8, maxdepth: 3, maxcomplexity: 17, maxparams: 8 */
+
+const $time= (function $time_iief(){
+    "use strict";
+    /**
+     * This NAMESPACE provides features for date/time. Mainly, there are utilities using **Date** class and feature [`Date.prototype.toLocaleString`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString).
+     * @namespace $time
+     * @version 1.0.0
+     * @see {@link https://github.com/jaandrle/dollar_time}
+     * @category namespaces
+     */
     const /* internal store */
         format_objects= (({ time, date, seconds })=>({
         /**
@@ -502,7 +504,6 @@ const $time= (function init(){
         WET: 274,
         WEST: 274
     });
-
     
     /**
      * Function generates `DateArray` from instance of `Date`.
@@ -634,7 +635,6 @@ const $time= (function init(){
         }
         return [ date, time, zone ];
     }
-    
     /**
      * It is in fact argument for `options` in [`Date.prototype.toLocaleString` Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString#Parameters).
      * @typedef {Object} toLocaleStringOptions
@@ -923,7 +923,6 @@ const $time= (function init(){
     function toString(format, params_obj){
         return toStringFromObject(Array.isArray(format) ? format : format ? getFormatObject(format) : undefined, params_obj);
     }
-    
     function getCETOffset([ date, time ]= []){
         if(!date||!time){
             let curr= fromNow();
@@ -1037,7 +1036,7 @@ const $time= (function init(){
     /**
      * This modify given **Date** instance (add days).
      * @method addDays
-     * @memberof module:jaaJSU~$time.Date
+     * @memberof module:jaaJSU~$time.Date_utils
      * @public
      * @param {Number} days_num How many days to add to `date_instance`
      * @returns {module:jaaJSU~$time~function_Date2Date}
@@ -1048,7 +1047,7 @@ const $time= (function init(){
     /**
      * This modify given **Date** instance (add months).
      * @method addMonths
-     * @memberof module:jaaJSU~$time.Date
+     * @memberof module:jaaJSU~$time.Date_utils
      * @public
      * @param {Number} months_num How many months to add to `date_instance`
      * @returns {module:jaaJSU~$time~function_Date2Date}
@@ -1058,7 +1057,7 @@ const $time= (function init(){
     }
     /**
      * @method getWeekDay
-     * @memberof module:jaaJSU~$time.Date
+     * @memberof module:jaaJSU~$time.Date_utils
      * @public
      * @param {String} [type="numeric"] Show week numebr by default or se `weekday` in **MDN** see {@link module:jaaJSU~$time~toLocaleStringOptions}
      * @param {module:jaaJSU~$time~toLocaleStringOptions} [toLocaleStringOptions] Key `declension` is redutant for this function
@@ -1070,7 +1069,7 @@ const $time= (function init(){
     /**
      * This return ISO number of week.
      * @method getWeekNumber
-     * @memberof module:jaaJSU~$time.Date
+     * @memberof module:jaaJSU~$time.Date_utils
      * @public
      * @param {Date} date_instance
      * @return {Number} In fact, it calculates no. of thursdays from this week to the first one (January 4 is always in week 1.)
@@ -1144,9 +1143,17 @@ const $time= (function init(){
     function redefineTimeZone(zone= internal_zone){
         return ([ date= "", time= "" ]= [])=> [ date, time, zone ];
     }
+    /**
+     * Utility workings with native Date
+     * @namespace Date_utils
+     * @memberof module:jaaJSU~$time
+     * @readonly
+     */
+    const Date_utils= { getWeekDay, getWeekNumber, addDays, addMonths };
     
     /**
-    * Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart)
+    * *Backward compatibility* 
+    * Function adds leading zero to the `time`. [It can be replaced in future: see `padStart`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart).
     * @method double
     * @memberof module:jaaJSU~$time
     * @public
@@ -1183,6 +1190,7 @@ const $time= (function init(){
         return daysInMonth(month, year);
     }
     /**
+    * *Backward compatibility* 
     * @method getMonthName
     * @memberof module:jaaJSU~$time
     * @public
@@ -1205,6 +1213,7 @@ const $time= (function init(){
         return v;
     }
     /**
+     * *Backward compatibility* 
      * See {@link module:jaaJSU~$time.ordinal_numbers}.
      * @method getOrdinalSuffix
      * @memberof module:jaaJSU~$time
@@ -1221,44 +1230,28 @@ const $time= (function init(){
         return n_orig+(ordinal_numbers[(v-20)%10]||ordinal_numbers[v]||ordinal_numbers[0]);
     }
     
-    return {
-        /**
-         * Alias for `undefined` which can be used to trigger default value of argument.
-         * @property {Undefined} _
-         * @memberof module:jaaJSU~$time
-         * @public
-         * @example
-         * test($time._)==="A"; function test(a= "A"){ return a; }
-         */
-        _: undefined,
+    /**
+     * Alias for `undefined` which can be used to trigger default value of argument.
+     * @property {undefined} _
+     * @memberof module:jaaJSU~$time
+     * @public
+     * @example
+     * test($time._)==="A"; function test(a= "A"){ return a; }
+     */
+    const _= void(0);
+    /**
+     * Public name of {@link module:jaaJSU~$time.format_arrays}.
+     * @namespace formats
+     * @alias module:jaaJSU~$time.format_arrays
+     * @memberof module:jaaJSU~$time
+     * @readonly
+     * @static
+     */
+    const formats= format_arrays;
     
-        fromNow, fromString, fromDate, fromDateArguments,
-    
-        toDate, toString, toLocaleString, toRelative,
-    
-        getDiff, getRelative,
-        getCETOffset, getTimeZoneOffset, getTimeZoneOffsetString, getTimeZone, getCurrentTimeZone,
-        /**
-         * @namespace Date
-         * @memberof module:jaaJSU~$time
-         * @readonly
-         */
-        Date: { getWeekDay, getWeekNumber, addDays, addMonths },
-        redefineTimeZone, modify,
-    
-        /* backward compatibility */ double, getOrdinalSuffix, getMonthName,
-        getDaysInMonth, daysInMonth,
-    
-        getTimeZones: ()=> ary_ianna_time_zones, isTimeZone: candidate=> ary_ianna_time_zones.indexOf(candidate)!==-1,
-        setInternalZone: zone=> internal_zone= zone, setInternalLocale: locale=> internal_locale= locale,
-        /**
-         * Public name of {@link module:jaaJSU~$time.format_arrays}.
-         * @namespace formats
-         * @alias module:jaaJSU~$time.format_arrays
-         * @memberof module:jaaJSU~$time
-         * @readonly
-         * @static
-         */
-        formats: format_arrays
-    };
+    const getTimeZones= ()=> ary_ianna_time_zones;
+    const isTimeZone= candidate=> ary_ianna_time_zones.indexOf(candidate)!==-1;
+    const setInternalZone= zone=> internal_zone= zone;
+    const setInternalLocale= locale=> internal_locale= locale;
+    return { fromDate, fromDateArguments, fromNow, fromString, toDate, toLocaleString, toRelative, getDiff, getRelative, toString, getCETOffset, getTimeZone, getCurrentTimeZone, getTimeZoneOffset, getTimeZoneOffsetString, modify, redefineTimeZone, Date_utils, double, daysInMonth, getDaysInMonth, getMonthName, getOrdinalSuffix, _, formats, getTimeZones, isTimeZone, setInternalZone, setInternalLocale };
 })();
